@@ -15,13 +15,17 @@ fi
 # Parse DATABASE_URL if it exists (for PostgreSQL on Render)
 if [ -n "$DATABASE_URL" ]; then
     echo "🔗 Parsing DATABASE_URL..."
-    # Extract components from DATABASE_URL
-    # Format: postgresql://user:password@host:port/database?params
-    DB_USER=$(echo "$DATABASE_URL" | sed -n 's|.*://\([^:]*\):.*|\1|p')
-    DB_PASSWORD=$(echo "$DATABASE_URL" | sed -n 's|.*://[^:]*:\([^@]*\)@.*|\1|p')
-    DB_HOST=$(echo "$DATABASE_URL" | sed -n 's|.*@\([^:]*\):.*|\1|p')
-    DB_PORT=$(echo "$DATABASE_URL" | sed -n 's|.*:\([0-9]*\)/.*|\1|p')
-    DB_DATABASE=$(echo "$DATABASE_URL" | sed -n 's|.*/\([^?]*\).*|\1|p')
+    
+    # Remove query parameters first (everything after ?)
+    DB_URL_CLEAN=$(echo "$DATABASE_URL" | cut -d'?' -f1)
+    
+    # Extract components from cleaned URL
+    # Format: postgresql://user:password@host:port/database
+    DB_USER=$(echo "$DB_URL_CLEAN" | sed 's|.*://\([^:]*\):.*|\1|')
+    DB_PASSWORD=$(echo "$DB_URL_CLEAN" | sed 's|.*://[^:]*:\([^@]*\)@.*|\1|')
+    DB_HOST=$(echo "$DB_URL_CLEAN" | sed 's|.*@\([^:]*\):.*|\1|')
+    DB_PORT=$(echo "$DB_URL_CLEAN" | sed 's|.*:\([0-9]*\)/.*|\1|')
+    DB_DATABASE=$(echo "$DB_URL_CLEAN" | sed 's|.*/\([^/]*\)$|\1|')
     
     echo "  DB_HOST: $DB_HOST"
     echo "  DB_PORT: $DB_PORT"
