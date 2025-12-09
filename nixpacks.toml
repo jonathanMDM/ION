@@ -21,6 +21,3 @@ cmds = []
 
 [start]
 cmd = 'bash railway-start.sh'
-
-[variables]
-NIXPACKS_NO_MUSL = '1'
