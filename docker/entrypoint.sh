@@ -67,6 +67,11 @@ php artisan event:clear || true
 echo "🗄️ Running migrations..."
 php artisan migrate --force || echo "⚠️ Migrations failed or already run"
 
+# Run seeders (only SuperAdmin for production)
+echo "👤 Creating SuperAdmin user..."
+php artisan db:seed --class=SuperAdminSeeder --force || echo "⚠️ Seeder already run or failed"
+
+
 # Create storage link
 echo "🔗 Creating storage link..."
 php artisan storage:link --force || true
