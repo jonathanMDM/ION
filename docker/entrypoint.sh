@@ -15,9 +15,11 @@ fi
 # Parse DATABASE_URL if it exists (for PostgreSQL on Render)
 if [ -n "$DATABASE_URL" ]; then
     echo "🔗 Parsing DATABASE_URL..."
+    echo "  Original: $DATABASE_URL"
     
     # Remove query parameters first (everything after ?)
     DB_URL_CLEAN=$(echo "$DATABASE_URL" | cut -d'?' -f1)
+    echo "  Cleaned: $DB_URL_CLEAN"
     
     # Extract components from cleaned URL
     # Format: postgresql://user:password@host:port/database
