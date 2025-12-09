@@ -23,17 +23,17 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Set working directory
 WORKDIR /app
 
-# Copy existing application directory contents
+# Copy composer files first for better caching
+COPY composer.json composer.lock ./
+
+# Install dependencies without scripts
+RUN composer install --no-dev --optimize-autoloader --no-interaction --ignore-platform-reqs --no-scripts
+
+# Copy the rest of the application
 COPY . /app
 
-# Install dependencies
-RUN composer install --no-dev --optimize-autoloader --no-interaction --ignore-platform-reqs
-
-# Generate application key
-RUN php artisan key:generate --force || true
-
 # Set permissions
-RUN chmod -R 775 storage bootstrap/cache
+RUN chmod -R 775 storage bootstrap/cache 2>/dev/null || true
 
 # Expose port
 EXPOSE $PORT
