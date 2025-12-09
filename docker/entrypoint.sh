@@ -12,6 +12,24 @@ if [ -z "$APP_KEY" ] || [ "$APP_KEY" = "base64:" ]; then
     export APP_KEY="base64:${GENERATED_KEY}"
 fi
 
+# Parse DATABASE_URL if it exists (for PostgreSQL on Render)
+if [ -n "$DATABASE_URL" ]; then
+    echo "🔗 Parsing DATABASE_URL..."
+    # Extract components from DATABASE_URL
+    # Format: postgresql://user:password@host:port/database
+    DB_USER=$(echo $DATABASE_URL | sed -n 's/.*:\/\/\([^:]*\):.*/\1/p')
+    DB_PASSWORD=$(echo $DATABASE_URL | sed -n 's/.*:\/\/[^:]*:\([^@]*\)@.*/\1/p')
+    DB_HOST=$(echo $DATABASE_URL | sed -n 's/.*@\([^:]*\):.*/\1/p')
+    DB_PORT=$(echo $DATABASE_URL | sed -n 's/.*:\([0-9]*\)\/.*/\1/p')
+    DB_DATABASE=$(echo $DATABASE_URL | sed -n 's/.*\/\(.*\)/\1/p')
+else
+    DB_HOST="${DB_HOST:-127.0.0.1}"
+    DB_PORT="${DB_PORT:-5432}"
+    DB_DATABASE="${DB_DATABASE:-laravel}"
+    DB_USER="${DB_USER:-root}"
+    DB_PASSWORD="${DB_PASSWORD:-}"
+fi
+
 # Create .env file from environment variables (now with proper APP_KEY)
 echo "📝 Creating .env file..."
 cat > .env << EOF
@@ -25,7 +43,11 @@ LOG_CHANNEL=stack
 LOG_LEVEL=error
 
 DB_CONNECTION="${DB_CONNECTION:-pgsql}"
-DATABASE_URL="${DATABASE_URL}"
+DB_HOST="${DB_HOST}"
+DB_PORT="${DB_PORT}"
+DB_DATABASE="${DB_DATABASE}"
+DB_USERNAME="${DB_USER}"
+DB_PASSWORD="${DB_PASSWORD}"
 
 BROADCAST_DRIVER=log
 CACHE_DRIVER=file
