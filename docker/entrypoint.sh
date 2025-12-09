@@ -5,6 +5,10 @@ echo "🚀 Starting ION on Apache..."
 
 cd /var/www/html
 
+# Regenerate composer autoloader
+echo "🔄 Regenerating composer autoloader..."
+composer dump-autoload --optimize --no-interaction
+
 # Create .env file from environment variables
 echo "📝 Creating .env file..."
 cat > .env << EOF
@@ -49,12 +53,14 @@ if [ -z "$APP_KEY" ] || [ "$APP_KEY" = "base64:" ]; then
     php artisan key:generate --force
 fi
 
-# Clear caches
-echo "🧹 Clearing caches..."
+# Clear ALL caches
+echo "🧹 Clearing all caches..."
+rm -rf bootstrap/cache/*.php
 php artisan config:clear || true
 php artisan cache:clear || true
 php artisan route:clear || true
 php artisan view:clear || true
+php artisan event:clear || true
 
 # Run migrations
 echo "🗄️ Running migrations..."
