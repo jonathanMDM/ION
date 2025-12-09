@@ -6,9 +6,9 @@ echo "🚀 Starting ION deployment on Railway..."
 echo "🔐 Setting permissions..."
 chmod -R 775 storage bootstrap/cache 2>/dev/null || true
 
-# Install dependencies
-echo "📦 Installing Composer dependencies..."
-composer install --no-dev --optimize-autoloader --no-interaction --ignore-platform-reqs
+# Run composer scripts that were skipped during build
+echo "📦 Running composer post-install scripts..."
+composer run-script post-autoload-dump --no-interaction 2>/dev/null || true
 
 # Generate app key if not exists
 if [ -z "$APP_KEY" ] || [ "$APP_KEY" = "base64:" ]; then
@@ -16,17 +16,19 @@ if [ -z "$APP_KEY" ] || [ "$APP_KEY" = "base64:" ]; then
     php artisan key:generate --force --no-interaction
 fi
 
-# Run migrations
-echo "🗄️ Running database migrations..."
-php artisan migrate --force --no-interaction || echo "⚠️ Migrations failed or already run"
-
-# Clear and cache config
-echo "⚙️ Optimizing application..."
+# Clear all caches first
+echo "🧹 Clearing caches..."
 php artisan config:clear
 php artisan cache:clear
 php artisan route:clear
 php artisan view:clear
 
+# Run migrations
+echo "🗄️ Running database migrations..."
+php artisan migrate --force --no-interaction || echo "⚠️ Migrations failed or already run"
+
+# Cache config and routes for production
+echo "⚙️ Optimizing application..."
 php artisan config:cache
 php artisan route:cache  
 php artisan view:cache
