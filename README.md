@@ -1,59 +1,357 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🚀 ION - Sistema de Gestión de Activos e Inventario
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Sistema completo de gestión de inventario y activos desarrollado con Laravel, PHP y JavaScript. Diseñado para empresas que necesitan control total sobre sus recursos.
 
-## About Laravel
+![Laravel](https://img.shields.io/badge/Laravel-10.x-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)
+![PHP](https://img.shields.io/badge/PHP-8.1+-777BB4?style=for-the-badge&logo=php&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-8.0-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 📋 Características Principales
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+-   ✅ **Gestión de Activos**: Control completo con códigos QR, categorización y seguimiento
+-   🔧 **Mantenimiento**: Sistema de mantenimiento preventivo y correctivo
+-   📊 **Reportes**: Generación de reportes en PDF y Excel
+-   👥 **Multi-Usuario**: Sistema de roles y permisos
+-   📱 **Responsive**: Interfaz adaptable a todos los dispositivos
+-   🔐 **Seguridad**: Autenticación de dos factores y respaldos automáticos
+-   🌐 **API REST**: Endpoints para integraciones externas
+-   📦 **Módulos**: Inventario, Mantenimiento, Movimientos, Asignaciones, Reportes
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 🛠️ Tecnologías Utilizadas
 
-## Learning Laravel
+-   **Backend**: Laravel 10.x
+-   **Frontend**: Blade Templates, JavaScript, Bootstrap
+-   **Base de Datos**: MySQL 8.0
+-   **Autenticación**: Laravel Sanctum
+-   **PDF**: DomPDF
+-   **Excel**: PhpSpreadsheet
+-   **QR Codes**: SimpleSoftwareIO/simple-qrcode
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+## 📦 Requisitos Previos
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Antes de instalar, asegúrate de tener:
 
-## Laravel Sponsors
+-   PHP >= 8.1
+-   Composer
+-   MySQL >= 8.0 o MariaDB >= 10.3
+-   Node.js >= 16.x y npm
+-   Git
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## 🚀 Instalación
 
-### Premium Partners
+### 1. Clonar el Repositorio
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+```bash
+git clone https://github.com/jonathanMDM/ION.git
+cd ION
+```
 
-## Contributing
+### 2. Instalar Dependencias de PHP
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+composer install
+```
 
-## Code of Conduct
+### 3. Instalar Dependencias de Node.js
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```bash
+npm install
+```
 
-## Security Vulnerabilities
+### 4. Configurar Variables de Entorno
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Copia el archivo de ejemplo y configura tus variables:
 
-## License
+```bash
+cp .env.example .env
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Edita el archivo `.env` y configura:
+
+```env
+APP_NAME=ION
+APP_ENV=local
+APP_KEY=
+APP_DEBUG=true
+APP_URL=http://localhost
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=ion_database
+DB_USERNAME=tu_usuario
+DB_PASSWORD=tu_contraseña
+```
+
+### 5. Generar Clave de Aplicación
+
+```bash
+php artisan key:generate
+```
+
+### 6. Crear Base de Datos
+
+Crea una base de datos MySQL:
+
+```sql
+CREATE DATABASE ion_database CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+```
+
+### 7. Ejecutar Migraciones
+
+```bash
+php artisan migrate
+```
+
+### 8. Ejecutar Seeders (Opcional)
+
+Para datos de prueba:
+
+```bash
+php artisan db:seed
+```
+
+### 9. Crear Enlace Simbólico para Storage
+
+```bash
+php artisan storage:link
+```
+
+### 10. Compilar Assets
+
+**Para desarrollo:**
+
+```bash
+npm run dev
+```
+
+**Para producción:**
+
+```bash
+npm run build
+```
+
+### 11. Iniciar el Servidor
+
+```bash
+php artisan serve
+```
+
+La aplicación estará disponible en: `http://localhost:8000`
+
+## 👤 Credenciales por Defecto
+
+Después de ejecutar los seeders:
+
+**Administrador:**
+
+-   Email: `admin@ion.com`
+-   Password: `password`
+
+**Usuario Regular:**
+
+-   Email: `user@ion.com`
+-   Password: `password`
+
+⚠️ **IMPORTANTE**: Cambia estas contraseñas en producción.
+
+## 📁 Estructura del Proyecto
+
+```
+ION/
+├── app/
+│   ├── Http/Controllers/    # Controladores
+│   ├── Models/              # Modelos Eloquent
+│   └── Services/            # Lógica de negocio
+├── database/
+│   ├── migrations/          # Migraciones de BD
+│   └── seeders/            # Datos de prueba
+├── public/                  # Archivos públicos
+├── resources/
+│   ├── views/              # Vistas Blade
+│   ├── js/                 # JavaScript
+│   └── css/                # Estilos
+├── routes/
+│   ├── web.php             # Rutas web
+│   └── api.php             # Rutas API
+└── tests/                  # Tests unitarios
+```
+
+## 🔧 Configuración Adicional
+
+### Configurar Cola de Trabajos (Queue)
+
+Para procesar trabajos en segundo plano:
+
+```bash
+php artisan queue:work
+```
+
+### Configurar Tareas Programadas (Cron)
+
+Agrega a tu crontab:
+
+```bash
+* * * * * cd /ruta/a/ION && php artisan schedule:run >> /dev/null 2>&1
+```
+
+### Configurar Correo Electrónico
+
+En `.env`:
+
+```env
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.gmail.com
+MAIL_PORT=587
+MAIL_USERNAME=tu_email@gmail.com
+MAIL_PASSWORD=tu_contraseña
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS=noreply@ion.com
+MAIL_FROM_NAME="${APP_NAME}"
+```
+
+## 🧪 Ejecutar Tests
+
+```bash
+# Todos los tests
+php artisan test
+
+# Tests específicos
+php artisan test --filter AssetTest
+
+# Con cobertura
+php artisan test --coverage
+```
+
+## 📚 Uso de la API
+
+### Autenticación
+
+```bash
+POST /api/login
+Content-Type: application/json
+
+{
+  "email": "admin@ion.com",
+  "password": "password"
+}
+```
+
+### Obtener Activos
+
+```bash
+GET /api/assets
+Authorization: Bearer {token}
+```
+
+### Crear Activo
+
+```bash
+POST /api/assets
+Authorization: Bearer {token}
+Content-Type: application/json
+
+{
+  "name": "Laptop Dell",
+  "category_id": 1,
+  "serial_number": "ABC123",
+  "status": "available"
+}
+```
+
+## 🐛 Solución de Problemas
+
+### Error: "Class not found"
+
+```bash
+composer dump-autoload
+```
+
+### Error de permisos en storage
+
+```bash
+chmod -R 775 storage bootstrap/cache
+```
+
+### Error de migraciones
+
+```bash
+php artisan migrate:fresh --seed
+```
+
+### Limpiar caché
+
+```bash
+php artisan cache:clear
+php artisan config:clear
+php artisan route:clear
+php artisan view:clear
+```
+
+## 🚀 Despliegue en Producción
+
+### 1. Optimizar Aplicación
+
+```bash
+composer install --optimize-autoloader --no-dev
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
+npm run build
+```
+
+### 2. Configurar .env para Producción
+
+```env
+APP_ENV=production
+APP_DEBUG=false
+```
+
+### 3. Configurar Permisos
+
+```bash
+chown -R www-data:www-data storage bootstrap/cache
+chmod -R 775 storage bootstrap/cache
+```
+
+## 📖 Documentación Adicional
+
+-   [Laravel Documentation](https://laravel.com/docs)
+-   [API Documentation](docs/API.md) _(próximamente)_
+-   [User Manual](docs/MANUAL.md) _(próximamente)_
+
+## 🤝 Contribuir
+
+Las contribuciones son bienvenidas. Por favor:
+
+1. Fork el proyecto
+2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
+3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
+4. Push a la rama (`git push origin feature/AmazingFeature`)
+5. Abre un Pull Request
+
+## 📝 Licencia
+
+Este proyecto es privado y propietario de OurDeveloper.
+
+## 👥 Equipo
+
+-   **Sara Curiel** - CEO & Founder
+-   **Jonathan Montes** - Lead Developer
+
+## 📧 Contacto
+
+-   **Email**: info@ourdeveloper.com
+-   **WhatsApp**: +1 234 567 890
+-   **Website**: [OurDeveloper](https://ourdeveloper.com)
+
+## 🙏 Agradecimientos
+
+-   Laravel Framework
+-   Bootstrap
+-   Font Awesome
+-   Todos los contribuidores de código abierto
+
+---
+
+⭐ Si este proyecto te fue útil, considera darle una estrella en GitHub!
