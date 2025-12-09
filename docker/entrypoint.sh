@@ -22,11 +22,21 @@ if [ -n "$DATABASE_URL" ]; then
     echo "  Cleaned: $DB_URL_CLEAN"
     
     # Extract components from cleaned URL
-    # Format: postgresql://user:password@host:port/database
+    # Format: postgresql://user:password@host:port/database OR postgresql://user:password@host/database
     DB_USER=$(echo "$DB_URL_CLEAN" | sed 's|.*://\([^:]*\):.*|\1|')
     DB_PASSWORD=$(echo "$DB_URL_CLEAN" | sed 's|.*://[^:]*:\([^@]*\)@.*|\1|')
-    DB_HOST=$(echo "$DB_URL_CLEAN" | sed 's|.*@\([^:]*\):.*|\1|')
-    DB_PORT=$(echo "$DB_URL_CLEAN" | sed 's|.*:\([0-9]*\)/.*|\1|')
+    
+    # Check if URL contains port
+    if echo "$DB_URL_CLEAN" | grep -q '@[^/]*:[0-9]*/'; then
+        # URL has port
+        DB_HOST=$(echo "$DB_URL_CLEAN" | sed 's|.*@\([^:]*\):.*|\1|')
+        DB_PORT=$(echo "$DB_URL_CLEAN" | sed 's|.*:\([0-9]*\)/.*|\1|')
+    else
+        # URL doesn't have port, use default
+        DB_HOST=$(echo "$DB_URL_CLEAN" | sed 's|.*@\([^/]*\)/.*|\1|')
+        DB_PORT="5432"
+    fi
+    
     DB_DATABASE=$(echo "$DB_URL_CLEAN" | sed 's|.*/\([^/]*\)$|\1|')
     
     echo "  DB_HOST: $DB_HOST"
