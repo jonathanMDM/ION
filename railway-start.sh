@@ -4,10 +4,9 @@ echo "🚀 Starting ION deployment on Railway..."
 
 # Set proper permissions
 echo "🔐 Setting permissions..."
-chmod -R 775 storage bootstrap/cache
-chown -R www-data:www-data storage bootstrap/cache 2>/dev/null || true
+chmod -R 775 storage bootstrap/cache 2>/dev/null || true
 
-# Install dependencies with platform requirements ignored
+# Install dependencies
 echo "📦 Installing Composer dependencies..."
 composer install --no-dev --optimize-autoloader --no-interaction --ignore-platform-reqs
 
@@ -19,7 +18,7 @@ fi
 
 # Run migrations
 echo "🗄️ Running database migrations..."
-php artisan migrate --force --no-interaction
+php artisan migrate --force --no-interaction || echo "⚠️ Migrations failed or already run"
 
 # Clear and cache config
 echo "⚙️ Optimizing application..."
@@ -29,17 +28,13 @@ php artisan route:clear
 php artisan view:clear
 
 php artisan config:cache
-php artisan route:cache
+php artisan route:cache  
 php artisan view:cache
 
 # Create storage link
 echo "🔗 Creating storage link..."
 php artisan storage:link --force 2>/dev/null || true
 
-# Seed database (optional - comment out if not needed)
-# echo "🌱 Seeding database..."
-# php artisan db:seed --force --no-interaction
-
-# Start the server
-echo "✅ Starting web server on port $PORT..."
-php artisan serve --host=0.0.0.0 --port=$PORT --no-reload
+# Start PHP built-in server with proper binding
+echo "✅ Starting web server on 0.0.0.0:$PORT..."
+php -S 0.0.0.0:$PORT -t public public/index.php
