@@ -5,11 +5,14 @@ echo "🚀 Starting ION on Apache..."
 
 cd /var/www/html
 
-# Regenerate composer autoloader
-echo "🔄 Regenerating composer autoloader..."
-composer dump-autoload --optimize --no-interaction
+# Generate app key first (if missing)
+if [ -z "$APP_KEY" ] || [ "$APP_KEY" = "base64:" ]; then
+    echo "🔑 Generating application key..."
+    GENERATED_KEY=$(php artisan key:generate --show)
+    export APP_KEY="base64:${GENERATED_KEY}"
+fi
 
-# Create .env file from environment variables
+# Create .env file from environment variables (now with proper APP_KEY)
 echo "📝 Creating .env file..."
 cat > .env << EOF
 APP_NAME="${APP_NAME:-ION}"
@@ -47,11 +50,9 @@ MAIL_FROM_ADDRESS="hello@example.com"
 MAIL_FROM_NAME="\${APP_NAME}"
 EOF
 
-# Generate app key if not exists
-if [ -z "$APP_KEY" ] || [ "$APP_KEY" = "base64:" ]; then
-    echo "🔑 Generating application key..."
-    php artisan key:generate --force
-fi
+# Regenerate composer autoloader
+echo "🔄 Regenerating composer autoloader..."
+composer dump-autoload --optimize --no-interaction
 
 # Clear ALL caches
 echo "🧹 Clearing all caches..."
