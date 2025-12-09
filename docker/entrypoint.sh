@@ -52,7 +52,7 @@ EOF
 
 # Regenerate composer autoloader
 echo "🔄 Regenerating composer autoloader..."
-composer dump-autoload --optimize --no-interaction
+composer dump-autoload --optimize --no-interaction --ignore-platform-reqs
 
 # Clear ALL caches
 echo "🧹 Clearing all caches..."
