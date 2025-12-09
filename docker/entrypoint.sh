@@ -44,8 +44,8 @@ APP_KEY="${APP_KEY}"
 APP_DEBUG=true
 APP_URL="${APP_URL:-https://ion-rsed.onrender.com}"
 
-LOG_CHANNEL=stack
-LOG_LEVEL=error
+LOG_CHANNEL=stderr
+LOG_LEVEL=debug
 
 DB_CONNECTION="${DB_CONNECTION:-pgsql}"
 DB_HOST="${DB_HOST}"
