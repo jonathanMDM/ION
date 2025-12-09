@@ -1,0 +1,64 @@
+@import 'tailwindcss';
+@import '@fortawesome/fontawesome-free/css/all.css';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+/* Mobile-First Optimizations */
+@layer utilities {
+
+    /* Touch-friendly minimum sizes */
+    .touch-target {
+        min-height: 44px;
+        min-width: 44px;
+    }
+
+    /* Smooth scrolling for mobile */
+    html {
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* Prevent text selection on buttons for better UX */
+    button,
+    .btn {
+        -webkit-tap-highlight-color: transparent;
+        -webkit-touch-callout: none;
+        user-select: none;
+    }
+
+    /* Optimize form inputs for mobile */
+    input,
+    textarea,
+    select {
+        font-size: 16px;
+        /* Prevents zoom on iOS */
+    }
+
+    /* Better table scrolling on mobile */
+    .table-responsive {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+/* PWA Specific */
+@media (display-mode: standalone) {
+
+    /* Hide elements when running as PWA */
+    .pwa-hide {
+        display: none !important;
+    }
+
+    /* Add safe area padding for notched devices */
+    body {
+        padding-top: env(safe-area-inset-top);
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+}
