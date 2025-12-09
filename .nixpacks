@@ -5,19 +5,22 @@ nixPkgs = [
   'php82Extensions.zip',
   'php82Extensions.pdo',
   'php82Extensions.pdo_mysql',
+  'php82Extensions.mbstring',
+  'php82Extensions.xml',
+  'php82Extensions.curl',
   'php82Packages.composer'
 ]
 
 [phases.install]
 cmds = [
-  'composer install --no-dev --optimize-autoloader --no-interaction --ignore-platform-reqs'
+  'composer install --no-dev --optimize-autoloader --no-interaction --ignore-platform-reqs --no-scripts'
 ]
 
 [phases.build]
-cmds = [
-  'php artisan config:clear || true',
-  'php artisan cache:clear || true'
-]
+cmds = []
 
 [start]
 cmd = 'bash railway-start.sh'
+
+[variables]
+NIXPACKS_NO_MUSL = '1'
