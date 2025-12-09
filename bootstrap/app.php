@@ -25,5 +25,5 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
-        \Sentry\Laravel\Integration::handles($exceptions);
+        // \Sentry\Laravel\Integration::handles($exceptions); // Temporarily disabled for deployment
     })->create();
