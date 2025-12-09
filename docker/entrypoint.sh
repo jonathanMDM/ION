@@ -36,7 +36,7 @@ cat > .env << EOF
 APP_NAME="${APP_NAME:-ION}"
 APP_ENV="${APP_ENV:-production}"
 APP_KEY="${APP_KEY}"
-APP_DEBUG="${APP_DEBUG:-false}"
+APP_DEBUG=true
 APP_URL="${APP_URL:-https://ion-rsed.onrender.com}"
 
 LOG_CHANNEL=stack
