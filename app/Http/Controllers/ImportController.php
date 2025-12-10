@@ -25,15 +25,19 @@ class ImportController extends Controller
         $companyId = \Illuminate\Support\Facades\Auth::user()->company_id;
         $file = $request->file('file');
         
+        \Log::info('Import started', ['company_id' => $companyId, 'filename' => $file->getClientOriginalName()]);
+        
         try {
             $handle = fopen($file->getRealPath(), 'r');
             
             if (!$handle) {
+                \Log::error('Could not open file');
                 return redirect()->back()->with('error', 'No se pudo abrir el archivo.');
             }
             
             // Skip header row
             $header = fgetcsv($handle);
+            \Log::info('CSV Headers', ['headers' => $header]);
             
             $imported = 0;
             $errors = [];
@@ -47,10 +51,14 @@ class ImportController extends Controller
                     continue;
                 }
                 
+                \Log::info("Processing row $rowNumber", ['data' => $row]);
+                
                 try {
                     // Validate required fields
                     if (empty($row[0]) || empty($row[1])) {
-                        $errors[] = "Fila $rowNumber: custom_id y name son requeridos";
+                        $error = "Fila $rowNumber: custom_id y name son requeridos";
+                        $errors[] = $error;
+                        \Log::warning($error);
                         continue;
                     }
                     
@@ -75,6 +83,7 @@ class ImportController extends Controller
                             ['description' => 'Creado automáticamente desde importación']
                         );
                         $assetData['location_id'] = $location->id;
+                        \Log::info("Location processed", ['location' => $location->name, 'id' => $location->id]);
                     }
                     
                     // Find or create category and subcategory
@@ -87,6 +96,7 @@ class ImportController extends Controller
                             ['name' => trim($row[9]), 'category_id' => $category->id, 'company_id' => $companyId]
                         );
                         $assetData['subcategory_id'] = $subcategory->id;
+                        \Log::info("Category/Subcategory processed", ['category' => $category->name, 'subcategory' => $subcategory->name]);
                     }
                     
                     // Find or create supplier
@@ -96,17 +106,23 @@ class ImportController extends Controller
                             ['email' => '', 'phone' => '']
                         );
                         $assetData['supplier_id'] = $supplier->id;
+                        \Log::info("Supplier processed", ['supplier' => $supplier->name]);
                     }
                     
-                    \App\Models\Asset::create($assetData);
+                    $asset = \App\Models\Asset::create($assetData);
                     $imported++;
+                    \Log::info("Asset created", ['asset_id' => $asset->id, 'name' => $asset->name]);
                     
                 } catch (\Exception $e) {
-                    $errors[] = "Fila $rowNumber: " . $e->getMessage();
+                    $error = "Fila $rowNumber: " . $e->getMessage();
+                    $errors[] = $error;
+                    \Log::error($error, ['exception' => $e]);
                 }
             }
             
             fclose($handle);
+            
+            \Log::info('Import completed', ['imported' => $imported, 'errors' => count($errors)]);
             
             $message = "Se importaron exitosamente $imported activos.";
             
@@ -119,6 +135,7 @@ class ImportController extends Controller
             return redirect()->route('assets.index')->with('success', $message);
                 
         } catch (\Exception $e) {
+            \Log::error('Import failed', ['exception' => $e->getMessage()]);
             return redirect()->back()->with('error', 'Error al procesar el archivo: ' . $e->getMessage());
         }
     }
