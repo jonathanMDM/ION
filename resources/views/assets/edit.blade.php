@@ -170,9 +170,9 @@
         <div class="mb-6">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="image">Imagen del Activo</label>
             @if($asset->image)
-                <div class="mb-2">
-                    <img src="{{ asset('storage/' . $asset->image) }}" alt="Current image" class="w-32 h-32 object-cover rounded">
-                    <p class="text-sm text-gray-600 mt-1">Imagen actual</p>
+                <div class="mt-2">
+                    <p class="text-sm text-gray-600 mb-2">Imagen actual:</p>
+                    <img src="{{ $asset->image }}" alt="Current image" class="w-32 h-32 object-cover rounded">
                 </div>
             @endif
             <input type="file" name="image" id="image" accept="image/*" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">

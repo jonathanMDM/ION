@@ -54,7 +54,7 @@
                 <td class="py-3 px-6 text-left whitespace-nowrap">
                     <div class="flex items-center">
                         @if($asset->image)
-                            <img src="{{ asset('storage/' . $asset->image) }}" alt="{{ $asset->name }}" class="w-10 h-10 rounded object-cover mr-3">
+                            <img src="{{ $asset->image }}" alt="{{ $asset->name }}" class="w-10 h-10 rounded object-cover mr-3">
                         @endif
                         <span class="font-medium">{{ $asset->name }}</span>
                     </div>

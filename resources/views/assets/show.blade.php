@@ -92,10 +92,10 @@
     </div>
 
     @if($asset->image)
-    <div class="mt-6 mb-6">
-        <label class="font-bold text-gray-700">Imagen del Activo:</label>
-        <div class="mt-2">
-            <img src="{{ asset('storage/' . $asset->image) }}" alt="{{ $asset->name }}" class="max-w-md rounded-lg shadow-lg">
+    <div class="bg-white shadow-md rounded p-6 mb-6">
+        <h3 class="text-lg font-semibold text-gray-800 mb-4">Imagen del Activo</h3>
+        <div class="flex justify-center">
+            <img src="{{ $asset->image }}" alt="{{ $asset->name }}" class="max-w-md rounded-lg shadow-lg">
         </div>
     </div>
     @endif
