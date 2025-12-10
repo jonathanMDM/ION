@@ -76,12 +76,6 @@
                 </div>
                 @endif
             @endforeach
-            <div class="mb-4">
-                <label class="font-bold text-gray-700">Código QR:</label>
-                <div class="mt-2">
-                    {!! QrCode::size(150)->generate(route('assets.show', $asset->id)) !!}
-                </div>
-            </div>
         </div>
     </div>
 
