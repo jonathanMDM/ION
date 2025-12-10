@@ -95,7 +95,12 @@
     <div class="bg-white shadow-md rounded p-6 mb-6">
         <h3 class="text-lg font-semibold text-gray-800 mb-4">Imagen del Activo</h3>
         <div class="flex justify-center">
-            <img src="{{ $asset->image }}" alt="{{ $asset->name }}" class="max-w-md rounded-lg shadow-lg">
+            @php
+                $imageUrl = str_starts_with($asset->image, 'http') 
+                    ? $asset->image 
+                    : asset('storage/' . $asset->image);
+            @endphp
+            <img src="{{ $imageUrl }}" alt="{{ $asset->name }}" class="max-w-md rounded-lg shadow-lg" onerror="this.style.display='none'">
         </div>
     </div>
     @endif

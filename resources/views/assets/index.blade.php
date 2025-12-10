@@ -54,7 +54,12 @@
                 <td class="py-3 px-6 text-left whitespace-nowrap">
                     <div class="flex items-center">
                         @if($asset->image)
-                            <img src="{{ $asset->image }}" alt="{{ $asset->name }}" class="w-10 h-10 rounded object-cover mr-3">
+                            @php
+                                $imageUrl = str_starts_with($asset->image, 'http') 
+                                    ? $asset->image 
+                                    : asset('storage/' . $asset->image);
+                            @endphp
+                            <img src="{{ $imageUrl }}" alt="{{ $asset->name }}" class="w-10 h-10 rounded object-cover mr-3" onerror="this.style.display='none'">
                         @endif
                         <span class="font-medium">{{ $asset->name }}</span>
                     </div>

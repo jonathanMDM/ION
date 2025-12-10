@@ -172,7 +172,12 @@
             @if($asset->image)
                 <div class="mt-2">
                     <p class="text-sm text-gray-600 mb-2">Imagen actual:</p>
-                    <img src="{{ $asset->image }}" alt="Current image" class="w-32 h-32 object-cover rounded">
+                    @php
+                        $imageUrl = str_starts_with($asset->image, 'http') 
+                            ? $asset->image 
+                            : asset('storage/' . $asset->image);
+                    @endphp
+                    <img src="{{ $imageUrl }}" alt="Current image" class="w-32 h-32 object-cover rounded" onerror="this.style.display='none'">
                 </div>
             @endif
             <input type="file" name="image" id="image" accept="image/*" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
