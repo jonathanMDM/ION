@@ -172,8 +172,75 @@
                         </tr>
                         
                         <!-- Existing Rules List -->
+                        @php
+                            $visibilityRules = \App\Models\FieldVisibility::where('company_id', $company->id)->get();
+                        @endphp
+                        
+                        @if($visibilityRules->count() > 0)
+                        <tr>
+                            <td colspan="4" class="p-2">
+                                <div class="mt-4">
+                                    <h4 class="font-semibold text-gray-700 mb-2">Reglas de Visibilidad Activas:</h4>
+                                    <div class="space-y-2">
+                                        @foreach($visibilityRules as $rule)
+                                        <div class="flex items-center justify-between bg-gray-50 p-2 rounded">
+                                            <div class="flex-1">
+                                                <span class="font-medium text-gray-800">{{ $rule->field_key }}</span>
+                                                <span class="text-xs text-gray-500 mx-2">→</span>
+                                                @if($rule->user_id)
+                                                    @php
+                                                        $ruleUser = \App\Models\User::find($rule->user_id);
+                                                    @endphp
+                                                    <span class="text-sm text-blue-600">Usuario: {{ $ruleUser ? $ruleUser->name : 'Desconocido' }}</span>
+                                                @elseif($rule->role)
+                                                    <span class="text-sm text-purple-600">Rol: {{ ucfirst($rule->role) }}</span>
+                                                @else
+                                                    <span class="text-sm text-gray-600">Global</span>
+                                                @endif
+                                                <span class="text-xs mx-2">→</span>
+                                                @if($rule->is_visible)
+                                                    <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">Visible</span>
+                                                @else
+                                                    <span class="text-xs bg-red-100 text-red-800 px-2 py-1 rounded">Oculto</span>
+                                                @endif
+                                            </div>
+                                            <div class="flex gap-2">
+                                                <!-- Toggle Visibility -->
+                                                <form action="{{ route('superadmin.companies.fields.visibility', $company) }}" method="POST" class="inline">
+                                                    @csrf
+                                                    <input type="hidden" name="field_key" value="{{ $rule->field_key }}">
+                                                    <input type="hidden" name="user_id" value="{{ $rule->user_id }}">
+                                                    <input type="hidden" name="role" value="{{ $rule->role }}">
+                                                    <input type="hidden" name="is_visible" value="{{ $rule->is_visible ? '0' : '1' }}">
+                                                    <button type="submit" class="text-blue-600 hover:text-blue-800 text-xs">
+                                                        {{ $rule->is_visible ? 'Ocultar' : 'Mostrar' }}
+                                                    </button>
+                                                </form>
+                                                <!-- Delete Rule -->
+                                                <form action="{{ route('superadmin.companies.fields.visibility.delete', [$company, $rule]) }}" method="POST" class="inline" onsubmit="return confirm('¿Eliminar esta regla?')">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="text-red-600 hover:text-red-800 text-xs">
+                                                        Eliminar
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        @else
                         <tr>
                             <td colspan="4" class="p-2 text-xs text-gray-500 text-center italic">
+                                No hay reglas de visibilidad configuradas. Todos los campos son visibles por defecto.
+                            </td>
+                        </tr>
+                        @endif
+                        
+                        <tr>
+                            <td colspan="4" class="p-2 text-xs text-gray-500 text-center italic border-t mt-2 pt-2">
                                 Las reglas se aplican en orden: Usuario > Rol > Global.
                             </td>
                         </tr>

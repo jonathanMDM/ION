@@ -89,4 +89,16 @@ class CompanyFieldController extends Controller
 
         return redirect()->back()->with('success', 'Visibilidad actualizada exitosamente.');
     }
+    
+    public function deleteVisibilityRule(Company $company, FieldVisibility $fieldVisibility)
+    {
+        if ($fieldVisibility->company_id !== $company->id) {
+            abort(403);
+        }
+        
+        $fieldVisibility->delete();
+        FieldHelper::clearCache();
+        
+        return redirect()->back()->with('success', 'Regla de visibilidad eliminada exitosamente.');
+    }
 }

@@ -181,7 +181,7 @@ Route::middleware(['auth', 'superadmin'])->prefix('superadmin')->name('superadmi
     Route::post('companies/{company}/fields', [\App\Http\Controllers\Superadmin\CompanyFieldController::class, 'store'])->name('companies.fields.store');
     Route::delete('companies/{company}/fields/{customField}', [\App\Http\Controllers\Superadmin\CompanyFieldController::class, 'destroy'])->name('companies.fields.destroy');
     Route::post('companies/{company}/fields/visibility', [\App\Http\Controllers\Superadmin\CompanyFieldController::class, 'updateVisibility'])->name('companies.fields.visibility');
-    Route::post('companies/{company}/fields/visibility', [\App\Http\Controllers\Superadmin\CompanyFieldController::class, 'updateVisibility'])->name('companies.fields.visibility');
+    Route::delete('companies/{company}/fields/visibility/{fieldVisibility}', [\App\Http\Controllers\Superadmin\CompanyFieldController::class, 'deleteVisibilityRule'])->name('companies.fields.visibility.delete');
 
     // Announcements
     Route::resource('announcements', \App\Http\Controllers\Superadmin\AnnouncementController::class);
