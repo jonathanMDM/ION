@@ -168,8 +168,82 @@ class ReportController extends Controller
             'decommissioned' => $assets->where('status', 'decommissioned')->count(),
         ];
 
-        // Return HTML view optimized for printing
-        return view('reports.print', compact('assets', 'stats'));
+        // Generate PDF using TCPDF
+        $pdf = new \TCPDF('L', 'mm', 'LETTER', true, 'UTF-8', false);
+        
+        // Set document information
+        $pdf->SetCreator('ION Inventory');
+        $pdf->SetAuthor(\Auth::user()->company->name ?? 'ION');
+        $pdf->SetTitle('Reporte de Activos');
+        
+        // Remove default header/footer
+        $pdf->setPrintHeader(false);
+        $pdf->setPrintFooter(false);
+        
+        // Set margins
+        $pdf->SetMargins(10, 10, 10);
+        $pdf->SetAutoPageBreak(TRUE, 10);
+        
+        // Add a page
+        $pdf->AddPage();
+        
+        // Set font
+        $pdf->SetFont('helvetica', '', 10);
+        
+        // Title
+        $pdf->SetFont('helvetica', 'B', 16);
+        $pdf->Cell(0, 10, 'Reporte de Activos', 0, 1, 'C');
+        $pdf->SetFont('helvetica', '', 10);
+        $pdf->Cell(0, 5, \Auth::user()->company->name ?? 'ION Inventory', 0, 1, 'C');
+        $pdf->Cell(0, 5, 'Fecha: ' . date('d/m/Y H:i'), 0, 1, 'C');
+        $pdf->Ln(5);
+        
+        // Stats
+        $pdf->SetFont('helvetica', 'B', 9);
+        $pdf->Cell(50, 7, 'Total: ' . $stats['total_assets'], 1, 0, 'C', false);
+        $pdf->Cell(50, 7, 'Valor: $' . number_format($stats['total_value'], 2), 1, 0, 'C', false);
+        $pdf->Cell(50, 7, 'Activos: ' . $stats['active'], 1, 0, 'C', false);
+        $pdf->Cell(50, 7, 'Mant.: ' . $stats['maintenance'], 1, 0, 'C', false);
+        $pdf->Cell(50, 7, 'Baja: ' . $stats['decommissioned'], 1, 1, 'C', false);
+        $pdf->Ln(5);
+        
+        // Table header
+        $pdf->SetFont('helvetica', 'B', 8);
+        $pdf->SetFillColor(51, 51, 51);
+        $pdf->SetTextColor(255, 255, 255);
+        $pdf->Cell(20, 7, 'ID', 1, 0, 'C', true);
+        $pdf->Cell(40, 7, 'Nombre', 1, 0, 'C', true);
+        $pdf->Cell(35, 7, 'Categoría', 1, 0, 'C', true);
+        $pdf->Cell(30, 7, 'Ubicación', 1, 0, 'C', true);
+        $pdf->Cell(20, 7, 'Estado', 1, 0, 'C', true);
+        $pdf->Cell(15, 7, 'Cant.', 1, 0, 'C', true);
+        $pdf->Cell(25, 7, 'Valor', 1, 0, 'C', true);
+        $pdf->Cell(35, 7, 'Proveedor', 1, 0, 'C', true);
+        $pdf->Cell(25, 7, 'F. Compra', 1, 1, 'C', true);
+        
+        // Table data
+        $pdf->SetFont('helvetica', '', 7);
+        $pdf->SetTextColor(0, 0, 0);
+        $fill = false;
+        
+        foreach ($assets as $asset) {
+            $pdf->SetFillColor(249, 249, 249);
+            $pdf->Cell(20, 6, $asset->custom_id, 1, 0, 'L', $fill);
+            $pdf->Cell(40, 6, substr($asset->name, 0, 25), 1, 0, 'L', $fill);
+            $pdf->Cell(35, 6, substr(($asset->subcategory->category->name ?? 'N/A'), 0, 20), 1, 0, 'L', $fill);
+            $pdf->Cell(30, 6, substr(($asset->location->name ?? 'N/A'), 0, 18), 1, 0, 'L', $fill);
+            $pdf->Cell(20, 6, ucfirst($asset->status), 1, 0, 'C', $fill);
+            $pdf->Cell(15, 6, $asset->quantity, 1, 0, 'C', $fill);
+            $pdf->Cell(25, 6, '$' . number_format($asset->value, 2), 1, 0, 'R', $fill);
+            $pdf->Cell(35, 6, substr(($asset->supplier->name ?? 'N/A'), 0, 20), 1, 0, 'L', $fill);
+            $pdf->Cell(25, 6, $asset->purchase_date ? $asset->purchase_date->format('d/m/Y') : 'N/A', 1, 1, 'C', $fill);
+            $fill = !$fill;
+        }
+        
+        // Output PDF
+        return response($pdf->Output('reporte-activos-' . date('Y-m-d') . '.pdf', 'S'))
+            ->header('Content-Type', 'application/pdf')
+            ->header('Content-Disposition', 'attachment; filename="reporte-activos-' . date('Y-m-d') . '.pdf"');
     }
 
     public function exportExcel(Request $request)
