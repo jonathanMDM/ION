@@ -122,6 +122,11 @@ Route::middleware(['auth'])->group(function () {
     // Maintenances
     Route::resource('maintenances', MaintenanceController::class);
     
+    // Custom Fields & Visibility
+    Route::get('settings/fields', [\App\Http\Controllers\CustomFieldController::class, 'index'])->name('settings.fields.index');
+    Route::post('settings/fields', [\App\Http\Controllers\CustomFieldController::class, 'store'])->name('settings.fields.store');
+    Route::delete('settings/fields/{customField}', [\App\Http\Controllers\CustomFieldController::class, 'destroy'])->name('settings.fields.destroy');
+    Route::post('settings/fields/visibility', [\App\Http\Controllers\CustomFieldController::class, 'updateVisibility'])->name('settings.fields.visibility');
 
     
     // Reports
