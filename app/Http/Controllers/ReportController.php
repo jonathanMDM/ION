@@ -168,7 +168,7 @@ class ReportController extends Controller
             'decommissioned' => $assets->where('status', 'decommissioned')->count(),
         ];
 
-        $pdf = \PDF::loadView('reports.pdf', compact('assets', 'stats'));
+        $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('reports.pdf', compact('assets', 'stats'));
         $pdf->setPaper('letter', 'landscape');
         
         return $pdf->download('reporte-activos-'.date('Y-m-d').'.pdf');
@@ -176,9 +176,10 @@ class ReportController extends Controller
 
     public function exportExcel(Request $request)
     {
-        // Temporarily disabled due to package configuration issue
-        return redirect()->back()->with('error', 'La exportación a Excel está temporalmente deshabilitada. Por favor, use la exportación a PDF.');
-        
-        // return \Maatwebsite\Excel\Facades\Excel::download(new AssetsExport($request->all()), 'assets-report-' . date('Y-m-d') . '.xlsx');
+        try {
+            return \Maatwebsite\Excel\Facades\Excel::download(new AssetsExport($request->all()), 'assets-report-' . date('Y-m-d') . '.xlsx');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Error al exportar a Excel: ' . $e->getMessage());
+        }
     }
 }
