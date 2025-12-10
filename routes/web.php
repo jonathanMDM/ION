@@ -143,26 +143,26 @@ Route::middleware(['auth'])->group(function () {
 
 // Superadmin Routes
 Route::middleware(['auth', 'superadmin'])->prefix('superadmin')->name('superadmin.')->group(function () {
-    Route::get('/', [\App\Http\Controllers\SuperAdmin\DashboardController::class, 'index'])->name('index');
-    Route::resource('companies', \App\Http\Controllers\SuperAdmin\CompanyController::class);
+    Route::get('/', [\App\Http\Controllers\Superadmin\DashboardController::class, 'index'])->name('index');
+    Route::resource('companies', \App\Http\Controllers\Superadmin\CompanyController::class);
     
     // Impersonation
-    Route::post('users/{user}/impersonate', [\App\Http\Controllers\SuperAdmin\UserController::class, 'impersonate'])->name('users.impersonate');
+    Route::post('users/{user}/impersonate', [\App\Http\Controllers\Superadmin\UserController::class, 'impersonate'])->name('users.impersonate');
     
     // System Status
-    Route::get('system-status', [\App\Http\Controllers\SuperAdmin\DashboardController::class, 'systemStatus'])->name('system-status');
+    Route::get('system-status', [\App\Http\Controllers\Superadmin\DashboardController::class, 'systemStatus'])->name('system-status');
     
     // Activity Logs
-    Route::get('activity-logs', [\App\Http\Controllers\SuperAdmin\ActivityLogController::class, 'index'])->name('activity-logs');
-    Route::get('activity-logs/export', [\App\Http\Controllers\SuperAdmin\ActivityLogController::class, 'export'])->name('activity-logs.export');
+    Route::get('activity-logs', [\App\Http\Controllers\Superadmin\ActivityLogController::class, 'index'])->name('activity-logs');
+    Route::get('activity-logs/export', [\App\Http\Controllers\Superadmin\ActivityLogController::class, 'export'])->name('activity-logs.export');
     
     // Backups
-    Route::get('backups', [\App\Http\Controllers\SuperAdmin\BackupController::class, 'index'])->name('backups.index');
-    Route::post('backups/create/{company}', [\App\Http\Controllers\SuperAdmin\BackupController::class, 'create'])->name('backups.create');
-    Route::get('backups/download/{filename}', [\App\Http\Controllers\SuperAdmin\BackupController::class, 'download'])->name('backups.download');
-    Route::delete('backups/delete/{filename}', [\App\Http\Controllers\SuperAdmin\BackupController::class, 'delete'])->name('backups.delete');
-    Route::post('backups/upload', [\App\Http\Controllers\SuperAdmin\BackupController::class, 'upload'])->name('backups.upload');
-    Route::post('backups/restore/{filename}', [\App\Http\Controllers\SuperAdmin\BackupController::class, 'restore'])->name('backups.restore');
+    Route::get('backups', [\App\Http\Controllers\Superadmin\BackupController::class, 'index'])->name('backups.index');
+    Route::post('backups/create/{company}', [\App\Http\Controllers\Superadmin\BackupController::class, 'create'])->name('backups.create');
+    Route::get('backups/download/{filename}', [\App\Http\Controllers\Superadmin\BackupController::class, 'download'])->name('backups.download');
+    Route::delete('backups/delete/{filename}', [\App\Http\Controllers\Superadmin\BackupController::class, 'delete'])->name('backups.delete');
+    Route::post('backups/upload', [\App\Http\Controllers\Superadmin\BackupController::class, 'upload'])->name('backups.upload');
+    Route::post('backups/restore/{filename}', [\App\Http\Controllers\Superadmin\BackupController::class, 'restore'])->name('backups.restore');
     
     // Webhooks
     Route::resource('webhooks', \App\Http\Controllers\WebhookController::class);
@@ -193,4 +193,4 @@ Route::middleware(['auth', 'superadmin'])->prefix('superadmin')->name('superadmi
 });
 
 // Stop Impersonation
-Route::post('impersonate/stop', [\App\Http\Controllers\SuperAdmin\UserController::class, 'stopImpersonating'])->name('impersonate.stop')->middleware('auth');
+Route::post('impersonate/stop', [\App\Http\Controllers\Superadmin\UserController::class, 'stopImpersonating'])->name('impersonate.stop')->middleware('auth');
