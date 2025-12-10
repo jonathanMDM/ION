@@ -54,10 +54,13 @@ class AssetController extends Controller
             $data['custom_id'] = 'AST-' . time() . '-' . rand(1000, 9999);
         }
         
-        // Handle image upload
+        // Handle image upload to Cloudinary
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('assets', 'public');
-            $data['image'] = $imagePath;
+            $result = \App\Helpers\CloudinaryHelper::upload($request->file('image'), 'assets');
+            if ($result) {
+                $data['image'] = $result['url'];
+                $data['image_public_id'] = $result['public_id'];
+            }
         }
         
         $asset = Asset::create($data);
@@ -108,14 +111,18 @@ class AssetController extends Controller
         
         $data = $request->all();
         
-        // Handle image upload
+        // Handle image upload to Cloudinary
         if ($request->hasFile('image')) {
-            // Delete old image if exists
-            if ($asset->image && \Storage::disk('public')->exists($asset->image)) {
-                \Storage::disk('public')->delete($asset->image);
+            // Delete old image from Cloudinary if exists
+            if ($asset->image_public_id) {
+                \App\Helpers\CloudinaryHelper::delete($asset->image_public_id);
             }
-            $imagePath = $request->file('image')->store('assets', 'public');
-            $data['image'] = $imagePath;
+            
+            $result = \App\Helpers\CloudinaryHelper::upload($request->file('image'), 'assets');
+            if ($result) {
+                $data['image'] = $result['url'];
+                $data['image_public_id'] = $result['public_id'];
+            }
         }
         
         // Track location change

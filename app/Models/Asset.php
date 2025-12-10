@@ -27,6 +27,7 @@ class Asset extends Model
         'model',
         'serial_number',
         'image',
+        'image_public_id',
         'specifications',
         'custom_attributes',
         'municipality_plate',
