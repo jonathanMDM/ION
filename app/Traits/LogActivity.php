@@ -32,8 +32,17 @@ trait LogActivity
             $changes = $this->getAttributes();
         }
 
+        // Get company_id from the model if it has one, or from the authenticated user
+        $companyId = null;
+        if (isset($this->company_id)) {
+            $companyId = $this->company_id;
+        } elseif (Auth::check() && Auth::user()->company_id) {
+            $companyId = Auth::user()->company_id;
+        }
+
         ActivityLog::create([
             'user_id' => Auth::id(),
+            'company_id' => $companyId,
             'action' => $event,
             'model' => class_basename($this),
             'model_id' => $this->id,

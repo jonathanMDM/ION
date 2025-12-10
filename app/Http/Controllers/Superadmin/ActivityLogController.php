@@ -8,8 +8,16 @@ class ActivityLogController extends Controller
 {
     public function index()
     {
-        $logs = ActivityLog::with('user')->latest()->paginate(50);
-        $users = \App\Models\User::orderBy('name')->get();
+        // Superadmin can see all logs, bypass CompanyScope
+        $logs = ActivityLog::withoutGlobalScope(\App\Scopes\CompanyScope::class)
+            ->with('user')
+            ->latest()
+            ->paginate(50);
+            
+        $users = \App\Models\User::withoutGlobalScope(\App\Scopes\CompanyScope::class)
+            ->orderBy('name')
+            ->get();
+            
         $companies = \App\Models\Company::orderBy('name')->get();
         
         return view('superadmin.activity-logs', compact('logs', 'users', 'companies'));
