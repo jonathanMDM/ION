@@ -23,4 +23,16 @@ class DashboardController extends Controller
 
         return view('superadmin.dashboard', compact('stats', 'recent_companies'));
     }
+
+    public function systemStatus()
+    {
+        $systemInfo = [
+            'php_version' => PHP_VERSION,
+            'laravel_version' => app()->version(),
+            'database' => config('database.default'),
+            'cache_driver' => config('cache.default'),
+        ];
+
+        return view('superadmin.system-status', compact('systemInfo'));
+    }
 }
