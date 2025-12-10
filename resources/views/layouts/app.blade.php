@@ -126,12 +126,6 @@
                     <span class="ml-3 sidebar-text">Reportes</span>
                 </a>
                 @endif
-                @if(Auth::user()->isAdmin())
-                <a href="{{ route('settings.fields.index') }}" class="flex items-center px-4 py-3 hover:bg-gray-700 {{ request()->routeIs('settings.fields.*') ? 'bg-gray-700 border-l-4 border-white' : '' }}" title="Campos Personalizados">
-                    <i class="fas fa-sliders-h w-6"></i>
-                    <span class="ml-3 sidebar-text">Campos Personalizados</span>
-                </a>
-                @endif
                 @if(Auth::user()->isAdmin() || Auth::user()->hasPermission('view_movements'))
                 <a href="{{ route('asset-movements.index') }}" class="flex items-center px-4 py-3 hover:bg-gray-700 {{ request()->routeIs('asset-movements.*') ? 'bg-gray-700 border-l-4 border-white' : '' }}" title="Movimientos">
                     <i class="fas fa-exchange-alt w-6"></i>
