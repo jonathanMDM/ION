@@ -15,7 +15,8 @@ class AnnouncementController extends Controller
 
     public function create()
     {
-        return view('superadmin.announcements.create');
+        $companies = \App\Models\Company::orderBy('name')->get();
+        return view('superadmin.announcements.create', compact('companies'));
     }
 
     public function store(Request $request)
@@ -35,7 +36,8 @@ class AnnouncementController extends Controller
 
     public function edit(Announcement $announcement)
     {
-        return view('superadmin.announcements.edit', compact('announcement'));
+        $companies = \App\Models\Company::orderBy('name')->get();
+        return view('superadmin.announcements.edit', compact('announcement', 'companies'));
     }
 
     public function update(Request $request, Announcement $announcement)
