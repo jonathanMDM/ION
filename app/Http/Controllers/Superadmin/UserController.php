@@ -28,10 +28,18 @@ class UserController extends Controller
         }
         
         $impersonatorId = session('impersonator_id');
-        session()->forget('impersonator_id');
         
         // Login back as the superadmin
         $superadmin = \App\Models\User::find($impersonatorId);
+        
+        if (!$superadmin) {
+            session()->forget('impersonator_id');
+            \Log::error('Superadmin not found during stop impersonation', ['impersonator_id' => $impersonatorId]);
+            \Auth::logout();
+            return redirect()->route('login')->with('error', 'Error al volver a la cuenta de Superadmin. Por favor, inicia sesión nuevamente.');
+        }
+        
+        session()->forget('impersonator_id');
         \Auth::login($superadmin);
         
         \Log::info('Impersonation stopped', ['superadmin_id' => $impersonatorId]);
