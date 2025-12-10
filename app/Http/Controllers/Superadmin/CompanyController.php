@@ -10,7 +10,10 @@ class CompanyController extends Controller
 {
     public function index()
     {
-        $companies = Company::latest()->paginate(15);
+        $companies = Company::withCount(['users', 'assets'])
+            ->with('users')
+            ->latest()
+            ->paginate(15);
         return view('superadmin.companies.index', compact('companies'));
     }
 
