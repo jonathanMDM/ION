@@ -7,7 +7,7 @@
     <h2 class="text-2xl font-bold text-gray-800 md:flex-1">Activos</h2>
     <div class="flex flex-col md:flex-row gap-3 shrink-0">
         @if(Auth::user()->isAdmin() || Auth::user()->hasPermission('create_assets'))
-        <a href="{{ route('assets.import') }}" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded text-center whitespace-nowrap">
+        <a href="{{ route('imports.create') }}" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded text-center whitespace-nowrap">
             <i class="fas fa-file-upload mr-2"></i>Importar Activos
         </a>
         <a href="{{ route('assets.create') }}" class="bg-gray-800 hover:bg-black text-white font-bold py-2 px-4 rounded text-center whitespace-nowrap">
