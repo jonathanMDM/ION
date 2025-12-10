@@ -100,4 +100,97 @@ class BackupController extends Controller
             return redirect()->back()->with('error', 'Error al crear backup: ' . $e->getMessage());
         }
     }
+    
+    public function delete($filename)
+    {
+        try {
+            $filepath = storage_path('app/backups/' . $filename);
+            
+            if (!file_exists($filepath)) {
+                return redirect()->back()->with('error', 'Backup no encontrado.');
+            }
+            
+            unlink($filepath);
+            \Log::info('Backup deleted', ['file' => $filename]);
+            
+            return redirect()->back()->with('success', 'Backup eliminado exitosamente.');
+            
+        } catch (\Exception $e) {
+            \Log::error('Backup delete exception', ['error' => $e->getMessage()]);
+            return redirect()->back()->with('error', 'Error al eliminar backup: ' . $e->getMessage());
+        }
+    }
+    
+    public function restore($filename)
+    {
+        try {
+            $filepath = storage_path('app/backups/' . $filename);
+            
+            if (!file_exists($filepath)) {
+                return redirect()->back()->with('error', 'Backup no encontrado.');
+            }
+            
+            // Get database connection details
+            $dbHost = config('database.connections.pgsql.host');
+            $dbPort = config('database.connections.pgsql.port');
+            $dbName = config('database.connections.pgsql.database');
+            $dbUser = config('database.connections.pgsql.username');
+            $dbPass = config('database.connections.pgsql.password');
+            
+            // Build psql restore command
+            $command = sprintf(
+                'PGPASSWORD=%s psql -h %s -p %s -U %s -d %s < %s 2>&1',
+                escapeshellarg($dbPass),
+                escapeshellarg($dbHost),
+                escapeshellarg($dbPort),
+                escapeshellarg($dbUser),
+                escapeshellarg($dbName),
+                escapeshellarg($filepath)
+            );
+            
+            // Execute restore
+            exec($command, $output, $returnVar);
+            
+            if ($returnVar === 0) {
+                \Log::info('Backup restored successfully', ['file' => $filename]);
+                return redirect()->back()->with('success', 'Backup restaurado exitosamente.');
+            } else {
+                \Log::error('Backup restore failed', ['file' => $filename, 'output' => $output, 'return' => $returnVar]);
+                return redirect()->back()->with('error', 'Error al restaurar el backup. Esta funcionalidad requiere psql instalado en el servidor.');
+            }
+            
+        } catch (\Exception $e) {
+            \Log::error('Backup restore exception', ['error' => $e->getMessage()]);
+            return redirect()->back()->with('error', 'Error al restaurar backup: ' . $e->getMessage());
+        }
+    }
+    
+    public function upload(\Illuminate\Http\Request $request)
+    {
+        try {
+            $request->validate([
+                'backup_file' => 'required|file|mimes:sql,zip|max:51200', // 50MB max
+            ]);
+            
+            $file = $request->file('backup_file');
+            $filename = 'uploaded-' . date('Y-m-d-His') . '-' . $file->getClientOriginalName();
+            
+            // Ensure backups directory exists
+            $backupPath = storage_path('app/backups');
+            if (!file_exists($backupPath)) {
+                mkdir($backupPath, 0755, true);
+            }
+            
+            // Move file to backups directory
+            $file->move($backupPath, $filename);
+            
+            \Log::info('Backup uploaded', ['file' => $filename]);
+            
+            return redirect()->back()->with('success', 'Backup subido exitosamente: ' . $filename);
+            
+        } catch (\Exception $e) {
+            \Log::error('Backup upload exception', ['error' => $e->getMessage()]);
+            return redirect()->back()->with('error', 'Error al subir backup: ' . $e->getMessage());
+        }
+    }
 }
