@@ -12,7 +12,11 @@
             <!-- QR Code -->
             <div class="flex justify-center mb-6">
                 <div class="bg-white p-4 rounded-lg shadow-inner">
-                    {!! QrCode::size(300)->generate(route('assets.show', $asset->id)) !!}
+                    @php
+                        $qrUrl = route('assets.show', $asset->id);
+                        $qrImageUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=' . urlencode($qrUrl);
+                    @endphp
+                    <img src="{{ $qrImageUrl }}" alt="QR Code" class="w-[300px] h-[300px]">
                 </div>
             </div>
             
