@@ -23,14 +23,19 @@ class UserController extends Controller
     
     public function stopImpersonating()
     {
+        \Log::info('Stop impersonation called');
+        
         if (!session()->has('impersonator_id')) {
+            \Log::warning('No impersonator_id in session');
             return redirect()->route('dashboard')->with('error', 'No estás suplantando a ningún usuario');
         }
         
         $impersonatorId = session('impersonator_id');
+        \Log::info('Impersonator ID from session', ['id' => $impersonatorId, 'type' => gettype($impersonatorId)]);
         
         // Login back as the superadmin
         $superadmin = \App\Models\User::find($impersonatorId);
+        \Log::info('User query result', ['found' => $superadmin ? 'yes' : 'no', 'user' => $superadmin ? $superadmin->toArray() : null]);
         
         if (!$superadmin) {
             session()->forget('impersonator_id');
