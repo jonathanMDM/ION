@@ -39,43 +39,43 @@ class ExampleDataSeeder extends Seeder
         // Categories and Subcategories
         $categoriesData = [
             'Tecnología' => [
-                'Computadoras' => 'Equipos de cómputo de escritorio y portátiles',
-                'Servidores' => 'Equipos servidores y almacenamiento',
-                'Redes' => 'Switches, routers y equipos de red',
-                'Periféricos' => 'Monitores, teclados, mouse, impresoras',
-                'Telefonía' => 'Teléfonos IP y equipos de comunicación',
+                'Computadoras',
+                'Servidores',
+                'Redes',
+                'Periféricos',
+                'Telefonía',
             ],
             'Mobiliario' => [
-                'Escritorios' => 'Mesas y escritorios de trabajo',
-                'Sillas' => 'Sillas de oficina y visitantes',
-                'Archivadores' => 'Gabinetes y archivadores',
-                'Estanterías' => 'Estantes y repisas',
-                'Mesas de Juntas' => 'Mesas para salas de reuniones',
+                'Escritorios',
+                'Sillas',
+                'Archivadores',
+                'Estanterías',
+                'Mesas de Juntas',
             ],
             'Vehículos' => [
-                'Automóviles' => 'Vehículos livianos',
-                'Camionetas' => 'Vehículos de carga liviana',
-                'Motocicletas' => 'Motos y ciclomotores',
-                'Camiones' => 'Vehículos de carga pesada',
+                'Automóviles',
+                'Camionetas',
+                'Motocicletas',
+                'Camiones',
             ],
             'Equipos de Oficina' => [
-                'Impresoras' => 'Impresoras láser e inyección de tinta',
-                'Fotocopiadoras' => 'Equipos multifuncionales',
-                'Proyectores' => 'Proyectores y pantallas',
-                'Escáneres' => 'Equipos de digitalización',
-                'Trituradoras' => 'Destructoras de documentos',
+                'Impresoras',
+                'Fotocopiadoras',
+                'Proyectores',
+                'Escáneres',
+                'Trituradoras',
             ],
             'Herramientas' => [
-                'Herramientas Eléctricas' => 'Taladros, sierras, etc.',
-                'Herramientas Manuales' => 'Martillos, destornilladores, etc.',
-                'Equipos de Medición' => 'Multímetros, niveles, etc.',
-                'Equipos de Seguridad' => 'Cascos, guantes, etc.',
+                'Herramientas Eléctricas',
+                'Herramientas Manuales',
+                'Equipos de Medición',
+                'Equipos de Seguridad',
             ],
             'Electrodomésticos' => [
-                'Refrigeradores' => 'Neveras y congeladores',
-                'Microondas' => 'Hornos microondas',
-                'Cafeteras' => 'Máquinas de café',
-                'Aires Acondicionados' => 'Equipos de climatización',
+                'Refrigeradores',
+                'Microondas',
+                'Cafeteras',
+                'Aires Acondicionados',
             ],
         ];
 
@@ -85,7 +85,7 @@ class ExampleDataSeeder extends Seeder
                 ['name' => $categoryName, 'company_id' => $companyId]
             );
 
-            foreach ($subcategories as $subcategoryName => $description) {
+            foreach ($subcategories as $subcategoryName) {
                 Subcategory::firstOrCreate(
                     [
                         'name' => $subcategoryName,
@@ -95,7 +95,6 @@ class ExampleDataSeeder extends Seeder
                     [
                         'name' => $subcategoryName,
                         'category_id' => $category->id,
-                        'description' => $description,
                         'company_id' => $companyId
                     ]
                 );
