@@ -96,7 +96,7 @@
         <h3 class="text-lg font-semibold text-gray-800 mb-4">Imagen del Activo</h3>
         <div class="flex justify-center">
             @php
-                $imageUrl = str_starts_with($asset->image, 'http') 
+                $imageUrl = \Illuminate\Support\Str::startsWith($asset->image, 'http') 
                     ? $asset->image 
                     : asset('storage/' . $asset->image);
             @endphp

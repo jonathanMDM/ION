@@ -55,7 +55,7 @@
                     <div class="flex items-center">
                         @if($asset->image)
                             @php
-                                $imageUrl = str_starts_with($asset->image, 'http') 
+                                $imageUrl = \Illuminate\Support\Str::startsWith($asset->image, 'http') 
                                     ? $asset->image 
                                     : asset('storage/' . $asset->image);
                             @endphp

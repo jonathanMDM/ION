@@ -173,7 +173,7 @@
                 <div class="mt-2">
                     <p class="text-sm text-gray-600 mb-2">Imagen actual:</p>
                     @php
-                        $imageUrl = str_starts_with($asset->image, 'http') 
+                        $imageUrl = \Illuminate\Support\Str::startsWith($asset->image, 'http') 
                             ? $asset->image 
                             : asset('storage/' . $asset->image);
                     @endphp
