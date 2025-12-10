@@ -168,8 +168,8 @@ class ReportController extends Controller
             'decommissioned' => $assets->where('status', 'decommissioned')->count(),
         ];
 
-        // PDF export temporarily disabled due to package configuration
-        return redirect()->back()->with('error', 'La exportación a PDF está temporalmente deshabilitada. Por favor, use la exportación a Excel (CSV).');
+        // Return HTML view optimized for printing
+        return view('reports.print', compact('assets', 'stats'));
     }
 
     public function exportExcel(Request $request)
