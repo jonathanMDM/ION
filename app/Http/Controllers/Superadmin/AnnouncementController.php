@@ -23,8 +23,12 @@ class AnnouncementController extends Controller
     {
         $validated = $request->validate([
             'title' => 'required|string|max:255',
-            'content' => 'required|string',
+            'message' => 'required|string',
             'type' => 'required|in:info,warning,success,error',
+            'target_audience' => 'required|in:all,specific_company,admins_only',
+            'company_id' => 'nullable|exists:companies,id',
+            'start_date' => 'nullable|date',
+            'end_date' => 'nullable|date|after_or_equal:start_date',
             'is_active' => 'boolean',
         ]);
 
@@ -44,8 +48,12 @@ class AnnouncementController extends Controller
     {
         $validated = $request->validate([
             'title' => 'required|string|max:255',
-            'content' => 'required|string',
+            'message' => 'required|string',
             'type' => 'required|in:info,warning,success,error',
+            'target_audience' => 'required|in:all,specific_company,admins_only',
+            'company_id' => 'nullable|exists:companies,id',
+            'start_date' => 'nullable|date',
+            'end_date' => 'nullable|date|after_or_equal:start_date',
             'is_active' => 'boolean',
         ]);
 

@@ -14,7 +14,7 @@
             </div>
             <div class="ml-4 flex-1">
                 <h3 class="text-lg font-bold text-gray-900">{{ $announcement->title }}</h3>
-                <p class="mt-2 text-gray-700">{{ $announcement->content }}</p>
+                <p class="mt-2 text-gray-700">{{ $announcement->message }}</p>
                 @if($announcement->start_date || $announcement->end_date)
                 <div class="mt-2 text-xs text-gray-500">
                     @if($announcement->start_date)

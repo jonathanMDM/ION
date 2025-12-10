@@ -31,23 +31,9 @@ class DashboardController extends Controller
         // Recent Activity
         $recent_assets = Asset::with(['location', 'subcategory.category'])->latest()->take(5)->get();
 
-        // Active Announcements
-        $announcements = \App\Models\Announcement::where('is_active', true)
-            ->where(function($query) {
-                $query->where('target_audience', 'all')
-                    ->orWhere(function($q) {
-                        $q->where('target_audience', 'specific_company')
-                          ->where('company_id', \Auth::user()->company_id);
-                    });
-            })
-            ->where(function($query) {
-                $query->whereNull('start_date')
-                    ->orWhere('start_date', '<=', now());
-            })
-            ->where(function($query) {
-                $query->whereNull('end_date')
-                    ->orWhere('end_date', '>=', now());
-            })
+        // Active Announcements for current user
+        $announcements = \App\Models\Announcement::active()
+            ->forUser(\Auth::user())
             ->latest()
             ->get();
 
