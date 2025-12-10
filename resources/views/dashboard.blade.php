@@ -3,6 +3,35 @@
 @section('page-title', 'Panel')
 
 @section('content')
+<!-- Announcements -->
+@if(isset($announcements) && $announcements->count() > 0)
+<div class="mb-6 space-y-4">
+    @foreach($announcements as $announcement)
+    <div class="bg-gradient-to-r from-blue-50 to-indigo-50 border-l-4 border-blue-500 rounded-lg shadow-md p-4">
+        <div class="flex items-start">
+            <div class="flex-shrink-0">
+                <i class="fas fa-bullhorn text-blue-600 text-2xl"></i>
+            </div>
+            <div class="ml-4 flex-1">
+                <h3 class="text-lg font-bold text-gray-900">{{ $announcement->title }}</h3>
+                <p class="mt-2 text-gray-700">{{ $announcement->content }}</p>
+                @if($announcement->start_date || $announcement->end_date)
+                <div class="mt-2 text-xs text-gray-500">
+                    @if($announcement->start_date)
+                        Desde: {{ \Carbon\Carbon::parse($announcement->start_date)->format('d/m/Y') }}
+                    @endif
+                    @if($announcement->end_date)
+                        - Hasta: {{ \Carbon\Carbon::parse($announcement->end_date)->format('d/m/Y') }}
+                    @endif
+                </div>
+                @endif
+            </div>
+        </div>
+    </div>
+    @endforeach
+</div>
+@endif
+
 <!-- Statistics Cards -->
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
     <!-- Total Assets -->
