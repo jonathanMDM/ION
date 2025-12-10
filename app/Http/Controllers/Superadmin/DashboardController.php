@@ -3,12 +3,22 @@
 namespace App\Http\Controllers\Superadmin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Company;
+use App\Models\User;
+use App\Models\Asset;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        return view('superadmin.dashboard');
+        $stats = [
+            'total_companies' => Company::count(),
+            'active_companies' => Company::where('status', 'active')->count(),
+            'total_users' => User::count(),
+            'total_assets' => Asset::count(),
+        ];
+
+        return view('superadmin.dashboard', compact('stats'));
     }
 }
