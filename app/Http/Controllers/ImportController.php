@@ -35,15 +35,27 @@ class ImportController extends Controller
                 return redirect()->back()->with('error', 'No se pudo abrir el archivo.');
             }
             
+            // Detect delimiter (comma or tab)
+            $firstLine = fgets($handle);
+            rewind($handle);
+            
+            $delimiter = ',';
+            if (strpos($firstLine, "\t") !== false && strpos($firstLine, ',') === false) {
+                $delimiter = "\t";
+                \Log::info('Detected tab-separated file');
+            } else {
+                \Log::info('Detected comma-separated file');
+            }
+            
             // Skip header row
-            $header = fgetcsv($handle);
-            \Log::info('CSV Headers', ['headers' => $header]);
+            $header = fgetcsv($handle, 0, $delimiter);
+            \Log::info('CSV Headers', ['headers' => $header, 'delimiter' => $delimiter === "\t" ? 'TAB' : 'COMMA']);
             
             $imported = 0;
             $errors = [];
             $rowNumber = 1; // Start at 1 (header is 0)
             
-            while (($row = fgetcsv($handle)) !== false) {
+            while (($row = fgetcsv($handle, 0, $delimiter)) !== false) {
                 $rowNumber++;
                 
                 // Skip empty rows
