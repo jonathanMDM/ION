@@ -19,6 +19,8 @@ class DashboardController extends Controller
             'total_assets' => Asset::count(),
         ];
 
-        return view('superadmin.dashboard', compact('stats'));
+        $recent_companies = Company::latest()->take(10)->get();
+
+        return view('superadmin.dashboard', compact('stats', 'recent_companies'));
     }
 }
