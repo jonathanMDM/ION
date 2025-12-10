@@ -168,18 +168,90 @@ class ReportController extends Controller
             'decommissioned' => $assets->where('status', 'decommissioned')->count(),
         ];
 
-        $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('reports.pdf', compact('assets', 'stats'));
-        $pdf->setPaper('letter', 'landscape');
-        
-        return $pdf->download('reporte-activos-'.date('Y-m-d').'.pdf');
+        // PDF export temporarily disabled due to package configuration
+        return redirect()->back()->with('error', 'La exportación a PDF está temporalmente deshabilitada. Por favor, use la exportación a Excel (CSV).');
     }
 
     public function exportExcel(Request $request)
     {
-        try {
-            return \Maatwebsite\Excel\Facades\Excel::download(new AssetsExport($request->all()), 'assets-report-' . date('Y-m-d') . '.xlsx');
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Error al exportar a Excel: ' . $e->getMessage());
+        $query = Asset::with(['location', 'subcategory.category', 'supplier']);
+
+        // Apply same filters as index
+        if ($request->filled('status')) {
+            $query->where('status', $request->status);
         }
+        if ($request->filled('location_id')) {
+            $query->where('location_id', $request->location_id);
+        }
+        if ($request->filled('category_id')) {
+            $query->whereHas('subcategory', function($q) use ($request) {
+                $q->where('category_id', $request->category_id);
+            });
+        }
+        if ($request->filled('subcategory_id')) {
+            $query->where('subcategory_id', $request->subcategory_id);
+        }
+        if ($request->filled('supplier_id')) {
+            $query->where('supplier_id', $request->supplier_id);
+        }
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function($q) use ($search) {
+                $q->where('name', 'like', '%' . $search . '%')
+                  ->orWhere('custom_id', 'like', '%' . $search . '%');
+            });
+        }
+
+        $assets = $query->get();
+
+        // Create CSV
+        $filename = 'assets-report-' . date('Y-m-d') . '.csv';
+        $headers = [
+            'Content-Type' => 'text/csv',
+            'Content-Disposition' => 'attachment; filename="' . $filename . '"',
+        ];
+
+        $callback = function() use ($assets) {
+            $file = fopen('php://output', 'w');
+            
+            // Add BOM for Excel UTF-8 compatibility
+            fprintf($file, chr(0xEF).chr(0xBB).chr(0xBF));
+            
+            // Headers
+            fputcsv($file, [
+                'ID Personalizado',
+                'Nombre',
+                'Categoría',
+                'Subcategoría',
+                'Ubicación',
+                'Estado',
+                'Cantidad',
+                'Valor',
+                'Proveedor',
+                'Fecha de Compra',
+                'Placa Municipal'
+            ]);
+
+            // Data
+            foreach ($assets as $asset) {
+                fputcsv($file, [
+                    $asset->custom_id,
+                    $asset->name,
+                    $asset->subcategory->category->name ?? 'N/A',
+                    $asset->subcategory->name ?? 'N/A',
+                    $asset->location->name ?? 'N/A',
+                    ucfirst($asset->status),
+                    $asset->quantity,
+                    $asset->value,
+                    $asset->supplier->name ?? 'N/A',
+                    $asset->purchase_date ? $asset->purchase_date->format('Y-m-d') : 'N/A',
+                    $asset->municipality_plate ?? 'N/A'
+                ]);
+            }
+
+            fclose($file);
+        };
+
+        return response()->stream($callback, 200, $headers);
     }
 }
