@@ -7,8 +7,49 @@ class BackupController extends Controller
 {
     public function index()
     {
+        $backupPath = storage_path('app/backups');
         $backups = [];
+        
+        if (file_exists($backupPath)) {
+            $files = \File::files($backupPath);
+            
+            foreach ($files as $file) {
+                $backups[] = [
+                    'name' => $file->getFilename(),
+                    'size' => $this->formatBytes($file->getSize()),
+                    'date' => date('Y-m-d H:i:s', $file->getMTime()),
+                    'path' => $file->getPathname(),
+                ];
+            }
+            
+            // Sort by date descending
+            usort($backups, function($a, $b) {
+                return strtotime($b['date']) - strtotime($a['date']);
+            });
+        }
+        
         return view('superadmin.backups.index', compact('backups'));
+    }
+    
+    private function formatBytes($bytes, $precision = 2)
+    {
+        $units = ['B', 'KB', 'MB', 'GB'];
+        $bytes = max($bytes, 0);
+        $pow = floor(($bytes ? log($bytes) : 0) / log(1024));
+        $pow = min($pow, count($units) - 1);
+        $bytes /= pow(1024, $pow);
+        return round($bytes, $precision) . ' ' . $units[$pow];
+    }
+    
+    public function download($filename)
+    {
+        $filepath = storage_path('app/backups/' . $filename);
+        
+        if (!file_exists($filepath)) {
+            return redirect()->back()->with('error', 'Backup no encontrado.');
+        }
+        
+        return response()->download($filepath);
     }
     
     public function create($companyId)

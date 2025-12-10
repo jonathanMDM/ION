@@ -77,10 +77,10 @@
                         {{ $backup['name'] }}
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        {{ number_format($backup['size'] / 1024, 2) }} KB
+                        {{ $backup['size'] }}
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        {{ date('d/m/Y H:i:s', $backup['date']) }}
+                        {{ $backup['date'] }}
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                         <form action="{{ route('superadmin.backups.restore', $backup['name']) }}" method="POST" class="inline-block mr-3" onsubmit="return confirm('⚠️ ADVERTENCIA: Esto restaurará los datos del backup. ¿Estás seguro?')">
