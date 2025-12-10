@@ -28,6 +28,10 @@ class CompanyController extends Controller
             'status' => 'required|in:active,inactive',
         ]);
 
+        // Add default values
+        $validated['user_limit'] = $request->input('user_limit', 10);
+        $validated['subscription_expires_at'] = $request->input('subscription_expires_at', now()->addYear());
+
         Company::create($validated);
 
         return redirect()->route('superadmin.companies.index')
