@@ -25,17 +25,39 @@ class CompanyController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:companies,email',
             'nit' => 'nullable|string|max:255',
-            'status' => 'required|in:active,inactive',
+            'phone' => 'nullable|string|max:255',
+            'address' => 'nullable|string|max:255',
+            'user_limit' => 'required|integer|min:1',
+            'subscription_expires_at' => 'nullable|date',
+            'admin_name' => 'required|string|max:255',
+            'admin_email' => 'required|email|unique:users,email',
+            'admin_password' => 'required|string|min:8',
         ]);
 
-        // Add default values
-        $validated['user_limit'] = $request->input('user_limit', 10);
-        $validated['subscription_expires_at'] = $request->input('subscription_expires_at', now()->addYear());
+        // Create company
+        $company = Company::create([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'nit' => $validated['nit'],
+            'phone' => $validated['phone'],
+            'address' => $validated['address'],
+            'user_limit' => $validated['user_limit'],
+            'subscription_expires_at' => $validated['subscription_expires_at'],
+            'status' => 'active',
+        ]);
 
-        Company::create($validated);
+        // Create admin user for the company
+        \App\Models\User::create([
+            'name' => $validated['admin_name'],
+            'email' => $validated['admin_email'],
+            'password' => bcrypt($validated['admin_password']),
+            'company_id' => $company->id,
+            'role' => 'admin',
+            'is_active' => true,
+        ]);
 
         return redirect()->route('superadmin.companies.index')
-            ->with('success', 'Empresa creada exitosamente.');
+            ->with('success', 'Empresa y administrador creados exitosamente.');
     }
 
     public function show(Company $company)
