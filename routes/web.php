@@ -70,7 +70,6 @@ Route::middleware(['auth'])->group(function () {
     Route::post('assets/import/preview', [AssetImportController::class, 'preview'])->name('assets.import.preview');
     Route::post('assets/import/execute', [AssetImportController::class, 'import'])->name('assets.import.execute');
     Route::get('assets/import/template', [AssetImportController::class, 'downloadTemplate'])->name('assets.import.template');
-    Route::get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
     
 
 
@@ -144,7 +143,7 @@ Route::middleware(['auth'])->group(function () {
 
 // Superadmin Routes
 Route::middleware(['auth', 'superadmin'])->prefix('superadmin')->name('superadmin.')->group(function () {
-    Route::get('/', [\App\Http\Controllers\SuperAdmin\DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/', [\App\Http\Controllers\SuperAdmin\DashboardController::class, 'index'])->name('index');
     Route::resource('companies', \App\Http\Controllers\SuperAdmin\CompanyController::class);
     
     // Impersonation
