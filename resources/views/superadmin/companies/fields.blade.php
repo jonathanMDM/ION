@@ -21,6 +21,57 @@
             </p>
         </div>
 
+        <!-- Formulario para crear campo -->
+        <div class="bg-gray-50 border border-gray-200 rounded-lg p-6 mb-6">
+            <h3 class="text-lg font-semibold text-gray-800 mb-4">Crear Nuevo Campo</h3>
+            <form action="{{ route('superadmin.companies.fields.store', $company) }}" method="POST">
+                @csrf
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Nombre del Campo</label>
+                        <input 
+                            type="text" 
+                            name="name" 
+                            required
+                            placeholder="ej: numero_serie"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        >
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Etiqueta</label>
+                        <input 
+                            type="text" 
+                            name="label" 
+                            required
+                            placeholder="ej: Número de Serie"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        >
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Tipo</label>
+                        <select 
+                            name="type" 
+                            required
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        >
+                            <option value="text">Texto</option>
+                            <option value="number">Número</option>
+                            <option value="date">Fecha</option>
+                            <option value="textarea">Área de Texto</option>
+                        </select>
+                    </div>
+                    <div class="flex items-end">
+                        <button 
+                            type="submit" 
+                            class="w-full px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition"
+                        >
+                            <i class="fas fa-plus mr-2"></i>Crear Campo
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
         @if($fields->count() > 0)
         <div class="overflow-x-auto">
             <table class="min-w-full divide-y divide-gray-200">
