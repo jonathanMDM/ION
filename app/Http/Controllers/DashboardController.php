@@ -14,7 +14,7 @@ class DashboardController extends Controller
     public function index()
     {
         if (\Illuminate\Support\Facades\Auth::user()->isSuperAdmin()) {
-            return redirect()->route('superadmin.dashboard');
+            return redirect()->route('superadmin.index');
         }
 
         // Statistics
