@@ -39,7 +39,7 @@
         </div>
         
         <nav class="mt-4 overflow-y-auto h-[calc(100vh-80px)]">
-            <a href="{{ route('superadmin.dashboard') }}" class="flex items-center px-4 py-3 hover:bg-gray-800 {{ request()->routeIs('superadmin.dashboard') ? 'bg-gray-800 border-l-4 border-white' : '' }}">
+            <a href="{{ route('superadmin.index') }}" class="flex items-center px-4 py-3 hover:bg-gray-800 {{ request()->routeIs('superadmin.index') ? 'bg-gray-800 border-l-4 border-white' : '' }}">
                 <i class="fas fa-tachometer-alt w-6"></i>
                 <span class="ml-3 sidebar-text">Dashboard Global</span>
             </a>
