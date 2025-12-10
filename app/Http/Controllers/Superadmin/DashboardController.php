@@ -33,6 +33,8 @@ class DashboardController extends Controller
             'cache_driver' => config('cache.default'),
         ];
 
-        return view('superadmin.system-status', compact('systemInfo'));
+        $companies = Company::with('users')->latest()->get();
+
+        return view('superadmin.system-status', compact('systemInfo', 'companies'));
     }
 }
