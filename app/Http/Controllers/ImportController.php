@@ -28,23 +28,41 @@ class ImportController extends Controller
         try {
             $handle = fopen($file->getRealPath(), 'r');
             
+            if (!$handle) {
+                return redirect()->back()->with('error', 'No se pudo abrir el archivo.');
+            }
+            
             // Skip header row
             $header = fgetcsv($handle);
             
             $imported = 0;
             $errors = [];
+            $rowNumber = 1; // Start at 1 (header is 0)
             
             while (($row = fgetcsv($handle)) !== false) {
+                $rowNumber++;
+                
+                // Skip empty rows
+                if (empty(array_filter($row))) {
+                    continue;
+                }
+                
                 try {
+                    // Validate required fields
+                    if (empty($row[0]) || empty($row[1])) {
+                        $errors[] = "Fila $rowNumber: custom_id y name son requeridos";
+                        continue;
+                    }
+                    
                     // Map CSV columns to asset fields
                     $assetData = [
-                        'custom_id' => $row[0] ?? null,
-                        'name' => $row[1] ?? null,
-                        'specifications' => $row[2] ?? null,
-                        'quantity' => $row[3] ?? 1,
-                        'value' => $row[4] ?? 0,
-                        'purchase_date' => $row[5] ?? null,
-                        'status' => $row[6] ?? 'active',
+                        'custom_id' => trim($row[0]),
+                        'name' => trim($row[1]),
+                        'specifications' => $row[2] ?? '',
+                        'quantity' => !empty($row[3]) ? (int)$row[3] : 1,
+                        'value' => !empty($row[4]) ? (float)$row[4] : 0,
+                        'purchase_date' => !empty($row[5]) ? $row[5] : null,
+                        'status' => !empty($row[6]) ? $row[6] : 'active',
                         'municipality_plate' => $row[11] ?? null,
                         'notes' => $row[12] ?? null,
                         'company_id' => $companyId,
@@ -53,8 +71,8 @@ class ImportController extends Controller
                     // Find or create location
                     if (!empty($row[7])) {
                         $location = \App\Models\Location::firstOrCreate(
-                            ['name' => $row[7], 'company_id' => $companyId],
-                            ['description' => 'Creado automáticamente']
+                            ['name' => trim($row[7]), 'company_id' => $companyId],
+                            ['description' => 'Creado automáticamente desde importación']
                         );
                         $assetData['location_id'] = $location->id;
                     }
@@ -62,11 +80,11 @@ class ImportController extends Controller
                     // Find or create category and subcategory
                     if (!empty($row[8]) && !empty($row[9])) {
                         $category = \App\Models\Category::firstOrCreate(
-                            ['name' => $row[8], 'company_id' => $companyId]
+                            ['name' => trim($row[8]), 'company_id' => $companyId]
                         );
                         
                         $subcategory = \App\Models\Subcategory::firstOrCreate(
-                            ['name' => $row[9], 'category_id' => $category->id, 'company_id' => $companyId]
+                            ['name' => trim($row[9]), 'category_id' => $category->id, 'company_id' => $companyId]
                         );
                         $assetData['subcategory_id'] = $subcategory->id;
                     }
@@ -74,7 +92,7 @@ class ImportController extends Controller
                     // Find or create supplier
                     if (!empty($row[10])) {
                         $supplier = \App\Models\Supplier::firstOrCreate(
-                            ['name' => $row[10], 'company_id' => $companyId],
+                            ['name' => trim($row[10]), 'company_id' => $companyId],
                             ['email' => '', 'phone' => '']
                         );
                         $assetData['supplier_id'] = $supplier->id;
@@ -84,23 +102,24 @@ class ImportController extends Controller
                     $imported++;
                     
                 } catch (\Exception $e) {
-                    $errors[] = "Error en fila " . ($imported + 1) . ": " . $e->getMessage();
+                    $errors[] = "Fila $rowNumber: " . $e->getMessage();
                 }
             }
             
             fclose($handle);
             
+            $message = "Se importaron exitosamente $imported activos.";
+            
             if (count($errors) > 0) {
-                return redirect()->route('assets.index')
-                    ->with('warning', "Importados: $imported activos. Errores: " . implode(', ', array_slice($errors, 0, 3)));
+                $message .= " Errores encontrados: " . count($errors) . ". ";
+                $message .= implode(' | ', array_slice($errors, 0, 5));
+                return redirect()->route('assets.index')->with('warning', $message);
             }
             
-            return redirect()->route('assets.index')
-                ->with('success', "Se importaron exitosamente $imported activos.");
+            return redirect()->route('assets.index')->with('success', $message);
                 
         } catch (\Exception $e) {
-            return redirect()->back()
-                ->with('error', 'Error al procesar el archivo: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Error al procesar el archivo: ' . $e->getMessage());
         }
     }
 
