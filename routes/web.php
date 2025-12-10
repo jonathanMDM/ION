@@ -55,6 +55,11 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/notifications/read-all', [\App\Http\Controllers\NotificationController::class, 'markAllAsRead'])->name('notifications.read-all');
     Route::delete('/notifications/{notification}', [\App\Http\Controllers\NotificationController::class, 'destroy'])->name('notifications.destroy');
     
+    // Import Assets (must be before resource route)
+    Route::get('imports/create', [ImportController::class, 'create'])->name('imports.create');
+    Route::post('imports/store', [ImportController::class, 'store'])->name('imports.store');
+    Route::get('imports/template', [ImportController::class, 'downloadTemplate'])->name('assets.import.template');
+    
     // Assets
     Route::resource('assets', AssetController::class);
     Route::get('/assets/{asset}/qr', [AssetController::class, 'showQR'])->name('assets.qr');
@@ -65,11 +70,7 @@ Route::middleware(['auth'])->group(function () {
     // Activity Logs
     Route::get('activity-logs', [ActivityLogController::class, 'index'])->name('activity-logs.index');
     
-    // Asset Import
-    Route::get('assets/import', [AssetImportController::class, 'showForm'])->name('assets.import');
-    Route::post('assets/import/preview', [AssetImportController::class, 'preview'])->name('assets.import.preview');
-    Route::post('assets/import/execute', [AssetImportController::class, 'import'])->name('assets.import.execute');
-    Route::get('assets/import/template', [AssetImportController::class, 'downloadTemplate'])->name('assets.import.template');
+
     
 
 
@@ -84,10 +85,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('two-factor/enable', [\App\Http\Controllers\TwoFactorController::class, 'enable'])->name('two-factor.enable');
     Route::delete('two-factor/disable', [\App\Http\Controllers\TwoFactorController::class, 'disable'])->name('two-factor.disable');
     
-    // Import Assets
-    Route::get('assets/import', [ImportController::class, 'create'])->name('assets.import');
-    Route::post('assets/import', [ImportController::class, 'store'])->name('assets.import.store');
-    Route::get('assets/import/template', [ImportController::class, 'downloadTemplate'])->name('assets.import.template');
+
     
     // Backups (Admin only)
     Route::middleware('role:admin')->group(function () {
@@ -124,9 +122,7 @@ Route::middleware(['auth'])->group(function () {
     // Maintenances
     Route::resource('maintenances', MaintenanceController::class);
     
-    // Import
-    Route::get('import', [ImportController::class, 'create'])->name('imports.create');
-    Route::post('import', [ImportController::class, 'store'])->name('imports.store');
+
     
     // Reports
     Route::get('reports', [ReportController::class, 'index'])->name('reports.index');
