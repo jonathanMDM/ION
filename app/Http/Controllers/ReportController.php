@@ -176,6 +176,9 @@ class ReportController extends Controller
 
     public function exportExcel(Request $request)
     {
-        return \Maatwebsite\Excel\Facades\Excel::download(new AssetsExport($request->all()), 'assets-report-' . date('Y-m-d') . '.xlsx');
+        // Temporarily disabled due to package configuration issue
+        return redirect()->back()->with('error', 'La exportación a Excel está temporalmente deshabilitada. Por favor, use la exportación a PDF.');
+        
+        // return \Maatwebsite\Excel\Facades\Excel::download(new AssetsExport($request->all()), 'assets-report-' . date('Y-m-d') . '.xlsx');
     }
 }
