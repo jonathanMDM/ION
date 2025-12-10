@@ -185,8 +185,9 @@
         // Auto-open print dialog after page loads
         window.onload = function() {
             setTimeout(function() {
-                // Uncomment to auto-open print dialog
-                // window.print();
+                window.print();
+                // Close window after printing (optional)
+                // window.onafterprint = function() { window.close(); };
             }, 500);
         };
     </script>
