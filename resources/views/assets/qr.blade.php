@@ -12,12 +12,7 @@
             <!-- QR Code -->
             <div class="flex justify-center mb-6">
                 <div class="bg-white p-4 rounded-lg shadow-inner">
-                    @php
-                        $qrUrl = route('assets.show', $asset->id);
-                        // Using QuickChart.io API for QR code generation
-                        $qrImageUrl = 'https://quickchart.io/qr?text=' . urlencode($qrUrl) . '&size=300';
-                    @endphp
-                    <img src="{{ $qrImageUrl }}" alt="QR Code para {{ $asset->name }}" class="w-[300px] h-[300px]" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'300\' height=\'300\'%3E%3Crect width=\'300\' height=\'300\' fill=\'%23f0f0f0\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' font-family=\'Arial\' font-size=\'16\' fill=\'%23666\'%3EQR Code no disponible%3C/text%3E%3C/svg%3E'">
+                    <div id="qrcode"></div>
                     <p class="text-xs text-gray-500 mt-2 text-center">Escanea para ver detalles</p>
                 </div>
             </div>
@@ -57,6 +52,20 @@
     </div>
 </div>
 
+<!-- QR Code Library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+    // Generate QR Code
+    new QRCode(document.getElementById("qrcode"), {
+        text: "{{ route('assets.show', $asset->id) }}",
+        width: 300,
+        height: 300,
+        colorDark : "#000000",
+        colorLight : "#ffffff",
+        correctLevel : QRCode.CorrectLevel.H
+    });
+</script>
+
 <style>
     @media print {
         .sidebar, .navbar, button, a {
@@ -65,6 +74,14 @@
         body {
             background: white !important;
         }
+    }
+    
+    #qrcode {
+        display: inline-block;
+    }
+    
+    #qrcode img {
+        margin: 0 auto;
     }
 </style>
 @endsection
