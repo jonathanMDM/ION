@@ -9,7 +9,10 @@ class ActivityLogController extends Controller
     public function index()
     {
         $logs = ActivityLog::with('user')->latest()->paginate(50);
-        return view('superadmin.activity-logs', compact('logs'));
+        $users = \App\Models\User::orderBy('name')->get();
+        $companies = \App\Models\Company::orderBy('name')->get();
+        
+        return view('superadmin.activity-logs', compact('logs', 'users', 'companies'));
     }
 
     public function export()
