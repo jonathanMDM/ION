@@ -176,6 +176,6 @@ class ReportController extends Controller
 
     public function exportExcel(Request $request)
     {
-        return Excel::download(new AssetsExport($request->all()), 'assets-report-' . date('Y-m-d') . '.xlsx');
+        return \Maatwebsite\Excel\Facades\Excel::download(new AssetsExport($request->all()), 'assets-report-' . date('Y-m-d') . '.xlsx');
     }
 }
