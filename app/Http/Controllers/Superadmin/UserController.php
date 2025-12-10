@@ -35,7 +35,6 @@ class UserController extends Controller
         
         // Login back as the superadmin - bypass CompanyScope to find superadmin
         $superadmin = \App\Models\User::withoutGlobalScope(\App\Scopes\CompanyScope::class)
-            ->withTrashed()
             ->find($impersonatorId);
         \Log::info('User query result', ['found' => $superadmin ? 'yes' : 'no', 'user' => $superadmin ? $superadmin->toArray() : null]);
         
