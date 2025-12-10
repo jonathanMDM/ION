@@ -30,6 +30,55 @@ class ImportController extends Controller
 
     public function downloadTemplate()
     {
-        return Excel::download(new AssetsTemplateExport, 'plantilla_activos.xlsx');
+        $filename = 'plantilla_activos.csv';
+        $headers = [
+            'Content-Type' => 'text/csv',
+            'Content-Disposition' => 'attachment; filename="' . $filename . '"',
+        ];
+
+        $callback = function() {
+            $file = fopen('php://output', 'w');
+            
+            // Add BOM for Excel UTF-8 compatibility
+            fprintf($file, chr(0xEF).chr(0xBB).chr(0xBF));
+            
+            // Headers
+            fputcsv($file, [
+                'custom_id',
+                'name',
+                'specifications',
+                'quantity',
+                'value',
+                'purchase_date',
+                'status',
+                'location_name',
+                'category_name',
+                'subcategory_name',
+                'supplier_name',
+                'municipality_plate',
+                'notes'
+            ]);
+
+            // Example row
+            fputcsv($file, [
+                'ACT-001',
+                'Laptop Dell',
+                'Core i5, 8GB RAM',
+                '1',
+                '800.00',
+                date('Y-m-d'),
+                'active',
+                'Oficina Principal',
+                'Tecnología',
+                'Computadoras',
+                'Dell Inc',
+                'MUN-001',
+                'Ejemplo de activo'
+            ]);
+
+            fclose($file);
+        };
+
+        return response()->stream($callback, 200, $headers);
     }
 }
