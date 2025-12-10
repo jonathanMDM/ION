@@ -33,8 +33,10 @@ class UserController extends Controller
         $impersonatorId = session('impersonator_id');
         \Log::info('Impersonator ID from session', ['id' => $impersonatorId, 'type' => gettype($impersonatorId)]);
         
-        // Login back as the superadmin - try with withTrashed in case of soft deletes
-        $superadmin = \App\Models\User::withTrashed()->find($impersonatorId);
+        // Login back as the superadmin - bypass CompanyScope to find superadmin
+        $superadmin = \App\Models\User::withoutGlobalScope(\App\Scopes\CompanyScope::class)
+            ->withTrashed()
+            ->find($impersonatorId);
         \Log::info('User query result', ['found' => $superadmin ? 'yes' : 'no', 'user' => $superadmin ? $superadmin->toArray() : null]);
         
         if (!$superadmin) {
