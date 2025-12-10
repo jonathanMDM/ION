@@ -19,14 +19,14 @@ class ExampleDataSeeder extends Seeder
 
         // Locations (Ubicaciones)
         $locations = [
-            ['name' => 'Oficina Principal', 'description' => 'Edificio administrativo central', 'company_id' => $companyId],
-            ['name' => 'Almacén General', 'description' => 'Bodega de almacenamiento principal', 'company_id' => $companyId],
-            ['name' => 'Sala de Servidores', 'description' => 'Data center y equipos de red', 'company_id' => $companyId],
-            ['name' => 'Recepción', 'description' => 'Área de recepción y atención al público', 'company_id' => $companyId],
-            ['name' => 'Sala de Juntas', 'description' => 'Sala de reuniones ejecutivas', 'company_id' => $companyId],
-            ['name' => 'Departamento de IT', 'description' => 'Área de tecnología e informática', 'company_id' => $companyId],
-            ['name' => 'Recursos Humanos', 'description' => 'Departamento de personal', 'company_id' => $companyId],
-            ['name' => 'Contabilidad', 'description' => 'Departamento financiero', 'company_id' => $companyId],
+            ['name' => 'Oficina Principal', 'company_id' => $companyId],
+            ['name' => 'Almacén General', 'company_id' => $companyId],
+            ['name' => 'Sala de Servidores', 'company_id' => $companyId],
+            ['name' => 'Recepción', 'company_id' => $companyId],
+            ['name' => 'Sala de Juntas', 'company_id' => $companyId],
+            ['name' => 'Departamento de IT', 'company_id' => $companyId],
+            ['name' => 'Recursos Humanos', 'company_id' => $companyId],
+            ['name' => 'Contabilidad', 'company_id' => $companyId],
         ];
 
         foreach ($locations as $location) {
