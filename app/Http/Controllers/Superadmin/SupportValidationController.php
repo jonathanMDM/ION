@@ -4,6 +4,6 @@ use App\Http\Controllers\Controller;
 class SupportValidationController extends Controller
 {
     public function index() {
-        return view('superadmin.support-validation.index');
+        return view('superadmin.coming-soon', ['title' => 'Validar Cliente']);
     }
 }

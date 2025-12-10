@@ -4,6 +4,6 @@ use App\Http\Controllers\Controller;
 class SuperadminSupportController extends Controller
 {
     public function index() {
-        return view('superadmin.support.index');
+        return view('superadmin.coming-soon', ['title' => 'Soporte']);
     }
 }
