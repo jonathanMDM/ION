@@ -76,6 +76,10 @@ class CompanyController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:companies,email,' . $company->id,
             'nit' => 'nullable|string|max:255',
+            'phone' => 'nullable|string|max:255',
+            'address' => 'nullable|string|max:255',
+            'user_limit' => 'required|integer|min:1',
+            'subscription_expires_at' => 'nullable|date',
             'status' => 'required|in:active,inactive',
         ]);
 
