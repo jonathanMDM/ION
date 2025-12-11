@@ -96,6 +96,41 @@ class ImportController extends Controller
                         \Log::info("Custom ID duplicado, cambiado de '$originalCustomId' a '$customId'");
                     }
                     
+                    // Parse purchase date with flexible format support
+                    $purchaseDate = null;
+                    if (!empty($row[5])) {
+                        try {
+                            // Try multiple date formats
+                            $dateString = trim($row[5]);
+                            
+                            // Try dd/mm/yy format (Excel default)
+                            if (preg_match('/^(\d{1,2})\/(\d{1,2})\/(\d{2})$/', $dateString, $matches)) {
+                                $day = str_pad($matches[1], 2, '0', STR_PAD_LEFT);
+                                $month = str_pad($matches[2], 2, '0', STR_PAD_LEFT);
+                                $year = '20' . $matches[3]; // Assume 20xx
+                                $purchaseDate = "$year-$month-$day";
+                            }
+                            // Try dd/mm/yyyy format
+                            elseif (preg_match('/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/', $dateString, $matches)) {
+                                $day = str_pad($matches[1], 2, '0', STR_PAD_LEFT);
+                                $month = str_pad($matches[2], 2, '0', STR_PAD_LEFT);
+                                $year = $matches[3];
+                                $purchaseDate = "$year-$month-$day";
+                            }
+                            // Try yyyy-mm-dd format (standard)
+                            elseif (preg_match('/^\d{4}-\d{2}-\d{2}$/', $dateString)) {
+                                $purchaseDate = $dateString;
+                            }
+                            else {
+                                // Try Carbon parse as last resort
+                                $purchaseDate = \Carbon\Carbon::parse($dateString)->format('Y-m-d');
+                            }
+                        } catch (\Exception $e) {
+                            \Log::warning("Could not parse date '$row[5]' for row $rowNumber, using null");
+                            $purchaseDate = null;
+                        }
+                    }
+                    
                     // Map CSV columns to asset fields
                     $assetData = [
                         'custom_id' => $customId,
@@ -103,7 +138,7 @@ class ImportController extends Controller
                         'specifications' => $row[2] ?? '',
                         'quantity' => !empty($row[3]) ? (int)$row[3] : 1,
                         'value' => !empty($row[4]) ? (float)$row[4] : 0,
-                        'purchase_date' => !empty($row[5]) ? $row[5] : null,
+                        'purchase_date' => $purchaseDate,
                         'status' => !empty($row[6]) ? $row[6] : 'active',
                         'municipality_plate' => $row[11] ?? null,
                         'notes' => $row[12] ?? null,
