@@ -372,7 +372,7 @@
     </div>
 
     <script>
-        // Initialize sidebar as collapsed on page load (desktop only)
+        // Initialize sidebar state from localStorage
         document.addEventListener('DOMContentLoaded', function() {
             const sidebar = document.getElementById('sidebar');
             const mainContent = document.getElementById('main-content');
@@ -380,11 +380,22 @@
             
             // Only on desktop (md breakpoint and above)
             if (window.innerWidth >= 768) {
-                sidebar.classList.remove('sidebar-expanded');
-                sidebar.classList.add('sidebar-collapsed');
-                mainContent.classList.remove('md:ml-64');
-                mainContent.classList.add('md:ml-16');
-                sidebarTexts.forEach(text => text.classList.add('hidden'));
+                // Get saved state from localStorage, default to collapsed
+                const isCollapsed = localStorage.getItem('sidebarCollapsed') !== 'false';
+                
+                if (isCollapsed) {
+                    sidebar.classList.remove('sidebar-expanded');
+                    sidebar.classList.add('sidebar-collapsed');
+                    mainContent.classList.remove('md:ml-64');
+                    mainContent.classList.add('md:ml-16');
+                    sidebarTexts.forEach(text => text.classList.add('hidden'));
+                } else {
+                    sidebar.classList.remove('sidebar-collapsed');
+                    sidebar.classList.add('sidebar-expanded');
+                    mainContent.classList.remove('md:ml-16');
+                    mainContent.classList.add('md:ml-64');
+                    sidebarTexts.forEach(text => text.classList.remove('hidden'));
+                }
             }
         });
 
@@ -399,12 +410,16 @@
                 mainContent.classList.remove('md:ml-64');
                 mainContent.classList.add('md:ml-16');
                 sidebarTexts.forEach(text => text.classList.add('hidden'));
+                // Save state to localStorage
+                localStorage.setItem('sidebarCollapsed', 'true');
             } else {
                 sidebar.classList.remove('sidebar-collapsed');
                 sidebar.classList.add('sidebar-expanded');
                 mainContent.classList.remove('md:ml-16');
                 mainContent.classList.add('md:ml-64');
                 sidebarTexts.forEach(text => text.classList.remove('hidden'));
+                // Save state to localStorage
+                localStorage.setItem('sidebarCollapsed', 'false');
             }
         }
 
