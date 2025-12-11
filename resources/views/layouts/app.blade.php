@@ -343,32 +343,6 @@
 
             <!-- Global Announcements -->
             @auth
-                @php
-                    $globalAnnouncements = \App\Models\Announcement::active()->forUser(Auth::user())->get();
-                @endphp
-                
-                @foreach($globalAnnouncements as $announcement)
-                    <div class="mb-4 p-4 rounded-md shadow-sm border-l-4 
-                        {{ $announcement->type == 'info' ? 'bg-blue-50 border-blue-500 text-blue-700' : '' }}
-                        {{ $announcement->type == 'warning' ? 'bg-yellow-50 border-yellow-500 text-yellow-700' : '' }}
-                        {{ $announcement->type == 'error' ? 'bg-red-50 border-red-500 text-red-700' : '' }}
-                        {{ $announcement->type == 'success' ? 'bg-green-50 border-green-500 text-green-700' : '' }}">
-                        <div class="flex">
-                            <div class="flex-shrink-0">
-                                @if($announcement->type == 'info') <i class="fas fa-info-circle"></i> @endif
-                                @if($announcement->type == 'warning') <i class="fas fa-exclamation-triangle"></i> @endif
-                                @if($announcement->type == 'error') <i class="fas fa-exclamation-circle"></i> @endif
-                                @if($announcement->type == 'success') <i class="fas fa-check-circle"></i> @endif
-                            </div>
-                            <div class="ml-3">
-                                <h3 class="text-sm font-medium">{{ $announcement->title }}</h3>
-                                <div class="mt-2 text-sm">
-                                    <p>{{ $announcement->message }}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
             @endauth
 
             @yield('content')
