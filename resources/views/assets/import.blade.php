@@ -24,11 +24,14 @@
                     <div class="mt-2 text-sm text-blue-800 space-y-2">
                         <ol class="list-decimal list-inside space-y-2">
                             <li><strong>Descarga la plantilla</strong> haciendo clic en el botón verde de abajo</li>
-                            <li><strong>Abre el archivo</strong> con Excel (se abrirá automáticamente)</li>
+                            <li><strong>Abre el archivo</strong> con Excel o Google Sheets</li>
                             <li><strong>Llena los datos</strong> de tus activos (puedes borrar las filas de ejemplo)</li>
-                            <li><strong>Guarda el archivo</strong> (Ctrl+S o Cmd+S)</li>
-                            <li><strong>Sube el archivo</strong> usando el formulario de abajo</li>
+                            <li><strong>Guarda como Excel</strong> (.xlsx) - Archivo → Guardar como → Excel</li>
+                            <li><strong>Sube el archivo Excel</strong> usando el formulario de abajo</li>
                         </ol>
+                        <p class="text-xs bg-green-100 p-2 rounded mt-2">
+                            ✅ <strong>Importante:</strong> Guarda el archivo como <strong>Excel (.xlsx)</strong> para evitar problemas con delimitadores
+                        </p>
                     </div>
                 </div>
             </div>
