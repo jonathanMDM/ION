@@ -74,8 +74,15 @@ class SubcategoryController extends Controller
      */
     public function destroy(Subcategory $subcategory)
     {
+        // Check if subcategory has associated assets
+        $assetCount = $subcategory->assets()->count();
+        
+        if ($assetCount > 0) {
+            return redirect()->route('subcategories.index')->with('error', "No se puede eliminar la subcategoría '{$subcategory->name}' porque tiene {$assetCount} activo(s) asociado(s).");
+        }
+        
         $subcategory->delete();
-        return redirect()->route('subcategories.index')->with('success', 'Subcategory deleted successfully.');
+        return redirect()->route('subcategories.index')->with('success', 'Subcategoría eliminada exitosamente.');
     }
 
     public function bulkDelete(Request $request)
@@ -84,6 +91,17 @@ class SubcategoryController extends Controller
             'selected_items' => 'required|array|min:1',
             'selected_items.*' => 'exists:subcategories,id'
         ]);
+
+        // Check if any subcategory has associated assets
+        $subcategoriesWithAssets = Subcategory::whereIn('id', $request->selected_items)
+            ->withCount('assets')
+            ->having('assets_count', '>', 0)
+            ->get();
+        
+        if ($subcategoriesWithAssets->count() > 0) {
+            $names = $subcategoriesWithAssets->pluck('name')->implode(', ');
+            return redirect()->route('subcategories.index')->with('error', "No se pueden eliminar las siguientes subcategorías porque tienen activos asociados: {$names}");
+        }
 
         $count = count($request->selected_items);
         Subcategory::whereIn('id', $request->selected_items)->delete();

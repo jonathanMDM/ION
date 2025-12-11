@@ -65,8 +65,15 @@ class LocationController extends Controller
      */
     public function destroy(Location $location)
     {
+        // Check if location has associated assets
+        $assetCount = $location->assets()->count();
+        
+        if ($assetCount > 0) {
+            return redirect()->route('locations.index')->with('error', "No se puede eliminar la ubicación '{$location->name}' porque tiene {$assetCount} activo(s) asociado(s).");
+        }
+        
         $location->delete();
-        return redirect()->route('locations.index')->with('success', 'Location deleted successfully.');
+        return redirect()->route('locations.index')->with('success', 'Ubicación eliminada exitosamente.');
     }
 
     /**
@@ -78,6 +85,17 @@ class LocationController extends Controller
             'selected_items' => 'required|array|min:1',
             'selected_items.*' => 'exists:locations,id'
         ]);
+
+        // Check if any location has associated assets
+        $locationsWithAssets = Location::whereIn('id', $request->selected_items)
+            ->withCount('assets')
+            ->having('assets_count', '>', 0)
+            ->get();
+        
+        if ($locationsWithAssets->count() > 0) {
+            $names = $locationsWithAssets->pluck('name')->implode(', ');
+            return redirect()->route('locations.index')->with('error', "No se pueden eliminar las siguientes ubicaciones porque tienen activos asociados: {$names}");
+        }
 
         $count = count($request->selected_items);
         Location::whereIn('id', $request->selected_items)->delete();

@@ -44,8 +44,15 @@ class CategoryController extends Controller
 
     public function destroy(Category $category)
     {
+        // Check if category has associated subcategories
+        $subcategoryCount = $category->subcategories()->count();
+        
+        if ($subcategoryCount > 0) {
+            return redirect()->route('categories.index')->with('error', "No se puede eliminar la categoría '{$category->name}' porque tiene {$subcategoryCount} subcategoría(s) asociada(s).");
+        }
+        
         $category->delete();
-        return redirect()->route('categories.index')->with('success', 'Category deleted successfully.');
+        return redirect()->route('categories.index')->with('success', 'Categoría eliminada exitosamente.');
     }
 
     public function bulkDelete(Request $request)
@@ -54,6 +61,17 @@ class CategoryController extends Controller
             'selected_items' => 'required|array|min:1',
             'selected_items.*' => 'exists:categories,id'
         ]);
+
+        // Check if any category has associated subcategories
+        $categoriesWithSubcategories = Category::whereIn('id', $request->selected_items)
+            ->withCount('subcategories')
+            ->having('subcategories_count', '>', 0)
+            ->get();
+        
+        if ($categoriesWithSubcategories->count() > 0) {
+            $names = $categoriesWithSubcategories->pluck('name')->implode(', ');
+            return redirect()->route('categories.index')->with('error', "No se pueden eliminar las siguientes categorías porque tienen subcategorías asociadas: {$names}");
+        }
 
         $count = count($request->selected_items);
         Category::whereIn('id', $request->selected_items)->delete();
