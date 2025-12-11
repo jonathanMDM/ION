@@ -27,17 +27,17 @@
     </div>
 
 <div class="bg-white shadow-md rounded my-6 overflow-x-auto">
-    <table class="min-w-full w-full table-auto">
+    <table class="w-full table-auto" style="min-width: 1400px;">
         <thead>
-            <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                <th class="py-3 px-6 text-center">
+            <tr class="bg-gray-200 text-gray-600 uppercase text-xs leading-normal">
+                <th class="py-3 px-4 text-center" style="width: 50px;">
                     <input type="checkbox" id="selectAll" class="form-checkbox h-5 w-5 text-gray-600" onchange="toggleAll(this)">
                 </th>
-                <th class="py-3 px-6 text-left whitespace-nowrap">ID Único</th>
-                <th class="py-3 px-6 text-left whitespace-nowrap">Nombre</th>
-                <th class="py-3 px-6 text-left whitespace-nowrap">Modelo</th>
+                <th class="py-3 px-4 text-left whitespace-nowrap" style="min-width: 120px;">ID Único</th>
+                <th class="py-3 px-4 text-left whitespace-nowrap" style="min-width: 200px;">Nombre</th>
+                <th class="py-3 px-4 text-left whitespace-nowrap" style="min-width: 100px;">Modelo</th>
                 @if(\App\Helpers\FieldHelper::isVisible('municipality_plate'))
-                <th class="py-3 px-6 text-left whitespace-nowrap">Placa Municipio</th>
+                <th class="py-3 px-4 text-left whitespace-nowrap" style="min-width: 120px;">Placa Municipio</th>
                 @endif
                 
                 @php
@@ -45,28 +45,28 @@
                 @endphp
                 @foreach($customFields as $field)
                     @if(\App\Helpers\FieldHelper::isVisible($field->name))
-                    <th class="py-3 px-6 text-left whitespace-nowrap">{{ $field->label }}</th>
+                    <th class="py-3 px-4 text-left whitespace-nowrap" style="min-width: 150px;">{{ $field->label }}</th>
                     @endif
                 @endforeach
-                <th class="py-3 px-6 text-left whitespace-nowrap">Ubicación</th>
-                <th class="py-3 px-6 text-left whitespace-nowrap">Categoría/Subcategoría</th>
-                <th class="py-3 px-6 text-left whitespace-nowrap">Especificaciones</th>
-                <th class="py-3 px-6 text-center whitespace-nowrap">Estado</th>
-                <th class="py-3 px-6 text-center whitespace-nowrap">Cantidad</th>
-                <th class="py-3 px-6 text-center whitespace-nowrap">Valor</th>
-                <th class="py-3 px-6 text-center whitespace-nowrap">Acciones</th>
+                <th class="py-3 px-4 text-left whitespace-nowrap" style="min-width: 150px;">Ubicación</th>
+                <th class="py-3 px-4 text-left whitespace-nowrap" style="min-width: 180px;">Categoría/Subcategoría</th>
+                <th class="py-3 px-4 text-left" style="min-width: 200px;">Especificaciones</th>
+                <th class="py-3 px-4 text-center whitespace-nowrap" style="min-width: 100px;">Estado</th>
+                <th class="py-3 px-4 text-center whitespace-nowrap" style="min-width: 80px;">Cantidad</th>
+                <th class="py-3 px-4 text-center whitespace-nowrap" style="min-width: 120px;">Valor</th>
+                <th class="py-3 px-4 text-center whitespace-nowrap" style="min-width: 120px;">Acciones</th>
             </tr>
         </thead>
         <tbody class="text-gray-600 text-sm font-light">
             @foreach($assets as $asset)
             <tr class="border-b border-gray-200 hover:bg-gray-100">
-                <td class="py-3 px-6 text-center">
+                <td class="py-3 px-4 text-center">
                     <input type="checkbox" name="selected_assets[]" value="{{ $asset->id }}" class="form-checkbox h-5 w-5 text-gray-600 row-checkbox" onchange="updateSelectedCount()">
                 </td>
-                <td class="py-3 px-6 text-left whitespace-nowrap">
+                <td class="py-3 px-4 text-left whitespace-nowrap">
                     <span class="font-medium">{{ $asset->custom_id }}</span>
                 </td>
-                <td class="py-3 px-6 text-left whitespace-nowrap">
+                <td class="py-3 px-4 text-left whitespace-nowrap">
                     <div class="flex items-center">
                         @if($asset->image)
                             @php
@@ -79,33 +79,33 @@
                         <span class="font-medium">{{ $asset->name }}</span>
                     </div>
                 </td>
-                <td class="py-3 px-6 text-left">
+                <td class="py-3 px-4 text-left">
                     <span>{{ $asset->model ?? '-' }}</span>
                 </td>
 
                 @if(\App\Helpers\FieldHelper::isVisible('municipality_plate'))
-                <td class="py-3 px-6 text-left">
+                <td class="py-3 px-4 text-left">
                     <span>{{ $asset->municipality_plate ?? '-' }}</span>
                 </td>
                 @endif
 
                 @foreach($customFields as $field)
                     @if(\App\Helpers\FieldHelper::isVisible($field->name))
-                    <td class="py-3 px-6 text-left">
+                    <td class="py-3 px-4 text-left">
                         <span>{{ $asset->custom_attributes[$field->name] ?? '-' }}</span>
                     </td>
                     @endif
                 @endforeach
-                <td class="py-3 px-6 text-left">
+                <td class="py-3 px-4 text-left">
                     <span>{{ $asset->location->name }}</span>
                 </td>
-                <td class="py-3 px-6 text-left">
+                <td class="py-3 px-4 text-left">
                     <span>{{ $asset->subcategory->category->name }} / {{ $asset->subcategory->name }}</span>
                 </td>
-                <td class="py-3 px-6 text-left">
+                <td class="py-3 px-4 text-left">
                     <span class="text-sm">{{ Str::limit($asset->specifications, 50) }}</span>
                 </td>
-                <td class="py-3 px-6 text-center w-32">
+                <td class="py-3 px-4 text-center w-32">
                     <span class="inline-block px-3 py-1 text-xs rounded-full whitespace-nowrap
                         {{ $asset->status == 'active' ? 'bg-green-100 text-green-800' : '' }}
                         {{ $asset->status == 'maintenance' ? 'bg-yellow-100 text-yellow-800' : '' }}
@@ -116,10 +116,10 @@
                 <td class="py-3 px-4 text-center w-20">
                     <span class="font-semibold text-sm">{{ $asset->quantity }}</span>
                 </td>
-                <td class="py-3 px-6 text-center">
+                <td class="py-3 px-4 text-center">
                     <span class="font-semibold">${{ number_format($asset->value, 2) }}</span>
                 </td>
-                <td class="py-3 px-6 text-center">
+                <td class="py-3 px-4 text-center">
                     <div class="flex item-center justify-center">
                         <a href="{{ route('assets.show', $asset->id) }}" class="w-4 mr-2 transform hover:text-green-500 hover:scale-110" title="Ver detalles">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
