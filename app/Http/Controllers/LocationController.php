@@ -68,4 +68,20 @@ class LocationController extends Controller
         $location->delete();
         return redirect()->route('locations.index')->with('success', 'Location deleted successfully.');
     }
+
+    /**
+     * Delete multiple locations at once
+     */
+    public function bulkDelete(Request $request)
+    {
+        $request->validate([
+            'selected_items' => 'required|array|min:1',
+            'selected_items.*' => 'exists:locations,id'
+        ]);
+
+        $count = count($request->selected_items);
+        Location::whereIn('id', $request->selected_items)->delete();
+        
+        return redirect()->route('locations.index')->with('success', "Se eliminaron exitosamente $count ubicación(es).");
+    }
 }

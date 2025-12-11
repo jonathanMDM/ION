@@ -111,13 +111,19 @@ Route::middleware(['auth'])->group(function () {
     Route::post('assignments/{assignment}/return', [\App\Http\Controllers\AssetAssignmentController::class, 'returnAsset'])->name('assignments.return');
     
     // Categories
+    Route::delete('/categories/bulk-delete', [CategoryController::class, 'bulkDelete'])->name('categories.bulk-delete');
     Route::resource('categories', CategoryController::class);
+    
+    // Subcategories
+    Route::delete('/subcategories/bulk-delete', [SubcategoryController::class, 'bulkDelete'])->name('subcategories.bulk-delete');
     Route::resource('subcategories', SubcategoryController::class);
     
     // Locations
+    Route::delete('/locations/bulk-delete', [LocationController::class, 'bulkDelete'])->name('locations.bulk-delete');
     Route::resource('locations', LocationController::class);
     
     // Suppliers
+    Route::delete('/suppliers/bulk-delete', [\App\Http\Controllers\SupplierController::class, 'bulkDelete'])->name('suppliers.bulk-delete');
     Route::resource('suppliers', \App\Http\Controllers\SupplierController::class);
     
     // Maintenances
