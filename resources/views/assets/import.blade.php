@@ -64,9 +64,9 @@
         <div class="mb-6 text-center">
             <a href="{{ route('assets.import.template') }}" class="inline-flex items-center bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-lg shadow-lg transition duration-200">
                 <i class="fas fa-download mr-2"></i>
-                📥 Descargar Plantilla Excel
+                📥 Descargar Plantilla
             </a>
-            <p class="text-xs text-gray-500 mt-2">Archivo .xlsx listo para editar en Excel - Incluye 3 ejemplos</p>
+            <p class="text-xs text-gray-500 mt-2">Archivo CSV que se abre automáticamente en Excel - Incluye 3 ejemplos</p>
         </div>
 
         <!-- Campos de la plantilla -->
