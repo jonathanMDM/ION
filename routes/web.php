@@ -43,6 +43,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [\App\Http\Controllers\UserProfileController::class, 'show'])->name('profile.show');
     Route::put('/profile', [\App\Http\Controllers\UserProfileController::class, 'update'])->name('profile.update');
     Route::get('/settings', [\App\Http\Controllers\UserProfileController::class, 'settings'])->name('profile.settings');
+    Route::put('/settings/preferences', [\App\Http\Controllers\UserProfileController::class, 'updatePreferences'])->name('profile.update-preferences');
     
     // Change password
     Route::get('/change-password', [UserController::class, 'changePassword'])->name('password.change');

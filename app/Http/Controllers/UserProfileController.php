@@ -50,6 +50,38 @@ class UserProfileController extends Controller
     }
 
     /**
+     * Update user preferences.
+     */
+    public function updatePreferences(Request $request)
+    {
+        $user = Auth::user();
+        
+        $validated = $request->validate([
+            'items_per_page' => 'required|in:10,25,50,100',
+            'notifications.low_stock' => 'nullable|boolean',
+            'notifications.maintenance' => 'nullable|boolean',
+            'notifications.weekly_digest' => 'nullable|boolean',
+        ]);
+
+        $preferences = $user->preferences ?? [];
+        
+        // Update values
+        $preferences['pagination']['items_per_page'] = (int) $validated['items_per_page'];
+        
+        // Handle checkboxes (if not present, they are false)
+        $preferences['notifications'] = [
+            'low_stock' => $request->has('notifications.low_stock'),
+            'maintenance' => $request->has('notifications.maintenance'),
+            'weekly_digest' => $request->has('notifications.weekly_digest'),
+        ];
+
+        $user->preferences = $preferences;
+        $user->save();
+
+        return redirect()->back()->with('success', 'Preferencias actualizadas correctamente.');
+    }
+
+    /**
      * Update the user's profile information.
      */
     public function update(Request $request)

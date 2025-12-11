@@ -105,16 +105,85 @@
             </div>
         </div>
 
-        <!-- Other Settings (Placeholder) -->
+        <!-- User Preferences -->
         <div class="bg-white rounded-lg shadow-md overflow-hidden">
             <div class="px-6 py-4 border-b border-gray-100 bg-gray-50">
                 <h3 class="font-bold text-gray-800 flex items-center">
-                    <i class="fas fa-bell mr-2 text-indigo-600"></i> Preferencias
+                    <i class="fas fa-sliders-h mr-2 text-indigo-600"></i> Preferencias Generales
                 </h3>
             </div>
-            <div class="p-6 text-center text-gray-500 py-12">
-                <p>Próximamente más configuraciones...</p>
-            </div>
+            
+            <form action="{{ route('profile.update-preferences') }}" method="POST" class="p-6">
+                @csrf
+                @method('PUT')
+                @php
+                    $prefs = $user->preferences ?? [];
+                    $perPage = $prefs['pagination']['items_per_page'] ?? 10;
+                    $notifyStock = $prefs['notifications']['low_stock'] ?? true;
+                    $notifyMaint = $prefs['notifications']['maintenance'] ?? true;
+                    $notifyWeekly = $prefs['notifications']['weekly_digest'] ?? false;
+                @endphp
+
+                <!-- Pagination -->
+                <div class="mb-4 pb-6 border-b border-gray-100">
+                    <h4 class="font-semibold text-gray-700 mb-2">Visualización de Tablas</h4>
+                    <div class="flex items-center justify-between">
+                         <label for="items_per_page" class="text-gray-600 text-sm">Registros por página:</label>
+                         <select name="items_per_page" id="items_per_page" class="border-gray-300 rounded-lg text-sm shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                             <option value="10" {{ $perPage == 10 ? 'selected' : '' }}>10 por página</option>
+                             <option value="25" {{ $perPage == 25 ? 'selected' : '' }}>25 por página</option>
+                             <option value="50" {{ $perPage == 50 ? 'selected' : '' }}>50 por página</option>
+                             <option value="100" {{ $perPage == 100 ? 'selected' : '' }}>100 por página</option>
+                         </select>
+                    </div>
+                </div>
+
+                <!-- Notifications -->
+                <div class="mb-6">
+                    <h4 class="font-semibold text-gray-700 mb-4">Ajustes de Notificaciones</h4>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm font-medium text-gray-800">Alertas de Stock Bajo</p>
+                                <p class="text-xs text-gray-500">Recibir correo cuando un activo llega al mínimo.</p>
+                            </div>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" name="notifications[low_stock]" value="1" class="sr-only peer" {{ $notifyStock ? 'checked' : '' }}>
+                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-indigo-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-600"></div>
+                            </label>
+                        </div>
+
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm font-medium text-gray-800">Recordatorios de Mantenimiento</p>
+                                <p class="text-xs text-gray-500">Avisos sobre mantenimientos programados.</p>
+                            </div>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" name="notifications[maintenance]" value="1" class="sr-only peer" {{ $notifyMaint ? 'checked' : '' }}>
+                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-indigo-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-600"></div>
+                            </label>
+                        </div>
+
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm font-medium text-gray-800">Resumen Semanal</p>
+                                <p class="text-xs text-gray-500">Recibir un reporte cada lunes con el estado general.</p>
+                            </div>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" name="notifications[weekly_digest]" value="1" class="sr-only peer" {{ $notifyWeekly ? 'checked' : '' }}>
+                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-indigo-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-600"></div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex justify-end pt-4 border-t border-gray-100">
+                    <button type="submit" class="bg-gray-800 hover:bg-black text-white font-bold py-2 px-6 rounded-lg transition-colors shadow shadow-gray-300">
+                        Guardar Preferencias
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

@@ -53,6 +53,7 @@ class User extends Authenticatable
         'is_active',
         'permissions',
         'company_id',
+        'preferences',
     ];
 
     /**
@@ -78,6 +79,7 @@ class User extends Authenticatable
         'permissions' => 'array', // Kept from original
         'is_superadmin' => 'boolean', // Added from instruction
         'api_token_expires_at' => 'datetime',
+        'preferences' => 'array',
     ];
 
     /**
