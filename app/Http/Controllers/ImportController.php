@@ -183,90 +183,9 @@ class ImportController extends Controller
 
     public function downloadTemplate()
     {
-        $filename = 'plantilla_activos.csv';
-        $headers = [
-            'Content-Type' => 'text/csv; charset=UTF-8',
-            'Content-Disposition' => 'attachment; filename="' . $filename . '"',
-            'Cache-Control' => 'max-age=0',
-        ];
-
-        $callback = function() {
-            $file = fopen('php://output', 'w');
-            
-            // Add BOM for Excel UTF-8 compatibility
-            fprintf($file, chr(0xEF).chr(0xBB).chr(0xBF));
-            
-            // Headers in Spanish with descriptions (using comma as standard delimiter)
-            fputcsv($file, [
-                'ID Unico',
-                'Nombre del Activo',
-                'Especificaciones',
-                'Cantidad',
-                'Valor',
-                'Fecha de Compra',
-                'Estado',
-                'Ubicacion',
-                'Categoria',
-                'Subcategoria',
-                'Proveedor',
-                'Placa Municipio',
-                'Notas'
-            ]);
-
-            // Example row 1 - Computer
-            fputcsv($file, [
-                'ACT-001',
-                'Laptop Dell Latitude 5420',
-                'Intel Core i5-1135G7 16GB RAM 512GB SSD Windows 11 Pro',
-                '1',
-                '1250000',
-                '2024-01-15',
-                'active',
-                'Oficina Principal',
-                'Tecnologia',
-                'Computadoras',
-                'Dell Colombia',
-                '',
-                'Asignada al departamento de IT'
-            ]);
-
-            // Example row 2 - Furniture
-            fputcsv($file, [
-                'ACT-002',
-                'Escritorio Ejecutivo',
-                'Madera MDF 1.60m x 0.80m color nogal',
-                '5',
-                '450000',
-                '2024-02-20',
-                'active',
-                'Sala de Juntas',
-                'Mobiliario',
-                'Escritorios',
-                'Muebles y Diseno',
-                '',
-                'Para sala de reuniones'
-            ]);
-
-            // Example row 3 - Vehicle
-            fputcsv($file, [
-                'ACT-003',
-                'Camioneta Toyota Hilux',
-                '4x4 Diesel 2.8L Doble Cabina Blanca',
-                '1',
-                '95000000',
-                '2023-06-10',
-                'active',
-                'Almacen General',
-                'Vehiculos',
-                'Camionetas',
-                'Toyota Colombia',
-                'ABC-123',
-                'Vehiculo de carga'
-            ]);
-
-            fclose($file);
-        };
-
-        return response()->stream($callback, 200, $headers);
+        return \Maatwebsite\Excel\Facades\Excel::download(
+            new \App\Exports\AssetsTemplateExport, 
+            'plantilla_activos.xlsx'
+        );
     }
 }
