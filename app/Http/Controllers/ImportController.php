@@ -166,38 +166,72 @@ class ImportController extends Controller
             // Add BOM for Excel UTF-8 compatibility
             fprintf($file, chr(0xEF).chr(0xBB).chr(0xBF));
             
-            // Headers
+            // Headers in Spanish with descriptions
             fputcsv($file, [
-                'custom_id',
-                'name',
-                'specifications',
-                'quantity',
-                'value',
-                'purchase_date',
-                'status',
-                'location_name',
-                'category_name',
-                'subcategory_name',
-                'supplier_name',
-                'municipality_plate',
-                'notes'
+                'ID Único (Ej: ACT-001)',
+                'Nombre del Activo',
+                'Especificaciones',
+                'Cantidad',
+                'Valor ($)',
+                'Fecha de Compra (AAAA-MM-DD)',
+                'Estado (active/maintenance/decommissioned)',
+                'Ubicación',
+                'Categoría',
+                'Subcategoría',
+                'Proveedor',
+                'Placa Municipio',
+                'Notas'
             ]);
 
-            // Example row
+            // Example row 1 - Computer
             fputcsv($file, [
                 'ACT-001',
-                'Laptop Dell',
-                'Core i5, 8GB RAM',
+                'Laptop Dell Latitude 5420',
+                'Intel Core i5-1135G7, 16GB RAM, 512GB SSD, Windows 11 Pro',
                 '1',
-                '800.00',
-                date('Y-m-d'),
+                '1250000',
+                '2024-01-15',
                 'active',
                 'Oficina Principal',
                 'Tecnología',
                 'Computadoras',
-                'Dell Inc',
-                'MUN-001',
-                'Ejemplo de activo'
+                'Dell Colombia',
+                '',
+                'Asignada al departamento de IT'
+            ]);
+
+            // Example row 2 - Furniture
+            fputcsv($file, [
+                'ACT-002',
+                'Escritorio Ejecutivo',
+                'Madera MDF, 1.60m x 0.80m, color nogal',
+                '5',
+                '450000',
+                '2024-02-20',
+                'active',
+                'Sala de Juntas',
+                'Mobiliario',
+                'Escritorios',
+                'Muebles & Diseño',
+                '',
+                'Para sala de reuniones'
+            ]);
+
+            // Example row 3 - Vehicle
+            fputcsv($file, [
+                'ACT-003',
+                'Camioneta Toyota Hilux',
+                '4x4, Diesel, 2.8L, Doble Cabina, Blanca',
+                '1',
+                '95000000',
+                '2023-06-10',
+                'active',
+                'Almacén General',
+                'Vehículos',
+                'Camionetas',
+                'Toyota Colombia',
+                'ABC-123',
+                'Vehículo de carga'
             ]);
 
             fclose($file);
