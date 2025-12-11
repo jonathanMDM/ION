@@ -35,12 +35,18 @@ class ImportController extends Controller
                 return redirect()->back()->with('error', 'No se pudo abrir el archivo.');
             }
             
-            // Detect delimiter (comma or tab)
+            // Detect delimiter (semicolon, comma, or tab)
             $firstLine = fgets($handle);
             rewind($handle);
             
             $delimiter = ',';
-            if (strpos($firstLine, "\t") !== false && strpos($firstLine, ',') === false) {
+            // Check for semicolon first (Excel Spanish format)
+            if (strpos($firstLine, ';') !== false) {
+                $delimiter = ';';
+                \Log::info('Detected semicolon-separated file');
+            }
+            // Then check for tab
+            elseif (strpos($firstLine, "\t") !== false && strpos($firstLine, ',') === false) {
                 $delimiter = "\t";
                 \Log::info('Detected tab-separated file');
             } else {
@@ -49,7 +55,7 @@ class ImportController extends Controller
             
             // Skip header row
             $header = fgetcsv($handle, 0, $delimiter);
-            \Log::info('CSV Headers', ['headers' => $header, 'delimiter' => $delimiter === "\t" ? 'TAB' : 'COMMA']);
+            \Log::info('CSV Headers', ['headers' => $header, 'delimiter' => $delimiter === "\t" ? 'TAB' : ($delimiter === ';' ? 'SEMICOLON' : 'COMMA')]);
             
             $imported = 0;
             $errors = [];
