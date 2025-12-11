@@ -177,14 +177,23 @@
 
 <script>
 function deleteAsset(id) {
-    if (confirm('¿Estás seguro de que deseas eliminar este activo?')) {
-        const form = document.getElementById('singleDeleteForm');
-        // Replace the placeholder with the actual ID
-        // Note: We use a strict placeholder :id to replace
-        const url = "{{ route('assets.destroy', ':id') }}";
-        form.action = url.replace(':id', id);
-        form.submit();
-    }
+    Swal.fire({
+        title: '¿Estás seguro?',
+        text: "¡No podrás revertir esto!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#ef4444',
+        cancelButtonColor: '#3b82f6',
+        confirmButtonText: 'Sí, eliminar',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            const form = document.getElementById('singleDeleteForm');
+            const url = "{{ route('assets.destroy', ':id') }}";
+            form.action = url.replace(':id', id);
+            form.submit();
+        }
+    });
 }
 
 function toggleAll(source) {
@@ -215,9 +224,20 @@ function updateSelectedCount() {
 
 function confirmBulkDelete() {
     const count = document.querySelectorAll('.row-checkbox:checked').length;
-    if (confirm(`¿Estás seguro de que deseas eliminar ${count} activo(s)? Esta acción no se puede deshacer.`)) {
-        document.getElementById('bulkDeleteForm').submit();
-    }
+    Swal.fire({
+        title: '¿Estás seguro?',
+        text: `Se eliminarán ${count} activo(s). ¡Esta acción no se puede deshacer!`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#ef4444',
+        cancelButtonColor: '#3b82f6',
+        confirmButtonText: 'Sí, eliminar todo',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            document.getElementById('bulkDeleteForm').submit();
+        }
+    });
 }
 </script>
 

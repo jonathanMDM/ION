@@ -90,12 +90,23 @@
 
 <script>
 function deleteSupplier(id) {
-    if (confirm('¿Estás seguro de eliminar este proveedor?')) {
-        const form = document.getElementById('singleDeleteForm');
-        const url = "{{ route('suppliers.destroy', ':id') }}";
-        form.action = url.replace(':id', id);
-        form.submit();
-    }
+    Swal.fire({
+        title: '¿Estás seguro?',
+        text: "¡No podrás revertir esto!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#ef4444',
+        cancelButtonColor: '#3b82f6',
+        confirmButtonText: 'Sí, eliminar',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            const form = document.getElementById('singleDeleteForm');
+            const url = "{{ route('suppliers.destroy', ':id') }}";
+            form.action = url.replace(':id', id);
+            form.submit();
+        }
+    });
 }
 
 function toggleAll(source) {
@@ -125,9 +136,20 @@ function updateSelectedCount() {
 
 function confirmBulkDelete(itemName = 'elemento') {
     const count = document.querySelectorAll('.row-checkbox:checked').length;
-    if (confirm(`¿Estás seguro de que deseas eliminar ${count} ${itemName}(es)? Esta acción no se puede deshacer.`)) {
-        document.getElementById('bulkDeleteForm').submit();
-    }
+    Swal.fire({
+        title: '¿Estás seguro?',
+        text: `Se eliminarán ${count} ${itemName}(es). ¡Esta acción no se puede deshacer!`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#ef4444',
+        cancelButtonColor: '#3b82f6',
+        confirmButtonText: 'Sí, eliminar todo',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            document.getElementById('bulkDeleteForm').submit();
+        }
+    });
 }
 </script>
 

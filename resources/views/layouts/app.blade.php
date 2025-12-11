@@ -11,6 +11,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         .sidebar-collapsed { width: 4rem; }
         .sidebar-expanded { width: 16rem; }
@@ -329,17 +330,7 @@
 
         <!-- Content Area -->
         <div class="max-w-full mx-auto p-4 md:p-6 w-full">
-            @if(session('success'))
-                <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
-                    <span class="block sm:inline">{{ session('success') }}</span>
-                </div>
-            @endif
 
-            @if(session('error'))
-                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
-                    <span class="block sm:inline">{{ session('error') }}</span>
-                </div>
-            @endif
 
             <!-- Global Announcements -->
             @auth
@@ -512,6 +503,29 @@
                     e.stopPropagation();
                 });
             }
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            @if(session('success'))
+                Swal.fire({
+                    icon: 'success',
+                    title: '¡Éxito!',
+                    text: "{{ session('success') }}",
+                    confirmButtonColor: '#4f46e5',
+                    timer: 3000,
+                    timerProgressBar: true
+                });
+            @endif
+
+            @if(session('error'))
+                Swal.fire({
+                    icon: 'error',
+                    title: '¡Error!',
+                    text: "{{ session('error') }}",
+                    confirmButtonColor: '#ef4444',
+                });
+            @endif
         });
     </script>
 </body>
