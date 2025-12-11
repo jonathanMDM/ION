@@ -23,14 +23,14 @@
                     <h3 class="text-sm font-bold text-blue-900">📋 Instrucciones de Importación</h3>
                     <div class="mt-2 text-sm text-blue-800 space-y-2">
                         <ol class="list-decimal list-inside space-y-2">
-                            <li><strong>Descarga la plantilla</strong> haciendo clic en el botón verde de abajo</li>
-                            <li><strong>Abre el archivo</strong> con Excel o Google Sheets</li>
-                            <li><strong>Llena los datos</strong> de tus activos (puedes borrar las filas de ejemplo)</li>
-                            <li><strong>Guarda como Excel</strong> (.xlsx) - Archivo → Guardar como → Excel</li>
-                            <li><strong>Sube el archivo Excel</strong> usando el formulario de abajo</li>
+                            <li><strong>Descarga la plantilla Excel</strong> haciendo clic en el botón verde</li>
+                            <li><strong>Abre el archivo</strong> (se abrirá automáticamente en Excel)</li>
+                            <li><strong>Llena tus datos</strong> (puedes borrar las filas de ejemplo)</li>
+                            <li><strong>Guarda el archivo</strong> (Ctrl+S o Cmd+S)</li>
+                            <li><strong>Sube el archivo</strong> usando el formulario de abajo</li>
                         </ol>
                         <p class="text-xs bg-green-100 p-2 rounded mt-2">
-                            ✅ <strong>Importante:</strong> Guarda el archivo como <strong>Excel (.xlsx)</strong> para evitar problemas con delimitadores
+                            ✅ <strong>¡Así de fácil!</strong> El archivo ya está en formato Excel (.xlsx) - Solo llena y sube
                         </p>
                     </div>
                 </div>
@@ -125,10 +125,10 @@
                         </p>
                         <a href="{{ route('assets.import.template') }}" class="inline-flex items-center bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-6 rounded-lg transition duration-200">
                             <i class="fas fa-download mr-2"></i>
-                            Descargar Plantilla
+                            Descargar Plantilla Excel
                         </a>
                         <p class="text-xs text-gray-500 mt-2">
-                            ⚠️ Nota: Al abrir en Excel, asegúrate de que las columnas estén separadas correctamente
+                            📊 Archivo .xlsx listo para usar - Incluye 3 ejemplos
                         </p>
                     </div>
                 </div>

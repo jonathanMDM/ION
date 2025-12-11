@@ -307,21 +307,20 @@ class ImportController extends Controller
     
     public function downloadTemplate()
     {
-        $filename = 'plantilla_activos.txt';
-        
-        $headers = [
-            'Content-Type' => 'text/plain; charset=UTF-8',
-            'Content-Disposition' => 'attachment; filename="' . $filename . '"',
-        ];
-
-        $callback = function() {
-            $file = fopen('php://output', 'w');
+        try {
+            // Create new Spreadsheet
+            $spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
+            $sheet = $spreadsheet->getActiveSheet();
             
-            // Add BOM for Excel UTF-8 compatibility
-            fprintf($file, chr(0xEF).chr(0xBB).chr(0xBF));
+            // Set document properties
+            $spreadsheet->getProperties()
+                ->setCreator('ION Inventory System')
+                ->setTitle('Plantilla de Importación de Activos')
+                ->setSubject('Plantilla para importar activos')
+                ->setDescription('Plantilla para importación masiva de activos al sistema ION');
             
-            // Write headers in Spanish (using TAB as delimiter)
-            fputcsv($file, [
+            // Headers in Spanish
+            $headers = [
                 'ID Unico',
                 'Nombre',
                 'Especificaciones',
@@ -335,62 +334,73 @@ class ImportController extends Controller
                 'Proveedor',
                 'Placa Municipio',
                 'Notas'
-            ], "\t");
-
-            // Example 1
-            fputcsv($file, [
-                'ACT-001',
-                'Laptop Dell Latitude 5420',
-                'Intel Core i5-1135G7 16GB RAM 512GB SSD',
-                '1',
-                '1250000',
-                '2024-01-15',
-                'active',
-                'Oficina Principal',
-                'Tecnologia',
-                'Computadoras',
-                'Dell Colombia',
-                '',
-                'Asignada al departamento de IT'
-            ], "\t");
-
-            // Example 2
-            fputcsv($file, [
-                'ACT-002',
-                'Escritorio Ejecutivo',
-                'Madera MDF 1.60m x 0.80m',
-                '5',
-                '450000',
-                '2024-02-20',
-                'active',
-                'Sala de Juntas',
-                'Mobiliario',
-                'Escritorios',
-                'Muebles y Diseno',
-                '',
-                'Para sala de reuniones'
-            ], "\t");
-
-            // Example 3
-            fputcsv($file, [
-                'ACT-003',
-                'Camioneta Toyota Hilux',
-                '4x4 Diesel 2.8L Doble Cabina',
-                '1',
-                '95000000',
-                '2023-06-10',
-                'active',
-                'Almacen General',
-                'Vehiculos',
-                'Camionetas',
-                'Toyota Colombia',
-                'ABC-123',
-                'Vehiculo de carga'
-            ], "\t");
-
-            fclose($file);
-        };
-
-        return response()->stream($callback, 200, $headers);
+            ];
+            
+            // Set headers
+            $sheet->fromArray($headers, NULL, 'A1');
+            
+            // Style headers
+            $headerStyle = [
+                'font' => [
+                    'bold' => true,
+                    'size' => 12,
+                    'color' => ['rgb' => 'FFFFFF']
+                ],
+                'fill' => [
+                    'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+                    'startColor' => ['rgb' => '4472C4']
+                ],
+                'alignment' => [
+                    'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                    'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER
+                ]
+            ];
+            $sheet->getStyle('A1:M1')->applyFromArray($headerStyle);
+            
+            // Example data
+            $examples = [
+                ['ACT-001', 'Laptop Dell Latitude 5420', 'Intel Core i5-1135G7, 16GB RAM, 512GB SSD', 1, 1250000, '2024-01-15', 'active', 'Oficina Principal', 'Tecnologia', 'Computadoras', 'Dell Colombia', '', 'Asignada al departamento de IT'],
+                ['ACT-002', 'Escritorio Ejecutivo', 'Madera MDF, 1.60m x 0.80m, color nogal', 5, 450000, '2024-02-20', 'active', 'Sala de Juntas', 'Mobiliario', 'Escritorios', 'Muebles y Diseno', '', 'Para sala de reuniones'],
+                ['ACT-003', 'Camioneta Toyota Hilux', '4x4, Diesel, 2.8L, Doble Cabina, Blanca', 1, 95000000, '2023-06-10', 'active', 'Almacen General', 'Vehiculos', 'Camionetas', 'Toyota Colombia', 'ABC-123', 'Vehiculo de carga']
+            ];
+            
+            $sheet->fromArray($examples, NULL, 'A2');
+            
+            // Auto-size columns
+            foreach (range('A', 'M') as $col) {
+                $sheet->getColumnDimension($col)->setAutoSize(true);
+            }
+            
+            // Set row height for header
+            $sheet->getRowDimension(1)->setRowHeight(25);
+            
+            // Add borders to data area
+            $styleArray = [
+                'borders' => [
+                    'allBorders' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                        'color' => ['rgb' => 'CCCCCC']
+                    ]
+                ]
+            ];
+            $sheet->getStyle('A1:M4')->applyFromArray($styleArray);
+            
+            // Create Excel file
+            $writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
+            
+            // Set headers for download
+            $filename = 'plantilla_activos.xlsx';
+            header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+            header('Content-Disposition: attachment;filename="' . $filename . '"');
+            header('Cache-Control: max-age=0');
+            
+            // Save to output
+            $writer->save('php://output');
+            exit;
+            
+        } catch (\Exception $e) {
+            \Log::error('Error generating template', ['error' => $e->getMessage()]);
+            return redirect()->back()->with('error', 'Error al generar la plantilla: ' . $e->getMessage());
+        }
     }
 }
