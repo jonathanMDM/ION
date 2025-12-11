@@ -156,14 +156,6 @@
             @endif
 
             <div class="mt-2 border-t border-gray-700 pt-2">
-                <a href="{{ route('two-factor.show') }}" class="flex items-center px-4 py-3 hover:bg-gray-700 {{ request()->routeIs('two-factor.*') ? 'bg-gray-700 border-l-4 border-white' : '' }}" title="Seguridad (2FA)">
-                    <i class="fas fa-shield-alt w-6"></i>
-                    <span class="ml-3 sidebar-text">Seguridad (2FA)</span>
-                </a>
-                <a href="{{ route('password.change') }}" class="flex items-center px-4 py-3 hover:bg-gray-700" title="Cambiar Contraseña">
-                    <i class="fas fa-key w-6"></i>
-                    <span class="ml-3 sidebar-text">Cambiar Contraseña</span>
-                </a>
                 @if(Auth::user()->isSuperAdmin())
                 <a href="{{ route('superadmin.api.token.index') }}" class="flex items-center px-4 py-3 hover:bg-gray-700" title="API Token">
                     <i class="fas fa-code w-6"></i>
@@ -174,13 +166,6 @@
                     <i class="fas fa-headset w-6"></i>
                     <span class="ml-3 sidebar-text">Soporte</span>
                 </a>
-                <form method="POST" action="{{ route('logout') }}" class="inline-block w-full">
-                    @csrf
-                    <button type="submit" class="flex items-center px-4 py-3 hover:bg-gray-700 w-full text-left" title="Cerrar Sesión">
-                        <i class="fas fa-sign-out-alt w-6"></i>
-                        <span class="ml-3 sidebar-text">Cerrar Sesión</span>
-                    </button>
-                </form>
             </div>
         </nav>
     </div>
@@ -347,10 +332,10 @@
                                 <p class="text-xs text-gray-500 truncate">{{ Auth::user()->email }}</p>
                             </div>
                             
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900">
+                            <a href="{{ route('profile.show') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900">
                                 <i class="fas fa-user-circle mr-2 text-gray-400 w-4"></i> Mi Perfil
                             </a>
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900">
+                            <a href="{{ route('profile.settings') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900">
                                 <i class="fas fa-cog mr-2 text-gray-400 w-4"></i> Configuración
                             </a>
                             

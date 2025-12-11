@@ -57,7 +57,7 @@ class TwoFactorController extends Controller
             $user->two_factor_recovery_codes = Crypt::encryptString(json_encode($recoveryCodes));
             $user->save();
             
-            return redirect()->route('two-factor.show')
+            return redirect()->route('profile.settings')
                 ->with('success', '2FA activado exitosamente.')
                 ->with('recovery_codes', $recoveryCodes);
         }
@@ -77,7 +77,7 @@ class TwoFactorController extends Controller
         $user->two_factor_recovery_codes = null;
         $user->save();
         
-        return redirect()->route('two-factor.show')
+        return redirect()->route('profile.settings')
             ->with('success', '2FA desactivado exitosamente.');
     }
     

@@ -38,6 +38,11 @@ Route::middleware(['auth'])->group(function () {
     
     // Dashboard
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
+    // User Profile & Settings
+    Route::get('/profile', [\App\Http\Controllers\UserProfileController::class, 'show'])->name('profile.show');
+    Route::put('/profile', [\App\Http\Controllers\UserProfileController::class, 'update'])->name('profile.update');
+    Route::get('/settings', [\App\Http\Controllers\UserProfileController::class, 'settings'])->name('profile.settings');
     
     // Change password
     Route::get('/change-password', [UserController::class, 'changePassword'])->name('password.change');
