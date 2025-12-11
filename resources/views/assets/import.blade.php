@@ -24,9 +24,9 @@
                     <div class="mt-2 text-sm text-blue-800 space-y-2">
                         <ol class="list-decimal list-inside space-y-2">
                             <li><strong>Descarga la plantilla</strong> haciendo clic en el botón verde de abajo</li>
-                            <li><strong>Abre el archivo</strong> con Excel o Google Sheets</li>
+                            <li><strong>Abre el archivo</strong> con Excel (se abrirá automáticamente)</li>
                             <li><strong>Llena los datos</strong> de tus activos (puedes borrar las filas de ejemplo)</li>
-                            <li><strong>Guarda el archivo</strong> en formato CSV</li>
+                            <li><strong>Guarda el archivo</strong> (Ctrl+S o Cmd+S)</li>
                             <li><strong>Sube el archivo</strong> usando el formulario de abajo</li>
                         </ol>
                     </div>
@@ -64,9 +64,9 @@
         <div class="mb-6 text-center">
             <a href="{{ route('assets.import.template') }}" class="inline-flex items-center bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-lg shadow-lg transition duration-200">
                 <i class="fas fa-download mr-2"></i>
-                📥 Descargar Plantilla CSV
+                📥 Descargar Plantilla Excel
             </a>
-            <p class="text-xs text-gray-500 mt-2">La plantilla incluye 3 ejemplos que puedes usar como guía</p>
+            <p class="text-xs text-gray-500 mt-2">Archivo .xlsx listo para editar en Excel - Incluye 3 ejemplos</p>
         </div>
 
         <!-- Campos de la plantilla -->
