@@ -511,7 +511,7 @@
                 Swal.fire({
                     icon: 'success',
                     title: '¡Éxito!',
-                    text: "{{ session('success') }}",
+                    text: {!! json_encode(session('success')) !!},
                     confirmButtonColor: '#4f46e5',
                     timer: 3000,
                     timerProgressBar: true
@@ -522,7 +522,7 @@
                 Swal.fire({
                     icon: 'error',
                     title: '¡Error!',
-                    text: "{{ session('error') }}",
+                    text: {!! json_encode(session('error')) !!},
                     confirmButtonColor: '#ef4444',
                 });
             @endif

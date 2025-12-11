@@ -177,6 +177,16 @@
 
 <script>
 function deleteAsset(id) {
+    if (typeof Swal === 'undefined') {
+        if (confirm('¿Estás seguro de que deseas eliminar este activo?')) {
+            const form = document.getElementById('singleDeleteForm');
+            const url = "{{ route('assets.destroy', ':id') }}";
+            form.action = url.replace(':id', id);
+            form.submit();
+        }
+        return;
+    }
+
     Swal.fire({
         title: '¿Estás seguro?',
         text: "¡No podrás revertir esto!",
@@ -224,6 +234,14 @@ function updateSelectedCount() {
 
 function confirmBulkDelete() {
     const count = document.querySelectorAll('.row-checkbox:checked').length;
+    
+    if (typeof Swal === 'undefined') {
+        if (confirm(`¿Estás seguro de que deseas eliminar ${count} activo(s)? Esta acción no se puede deshacer.`)) {
+            document.getElementById('bulkDeleteForm').submit();
+        }
+        return;
+    }
+
     Swal.fire({
         title: '¿Estás seguro?',
         text: `Se eliminarán ${count} activo(s). ¡Esta acción no se puede deshacer!`,

@@ -76,6 +76,16 @@
 
 <script>
 function deleteLocation(id) {
+    if (typeof Swal === 'undefined') {
+        if (confirm('¿Estás seguro de que deseas eliminar esta ubicación?')) {
+            const form = document.getElementById('singleDeleteForm');
+            const url = "{{ route('locations.destroy', ':id') }}";
+            form.action = url.replace(':id', id);
+            form.submit();
+        }
+        return;
+    }
+
     Swal.fire({
         title: '¿Estás seguro?',
         text: "¡No podrás revertir esto!",
@@ -123,6 +133,14 @@ function updateSelectedCount() {
 
 function confirmBulkDelete(itemName = 'elemento') {
     const count = document.querySelectorAll('.row-checkbox:checked').length;
+    
+    if (typeof Swal === 'undefined') {
+        if (confirm(`¿Estás seguro de que deseas eliminar ${count} ${itemName}(s)? Esta acción no se puede deshacer.`)) {
+            document.getElementById('bulkDeleteForm').submit();
+        }
+        return;
+    }
+
     Swal.fire({
         title: '¿Estás seguro?',
         text: `Se eliminarán ${count} ${itemName}(s). ¡Esta acción no se puede deshacer!`,
