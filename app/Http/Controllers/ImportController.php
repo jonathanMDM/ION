@@ -80,9 +80,22 @@ class ImportController extends Controller
                         continue;
                     }
                     
+                    // Check if custom_id already exists and make it unique if needed
+                    $customId = trim($row[0]);
+                    $originalCustomId = $customId;
+                    $counter = 1;
+                    while (\App\Models\Asset::where('custom_id', $customId)->where('company_id', $companyId)->exists()) {
+                        $customId = $originalCustomId . '-' . $counter;
+                        $counter++;
+                    }
+                    
+                    if ($customId !== $originalCustomId) {
+                        \Log::info("Custom ID duplicado, cambiado de '$originalCustomId' a '$customId'");
+                    }
+                    
                     // Map CSV columns to asset fields
                     $assetData = [
-                        'custom_id' => trim($row[0]),
+                        'custom_id' => $customId,
                         'name' => trim($row[1]),
                         'specifications' => $row[2] ?? '',
                         'quantity' => !empty($row[3]) ? (int)$row[3] : 1,
