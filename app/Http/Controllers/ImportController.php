@@ -183,7 +183,7 @@ class ImportController extends Controller
 
     public function downloadTemplate()
     {
-        return \Maatwebsite\Excel\Facades\Excel::download(
+        return excel()->download(
             new \App\Exports\AssetsTemplateExport, 
             'plantilla_activos.xlsx'
         );
