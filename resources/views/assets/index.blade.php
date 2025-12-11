@@ -166,6 +166,11 @@
     </table>
 </div>
 
+<!-- Pagination -->
+<div class="mt-6">
+    {{ $assets->links() }}
+</div>
+
 </form>
 
 <script>

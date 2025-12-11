@@ -14,7 +14,7 @@ class AssetController extends Controller
      */
     public function index()
     {
-        $assets = Asset::with(['location', 'subcategory.category'])->get();
+        $assets = Asset::with(['location', 'subcategory.category'])->paginate(20);
         return view('assets.index', compact('assets'));
     }
 
