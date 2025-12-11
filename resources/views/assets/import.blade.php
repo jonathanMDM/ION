@@ -60,14 +60,76 @@
             </div>
         </div>
 
-        <!-- Botón de descarga de plantilla -->
-        <div class="mb-6 text-center">
-            <a href="{{ route('assets.import.template') }}" class="inline-flex items-center bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-lg shadow-lg transition duration-200">
-                <i class="fas fa-download mr-2"></i>
-                📥 Descargar Plantilla
-            </a>
-            <p class="text-xs text-gray-500 mt-2">Archivo TXT que Excel abre con columnas separadas - Incluye 3 ejemplos</p>
-            <p class="text-xs text-blue-600 mt-1">💡 Doble clic en el archivo descargado y Excel lo abrirá automáticamente</p>
+        <!-- Opciones de descarga de plantilla -->
+        <div class="mb-6">
+            <!-- Opción 1: Google Sheets (Recomendado) -->
+            <div class="bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-500 rounded-lg p-6 mb-4">
+                <div class="flex items-start">
+                    <div class="flex-shrink-0">
+                        <i class="fas fa-star text-yellow-500 text-2xl"></i>
+                    </div>
+                    <div class="ml-4 flex-1">
+                        <h3 class="text-lg font-bold text-green-900 mb-2">
+                            ⭐ Opción Recomendada: Google Sheets
+                        </h3>
+                        <p class="text-sm text-green-800 mb-4">
+                            La forma más fácil - Edita directamente en tu navegador, sin descargar nada. Las columnas ya están separadas y listas para usar.
+                        </p>
+                        <div class="space-y-3">
+                            @if(env('GOOGLE_SHEETS_TEMPLATE_URL'))
+                                <a href="{{ env('GOOGLE_SHEETS_TEMPLATE_URL') }}" target="_blank" class="inline-flex items-center bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-lg shadow-lg transition duration-200">
+                                    <i class="fab fa-google mr-2"></i>
+                                    📊 Abrir Plantilla en Google Sheets
+                                </a>
+                            @else
+                                <div class="bg-yellow-100 border border-yellow-400 rounded p-3 text-sm text-yellow-800">
+                                    <p class="font-semibold mb-2">🔧 Configuración Pendiente</p>
+                                    <p class="mb-2">Para habilitar esta opción, crea una plantilla de Google Sheets con estos encabezados:</p>
+                                    <div class="bg-white p-2 rounded text-xs font-mono mb-2">
+                                        ID Unico | Nombre | Especificaciones | Cantidad | Valor | Fecha de Compra | Estado | Ubicacion | Categoria | Subcategoria | Proveedor | Placa Municipio | Notas
+                                    </div>
+                                    <p class="text-xs">Luego configura la variable de entorno <code class="bg-yellow-200 px-1 rounded">GOOGLE_SHEETS_TEMPLATE_URL</code> con el enlace de tu plantilla.</p>
+                                </div>
+                            @endif
+                            <div class="text-xs text-green-700 mt-2">
+                                <p class="font-semibold mb-1">📝 Pasos:</p>
+                                <ol class="list-decimal list-inside space-y-1 ml-2">
+                                    <li>Haz clic en el botón verde</li>
+                                    <li>Se abrirá Google Sheets con la plantilla</li>
+                                    <li>Haz clic en "Hacer una copia" (se guardará en tu Google Drive)</li>
+                                    <li>Edita los datos directamente en el navegador</li>
+                                    <li>Descarga como Excel: Archivo → Descargar → Microsoft Excel (.xlsx)</li>
+                                    <li>Sube el archivo descargado aquí</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Opción 2: Descarga directa -->
+            <div class="bg-gray-50 border border-gray-300 rounded-lg p-6">
+                <div class="flex items-start">
+                    <div class="flex-shrink-0">
+                        <i class="fas fa-download text-gray-600 text-xl"></i>
+                    </div>
+                    <div class="ml-4 flex-1">
+                        <h3 class="text-base font-bold text-gray-900 mb-2">
+                            Opción 2: Descargar Plantilla
+                        </h3>
+                        <p class="text-sm text-gray-700 mb-3">
+                            Si prefieres trabajar offline, descarga la plantilla y ábrela con Excel.
+                        </p>
+                        <a href="{{ route('assets.import.template') }}" class="inline-flex items-center bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-6 rounded-lg transition duration-200">
+                            <i class="fas fa-download mr-2"></i>
+                            Descargar Plantilla
+                        </a>
+                        <p class="text-xs text-gray-500 mt-2">
+                            ⚠️ Nota: Al abrir en Excel, asegúrate de que las columnas estén separadas correctamente
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Campos de la plantilla -->
