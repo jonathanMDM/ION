@@ -309,19 +309,61 @@
                         <i class="fas fa-download text-lg"></i>
                     </button>
                     
-                    <span class="text-xs md:text-sm text-gray-600 flex flex-col items-end">
-                        <span class="font-bold text-gray-800">{{ Auth::user()->company ? Auth::user()->company->name : 'Sin Empresa' }}</span>
-                        <span>
-                            <i class="fas fa-user-circle mr-1"></i>{{ Auth::user()->name }}
-                            @if(Auth::user()->isAdmin())
-                                <span class="ml-1 bg-gray-200 text-gray-900 text-xs px-2 py-0.5 rounded">Admin</span>
-                            @elseif(Auth::user()->isEditor())
-                                <span class="ml-1 bg-green-100 text-green-800 text-xs px-2 py-0.5 rounded">Editor</span>
-                            @else
-                                <span class="ml-1 bg-gray-100 text-gray-800 text-xs px-2 py-0.5 rounded">Visor</span>
-                            @endif
-                        </span>
-                    </span>
+                    <!-- User Menu -->
+                    <div class="relative ml-3">
+                        <button id="user-menu-btn" class="flex items-center text-sm focus:outline-none hover:bg-gray-50 rounded-lg p-2 transition-colors">
+                            <div class="flex flex-col items-end mr-3 hidden md:flex">
+                                <span class="font-bold text-gray-800 text-xs">
+                                    {{ Auth::user()->company ? Str::limit(Auth::user()->company->name, 20) : 'Sin Empresa' }}
+                                </span>
+                                <div class="flex items-center">
+                                    <span class="text-gray-600">
+                                        @php
+                                            $names = explode(' ', Auth::user()->name);
+                                            $firstName = $names[0] ?? '';
+                                            $lastName = count($names) > 2 ? $names[2] : ($names[1] ?? ''); // Try to get 3rd word as surname, fallback to 2nd
+                                        @endphp
+                                        {{ ucfirst($firstName) }} {{ ucfirst($lastName) }}
+                                    </span>
+                                    @if(Auth::user()->isAdmin())
+                                        <span class="ml-2 bg-gray-200 text-gray-800 text-[10px] px-1.5 py-0.5 rounded border border-gray-300 font-medium">Admin</span>
+                                    @elseif(Auth::user()->isEditor())
+                                        <span class="ml-2 bg-green-100 text-green-800 text-[10px] px-1.5 py-0.5 rounded border border-green-200 font-medium">Editor</span>
+                                    @else
+                                        <span class="ml-2 bg-gray-100 text-gray-800 text-[10px] px-1.5 py-0.5 rounded border border-gray-200 font-medium">Visor</span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="h-9 w-9 bg-gray-200 rounded-full flex items-center justify-center text-gray-500 ring-2 ring-white shadow-sm">
+                                <i class="fas fa-user text-lg"></i>
+                            </div>
+                            <i class="fas fa-chevron-down ml-2 text-gray-400 text-xs hidden md:block"></i>
+                        </button>
+
+                        <!-- User Dropdown -->
+                        <div id="user-menu-dropdown" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-100 py-1 z-50 origin-top-right transition-all duration-200">
+                            <div class="px-4 py-3 border-b border-gray-50 md:hidden">
+                                <p class="text-sm font-medium text-gray-900">{{ Auth::user()->name }}</p>
+                                <p class="text-xs text-gray-500 truncate">{{ Auth::user()->email }}</p>
+                            </div>
+                            
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900">
+                                <i class="fas fa-user-circle mr-2 text-gray-400 w-4"></i> Mi Perfil
+                            </a>
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900">
+                                <i class="fas fa-cog mr-2 text-gray-400 w-4"></i> Configuración
+                            </a>
+                            
+                            <div class="border-t border-gray-100 my-1"></div>
+                            
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 hover:text-red-700 transition-colors">
+                                    <i class="fas fa-sign-out-alt mr-2 text-red-400 w-4"></i> Cerrar Sesión
+                                </button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -500,6 +542,31 @@
                 
                 // Prevent closing when clicking inside dropdown
                 dropdown.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                });
+            }
+
+            // User Menu Dropdown
+            const userBtn = document.getElementById('user-menu-btn');
+            const userDropdown = document.getElementById('user-menu-dropdown');
+            
+            if (userBtn && userDropdown) {
+                userBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    userDropdown.classList.toggle('hidden');
+                    // Close notifications if open
+                    if (dropdown && !dropdown.classList.contains('hidden')) {
+                        dropdown.classList.add('hidden');
+                    }
+                });
+                
+                document.addEventListener('click', function(e) {
+                    if (!userDropdown.contains(e.target) && !userBtn.contains(e.target)) {
+                        userDropdown.classList.add('hidden');
+                    }
+                });
+
+                userDropdown.addEventListener('click', function(e) {
                     e.stopPropagation();
                 });
             }
