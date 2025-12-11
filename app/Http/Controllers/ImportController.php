@@ -64,12 +64,15 @@ class ImportController extends Controller
             while (($row = fgetcsv($handle, 0, $delimiter)) !== false) {
                 $rowNumber++;
                 
+                \Log::info("Raw row $rowNumber", ['data' => $row, 'count' => count($row)]);
+                
                 // Skip empty rows
                 if (empty(array_filter($row))) {
+                    \Log::warning("Skipping empty row $rowNumber");
                     continue;
                 }
                 
-                \Log::info("Processing row $rowNumber", ['data' => $row]);
+                \Log::info("Processing row $rowNumber", ['custom_id' => $row[0] ?? 'N/A', 'name' => $row[1] ?? 'N/A']);
                 
                 try {
                     // Validate required fields
@@ -153,13 +156,20 @@ class ImportController extends Controller
             
             fclose($handle);
             
-            \Log::info('Import completed', ['imported' => $imported, 'errors' => count($errors)]);
+            \Log::info('Import completed', [
+                'total_rows' => $rowNumber - 1, 
+                'imported' => $imported, 
+                'errors' => count($errors)
+            ]);
             
-            $message = "Se importaron exitosamente $imported activos.";
+            $message = "Se procesaron " . ($rowNumber - 1) . " filas. Se importaron exitosamente $imported activos.";
             
             if (count($errors) > 0) {
                 $message .= " Errores encontrados: " . count($errors) . ". ";
                 $message .= implode(' | ', array_slice($errors, 0, 5));
+                if (count($errors) > 5) {
+                    $message .= " (y " . (count($errors) - 5) . " más...)";
+                }
                 return redirect()->route('assets.index')->with('warning', $message);
             }
             
