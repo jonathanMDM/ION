@@ -19,7 +19,7 @@ class ImportController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'file' => 'required|mimes:csv,txt',
+            'file' => 'required|mimes:csv,txt,xlsx,xls',
         ]);
 
         $companyId = \Illuminate\Support\Facades\Auth::user()->company_id;
@@ -28,6 +28,14 @@ class ImportController extends Controller
         \Log::info('Import started', ['company_id' => $companyId, 'filename' => $file->getClientOriginalName()]);
         
         try {
+            $extension = $file->getClientOriginalExtension();
+            
+            // Handle Excel files (.xlsx, .xls)
+            if (in_array($extension, ['xlsx', 'xls'])) {
+                return $this->importExcel($file, $companyId);
+            }
+            
+            // Handle CSV/TXT files
             $handle = fopen($file->getRealPath(), 'r');
             
             if (!$handle) {
@@ -75,113 +83,12 @@ class ImportController extends Controller
                 \Log::info("Processing row $rowNumber", ['custom_id' => $row[0] ?? 'N/A', 'name' => $row[1] ?? 'N/A']);
                 
                 try {
-                    // Validate required fields
-                    if (empty($row[0]) || empty($row[1])) {
-                        $error = "Fila $rowNumber: custom_id y name son requeridos";
-                        $errors[] = $error;
-                        \Log::warning($error);
-                        continue;
+                    $result = $this->processRow($row, $rowNumber, $companyId);
+                    if ($result['success']) {
+                        $imported++;
+                    } else {
+                        $errors[] = $result['error'];
                     }
-                    
-                    // Check if custom_id already exists and make it unique if needed
-                    $customId = trim($row[0]);
-                    $originalCustomId = $customId;
-                    $counter = 1;
-                    while (\App\Models\Asset::where('custom_id', $customId)->where('company_id', $companyId)->exists()) {
-                        $customId = $originalCustomId . '-' . $counter;
-                        $counter++;
-                    }
-                    
-                    if ($customId !== $originalCustomId) {
-                        \Log::info("Custom ID duplicado, cambiado de '$originalCustomId' a '$customId'");
-                    }
-                    
-                    // Parse purchase date with flexible format support
-                    $purchaseDate = null;
-                    if (!empty($row[5])) {
-                        try {
-                            // Try multiple date formats
-                            $dateString = trim($row[5]);
-                            
-                            // Try dd/mm/yy format (Excel default)
-                            if (preg_match('/^(\d{1,2})\/(\d{1,2})\/(\d{2})$/', $dateString, $matches)) {
-                                $day = str_pad($matches[1], 2, '0', STR_PAD_LEFT);
-                                $month = str_pad($matches[2], 2, '0', STR_PAD_LEFT);
-                                $year = '20' . $matches[3]; // Assume 20xx
-                                $purchaseDate = "$year-$month-$day";
-                            }
-                            // Try dd/mm/yyyy format
-                            elseif (preg_match('/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/', $dateString, $matches)) {
-                                $day = str_pad($matches[1], 2, '0', STR_PAD_LEFT);
-                                $month = str_pad($matches[2], 2, '0', STR_PAD_LEFT);
-                                $year = $matches[3];
-                                $purchaseDate = "$year-$month-$day";
-                            }
-                            // Try yyyy-mm-dd format (standard)
-                            elseif (preg_match('/^\d{4}-\d{2}-\d{2}$/', $dateString)) {
-                                $purchaseDate = $dateString;
-                            }
-                            else {
-                                // Try Carbon parse as last resort
-                                $purchaseDate = \Carbon\Carbon::parse($dateString)->format('Y-m-d');
-                            }
-                        } catch (\Exception $e) {
-                            \Log::warning("Could not parse date '$row[5]' for row $rowNumber, using null");
-                            $purchaseDate = null;
-                        }
-                    }
-                    
-                    // Map CSV columns to asset fields
-                    $assetData = [
-                        'custom_id' => $customId,
-                        'name' => trim($row[1]),
-                        'specifications' => $row[2] ?? '',
-                        'quantity' => !empty($row[3]) ? (int)$row[3] : 1,
-                        'value' => !empty($row[4]) ? (float)$row[4] : 0,
-                        'purchase_date' => $purchaseDate,
-                        'status' => !empty($row[6]) ? $row[6] : 'active',
-                        'municipality_plate' => $row[11] ?? null,
-                        'notes' => $row[12] ?? null,
-                        'company_id' => $companyId,
-                    ];
-                    
-                    // Find or create location
-                    if (!empty($row[7])) {
-                        $location = \App\Models\Location::firstOrCreate(
-                            ['name' => trim($row[7]), 'company_id' => $companyId],
-                            ['description' => 'Creado automáticamente desde importación']
-                        );
-                        $assetData['location_id'] = $location->id;
-                        \Log::info("Location processed", ['location' => $location->name, 'id' => $location->id]);
-                    }
-                    
-                    // Find or create category and subcategory
-                    if (!empty($row[8]) && !empty($row[9])) {
-                        $category = \App\Models\Category::firstOrCreate(
-                            ['name' => trim($row[8]), 'company_id' => $companyId]
-                        );
-                        
-                        $subcategory = \App\Models\Subcategory::firstOrCreate(
-                            ['name' => trim($row[9]), 'category_id' => $category->id, 'company_id' => $companyId]
-                        );
-                        $assetData['subcategory_id'] = $subcategory->id;
-                        \Log::info("Category/Subcategory processed", ['category' => $category->name, 'subcategory' => $subcategory->name]);
-                    }
-                    
-                    // Find or create supplier
-                    if (!empty($row[10])) {
-                        $supplier = \App\Models\Supplier::firstOrCreate(
-                            ['name' => trim($row[10]), 'company_id' => $companyId],
-                            ['email' => '', 'phone' => '']
-                        );
-                        $assetData['supplier_id'] = $supplier->id;
-                        \Log::info("Supplier processed", ['supplier' => $supplier->name]);
-                    }
-                    
-                    $asset = \App\Models\Asset::create($assetData);
-                    $imported++;
-                    \Log::info("Asset created", ['asset_id' => $asset->id, 'name' => $asset->name]);
-                    
                 } catch (\Exception $e) {
                     $error = "Fila $rowNumber: " . $e->getMessage();
                     $errors[] = $error;
@@ -209,13 +116,195 @@ class ImportController extends Controller
             }
             
             return redirect()->route('assets.index')->with('success', $message);
-                
+            
         } catch (\Exception $e) {
-            \Log::error('Import failed', ['exception' => $e->getMessage()]);
-            return redirect()->back()->with('error', 'Error al procesar el archivo: ' . $e->getMessage());
+            \Log::error('Import failed', ['error' => $e->getMessage(), 'trace' => $e->getTraceAsString()]);
+            return redirect()->back()->with('error', 'Error al importar: ' . $e->getMessage());
         }
     }
-
+    
+    private function importExcel($file, $companyId)
+    {
+        try {
+            // Use PhpSpreadsheet to read Excel file
+            $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($file->getRealPath());
+            $worksheet = $spreadsheet->getActiveSheet();
+            $rows = $worksheet->toArray();
+            
+            \Log::info('Excel file loaded', ['total_rows' => count($rows)]);
+            
+            // Skip header row
+            $header = array_shift($rows);
+            \Log::info('Excel Headers', ['headers' => $header]);
+            
+            $imported = 0;
+            $errors = [];
+            $rowNumber = 1;
+            
+            foreach ($rows as $row) {
+                $rowNumber++;
+                
+                // Skip empty rows
+                if (empty(array_filter($row))) {
+                    \Log::warning("Skipping empty row $rowNumber");
+                    continue;
+                }
+                
+                \Log::info("Processing Excel row $rowNumber", ['custom_id' => $row[0] ?? 'N/A', 'name' => $row[1] ?? 'N/A']);
+                
+                try {
+                    $result = $this->processRow($row, $rowNumber, $companyId);
+                    if ($result['success']) {
+                        $imported++;
+                    } else {
+                        $errors[] = $result['error'];
+                    }
+                } catch (\Exception $e) {
+                    $error = "Fila $rowNumber: " . $e->getMessage();
+                    $errors[] = $error;
+                    \Log::error($error, ['exception' => $e]);
+                }
+            }
+            
+            \Log::info('Excel import completed', [
+                'total_rows' => $rowNumber - 1, 
+                'imported' => $imported, 
+                'errors' => count($errors)
+            ]);
+            
+            $message = "Se procesaron " . ($rowNumber - 1) . " filas. Se importaron exitosamente $imported activos.";
+            
+            if (count($errors) > 0) {
+                $message .= " Errores encontrados: " . count($errors) . ". ";
+                $message .= implode(' | ', array_slice($errors, 0, 5));
+                if (count($errors) > 5) {
+                    $message .= " (y " . (count($errors) - 5) . " más...)";
+                }
+                return redirect()->route('assets.index')->with('warning', $message);
+            }
+            
+            return redirect()->route('assets.index')->with('success', $message);
+            
+        } catch (\Exception $e) {
+            \Log::error('Excel import failed', ['error' => $e->getMessage()]);
+            return redirect()->back()->with('error', 'Error al importar Excel: ' . $e->getMessage());
+        }
+    }
+    
+    private function processRow($row, $rowNumber, $companyId)
+    {
+        // Validate required fields
+        if (empty($row[0]) || empty($row[1])) {
+            return [
+                'success' => false,
+                'error' => "Fila $rowNumber: ID y Nombre son requeridos"
+            ];
+        }
+                    
+        // Check if custom_id already exists and make it unique if needed
+        $customId = trim($row[0]);
+        $originalCustomId = $customId;
+        $counter = 1;
+        while (\App\Models\Asset::where('custom_id', $customId)->where('company_id', $companyId)->exists()) {
+            $customId = $originalCustomId . '-' . $counter;
+            $counter++;
+        }
+        
+        if ($customId !== $originalCustomId) {
+            \Log::info("Custom ID duplicado, cambiado de '$originalCustomId' a '$customId'");
+        }
+        
+        // Parse purchase date with flexible format support
+        $purchaseDate = null;
+        if (!empty($row[5])) {
+            try {
+                // Try multiple date formats
+                $dateString = trim($row[5]);
+                
+                // Try dd/mm/yy format (Excel default)
+                if (preg_match('/^(\d{1,2})\/(\d{1,2})\/(\d{2})$/', $dateString, $matches)) {
+                    $day = str_pad($matches[1], 2, '0', STR_PAD_LEFT);
+                    $month = str_pad($matches[2], 2, '0', STR_PAD_LEFT);
+                    $year = '20' . $matches[3]; // Assume 20xx
+                    $purchaseDate = "$year-$month-$day";
+                }
+                // Try dd/mm/yyyy format
+                elseif (preg_match('/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/', $dateString, $matches)) {
+                    $day = str_pad($matches[1], 2, '0', STR_PAD_LEFT);
+                    $month = str_pad($matches[2], 2, '0', STR_PAD_LEFT);
+                    $year = $matches[3];
+                    $purchaseDate = "$year-$month-$day";
+                }
+                // Try yyyy-mm-dd format (standard)
+                elseif (preg_match('/^\d{4}-\d{2}-\d{2}$/', $dateString)) {
+                    $purchaseDate = $dateString;
+                }
+                else {
+                    // Try Carbon parse as last resort
+                    $purchaseDate = \Carbon\Carbon::parse($dateString)->format('Y-m-d');
+                }
+            } catch (\Exception $e) {
+                \Log::warning("Could not parse date '$row[5]' for row $rowNumber, using null");
+                $purchaseDate = null;
+            }
+        }
+        
+        // Map columns to asset fields
+        $assetData = [
+            'custom_id' => $customId,
+            'name' => trim($row[1]),
+            'specifications' => $row[2] ?? '',
+            'quantity' => !empty($row[3]) ? (int)$row[3] : 1,
+            'value' => !empty($row[4]) ? (float)$row[4] : 0,
+            'purchase_date' => $purchaseDate,
+            'status' => !empty($row[6]) ? $row[6] : 'active',
+            'municipality_plate' => $row[11] ?? null,
+            'notes' => $row[12] ?? null,
+            'company_id' => $companyId,
+        ];
+        
+        // Find or create location
+        if (!empty($row[7])) {
+            $location = \App\Models\Location::firstOrCreate(
+                ['name' => trim($row[7]), 'company_id' => $companyId],
+                ['address' => '']
+            );
+            $assetData['location_id'] = $location->id;
+            \Log::info("Location processed", ['location' => $location->name, 'id' => $location->id]);
+        }
+        
+        // Find or create category and subcategory
+        if (!empty($row[8]) && !empty($row[9])) {
+            $category = \App\Models\Category::firstOrCreate(
+                ['name' => trim($row[8]), 'company_id' => $companyId]
+            );
+            
+            $subcategory = \App\Models\Subcategory::firstOrCreate(
+                ['name' => trim($row[9]), 'category_id' => $category->id, 'company_id' => $companyId]
+            );
+            $assetData['subcategory_id'] = $subcategory->id;
+            \Log::info("Category/Subcategory processed", ['category' => $category->name, 'subcategory' => $subcategory->name]);
+        }
+        
+        // Find or create supplier
+        if (!empty($row[10])) {
+            $supplier = \App\Models\Supplier::firstOrCreate(
+                ['name' => trim($row[10]), 'company_id' => $companyId],
+                ['email' => '', 'phone' => '']
+            );
+            $assetData['supplier_id'] = $supplier->id;
+            \Log::info("Supplier processed", ['supplier' => $supplier->name]);
+        }
+        
+        $asset = \App\Models\Asset::create($assetData);
+        \Log::info("Asset created", ['asset_id' => $asset->id, 'name' => $asset->name]);
+        
+        return [
+            'success' => true,
+            'asset_id' => $asset->id
+        ];
+    }
+    
     public function downloadTemplate()
     {
         $filename = 'plantilla_activos.txt';
