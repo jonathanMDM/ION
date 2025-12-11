@@ -154,9 +154,9 @@ class ImportController extends Controller
 
     public function downloadTemplate()
     {
-        $filename = 'plantilla_activos.xls';
+        $filename = 'plantilla_activos.csv';
         $headers = [
-            'Content-Type' => 'application/vnd.ms-excel',
+            'Content-Type' => 'text/csv; charset=UTF-8',
             'Content-Disposition' => 'attachment; filename="' . $filename . '"',
             'Cache-Control' => 'max-age=0',
         ];
@@ -167,7 +167,7 @@ class ImportController extends Controller
             // Add BOM for Excel UTF-8 compatibility
             fprintf($file, chr(0xEF).chr(0xBB).chr(0xBF));
             
-            // Headers in Spanish with descriptions (using tabs as delimiter)
+            // Headers in Spanish with descriptions (using semicolon as delimiter for Excel)
             fputcsv($file, [
                 'ID Único (Ej: ACT-001)',
                 'Nombre del Activo',
@@ -182,7 +182,7 @@ class ImportController extends Controller
                 'Proveedor',
                 'Placa Municipio',
                 'Notas'
-            ], "\t");
+            ], ';');
 
             // Example row 1 - Computer
             fputcsv($file, [
@@ -199,7 +199,7 @@ class ImportController extends Controller
                 'Dell Colombia',
                 '',
                 'Asignada al departamento de IT'
-            ], "\t");
+            ], ';');
 
             // Example row 2 - Furniture
             fputcsv($file, [
@@ -216,7 +216,7 @@ class ImportController extends Controller
                 'Muebles & Diseño',
                 '',
                 'Para sala de reuniones'
-            ], "\t");
+            ], ';');
 
             // Example row 3 - Vehicle
             fputcsv($file, [
@@ -233,7 +233,7 @@ class ImportController extends Controller
                 'Toyota Colombia',
                 'ABC-123',
                 'Vehículo de carga'
-            ], "\t");
+            ], ';');
 
             fclose($file);
         };
