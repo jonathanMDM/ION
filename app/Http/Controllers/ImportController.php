@@ -196,21 +196,21 @@ class ImportController extends Controller
             // Add BOM for Excel UTF-8 compatibility
             fprintf($file, chr(0xEF).chr(0xBB).chr(0xBF));
             
-            // Write headers
+            // Write headers in Spanish
             fputcsv($file, [
-                'custom_id',
-                'name',
-                'specifications',
-                'quantity',
-                'value',
-                'purchase_date',
-                'status',
-                'location_name',
-                'category_name',
-                'subcategory_name',
-                'supplier_name',
-                'municipality_plate',
-                'notes'
+                'ID Unico',
+                'Nombre',
+                'Especificaciones',
+                'Cantidad',
+                'Valor',
+                'Fecha de Compra',
+                'Estado',
+                'Ubicacion',
+                'Categoria',
+                'Subcategoria',
+                'Proveedor',
+                'Placa Municipio',
+                'Notas'
             ]);
 
             // Example 1
