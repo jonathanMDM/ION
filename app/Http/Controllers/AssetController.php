@@ -158,4 +158,22 @@ class AssetController extends Controller
         
         return view('assets.qr', compact('asset'));
     }
+
+    /**
+     * Delete multiple assets at once
+     */
+    public function bulkDelete(Request $request)
+    {
+        $request->validate([
+            'selected_assets' => 'required|array|min:1',
+            'selected_assets.*' => 'exists:assets,id'
+        ]);
+
+        $count = count($request->selected_assets);
+        
+        // Delete selected assets
+        Asset::whereIn('id', $request->selected_assets)->delete();
+        
+        return redirect()->route('assets.index')->with('success', "Se eliminaron exitosamente $count activo(s).");
+    }
 }

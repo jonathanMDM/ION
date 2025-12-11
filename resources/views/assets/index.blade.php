@@ -3,24 +3,36 @@
 @section('page-title', 'Activos')
 
 @section('content')
-<div class="mb-6 flex flex-col md:flex-row md:items-center gap-4">
-    <h2 class="text-2xl font-bold text-gray-800 md:flex-1">Activos</h2>
-    <div class="flex flex-col md:flex-row gap-3 shrink-0">
-        @if(Auth::user()->isAdmin() || Auth::user()->hasPermission('create_assets'))
-        <a href="{{ route('imports.create') }}" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded text-center whitespace-nowrap">
-            <i class="fas fa-file-upload mr-2"></i>Importar Activos
-        </a>
-        <a href="{{ route('assets.create') }}" class="bg-gray-800 hover:bg-black text-white font-bold py-2 px-4 rounded text-center whitespace-nowrap">
-            <i class="fas fa-plus mr-2"></i>Nuevo Activo
-        </a>
-        @endif
+<form id="bulkDeleteForm" action="{{ route('assets.bulk-delete') }}" method="POST">
+    @csrf
+    @method('DELETE')
+    
+    <div class="mb-6 flex flex-col md:flex-row md:items-center gap-4">
+        <h2 class="text-2xl font-bold text-gray-800 md:flex-1">Activos</h2>
+        <div class="flex flex-col md:flex-row gap-3 shrink-0">
+            <!-- Bulk delete button (hidden by default) -->
+            <button type="button" id="bulkDeleteBtn" class="hidden bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded text-center whitespace-nowrap" onclick="confirmBulkDelete()">
+                <i class="fas fa-trash mr-2"></i>Eliminar Seleccionados (<span id="selectedCount">0</span>)
+            </button>
+            
+            @if(Auth::user()->isAdmin() || Auth::user()->hasPermission('create_assets'))
+            <a href="{{ route('imports.create') }}" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded text-center whitespace-nowrap">
+                <i class="fas fa-file-upload mr-2"></i>Importar Activos
+            </a>
+            <a href="{{ route('assets.create') }}" class="bg-gray-800 hover:bg-black text-white font-bold py-2 px-4 rounded text-center whitespace-nowrap">
+                <i class="fas fa-plus mr-2"></i>Nuevo Activo
+            </a>
+            @endif
+        </div>
     </div>
-</div>
 
 <div class="bg-white shadow-md rounded my-6 overflow-x-auto">
     <table class="min-w-full w-full table-auto">
         <thead>
             <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+                <th class="py-3 px-6 text-center">
+                    <input type="checkbox" id="selectAll" class="form-checkbox h-5 w-5 text-gray-600" onchange="toggleAll(this)">
+                </th>
                 <th class="py-3 px-6 text-left whitespace-nowrap">ID Único</th>
                 <th class="py-3 px-6 text-left whitespace-nowrap">Nombre</th>
                 <th class="py-3 px-6 text-left whitespace-nowrap">Modelo</th>
@@ -48,6 +60,9 @@
         <tbody class="text-gray-600 text-sm font-light">
             @foreach($assets as $asset)
             <tr class="border-b border-gray-200 hover:bg-gray-100">
+                <td class="py-3 px-6 text-center">
+                    <input type="checkbox" name="selected_assets[]" value="{{ $asset->id }}" class="form-checkbox h-5 w-5 text-gray-600 row-checkbox" onchange="updateSelectedCount()">
+                </td>
                 <td class="py-3 px-6 text-left whitespace-nowrap">
                     <span class="font-medium">{{ $asset->custom_id }}</span>
                 </td>
@@ -150,4 +165,42 @@
         </tbody>
     </table>
 </div>
+
+</form>
+
+<script>
+function toggleAll(source) {
+    const checkboxes = document.querySelectorAll('.row-checkbox');
+    checkboxes.forEach(checkbox => {
+        checkbox.checked = source.checked;
+    });
+    updateSelectedCount();
+}
+
+function updateSelectedCount() {
+    const checkboxes = document.querySelectorAll('.row-checkbox:checked');
+    const count = checkboxes.length;
+    document.getElementById('selectedCount').textContent = count;
+    
+    const bulkDeleteBtn = document.getElementById('bulkDeleteBtn');
+    if (count > 0) {
+        bulkDeleteBtn.classList.remove('hidden');
+    } else {
+        bulkDeleteBtn.classList.add('hidden');
+    }
+    
+    // Update select all checkbox
+    const selectAll = document.getElementById('selectAll');
+    const allCheckboxes = document.querySelectorAll('.row-checkbox');
+    selectAll.checked = allCheckboxes.length > 0 && count === allCheckboxes.length;
+}
+
+function confirmBulkDelete() {
+    const count = document.querySelectorAll('.row-checkbox:checked').length;
+    if (confirm(`¿Estás seguro de que deseas eliminar ${count} activo(s)? Esta acción no se puede deshacer.`)) {
+        document.getElementById('bulkDeleteForm').submit();
+    }
+}
+</script>
+
 @endsection

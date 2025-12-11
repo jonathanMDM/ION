@@ -61,6 +61,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('imports/template', [ImportController::class, 'downloadTemplate'])->name('assets.import.template');
     
     // Assets
+    Route::delete('/assets/bulk-delete', [AssetController::class, 'bulkDelete'])->name('assets.bulk-delete');
     Route::resource('assets', AssetController::class);
     Route::get('/assets/{asset}/qr', [AssetController::class, 'showQR'])->name('assets.qr');
     
