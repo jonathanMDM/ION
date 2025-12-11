@@ -9,12 +9,14 @@
         
         <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="name">Nombre de la Ubicación</label>
-            <input type="text" name="name" id="name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+            <input type="text" name="name" id="name" placeholder="Ej: Oficina Principal, Almacén General, Sala de Servidores..." class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+            <p class="text-gray-500 text-xs mt-1">💡 Ejemplos: Oficina Principal, Almacén General, Sala de Servidores, Recepción, Departamento de IT</p>
         </div>
 
         <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="address">Dirección</label>
-            <input type="text" name="address" id="address" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            <input type="text" name="address" id="address" placeholder="Ej: Piso 2, Edificio A, Calle 123 #45-67..." class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            <p class="text-gray-500 text-xs mt-1">💡 Opcional: Agrega detalles como piso, edificio, o dirección completa</p>
         </div>
 
         <div class="flex items-center justify-between">

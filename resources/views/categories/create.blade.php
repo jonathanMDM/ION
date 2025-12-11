@@ -9,7 +9,8 @@
         
         <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="name">Nombre de la Categoría</label>
-            <input type="text" name="name" id="name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+            <input type="text" name="name" id="name" placeholder="Ej: Tecnología, Mobiliario, Vehículos, Equipos de Oficina..." class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+            <p class="text-gray-500 text-xs mt-1">💡 Ejemplos: Tecnología, Mobiliario, Vehículos, Equipos de Oficina, Herramientas, Electrodomésticos</p>
         </div>
 
         <div class="flex items-center justify-between">
