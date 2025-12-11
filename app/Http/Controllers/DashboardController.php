@@ -19,10 +19,10 @@ class DashboardController extends Controller
 
         // Statistics
         $stats = [
-            'total_assets' => Asset::count(),
-            'active_assets' => Asset::where('status', 'active')->count(),
-            'maintenance_assets' => Asset::where('status', 'maintenance')->count(),
-            'decommissioned_assets' => Asset::where('status', 'decommissioned')->count(),
+            'total_assets' => Asset::sum('quantity'),
+            'active_assets' => Asset::where('status', 'active')->sum('quantity'),
+            'maintenance_assets' => Asset::where('status', 'maintenance')->sum('quantity'),
+            'decommissioned_assets' => Asset::where('status', 'decommissioned')->sum('quantity'),
             'total_locations' => Location::count(),
             'total_categories' => Category::count(),
             'total_maintenances' => Maintenance::count(),

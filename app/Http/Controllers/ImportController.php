@@ -319,7 +319,7 @@ class ImportController extends Controller
                 ->setSubject('Plantilla para importar activos')
                 ->setDescription('Plantilla para importación masiva de activos al sistema ION');
             
-            // Headers in Spanish
+            // Headers in Spanish - conditional based on field visibility
             $headers = [
                 'ID Unico',
                 'Nombre',
@@ -332,9 +332,14 @@ class ImportController extends Controller
                 'Categoria',
                 'Subcategoria',
                 'Proveedor',
-                'Placa Municipio',
-                'Notas'
             ];
+            
+            // Add Placa Municipio only if visible for the company
+            if (\App\Helpers\FieldHelper::isVisible('municipality_plate')) {
+                $headers[] = 'Placa Municipio';
+            }
+            
+            $headers[] = 'Notas';
             
             // Set headers
             $sheet->fromArray($headers, NULL, 'A1');
@@ -355,26 +360,38 @@ class ImportController extends Controller
                     'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER
                 ]
             ];
-            $sheet->getStyle('A1:M1')->applyFromArray($headerStyle);
             
-            // Example data
-            $examples = [
-                ['ACT-001', 'Laptop Dell Latitude 5420', 'Intel Core i5-1135G7, 16GB RAM, 512GB SSD', 1, 1250000, '2024-01-15', 'active', 'Oficina Principal', 'Tecnologia', 'Computadoras', 'Dell Colombia', '', 'Asignada al departamento de IT'],
-                ['ACT-002', 'Escritorio Ejecutivo', 'Madera MDF, 1.60m x 0.80m, color nogal', 5, 450000, '2024-02-20', 'active', 'Sala de Juntas', 'Mobiliario', 'Escritorios', 'Muebles y Diseno', '', 'Para sala de reuniones'],
-                ['ACT-003', 'Camioneta Toyota Hilux', '4x4, Diesel, 2.8L, Doble Cabina, Blanca', 1, 95000000, '2023-06-10', 'active', 'Almacen General', 'Vehiculos', 'Camionetas', 'Toyota Colombia', 'ABC-123', 'Vehiculo de carga']
-            ];
+            // Apply header style to all header columns dynamically
+            $lastColumn = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::stringFromColumnIndex(count($headers));
+            $sheet->getStyle('A1:' . $lastColumn . '1')->applyFromArray($headerStyle);
+            
+            // Example data - conditional based on field visibility
+            if (\App\Helpers\FieldHelper::isVisible('municipality_plate')) {
+                $examples = [
+                    ['ACT-001', 'Laptop Dell Latitude 5420', 'Intel Core i5-1135G7, 16GB RAM, 512GB SSD', 1, 1250000, '2024-01-15', 'active', 'Oficina Principal', 'Tecnologia', 'Computadoras', 'Dell Colombia', 'N/A', 'Asignada al departamento de IT'],
+                    ['ACT-002', 'Escritorio Ejecutivo', 'Madera MDF, 1.60m x 0.80m, color nogal', 5, 450000, '2024-02-20', 'active', 'Sala de Juntas', 'Mobiliario', 'Escritorios', 'Muebles y Diseno', 'N/A', 'Para sala de reuniones'],
+                    ['ACT-003', 'Camioneta Toyota Hilux', '4x4, Diesel, 2.8L, Doble Cabina, Blanca', 1, 95000000, '2023-06-10', 'active', 'Almacen General', 'Vehiculos', 'Camionetas', 'Toyota Colombia', 'ABC-123', 'Vehiculo de carga']
+                ];
+            } else {
+                $examples = [
+                    ['ACT-001', 'Laptop Dell Latitude 5420', 'Intel Core i5-1135G7, 16GB RAM, 512GB SSD', 1, 1250000, '2024-01-15', 'active', 'Oficina Principal', 'Tecnologia', 'Computadoras', 'Dell Colombia', 'Asignada al departamento de IT'],
+                    ['ACT-002', 'Escritorio Ejecutivo', 'Madera MDF, 1.60m x 0.80m, color nogal', 5, 450000, '2024-02-20', 'active', 'Sala de Juntas', 'Mobiliario', 'Escritorios', 'Muebles y Diseno', 'Para sala de reuniones'],
+                    ['ACT-003', 'Camioneta Toyota Hilux', '4x4, Diesel, 2.8L, Doble Cabina, Blanca', 1, 95000000, '2023-06-10', 'active', 'Almacen General', 'Vehiculos', 'Camionetas', 'Toyota Colombia', 'Vehiculo de carga']
+                ];
+            }
             
             $sheet->fromArray($examples, NULL, 'A2');
             
-            // Auto-size columns
-            foreach (range('A', 'M') as $col) {
-                $sheet->getColumnDimension($col)->setAutoSize(true);
+            // Auto-size columns dynamically
+            for ($col = 1; $col <= count($headers); $col++) {
+                $columnLetter = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::stringFromColumnIndex($col);
+                $sheet->getColumnDimension($columnLetter)->setAutoSize(true);
             }
             
             // Set row height for header
             $sheet->getRowDimension(1)->setRowHeight(25);
             
-            // Add borders to data area
+            // Add borders to data area (dynamically based on column count)
             $styleArray = [
                 'borders' => [
                     'allBorders' => [
@@ -383,7 +400,7 @@ class ImportController extends Controller
                     ]
                 ]
             ];
-            $sheet->getStyle('A1:M4')->applyFromArray($styleArray);
+            $sheet->getStyle('A1:' . $lastColumn . '4')->applyFromArray($styleArray);
             
             // Create Excel file
             $writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
