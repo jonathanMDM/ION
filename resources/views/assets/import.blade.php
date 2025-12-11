@@ -66,7 +66,8 @@
                 <i class="fas fa-download mr-2"></i>
                 📥 Descargar Plantilla
             </a>
-            <p class="text-xs text-gray-500 mt-2">Archivo CSV que se abre automáticamente en Excel - Incluye 3 ejemplos</p>
+            <p class="text-xs text-gray-500 mt-2">Archivo TXT que Excel abre con columnas separadas - Incluye 3 ejemplos</p>
+            <p class="text-xs text-blue-600 mt-1">💡 Doble clic en el archivo descargado y Excel lo abrirá automáticamente</p>
         </div>
 
         <!-- Campos de la plantilla -->

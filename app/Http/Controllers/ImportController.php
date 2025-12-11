@@ -218,10 +218,10 @@ class ImportController extends Controller
 
     public function downloadTemplate()
     {
-        $filename = 'plantilla_activos.csv';
+        $filename = 'plantilla_activos.txt';
         
         $headers = [
-            'Content-Type' => 'text/csv; charset=UTF-8',
+            'Content-Type' => 'text/plain; charset=UTF-8',
             'Content-Disposition' => 'attachment; filename="' . $filename . '"',
         ];
 
@@ -231,7 +231,7 @@ class ImportController extends Controller
             // Add BOM for Excel UTF-8 compatibility
             fprintf($file, chr(0xEF).chr(0xBB).chr(0xBF));
             
-            // Write headers in Spanish
+            // Write headers in Spanish (using TAB as delimiter)
             fputcsv($file, [
                 'ID Unico',
                 'Nombre',
@@ -246,7 +246,7 @@ class ImportController extends Controller
                 'Proveedor',
                 'Placa Municipio',
                 'Notas'
-            ]);
+            ], "\t");
 
             // Example 1
             fputcsv($file, [
@@ -263,7 +263,7 @@ class ImportController extends Controller
                 'Dell Colombia',
                 '',
                 'Asignada al departamento de IT'
-            ]);
+            ], "\t");
 
             // Example 2
             fputcsv($file, [
@@ -280,7 +280,7 @@ class ImportController extends Controller
                 'Muebles y Diseno',
                 '',
                 'Para sala de reuniones'
-            ]);
+            ], "\t");
 
             // Example 3
             fputcsv($file, [
@@ -297,7 +297,7 @@ class ImportController extends Controller
                 'Toyota Colombia',
                 'ABC-123',
                 'Vehiculo de carga'
-            ]);
+            ], "\t");
 
             fclose($file);
         };
