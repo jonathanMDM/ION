@@ -84,4 +84,20 @@ class SupplierController extends Controller
         $supplier->delete();
         return redirect()->route('suppliers.index')->with('success', 'Proveedor eliminado exitosamente.');
     }
+
+    /**
+     * Delete multiple suppliers at once
+     */
+    public function bulkDelete(Request $request)
+    {
+        $request->validate([
+            'selected_items' => 'required|array|min:1',
+            'selected_items.*' => 'exists:suppliers,id'
+        ]);
+
+        $count = count($request->selected_items);
+        Supplier::whereIn('id', $request->selected_items)->delete();
+        
+        return redirect()->route('suppliers.index')->with('success', "Se eliminaron exitosamente $count proveedor(es).");
+    }
 }
