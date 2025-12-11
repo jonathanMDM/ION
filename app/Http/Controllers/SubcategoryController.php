@@ -95,8 +95,10 @@ class SubcategoryController extends Controller
         // Check if any subcategory has associated assets
         $subcategoriesWithAssets = Subcategory::whereIn('id', $request->selected_items)
             ->withCount('assets')
-            ->having('assets_count', '>', 0)
-            ->get();
+            ->get()
+            ->filter(function($subcategory) {
+                return $subcategory->assets_count > 0;
+            });
         
         if ($subcategoriesWithAssets->count() > 0) {
             $names = $subcategoriesWithAssets->pluck('name')->implode(', ');

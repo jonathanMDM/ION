@@ -89,8 +89,10 @@ class LocationController extends Controller
         // Check if any location has associated assets
         $locationsWithAssets = Location::whereIn('id', $request->selected_items)
             ->withCount('assets')
-            ->having('assets_count', '>', 0)
-            ->get();
+            ->get()
+            ->filter(function($location) {
+                return $location->assets_count > 0;
+            });
         
         if ($locationsWithAssets->count() > 0) {
             $names = $locationsWithAssets->pluck('name')->implode(', ');

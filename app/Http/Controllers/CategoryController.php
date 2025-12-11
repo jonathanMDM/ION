@@ -65,8 +65,10 @@ class CategoryController extends Controller
         // Check if any category has associated subcategories
         $categoriesWithSubcategories = Category::whereIn('id', $request->selected_items)
             ->withCount('subcategories')
-            ->having('subcategories_count', '>', 0)
-            ->get();
+            ->get()
+            ->filter(function($category) {
+                return $category->subcategories_count > 0;
+            });
         
         if ($categoriesWithSubcategories->count() > 0) {
             $names = $categoriesWithSubcategories->pluck('name')->implode(', ');
