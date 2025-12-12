@@ -65,6 +65,15 @@
         </div>
 
         <div class="mb-4">
+            <label for="minimum_quantity" class="block text-gray-700 font-bold mb-2">
+                Cantidad Mínima (Stock Bajo)
+                <span class="text-gray-500 font-normal text-sm">- Opcional</span>
+            </label>
+            <input type="number" name="minimum_quantity" id="minimum_quantity" min="0" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" value="{{ old('minimum_quantity', $asset->minimum_quantity ?? 0) }}" placeholder="0 = Sin alerta">
+            <p class="text-gray-600 text-xs italic mt-1">Recibirás una alerta cuando la cantidad sea igual o menor a este valor</p>
+        </div>
+
+        <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="purchase_date">Fecha de Compra</label>
             <input type="date" name="purchase_date" id="purchase_date" value="{{ $asset->purchase_date ? $asset->purchase_date->format('Y-m-d') : '' }}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
         </div>
