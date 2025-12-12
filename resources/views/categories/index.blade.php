@@ -26,8 +26,9 @@
                     <th class="py-3 px-6 text-center">
                         <input type="checkbox" id="selectAll" class="form-checkbox h-5 w-5 text-gray-600" onchange="toggleAll(this)">
                     </th>
-                    <th class="py-3 px-6 text-left whitespace-nowrap">ID</th>
+                    <th class="py-3 px-6 text-left whitespace-nowrap">#</th>
                     <th class="py-3 px-6 text-left whitespace-nowrap">Nombre</th>
+                    <th class="py-3 px-6 text-left whitespace-nowrap">Descripción</th>
                     <th class="py-3 px-6 text-center whitespace-nowrap">Acciones</th>
                 </tr>
             </thead>
@@ -38,7 +39,7 @@
                         <input type="checkbox" name="selected_items[]" value="{{ $category->id }}" class="form-checkbox h-5 w-5 text-gray-600 row-checkbox" onchange="updateSelectedCount()">
                     </td>
                     <td class="py-3 px-6 text-left">
-                        <span class="font-medium text-gray-800">{{ $category->id }}</span>
+                        <span class="font-medium text-gray-800">{{ $loop->iteration }}</span>
                     </td>
                     <td class="py-3 px-6 text-left whitespace-nowrap">
                         <span class="font-medium">{{ $category->name }}</span>
