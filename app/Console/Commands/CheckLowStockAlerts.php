@@ -7,6 +7,8 @@ use App\Models\Asset;
 use App\Models\Company;
 use App\Models\User;
 use App\Models\UserNotification;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\LowStockAlert;
 
 class CheckLowStockAlerts extends Command
 {
@@ -42,12 +44,14 @@ class CheckLowStockAlerts extends Command
         }
 
         $totalAlerts = 0;
+        $totalEmails = 0;
 
         foreach ($companies as $company) {
             $this->info("Checking company: {$company->name}");
 
             // Get assets with low stock for this company
             $lowStockAssets = Asset::where('company_id', $company->id)
+                ->with(['location', 'subcategory.category'])
                 ->lowStock()
                 ->get();
 
@@ -72,20 +76,21 @@ class CheckLowStockAlerts extends Command
                 continue;
             }
 
-            // Send notification to each user
+            // Send notification and email to each user
             foreach ($users as $user) {
+                // Check if we already sent notifications today
+                $alreadySentToday = UserNotification::where('user_id', $user->id)
+                    ->where('type', 'low_stock_alert')
+                    ->whereDate('created_at', today())
+                    ->exists();
+
+                if ($alreadySentToday) {
+                    $this->info("  User {$user->name} already notified today. Skipping...");
+                    continue;
+                }
+
+                // Create in-app notifications for each asset
                 foreach ($lowStockAssets as $asset) {
-                    // Check if we already sent a notification for this asset today
-                    $existingNotification = UserNotification::where('user_id', $user->id)
-                        ->where('type', 'low_stock_alert')
-                        ->where('data->asset_id', $asset->id)
-                        ->whereDate('created_at', today())
-                        ->exists();
-
-                    if ($existingNotification) {
-                        continue; // Skip if already notified today
-                    }
-
                     UserNotification::create([
                         'user_id' => $user->id,
                         'type' => 'low_stock_alert',
@@ -102,10 +107,19 @@ class CheckLowStockAlerts extends Command
 
                     $totalAlerts++;
                 }
+
+                // Send one email with all low stock assets
+                try {
+                    Mail::to($user->email)->send(new LowStockAlert($lowStockAssets, $user->name));
+                    $this->info("  ✉️ Email sent to {$user->email}");
+                    $totalEmails++;
+                } catch (\Exception $e) {
+                    $this->error("  ✗ Failed to send email to {$user->email}: " . $e->getMessage());
+                }
             }
         }
 
-        $this->info("✅ Process completed! Sent {$totalAlerts} low stock alert(s).");
+        $this->info("✅ Process completed! Sent {$totalAlerts} in-app notification(s) and {$totalEmails} email(s).");
         return 0;
     }
 }

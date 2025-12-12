@@ -87,6 +87,87 @@
     </div>
 </div>
 
+<!-- Low Stock Alerts Widget -->
+@if($lowStockAssets->count() > 0)
+<div class="mb-6">
+    <div class="bg-gradient-to-r from-red-50 to-orange-50 border-l-4 border-red-500 rounded-lg shadow-lg p-6">
+        <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center">
+                <div class="bg-red-100 rounded-full p-3 mr-4">
+                    <i class="fas fa-exclamation-triangle text-red-600 text-2xl"></i>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-gray-900">⚠️ Alertas de Stock Bajo</h3>
+                    <p class="text-sm text-gray-600">{{ $lowStockAssets->count() }} activo(s) requieren atención</p>
+                </div>
+            </div>
+            <a href="{{ route('assets.index') }}" class="text-red-600 hover:text-red-800 font-semibold text-sm">
+                Ver todos <i class="fas fa-arrow-right ml-1"></i>
+            </a>
+        </div>
+        
+        <div class="overflow-x-auto">
+            <table class="min-w-full bg-white rounded-lg overflow-hidden">
+                <thead class="bg-gray-100">
+                    <tr>
+                        <th class="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase">Activo</th>
+                        <th class="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase">Ubicación</th>
+                        <th class="px-4 py-3 text-center text-xs font-semibold text-gray-600 uppercase">Stock Actual</th>
+                        <th class="px-4 py-3 text-center text-xs font-semibold text-gray-600 uppercase">Mínimo</th>
+                        <th class="px-4 py-3 text-center text-xs font-semibold text-gray-600 uppercase">Estado</th>
+                        <th class="px-4 py-3 text-right text-xs font-semibold text-gray-600 uppercase">Acción</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200">
+                    @foreach($lowStockAssets as $asset)
+                    <tr class="hover:bg-gray-50 transition-colors">
+                        <td class="px-4 py-3">
+                            <div class="flex items-center">
+                                <i class="fas fa-box text-red-500 mr-2"></i>
+                                <div>
+                                    <p class="font-medium text-gray-900">{{ $asset->name }}</p>
+                                    <p class="text-xs text-gray-500">{{ $asset->subcategory->category->name }} / {{ $asset->subcategory->name }}</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="px-4 py-3 text-sm text-gray-700">
+                            <i class="fas fa-map-marker-alt text-gray-400 mr-1"></i>
+                            {{ $asset->location->name }}
+                        </td>
+                        <td class="px-4 py-3 text-center">
+                            <span class="px-3 py-1 rounded-full text-sm font-bold {{ $asset->quantity == 0 ? 'bg-red-100 text-red-800' : 'bg-orange-100 text-orange-800' }}">
+                                {{ $asset->quantity }}
+                            </span>
+                        </td>
+                        <td class="px-4 py-3 text-center text-sm text-gray-600">
+                            {{ $asset->minimum_quantity }}
+                        </td>
+                        <td class="px-4 py-3 text-center">
+                            @if($asset->quantity == 0)
+                                <span class="px-2 py-1 bg-red-100 text-red-800 rounded-full text-xs font-semibold">
+                                    <i class="fas fa-times-circle mr-1"></i>Agotado
+                                </span>
+                            @else
+                                <span class="px-2 py-1 bg-orange-100 text-orange-800 rounded-full text-xs font-semibold">
+                                    <i class="fas fa-exclamation-circle mr-1"></i>Crítico
+                                </span>
+                            @endif
+                        </td>
+                        <td class="px-4 py-3 text-right">
+                            <a href="{{ route('assets.edit', $asset->id) }}" class="inline-flex items-center px-3 py-1 bg-red-600 hover:bg-red-700 text-white text-xs font-semibold rounded transition-colors">
+                                <i class="fas fa-edit mr-1"></i>
+                                Actualizar
+                            </a>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@endif
+
 <!-- Quick Actions & Recent Activity -->
 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
     <!-- Quick Actions -->

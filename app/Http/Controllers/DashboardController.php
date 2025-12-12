@@ -31,12 +31,22 @@ class DashboardController extends Controller
         // Recent Activity
         $recent_assets = Asset::with(['location', 'subcategory.category'])->latest()->take(5)->get();
 
+        // Low Stock Assets (only if company has alerts enabled)
+        $lowStockAssets = collect();
+        if (auth()->user()->company && auth()->user()->company->low_stock_alerts_enabled) {
+            $lowStockAssets = Asset::with(['location', 'subcategory.category'])
+                ->lowStock()
+                ->orderBy('quantity', 'asc')
+                ->take(10)
+                ->get();
+        }
+
         // Active Announcements for current user
         $announcements = \App\Models\Announcement::active()
             ->forUser(\Auth::user())
             ->latest()
             ->get();
 
-        return view('dashboard', compact('stats', 'recent_assets', 'announcements'));
+        return view('dashboard', compact('stats', 'recent_assets', 'announcements', 'lowStockAssets'));
     }
 }
