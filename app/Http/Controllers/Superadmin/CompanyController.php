@@ -99,4 +99,19 @@ class CompanyController extends Controller
         return redirect()->route('superadmin.companies.index')
             ->with('success', 'Empresa eliminada exitosamente.');
     }
+
+    /**
+     * Toggle low stock alerts for a company
+     */
+    public function toggleLowStockAlerts(Company $company)
+    {
+        $company->update([
+            'low_stock_alerts_enabled' => !$company->low_stock_alerts_enabled
+        ]);
+
+        $status = $company->low_stock_alerts_enabled ? 'activadas' : 'desactivadas';
+
+        return redirect()->back()
+            ->with('success', "Alertas de stock bajo {$status} para {$company->name}.");
+    }
 }

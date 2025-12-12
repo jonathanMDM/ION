@@ -49,6 +49,7 @@ class AssetController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'next_maintenance_date' => 'nullable|date',
             'maintenance_frequency_days' => 'nullable|integer|min:1',
+            'minimum_quantity' => 'nullable|integer|min:0',
         ]);
         
         $data = $request->all();
@@ -110,6 +111,7 @@ class AssetController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'next_maintenance_date' => 'nullable|date',
             'maintenance_frequency_days' => 'nullable|integer|min:1',
+            'minimum_quantity' => 'nullable|integer|min:0',
         ]);
         
         $data = $request->all();

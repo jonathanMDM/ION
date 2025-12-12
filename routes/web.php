@@ -159,6 +159,7 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth', 'superadmin'])->prefix('superadmin')->name('superadmin.')->group(function () {
     Route::get('/', [\App\Http\Controllers\Superadmin\DashboardController::class, 'index'])->name('index');
     Route::resource('companies', \App\Http\Controllers\Superadmin\CompanyController::class);
+    Route::post('companies/{company}/toggle-low-stock-alerts', [\App\Http\Controllers\Superadmin\CompanyController::class, 'toggleLowStockAlerts'])->name('companies.toggle-low-stock-alerts');
     
     // Impersonation
     Route::post('users/{user}/impersonate', [\App\Http\Controllers\Superadmin\UserController::class, 'impersonate'])->name('users.impersonate');

@@ -19,6 +19,7 @@
                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Contacto</th>
                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Estadísticas</th>
                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Estado</th>
+                <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Alertas Stock</th>
                 <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
             </tr>
         </thead>
@@ -48,6 +49,18 @@
                     <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ $company->status === 'active' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
                         {{ ucfirst($company->status) }}
                     </span>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-center">
+                    <form action="{{ route('superadmin.companies.toggle-low-stock-alerts', $company) }}" method="POST" class="inline-block">
+                        @csrf
+                        <button type="submit" class="relative inline-flex items-center h-6 rounded-full w-11 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 {{ $company->low_stock_alerts_enabled ? 'bg-green-600' : 'bg-gray-200' }}" title="{{ $company->low_stock_alerts_enabled ? 'Desactivar alertas' : 'Activar alertas' }}">
+                            <span class="sr-only">Toggle low stock alerts</span>
+                            <span class="inline-block w-4 h-4 transform bg-white rounded-full transition-transform {{ $company->low_stock_alerts_enabled ? 'translate-x-6' : 'translate-x-1' }}"></span>
+                        </button>
+                    </form>
+                    <div class="text-xs text-gray-500 mt-1">
+                        {{ $company->low_stock_alerts_enabled ? 'Activas' : 'Inactivas' }}
+                    </div>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                     @if($company->users->where('role', 'admin')->first())
