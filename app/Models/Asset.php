@@ -24,6 +24,7 @@ class Asset extends Model
         'purchase_price',
         'value',
         'quantity',
+        'minimum_quantity',
         'model',
         'serial_number',
         'image',
@@ -41,6 +42,23 @@ class Asset extends Model
         'custom_attributes' => 'array',
         'value' => 'decimal:2',
     ];
+
+    /**
+     * Check if asset is low on stock
+     */
+    public function isLowStock()
+    {
+        return $this->minimum_quantity > 0 && $this->quantity <= $this->minimum_quantity;
+    }
+
+    /**
+     * Scope to get assets with low stock
+     */
+    public function scopeLowStock($query)
+    {
+        return $query->whereColumn('quantity', '<=', 'minimum_quantity')
+                     ->where('minimum_quantity', '>', 0);
+    }
 
     public function scopeDueForMaintenance($query, $days = 7)
     {

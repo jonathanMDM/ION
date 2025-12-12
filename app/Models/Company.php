@@ -19,10 +19,12 @@ class Company extends Model
         'status',
         'user_limit',
         'subscription_expires_at',
+        'low_stock_alerts_enabled',
     ];
 
     protected $casts = [
         'subscription_expires_at' => 'date',
+        'low_stock_alerts_enabled' => 'boolean',
     ];
 
     /**
