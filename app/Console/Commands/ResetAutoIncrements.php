@@ -12,7 +12,7 @@ class ResetAutoIncrements extends Command
      *
      * @var string
      */
-    protected $signature = 'db:reset-ids {--table= : Specific table to reset}';
+    protected $signature = 'db:reset-ids {--table= : Specific table to reset} {--force : Force execution without confirmation}';
 
     /**
      * The console command description.
@@ -28,7 +28,7 @@ class ResetAutoIncrements extends Command
     {
         $table = $this->option('table');
         
-        if ($this->confirm('⚠️ ESTO BORRARÁ TODOS LOS DATOS de las tablas seleccionadas para reiniciar los IDs a 1. ¿Deseas continuar?')) {
+        if ($this->option('force') || $this->confirm('⚠️ ESTO BORRARÁ TODOS LOS DATOS de las tablas seleccionadas para reiniciar los IDs a 1. ¿Deseas continuar?')) {
             if ($table) {
                 $this->resetTable($table);
             } else {
