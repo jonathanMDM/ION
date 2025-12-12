@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Asset;
 use App\Models\AssetAssignment;
 use App\Models\Employee;
+use App\Models\UserNotification;
 use Illuminate\Http\Request;
 
 class AssetAssignmentController extends Controller
@@ -43,8 +44,19 @@ class AssetAssignmentController extends Controller
             'status' => 'active',
         ]);
 
-        // Enviar notificación
-        auth()->user()->notify(new \App\Notifications\AssetAssignedNotification($assignment));
+        // Crear notificación en user_notifications
+        UserNotification::create([
+            'user_id' => auth()->id(),
+            'type' => 'asset_assigned',
+            'title' => 'Nuevo Activo Asignado',
+            'message' => "Se ha asignado el activo {$asset->name} a {$assignment->employee->full_name}.",
+            'data' => [
+                'asset_id' => $asset->id,
+                'employee_id' => $assignment->employee_id,
+                'assignment_id' => $assignment->id,
+                'action_url' => route('assets.show', $asset->id),
+            ],
+        ]);
 
         return redirect()->route('assets.show', $asset->id)
             ->with('success', 'Activo asignado exitosamente.');

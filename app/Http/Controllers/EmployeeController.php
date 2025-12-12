@@ -59,9 +59,21 @@ class EmployeeController extends Controller
 
     public function show(Employee $employee)
     {
-        // Cargar asignaciones cuando existan
-        // $employee->load('assignments.asset');
-        return view('employees.show', compact('employee'));
+        // Cargar asignaciones activas (actualmente asignados)
+        $activeAssignments = $employee->assignments()
+            ->with(['asset.location', 'asset.subcategory.category'])
+            ->where('status', 'active')
+            ->orderBy('assigned_date', 'desc')
+            ->get();
+
+        // Cargar historial de asignaciones (devueltos)
+        $assignmentHistory = $employee->assignments()
+            ->with(['asset.location', 'asset.subcategory.category'])
+            ->where('status', 'returned')
+            ->orderBy('return_date', 'desc')
+            ->get();
+
+        return view('employees.show', compact('employee', 'activeAssignments', 'assignmentHistory'));
     }
 
     public function edit(Employee $employee)
