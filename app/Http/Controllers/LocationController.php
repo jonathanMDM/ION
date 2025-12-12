@@ -12,7 +12,7 @@ class LocationController extends Controller
      */
     public function index()
     {
-        $locations = Location::orderBy('id', 'desc')->get();
+        $locations = Location::orderBy('id', 'asc')->get();
         return view('locations.index', compact('locations'));
     }
 
