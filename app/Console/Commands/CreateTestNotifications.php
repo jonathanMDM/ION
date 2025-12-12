@@ -28,53 +28,59 @@ class CreateTestNotifications extends Command
      */
     public function handle()
     {
-        $user = User::where('email', $this->ask('Enter your email'))->first();
+        // Try to get authenticated user first, otherwise get first active user
+        $user = auth()->user();
+        
+        if (!$user) {
+            $user = User::where('is_active', true)->first();
+        }
 
         if (!$user) {
-            $this->error('User not found!');
+            $this->error('No active users found!');
             return 1;
         }
 
-        // Get a random asset for testing
+        $this->info("Creating test notifications for: {$user->name} ({$user->email})");
+
+        // Get a random asset for testing (optional)
         $asset = Asset::where('company_id', $user->company_id)->first();
-
-        if (!$asset) {
-            $this->error('No assets found for this company!');
-            return 1;
-        }
+        
+        $assetName = $asset ? $asset->name : 'Laptop Dell XPS 15';
+        $assetId = $asset ? $asset->id : 1;
+        $actionUrl = $asset ? route('assets.show', $asset->id) : route('dashboard');
 
         // Create test notifications
         $notifications = [
             [
                 'type' => 'low_stock_alert',
                 'title' => '⚠️ Alerta de Stock Bajo',
-                'message' => "El activo '{$asset->name}' tiene stock bajo. Cantidad actual: 2, Mínimo: 5",
+                'message' => "El activo '{$assetName}' tiene stock bajo. Cantidad actual: 2, Mínimo: 5",
                 'data' => [
-                    'asset_id' => $asset->id,
-                    'asset_name' => $asset->name,
+                    'asset_id' => $assetId,
+                    'asset_name' => $assetName,
                     'current_quantity' => 2,
                     'minimum_quantity' => 5,
-                    'action_url' => route('assets.show', $asset->id),
+                    'action_url' => $actionUrl,
                 ],
             ],
             [
                 'type' => 'asset_assigned',
                 'title' => '📦 Activo Asignado',
-                'message' => "Se te ha asignado el activo '{$asset->name}'",
+                'message' => "Se te ha asignado el activo '{$assetName}'",
                 'data' => [
-                    'asset_id' => $asset->id,
-                    'asset_name' => $asset->name,
-                    'action_url' => route('assets.show', $asset->id),
+                    'asset_id' => $assetId,
+                    'asset_name' => $assetName,
+                    'action_url' => $actionUrl,
                 ],
             ],
             [
                 'type' => 'maintenance_reminder',
                 'title' => '🔧 Recordatorio de Mantenimiento',
-                'message' => "El activo '{$asset->name}' requiere mantenimiento próximamente",
+                'message' => "El activo '{$assetName}' requiere mantenimiento próximamente",
                 'data' => [
-                    'asset_id' => $asset->id,
-                    'asset_name' => $asset->name,
-                    'action_url' => route('assets.show', $asset->id),
+                    'asset_id' => $assetId,
+                    'asset_name' => $assetName,
+                    'action_url' => $actionUrl,
                 ],
             ],
         ];
@@ -84,7 +90,8 @@ class CreateTestNotifications extends Command
         }
 
         $this->info("✅ Created 3 test notifications for {$user->name} ({$user->email})");
-        $this->info("Check the notification bell icon in the app!");
+        $this->info("🔔 Check the notification bell icon in the app!");
+        $this->info("📧 User email: {$user->email}");
 
         return 0;
     }
