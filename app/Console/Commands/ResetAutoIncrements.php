@@ -28,15 +28,24 @@ class ResetAutoIncrements extends Command
     {
         $table = $this->option('table');
         
-        if ($table) {
-            $this->resetTable($table);
-        } else {
-            // Reset all tables
-            $this->info('Reiniciando IDs de todas las tablas...');
-            $this->resetTable('locations');
-            $this->resetTable('categories');
-            $this->resetTable('subcategories');
-            $this->info('✅ Todos los IDs han sido reiniciados exitosamente!');
+        if ($this->confirm('⚠️ ESTO BORRARÁ TODOS LOS DATOS de las tablas seleccionadas para reiniciar los IDs a 1. ¿Deseas continuar?')) {
+            if ($table) {
+                $this->resetTable($table);
+            } else {
+                // Reset all tables in correct order to avoid FK constraints
+                $this->info('Reiniciando IDs de todas las tablas...');
+                
+                // Child tables first
+                $this->resetTable('assets');
+                $this->resetTable('subcategories');
+                
+                // Parent tables
+                $this->resetTable('locations');
+                $this->resetTable('categories');
+                $this->resetTable('suppliers');
+                
+                $this->info('✅ Todos los IDs han sido reiniciados a 1!');
+            }
         }
         
         return 0;
@@ -45,14 +54,18 @@ class ResetAutoIncrements extends Command
     private function resetTable($table)
     {
         try {
-            // Get the maximum ID currently in the table
-            $maxId = DB::table($table)->max('id');
-            $nextId = $maxId ? $maxId + 1 : 1;
+            $driver = DB::connection()->getDriverName();
+
+            if ($driver === 'pgsql') {
+                DB::statement("TRUNCATE TABLE {$table} RESTART IDENTITY CASCADE");
+            } else {
+                // MySQL content
+                DB::statement("SET FOREIGN_KEY_CHECKS=0;");
+                DB::table($table)->truncate();
+                DB::statement("SET FOREIGN_KEY_CHECKS=1;");
+            }
             
-            // Reset the auto-increment value
-            DB::statement("ALTER TABLE {$table} AUTO_INCREMENT = {$nextId}");
-            
-            $this->info("✓ Tabla '{$table}': Auto-increment ajustado a {$nextId}");
+            $this->info("✓ Tabla '{$table}': Datos borrados y ID reiniciado a 1.");
         } catch (\Exception $e) {
             $this->error("✗ Error al reiniciar tabla '{$table}': " . $e->getMessage());
         }
