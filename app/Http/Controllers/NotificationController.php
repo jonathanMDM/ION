@@ -2,82 +2,72 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Notification;
+use App\Models\UserNotification;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class NotificationController extends Controller
 {
     /**
-     * Display a listing of notifications.
+     * Get unread notifications for the authenticated user
      */
-    public function index(Request $request)
+    public function index()
     {
-        $query = Auth::user()->notifications()->orderBy('created_at', 'desc');
-
-        // Filter by read/unread
-        if ($request->has('filter')) {
-            if ($request->filter === 'unread') {
-                $query->unread();
-            } elseif ($request->filter === 'read') {
-                $query->whereNotNull('read_at');
-            }
-        }
-
-        $notifications = $query->paginate(20);
+        $notifications = auth()->user()
+            ->notifications()
+            ->latest()
+            ->paginate(20);
 
         return view('notifications.index', compact('notifications'));
     }
 
     /**
-     * Mark notification as read.
+     * Get unread notifications count (for AJAX)
      */
-    public function markAsRead(Notification $notification)
+    public function unreadCount()
     {
-        // Ensure user owns this notification
-        if ($notification->user_id !== Auth::id()) {
-            abort(403);
-        }
+        $count = UserNotification::where('user_id', auth()->id())
+            ->whereNull('read_at')
+            ->count();
+
+        return response()->json(['count' => $count]);
+    }
+
+    /**
+     * Get recent unread notifications (for dropdown)
+     */
+    public function recent()
+    {
+        $notifications = UserNotification::where('user_id', auth()->id())
+            ->whereNull('read_at')
+            ->latest()
+            ->take(5)
+            ->get();
+
+        return response()->json($notifications);
+    }
+
+    /**
+     * Mark a notification as read
+     */
+    public function markAsRead($id)
+    {
+        $notification = UserNotification::where('user_id', auth()->id())
+            ->findOrFail($id);
 
         $notification->markAsRead();
 
-        // Redirect to support request if data contains support_request_id
-        if (isset($notification->data['support_request_id'])) {
-            // Superadmins go to admin panel, regular users go to their view
-            if (Auth::user()->isSuperAdmin()) {
-                return redirect()->route('superadmin.support.show', $notification->data['support_request_id'])
-                    ->with('success', 'Notificación marcada como leída');
-            } else {
-                return redirect()->route('support.show', $notification->data['support_request_id'])
-                    ->with('success', 'Notificación marcada como leída');
-            }
-        }
-
-        return redirect()->back();
+        return response()->json(['success' => true]);
     }
 
     /**
-     * Mark all notifications as read.
+     * Mark all notifications as read
      */
     public function markAllAsRead()
     {
-        Auth::user()->notifications()->unread()->update(['read_at' => now()]);
+        UserNotification::where('user_id', auth()->id())
+            ->whereNull('read_at')
+            ->update(['read_at' => now()]);
 
-        return redirect()->back()->with('success', 'Todas las notificaciones han sido marcadas como leídas');
-    }
-
-    /**
-     * Remove the specified notification.
-     */
-    public function destroy(Notification $notification)
-    {
-        // Ensure user owns this notification
-        if ($notification->user_id !== Auth::id()) {
-            abort(403);
-        }
-
-        $notification->delete();
-
-        return redirect()->back()->with('success', 'Notificación eliminada');
+        return response()->json(['success' => true]);
     }
 }

@@ -294,6 +294,35 @@
                         <i class="fas fa-download text-lg"></i>
                     </button>
                     
+                    <!-- Notifications Bell -->
+                    <div class="relative ml-3">
+                        <button id="notifications-btn" class="relative p-2 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-lg transition-colors focus:outline-none">
+                            <i class="fas fa-bell text-xl"></i>
+                            <span id="notification-badge" class="hidden absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full"></span>
+                        </button>
+
+                        <!-- Notifications Dropdown -->
+                        <div id="notifications-dropdown" class="hidden absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-xl border border-gray-200 z-50 max-h-96 overflow-hidden">
+                            <div class="px-4 py-3 border-b border-gray-200 flex items-center justify-between">
+                                <h3 class="text-sm font-semibold text-gray-800">Notificaciones</h3>
+                                <button id="mark-all-read" class="text-xs text-indigo-600 hover:text-indigo-800 font-medium">
+                                    Marcar todas como leídas
+                                </button>
+                            </div>
+                            <div id="notifications-list" class="overflow-y-auto max-h-80">
+                                <!-- Notifications will be loaded here via AJAX -->
+                                <div class="flex items-center justify-center py-8">
+                                    <i class="fas fa-spinner fa-spin text-gray-400 text-2xl"></i>
+                                </div>
+                            </div>
+                            <div class="px-4 py-3 border-t border-gray-200 text-center">
+                                <a href="{{ route('notifications.index') }}" class="text-sm text-indigo-600 hover:text-indigo-800 font-medium">
+                                    Ver todas las notificaciones
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
                     <!-- User Menu -->
                     <div class="relative ml-3">
                         <button id="user-menu-btn" class="flex items-center text-sm focus:outline-none hover:bg-gray-50 rounded-lg p-2 transition-colors">
@@ -580,5 +609,187 @@
             @endif
         });
     </script>
+
+    <!-- Notifications Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const notificationsBtn = document.getElementById('notifications-btn');
+            const notificationsDropdown = document.getElementById('notifications-dropdown');
+            const notificationsList = document.getElementById('notifications-list');
+            const notificationBadge = document.getElementById('notification-badge');
+            const markAllReadBtn = document.getElementById('mark-all-read');
+
+            // Toggle notifications dropdown
+            if (notificationsBtn) {
+                notificationsBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    notificationsDropdown.classList.toggle('hidden');
+                    if (!notificationsDropdown.classList.contains('hidden')) {
+                        loadNotifications();
+                    }
+                });
+
+                // Close dropdown when clicking outside
+                document.addEventListener('click', function(e) {
+                    if (!notificationsDropdown.contains(e.target) && !notificationsBtn.contains(e.target)) {
+                        notificationsDropdown.classList.add('hidden');
+                    }
+                });
+
+                notificationsDropdown.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                });
+            }
+
+            // Load notifications count on page load
+            updateNotificationCount();
+
+            // Update count every 30 seconds
+            setInterval(updateNotificationCount, 30000);
+
+            // Update notification count
+            function updateNotificationCount() {
+                fetch('{{ route("notifications.unread-count") }}')
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.count > 0) {
+                            notificationBadge.textContent = data.count > 99 ? '99+' : data.count;
+                            notificationBadge.classList.remove('hidden');
+                        } else {
+                            notificationBadge.classList.add('hidden');
+                        }
+                    })
+                    .catch(error => console.error('Error loading notification count:', error));
+            }
+
+            // Load recent notifications
+            function loadNotifications() {
+                notificationsList.innerHTML = '<div class="flex items-center justify-center py-8"><i class="fas fa-spinner fa-spin text-gray-400 text-2xl"></i></div>';
+                
+                fetch('{{ route("notifications.recent") }}')
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.length === 0) {
+                            notificationsList.innerHTML = `
+                                <div class="flex flex-col items-center justify-center py-8 text-gray-500">
+                                    <i class="fas fa-bell-slash text-4xl mb-2"></i>
+                                    <p class="text-sm">No tienes notificaciones</p>
+                                </div>
+                            `;
+                        } else {
+                            notificationsList.innerHTML = data.map(notification => `
+                                <div class="px-4 py-3 hover:bg-gray-50 border-b border-gray-100 cursor-pointer transition-colors notification-item" data-id="${notification.id}" data-url="${notification.data.action_url || '#'}">
+                                    <div class="flex items-start">
+                                        <div class="flex-shrink-0">
+                                            <i class="fas ${getNotificationIcon(notification.type)} text-${getNotificationColor(notification.type)}-600 text-lg"></i>
+                                        </div>
+                                        <div class="ml-3 flex-1">
+                                            <p class="text-sm font-medium text-gray-900">${notification.title}</p>
+                                            <p class="text-xs text-gray-600 mt-1">${notification.message}</p>
+                                            <p class="text-xs text-gray-400 mt-1">${formatDate(notification.created_at)}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            `).join('');
+
+                            // Add click handlers to notification items
+                            document.querySelectorAll('.notification-item').forEach(item => {
+                                item.addEventListener('click', function() {
+                                    const notificationId = this.dataset.id;
+                                    const url = this.dataset.url;
+                                    markAsRead(notificationId, url);
+                                });
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error loading notifications:', error);
+                        notificationsList.innerHTML = `
+                            <div class="flex flex-col items-center justify-center py-8 text-red-500">
+                                <i class="fas fa-exclamation-circle text-4xl mb-2"></i>
+                                <p class="text-sm">Error al cargar notificaciones</p>
+                            </div>
+                        `;
+                    });
+            }
+
+            // Mark notification as read
+            function markAsRead(notificationId, redirectUrl) {
+                fetch(`/notifications/${notificationId}/mark-as-read`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        updateNotificationCount();
+                        if (redirectUrl && redirectUrl !== '#') {
+                            window.location.href = redirectUrl;
+                        }
+                    }
+                })
+                .catch(error => console.error('Error marking notification as read:', error));
+            }
+
+            // Mark all as read
+            if (markAllReadBtn) {
+                markAllReadBtn.addEventListener('click', function() {
+                    fetch('{{ route("notifications.mark-all-as-read") }}', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            updateNotificationCount();
+                            loadNotifications();
+                        }
+                    })
+                    .catch(error => console.error('Error marking all as read:', error));
+                });
+            }
+
+            // Helper functions
+            function getNotificationIcon(type) {
+                const icons = {
+                    'low_stock_alert': 'fa-exclamation-triangle',
+                    'asset_assigned': 'fa-box-open',
+                    'maintenance_reminder': 'fa-tools',
+                    'default': 'fa-bell'
+                };
+                return icons[type] || icons.default;
+            }
+
+            function getNotificationColor(type) {
+                const colors = {
+                    'low_stock_alert': 'red',
+                    'asset_assigned': 'blue',
+                    'maintenance_reminder': 'yellow',
+                    'default': 'gray'
+                };
+                return colors[type] || colors.default;
+            }
+
+            function formatDate(dateString) {
+                const date = new Date(dateString);
+                const now = new Date();
+                const diff = Math.floor((now - date) / 1000); // seconds
+
+                if (diff < 60) return 'Hace un momento';
+                if (diff < 3600) return `Hace ${Math.floor(diff / 60)} minutos`;
+                if (diff < 86400) return `Hace ${Math.floor(diff / 3600)} horas`;
+                if (diff < 604800) return `Hace ${Math.floor(diff / 86400)} días`;
+                
+                return date.toLocaleDateString('es-ES', { day: '2-digit', month: 'short' });
+            }
+        });
+    </script>
+
 </body>
 </html>

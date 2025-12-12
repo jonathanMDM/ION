@@ -45,6 +45,13 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/settings', [\App\Http\Controllers\UserProfileController::class, 'settings'])->name('profile.settings');
     Route::put('/settings/preferences', [\App\Http\Controllers\UserProfileController::class, 'updatePreferences'])->name('profile.update-preferences');
     
+    // Notifications
+    Route::get('/notifications', [\App\Http\Controllers\NotificationController::class, 'index'])->name('notifications.index');
+    Route::get('/notifications/unread-count', [\App\Http\Controllers\NotificationController::class, 'unreadCount'])->name('notifications.unread-count');
+    Route::get('/notifications/recent', [\App\Http\Controllers\NotificationController::class, 'recent'])->name('notifications.recent');
+    Route::post('/notifications/{id}/mark-as-read', [\App\Http\Controllers\NotificationController::class, 'markAsRead'])->name('notifications.mark-as-read');
+    Route::post('/notifications/mark-all-as-read', [\App\Http\Controllers\NotificationController::class, 'markAllAsRead'])->name('notifications.mark-all-as-read');
+    
     // Change password
     Route::get('/change-password', [UserController::class, 'changePassword'])->name('password.change');
     Route::post('/change-password', [UserController::class, 'updatePassword'])->name('password.update');
