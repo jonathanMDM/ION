@@ -14,7 +14,7 @@ class CreateTestNotifications extends Command
      *
      * @var string
      */
-    protected $signature = 'test:notifications';
+    protected $signature = 'test:notifications {email? : Email of the user to create notifications for}';
 
     /**
      * The console command description.
@@ -28,16 +28,28 @@ class CreateTestNotifications extends Command
      */
     public function handle()
     {
-        // Try to get authenticated user first, otherwise get first active user
-        $user = auth()->user();
+        // Try to get user by email argument first
+        $email = $this->argument('email');
         
-        if (!$user) {
-            $user = User::where('is_active', true)->first();
-        }
+        if ($email) {
+            $user = User::where('email', $email)->first();
+            
+            if (!$user) {
+                $this->error("User with email '{$email}' not found!");
+                return 1;
+            }
+        } else {
+            // Try to get authenticated user, otherwise get first active user
+            $user = auth()->user();
+            
+            if (!$user) {
+                $user = User::where('is_active', true)->first();
+            }
 
-        if (!$user) {
-            $this->error('No active users found!');
-            return 1;
+            if (!$user) {
+                $this->error('No active users found!');
+                return 1;
+            }
         }
 
         $this->info("Creating test notifications for: {$user->name} ({$user->email})");
