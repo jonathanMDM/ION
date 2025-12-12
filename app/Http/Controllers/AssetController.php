@@ -15,7 +15,9 @@ class AssetController extends Controller
     public function index()
     {
         $perPage = auth()->user()->preferences['pagination']['items_per_page'] ?? 10;
-        $assets = Asset::with(['location', 'subcategory.category'])->paginate($perPage);
+        $assets = Asset::with(['location', 'subcategory.category'])
+            ->orderBy('id', 'desc')
+            ->paginate($perPage);
         return view('assets.index', compact('assets'));
     }
 

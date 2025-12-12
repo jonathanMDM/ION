@@ -12,7 +12,7 @@ class SupplierController extends Controller
      */
     public function index()
     {
-        $suppliers = Supplier::withCount('assets')->get();
+        $suppliers = Supplier::withCount('assets')->orderBy('id', 'desc')->get();
         return view('suppliers.index', compact('suppliers'));
     }
 
