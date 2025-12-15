@@ -77,9 +77,9 @@ class SendWeeklyDigest extends Command
                         $query->where('company_id', $company->id);
                     })
                     ->with('asset')
-                    ->where('scheduled_date', '>=', Carbon::now())
-                    ->where('scheduled_date', '<=', Carbon::now()->addDays(7))
-                    ->orderBy('scheduled_date')
+                    ->where('date', '>=', Carbon::now())
+                    ->where('date', '<=', Carbon::now()->addDays(7))
+                    ->orderBy('date')
                     ->take(5)
                     ->get();
 

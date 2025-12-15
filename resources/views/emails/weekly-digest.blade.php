@@ -222,7 +222,7 @@
             <li class="asset-item">
                 <div>
                     <div class="asset-name">{{ $maintenance->asset->name }}</div>
-                    <div class="asset-category">Programado: {{ \Carbon\Carbon::parse($maintenance->scheduled_date)->format('d/m/Y') }}</div>
+                    <div class="asset-category">Programado: {{ \Carbon\Carbon::parse($maintenance->date)->format('d/m/Y') }}</div>
                 </div>
                 <span class="badge badge-warning">Próximo</span>
             </li>
