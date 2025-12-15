@@ -172,6 +172,18 @@ class UserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
+        // Send password changed notification email
+        try {
+            \Mail::to($user->email)->send(new \App\Mail\PasswordChanged(
+                $user->name,
+                now()->format('d/m/Y H:i:s'),
+                $request->ip(),
+                $request->userAgent()
+            ));
+        } catch (\Exception $e) {
+            \Log::error('Failed to send password changed email: ' . $e->getMessage());
+        }
+
         return redirect()->route('dashboard')->with('success', 'Contraseña actualizada exitosamente.');
     }
 }
