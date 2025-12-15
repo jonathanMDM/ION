@@ -16,6 +16,7 @@ return Application::configure(basePath: dirname(__DIR__))
             \App\Http\Middleware\PreventBackHistory::class,
             \App\Http\Middleware\SecurityHeaders::class,
             \App\Http\Middleware\CheckUserActive::class,
+            \App\Http\Middleware\ForcePasswordChange::class,
         ]);
 
         $middleware->alias([

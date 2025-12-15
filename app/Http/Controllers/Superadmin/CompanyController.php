@@ -34,8 +34,10 @@ class CompanyController extends Controller
             'subscription_expires_at' => 'nullable|date',
             'admin_name' => 'required|string|max:255',
             'admin_email' => 'required|email|unique:users,email',
-            'admin_password' => 'required|string|min:8',
         ]);
+
+        // Generate random password
+        $temporaryPassword = \Illuminate\Support\Str::random(12);
 
         // Create company
         $company = Company::create([
@@ -50,17 +52,25 @@ class CompanyController extends Controller
         ]);
 
         // Create admin user for the company
-        \App\Models\User::create([
+        $user = \App\Models\User::create([
             'name' => $validated['admin_name'],
             'email' => $validated['admin_email'],
-            'password' => bcrypt($validated['admin_password']),
+            'password' => bcrypt($temporaryPassword),
             'company_id' => $company->id,
             'role' => 'admin',
             'is_active' => true,
+            'must_change_password' => true,
         ]);
 
+        // Send welcome email with credentials
+        try {
+            \Mail::to($user->email)->send(new \App\Mail\WelcomeCompanyAdmin($company, $user, $temporaryPassword));
+        } catch (\Exception $e) {
+            \Log::error('Failed to send welcome email: ' . $e->getMessage());
+        }
+
         return redirect()->route('superadmin.companies.index')
-            ->with('success', 'Empresa y administrador creados exitosamente.');
+            ->with('success', 'Empresa y administrador creados exitosamente. Se ha enviado un correo con las credenciales.');
     }
 
     public function show(Company $company)

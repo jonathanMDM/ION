@@ -27,6 +27,13 @@ Route::get('/', function () {
 
 Route::view('/offline', 'offline');
 
+// Force Password Change (must be outside main auth middleware to avoid redirect loop)
+Route::middleware(['auth'])->group(function () {
+    Route::get('/force-password-change', [App\Http\Controllers\Auth\ForcePasswordChangeController::class, 'show'])->name('force-password-change');
+    Route::post('/force-password-change', [App\Http\Controllers\Auth\ForcePasswordChangeController::class, 'update'])->name('force-password-change.update');
+});
+
+
 // Protected routes
 Route::middleware(['auth'])->group(function () {
     // Support Validation
