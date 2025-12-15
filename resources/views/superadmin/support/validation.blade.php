@@ -98,12 +98,73 @@
             </div>
         </div>
 
+        <!-- Subscription & Support Info -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+            <div class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-blue-500">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm text-gray-500">Suscripción</p>
+                        <p class="text-lg font-bold text-gray-900">
+                            @if($company->subscription_expires_at)
+                                {{ $company->subscription_expires_at->format('d/m/Y') }}
+                            @else
+                                Sin límite
+                            @endif
+                        </p>
+                    </div>
+                    <i class="fas fa-calendar-alt text-3xl text-blue-500"></i>
+                </div>
+                @if($company->subscription_expires_at)
+                    @php
+                        $daysLeft = now()->diffInDays($company->subscription_expires_at, false);
+                    @endphp
+                    <p class="text-xs mt-2 {{ $daysLeft < 30 ? 'text-red-600' : 'text-green-600' }}">
+                        {{ $daysLeft > 0 ? $daysLeft . ' días restantes' : 'Expirada' }}
+                    </p>
+                @endif
+            </div>
+
+            <div class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-green-500">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm text-gray-500">Usuarios</p>
+                        <p class="text-lg font-bold text-gray-900">{{ $company->users()->count() }} / {{ $company->user_limit }}</p>
+                    </div>
+                    <i class="fas fa-users text-3xl text-green-500"></i>
+                </div>
+                <p class="text-xs mt-2 text-gray-600">
+                    {{ $company->user_limit - $company->users()->count() }} disponibles
+                </p>
+            </div>
+
+            <div class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-purple-500">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm text-gray-500">Activos</p>
+                        <p class="text-lg font-bold text-gray-900">{{ $company->assets()->count() }}</p>
+                    </div>
+                    <i class="fas fa-box text-3xl text-purple-500"></i>
+                </div>
+                <p class="text-xs mt-2 text-gray-600">
+                    Registrados en el sistema
+                </p>
+            </div>
+        </div>
+
         <!-- Actions -->
         <div class="mt-6 flex justify-end gap-4">
             <a href="{{ route('superadmin.companies.show', $company->id) }}" class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded transition duration-200">
                 <i class="fas fa-eye mr-2"></i>Ver Detalles Completos
             </a>
-            <!-- Future: Add Impersonate Button Here -->
+            @if($company->status == 'active')
+            <a href="{{ route('superadmin.support.index') }}" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded transition duration-200">
+                <i class="fas fa-headset mr-2"></i>Iniciar Soporte
+            </a>
+            @else
+            <button disabled class="bg-gray-400 text-white font-bold py-2 px-4 rounded cursor-not-allowed">
+                <i class="fas fa-ban mr-2"></i>Cliente Inactivo
+            </button>
+            @endif
         </div>
     </div>
     @endif

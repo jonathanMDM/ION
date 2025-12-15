@@ -188,9 +188,58 @@
                         </div>
                     </div>
 
-                    <span class="text-sm text-gray-600">
-                        <i class="fas fa-user-shield mr-1 text-gray-600"></i>{{ Auth::user()->name }}
-                    </span>
+
+                    <!-- User Menu Dropdown -->
+                    <div class="relative">
+                        <button id="user-menu-btn" class="flex items-center text-sm focus:outline-none hover:bg-gray-50 rounded-lg p-2 transition-colors">
+                            <div class="flex items-center space-x-2">
+                                <div class="w-8 h-8 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-full flex items-center justify-center text-white font-bold">
+                                    {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+                                </div>
+                                <div class="hidden md:block text-left">
+                                    <div class="text-sm font-medium text-gray-700">{{ Auth::user()->name }}</div>
+                                    <div class="text-xs text-gray-500">Superadministrador</div>
+                                </div>
+                                <i class="fas fa-chevron-down text-gray-400 text-xs"></i>
+                            </div>
+                        </button>
+
+                        <!-- Dropdown Menu -->
+                        <div id="user-menu-dropdown" class="hidden absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-lg border border-gray-100 py-1 z-50 origin-top-right transition-all duration-200">
+                            <!-- User Info -->
+                            <div class="px-4 py-3 border-b border-gray-100">
+                                <p class="text-sm font-medium text-gray-900">{{ Auth::user()->name }}</p>
+                                <p class="text-xs text-gray-500 truncate">{{ Auth::user()->email }}</p>
+                            </div>
+
+                            <!-- Menu Items -->
+                            <div class="py-1">
+                                <a href="{{ route('superadmin.support.validation') }}" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">
+                                    <i class="fas fa-user-check w-5 text-gray-400"></i>
+                                    <span class="ml-3">Validar Cliente</span>
+                                </a>
+                                <a href="{{ route('superadmin.system-status') }}" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">
+                                    <i class="fas fa-server w-5 text-gray-400"></i>
+                                    <span class="ml-3">Estado del Sistema</span>
+                                </a>
+                                <a href="{{ route('superadmin.activity-logs') }}" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">
+                                    <i class="fas fa-clipboard-list w-5 text-gray-400"></i>
+                                    <span class="ml-3">Logs de Actividad</span>
+                                </a>
+                            </div>
+
+                            <!-- Logout -->
+                            <div class="border-t border-gray-100 py-1">
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <button type="submit" class="flex items-center w-full px-4 py-2 text-sm text-red-600 hover:bg-red-50">
+                                        <i class="fas fa-sign-out-alt w-5"></i>
+                                        <span class="ml-3">Cerrar Sesión</span>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -292,6 +341,33 @@
                 
                 // Prevent closing when clicking inside dropdown
                 dropdown.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                });
+            }
+        });
+    </script>
+    <script>
+        // User Menu Dropdown
+        document.addEventListener('DOMContentLoaded', function() {
+            const userBtn = document.getElementById('user-menu-btn');
+            const userDropdown = document.getElementById('user-menu-dropdown');
+            
+            if (userBtn && userDropdown) {
+                // Toggle dropdown
+                userBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    userDropdown.classList.toggle('hidden');
+                });
+                
+                // Close when clicking outside
+                document.addEventListener('click', function(e) {
+                    if (!userDropdown.contains(e.target) && !userBtn.contains(e.target)) {
+                        userDropdown.classList.add('hidden');
+                    }
+                });
+                
+                // Prevent closing when clicking inside dropdown
+                userDropdown.addEventListener('click', function(e) {
                     e.stopPropagation();
                 });
             }
