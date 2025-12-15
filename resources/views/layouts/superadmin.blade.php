@@ -212,24 +212,8 @@
                                 <p class="text-xs text-gray-500 truncate">{{ Auth::user()->email }}</p>
                             </div>
 
-                            <!-- Menu Items -->
-                            <div class="py-1">
-                                <a href="{{ route('superadmin.support.validation') }}" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">
-                                    <i class="fas fa-user-check w-5 text-gray-400"></i>
-                                    <span class="ml-3">Validar Cliente</span>
-                                </a>
-                                <a href="{{ route('superadmin.system-status') }}" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">
-                                    <i class="fas fa-server w-5 text-gray-400"></i>
-                                    <span class="ml-3">Estado del Sistema</span>
-                                </a>
-                                <a href="{{ route('superadmin.activity-logs') }}" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">
-                                    <i class="fas fa-clipboard-list w-5 text-gray-400"></i>
-                                    <span class="ml-3">Logs de Actividad</span>
-                                </a>
-                            </div>
-
                             <!-- Logout -->
-                            <div class="border-t border-gray-100 py-1">
+                            <div class="py-1">
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
                                     <button type="submit" class="flex items-center w-full px-4 py-2 text-sm text-red-600 hover:bg-red-50">
