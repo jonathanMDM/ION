@@ -83,16 +83,6 @@
                     <span class="ml-3 sidebar-text">Soporte</span>
                 </a>
             </div>
-
-            <div class="mt-2 border-t border-gray-800 pt-2">
-                <form method="POST" action="{{ route('logout') }}" class="inline-block w-full">
-                    @csrf
-                    <button type="submit" class="flex items-center px-4 py-3 hover:bg-gray-800 w-full text-left">
-                        <i class="fas fa-sign-out-alt w-6"></i>
-                        <span class="ml-3 sidebar-text">Cerrar Sesión</span>
-                    </button>
-                </form>
-            </div>
         </nav>
     </div>
 
