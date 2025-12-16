@@ -47,6 +47,26 @@ class DashboardController extends Controller
             ->latest()
             ->get();
 
-        return view('dashboard', compact('stats', 'recent_assets', 'announcements', 'lowStockAssets'));
+        // Check subscription expiration
+        $subscriptionWarning = null;
+        $company = auth()->user()->company;
+        if ($company && $company->subscription_expires_at) {
+            $daysLeft = (int) now()->diffInDays($company->subscription_expires_at, false);
+            if ($daysLeft <= 15 && $daysLeft > 0) {
+                $subscriptionWarning = [
+                    'days_left' => $daysLeft,
+                    'expires_at' => $company->subscription_expires_at->format('d/m/Y'),
+                    'is_critical' => $daysLeft <= 7,
+                ];
+            } elseif ($daysLeft <= 0) {
+                $subscriptionWarning = [
+                    'days_left' => 0,
+                    'expires_at' => $company->subscription_expires_at->format('d/m/Y'),
+                    'is_expired' => true,
+                ];
+            }
+        }
+
+        return view('dashboard', compact('stats', 'recent_assets', 'announcements', 'lowStockAssets', 'subscriptionWarning'));
     }
 }

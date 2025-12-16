@@ -3,6 +3,57 @@
 @section('page-title', 'Panel')
 
 @section('content')
+<!-- Subscription Warning -->
+@if(isset($subscriptionWarning))
+<div class="mb-6">
+    @if(isset($subscriptionWarning['is_expired']) && $subscriptionWarning['is_expired'])
+    <!-- Expired Subscription -->
+    <div class="bg-gradient-to-r from-red-500 to-red-600 rounded-lg shadow-lg p-6 text-white">
+        <div class="flex items-start">
+            <div class="flex-shrink-0">
+                <i class="fas fa-exclamation-triangle text-4xl"></i>
+            </div>
+            <div class="ml-4 flex-1">
+                <h3 class="text-xl font-bold mb-2">⚠️ Suscripción Expirada</h3>
+                <p class="text-lg mb-3">Su suscripción expiró el {{ $subscriptionWarning['expires_at'] }}</p>
+                <p class="text-sm opacity-90">Por favor, contacte al administrador para renovar su suscripción y continuar usando el sistema.</p>
+            </div>
+        </div>
+    </div>
+    @elseif(isset($subscriptionWarning['is_critical']) && $subscriptionWarning['is_critical'])
+    <!-- Critical Warning (7 days or less) -->
+    <div class="bg-gradient-to-r from-orange-500 to-red-500 rounded-lg shadow-lg p-6 text-white animate-pulse">
+        <div class="flex items-start">
+            <div class="flex-shrink-0">
+                <i class="fas fa-clock text-4xl"></i>
+            </div>
+            <div class="ml-4 flex-1">
+                <h3 class="text-xl font-bold mb-2">🚨 ¡Atención Urgente!</h3>
+                <p class="text-lg mb-3">Su suscripción expira en <strong class="text-2xl">{{ $subscriptionWarning['days_left'] }}</strong> {{ $subscriptionWarning['days_left'] == 1 ? 'día' : 'días' }}</p>
+                <p class="text-sm opacity-90">Fecha de expiración: {{ $subscriptionWarning['expires_at'] }}</p>
+                <p class="text-sm mt-2 font-semibold">Por favor, renueve su suscripción lo antes posible para evitar interrupciones en el servicio.</p>
+            </div>
+        </div>
+    </div>
+    @else
+    <!-- Standard Warning (8-15 days) -->
+    <div class="bg-gradient-to-r from-yellow-400 to-orange-400 rounded-lg shadow-lg p-6 text-gray-900">
+        <div class="flex items-start">
+            <div class="flex-shrink-0">
+                <i class="fas fa-bell text-4xl"></i>
+            </div>
+            <div class="ml-4 flex-1">
+                <h3 class="text-xl font-bold mb-2">📅 Recordatorio de Suscripción</h3>
+                <p class="text-lg mb-3">Su suscripción expira en <strong class="text-xl">{{ $subscriptionWarning['days_left'] }}</strong> días</p>
+                <p class="text-sm opacity-90">Fecha de expiración: {{ $subscriptionWarning['expires_at'] }}</p>
+                <p class="text-sm mt-2 font-semibold">Le recomendamos renovar su suscripción pronto para asegurar la continuidad del servicio.</p>
+            </div>
+        </div>
+    </div>
+    @endif
+</div>
+@endif
+
 <!-- Announcements -->
 @if(isset($announcements) && $announcements->count() > 0)
 <div class="mb-6 space-y-4">
