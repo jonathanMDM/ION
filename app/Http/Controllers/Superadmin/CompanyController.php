@@ -27,7 +27,7 @@ class CompanyController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:companies,email',
-            'nit' => 'nullable|string|max:255',
+            'nit' => 'nullable|string|max:255|unique:companies,nit',
             'phone' => 'nullable|string|max:255',
             'address' => 'nullable|string|max:255',
             'user_limit' => 'required|integer|min:1',
@@ -88,7 +88,7 @@ class CompanyController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:companies,email,' . $company->id,
-            'nit' => 'nullable|string|max:255',
+            'nit' => 'nullable|string|max:255|unique:companies,nit,' . $company->id,
             'phone' => 'nullable|string|max:255',
             'address' => 'nullable|string|max:255',
             'user_limit' => 'required|integer|min:1',
