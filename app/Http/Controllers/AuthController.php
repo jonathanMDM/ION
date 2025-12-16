@@ -83,6 +83,20 @@ class AuthController extends Controller
                 ]);
             }
 
+            // ========================================
+            // CHECK 2FA - If enabled, require verification
+            // ========================================
+            if (Auth::user()->two_factor_enabled) {
+                // Store user ID in session for 2FA verification
+                $request->session()->put('2fa:user:id', Auth::id());
+                
+                // Logout temporarily (will re-login after 2FA verification)
+                Auth::logout();
+                
+                // Redirect to 2FA verification page
+                return redirect()->route('2fa.verify');
+            }
+
             // Redirect based on role
             if (Auth::user()->isSuperAdmin()) {
                 return redirect()->intended(route('superadmin.index'));

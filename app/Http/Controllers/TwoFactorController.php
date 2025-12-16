@@ -81,16 +81,36 @@ class TwoFactorController extends Controller
             ->with('success', '2FA desactivado exitosamente.');
     }
     
+    public function showVerifyForm(Request $request)
+    {
+        // Check if user ID is in session (from login)
+        if (!$request->session()->has('2fa:user:id')) {
+            return redirect()->route('login');
+        }
+        
+        return view('two-factor.verify');
+    }
+    
     public function verify(Request $request)
     {
         $request->validate([
             'code' => 'required'
         ]);
         
-        $user = Auth::user();
+        // Get user ID from session (set during login)
+        $userId = $request->session()->get('2fa:user:id');
         
-        if (!$user->two_factor_enabled) {
-            return redirect()->intended('/dashboard');
+        if (!$userId) {
+            return redirect()->route('login')->withErrors([
+                'code' => 'Sesión expirada. Por favor inicia sesión nuevamente.'
+            ]);
+        }
+        
+        $user = \App\Models\User::find($userId);
+        
+        if (!$user || !$user->two_factor_enabled) {
+            $request->session()->forget('2fa:user:id');
+            return redirect()->route('login');
         }
         
         $google2fa = new Google2FA();
@@ -99,22 +119,48 @@ class TwoFactorController extends Controller
         $valid = $google2fa->verifyKey($secret, $request->code);
         
         if ($valid) {
-            session(['2fa_verified' => true]);
-            return redirect()->intended('/dashboard');
+            // Remove 2FA session data
+            $request->session()->forget('2fa:user:id');
+            
+            // Login the user
+            Auth::login($user, true);
+            $request->session()->regenerate();
+            
+            // Redirect based on role
+            if ($user->isSuperAdmin()) {
+                return redirect()->intended(route('superadmin.index'));
+            }
+            
+            return redirect()->intended(route('dashboard'));
         }
         
         // Check recovery codes
-        $recoveryCodes = json_decode(Crypt::decryptString($user->two_factor_recovery_codes), true);
-        if (in_array(strtoupper($request->code), $recoveryCodes)) {
-            // Remove used recovery code
-            $recoveryCodes = array_diff($recoveryCodes, [strtoupper($request->code)]);
-            $user->two_factor_recovery_codes = Crypt::encryptString(json_encode(array_values($recoveryCodes)));
-            $user->save();
-            
-            session(['2fa_verified' => true]);
-            return redirect()->intended('/dashboard');
+        if ($user->two_factor_recovery_codes) {
+            $recoveryCodes = json_decode(Crypt::decryptString($user->two_factor_recovery_codes), true);
+            if (in_array(strtoupper($request->code), $recoveryCodes)) {
+                // Remove used recovery code
+                $recoveryCodes = array_diff($recoveryCodes, [strtoupper($request->code)]);
+                $user->two_factor_recovery_codes = Crypt::encryptString(json_encode(array_values($recoveryCodes)));
+                $user->save();
+                
+                // Remove 2FA session data
+                $request->session()->forget('2fa:user:id');
+                
+                // Login the user
+                Auth::login($user, true);
+                $request->session()->regenerate();
+                
+                // Redirect based on role
+                if ($user->isSuperAdmin()) {
+                    return redirect()->intended(route('superadmin.index'));
+                }
+                
+                return redirect()->intended(route('dashboard'));
+            }
         }
         
-        return back()->with('error', 'Código inválido.');
+        return back()->withErrors([
+            'code' => 'Código inválido. Por favor intenta de nuevo.'
+        ]);
     }
 }

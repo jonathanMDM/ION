@@ -28,6 +28,10 @@ Route::post('/forgot-password', [\App\Http\Controllers\Auth\ForgotPasswordContro
 Route::get('/reset-password/{token}', [\App\Http\Controllers\Auth\ResetPasswordController::class, 'showResetForm'])->name('password.reset');
 Route::post('/reset-password', [\App\Http\Controllers\Auth\ResetPasswordController::class, 'reset'])->name('password.update');
 
+// 2FA Verification Routes (for login)
+Route::get('/2fa/verify', [\App\Http\Controllers\TwoFactorController::class, 'showVerifyForm'])->name('2fa.verify');
+Route::post('/2fa/verify', [\App\Http\Controllers\TwoFactorController::class, 'verify']);
+
 Route::get('/', function () {
     return redirect()->route('login');
 });
