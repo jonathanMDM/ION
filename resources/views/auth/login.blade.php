@@ -55,13 +55,22 @@
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
                     <i class="fas fa-lock mr-2"></i>Contraseña
                 </label>
-                <input 
-                    type="password" 
-                    name="password" 
-                    id="password" 
-                    class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-gray-500" 
-                    required
-                >
+                <div class="relative">
+                    <input 
+                        type="password" 
+                        name="password" 
+                        id="password" 
+                        class="shadow appearance-none border rounded w-full py-3 px-4 pr-12 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-gray-500" 
+                        required
+                    >
+                    <button 
+                        type="button" 
+                        onclick="togglePassword()" 
+                        class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-600 hover:text-gray-800"
+                    >
+                        <i id="toggleIcon" class="fas fa-eye"></i>
+                    </button>
+                </div>
             </div>
 
             <div class="mb-4 flex items-center justify-between">
@@ -82,5 +91,22 @@
             </button>
         </form>
     </div>
+
+    <script>
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const toggleIcon = document.getElementById('toggleIcon');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleIcon.classList.remove('fa-eye');
+                toggleIcon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                toggleIcon.classList.remove('fa-eye-slash');
+                toggleIcon.classList.add('fa-eye');
+            }
+        }
+    </script>
 </body>
 </html>
