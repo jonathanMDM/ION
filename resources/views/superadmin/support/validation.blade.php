@@ -157,8 +157,8 @@
                 <i class="fas fa-eye mr-2"></i>Ver Detalles Completos
             </a>
             @if($company->status == 'active')
-            <a href="{{ route('superadmin.support.index') }}" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded transition duration-200">
-                <i class="fas fa-headset mr-2"></i>Iniciar Soporte
+            <a href="{{ route('superadmin.tickets.create', ['company_id' => $company->id]) }}" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded transition duration-200">
+                <i class="fas fa-ticket-alt mr-2"></i>Crear Ticket de Soporte
             </a>
             @else
             <button disabled class="bg-gray-400 text-white font-bold py-2 px-4 rounded cursor-not-allowed">

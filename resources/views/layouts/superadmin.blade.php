@@ -80,9 +80,9 @@
                     <i class="fas fa-bullhorn w-6"></i>
                     <span class="ml-3 sidebar-text">Anuncios</span>
                 </a>
-                <a href="{{ route('superadmin.support.index') }}" class="flex items-center px-4 py-3 hover:bg-gray-800 {{ request()->routeIs('superadmin.support.index') ? 'bg-gray-800 border-l-4 border-white' : '' }}">
-                    <i class="fas fa-headset w-6"></i>
-                    <span class="ml-3 sidebar-text">Soporte</span>
+                <a href="{{ route('superadmin.tickets.index') }}" class="flex items-center px-4 py-3 hover:bg-gray-800 {{ request()->routeIs('superadmin.tickets.*') ? 'bg-gray-800 border-l-4 border-white' : '' }}">
+                    <i class="fas fa-ticket-alt w-6"></i>
+                    <span class="ml-3 sidebar-text">Tickets de Soporte</span>
                 </a>
             </div>
         </nav>

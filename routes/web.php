@@ -40,6 +40,16 @@ Route::middleware(['auth'])->group(function () {
     Route::get('support/validation', [App\Http\Controllers\Superadmin\SupportValidationController::class, 'index'])->name('superadmin.support.validation');
     Route::post('support/validation', [App\Http\Controllers\Superadmin\SupportValidationController::class, 'validateCustomer'])->name('superadmin.support.validate');
 
+    // Support Tickets
+    Route::prefix('superadmin/tickets')->name('superadmin.tickets.')->middleware('superadmin')->group(function () {
+        Route::get('/', [App\Http\Controllers\Superadmin\SupportTicketController::class, 'index'])->name('index');
+        Route::get('/create', [App\Http\Controllers\Superadmin\SupportTicketController::class, 'create'])->name('create');
+        Route::post('/', [App\Http\Controllers\Superadmin\SupportTicketController::class, 'store'])->name('store');
+        Route::get('/{ticket}', [App\Http\Controllers\Superadmin\SupportTicketController::class, 'show'])->name('show');
+        Route::put('/{ticket}', [App\Http\Controllers\Superadmin\SupportTicketController::class, 'update'])->name('update');
+        Route::post('/{ticket}/notes', [App\Http\Controllers\Superadmin\SupportTicketController::class, 'addNote'])->name('add-note');
+    });
+
     // Logout
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     
