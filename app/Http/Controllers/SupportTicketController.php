@@ -12,25 +12,32 @@ class SupportTicketController extends Controller
     {
         $user = auth()->user();
         
-        // Check if user has a company
-        if (!$user->company_id) {
-            return redirect()->route('dashboard')
-                ->with('error', 'No tienes una empresa asignada. Contacta al administrador.');
-        }
-        
-        // Get tickets for user's company
-        $tickets = SupportTicket::with(['user', 'superadmin'])
-            ->where('company_id', $user->company_id)
-            ->latest()
-            ->paginate(15);
-
-        // Statistics
+        // Initialize default stats
         $stats = [
-            'total' => SupportTicket::where('company_id', $user->company_id)->count(),
-            'open' => SupportTicket::where('company_id', $user->company_id)->where('status', 'open')->count(),
-            'in_progress' => SupportTicket::where('company_id', $user->company_id)->where('status', 'in_progress')->count(),
-            'resolved' => SupportTicket::where('company_id', $user->company_id)->where('status', 'resolved')->count(),
+            'total' => 0,
+            'open' => 0,
+            'in_progress' => 0,
+            'resolved' => 0,
         ];
+        
+        // Get tickets for user's company if they have one
+        if ($user->company_id) {
+            $tickets = SupportTicket::with(['user', 'superadmin'])
+                ->where('company_id', $user->company_id)
+                ->latest()
+                ->paginate(15);
+
+            // Statistics
+            $stats = [
+                'total' => SupportTicket::where('company_id', $user->company_id)->count(),
+                'open' => SupportTicket::where('company_id', $user->company_id)->where('status', 'open')->count(),
+                'in_progress' => SupportTicket::where('company_id', $user->company_id)->where('status', 'in_progress')->count(),
+                'resolved' => SupportTicket::where('company_id', $user->company_id)->where('status', 'resolved')->count(),
+            ];
+        } else {
+            // Empty collection if no company
+            $tickets = new \Illuminate\Pagination\LengthAwarePaginator([], 0, 15);
+        }
 
         return view('support.index', compact('tickets', 'stats'));
     }
