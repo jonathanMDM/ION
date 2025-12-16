@@ -64,11 +64,16 @@
                 >
             </div>
 
-            <div class="mb-6">
+            <div class="mb-4 flex items-center justify-between">
                 <label class="flex items-center">
                     <input type="checkbox" name="remember" class="form-checkbox h-4 w-4 text-gray-800">
                     <span class="ml-2 text-sm text-gray-700">Recordarme</span>
                 </label>
+                @if (Route::has('password.request'))
+                <a href="{{ route('password.request') }}" class="text-sm text-blue-600 hover:text-blue-800 hover:underline">
+                    ¿Olvidaste tu contraseña?
+                </a>
+                @endif
             </div>
 
             <button 
@@ -78,11 +83,6 @@
                 <i class="fas fa-sign-in-alt mr-2"></i>Iniciar Sesión
             </button>
         </form>
-
-        <div class="mt-6 text-center text-sm text-gray-600">
-            <p>Usuario por defecto: <strong>admin@paladin.com</strong></p>
-            <p>Contraseña: <strong>password</strong></p>
-        </div>
     </div>
 </body>
 </html>
