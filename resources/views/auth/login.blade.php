@@ -69,11 +69,9 @@
                     <input type="checkbox" name="remember" class="form-checkbox h-4 w-4 text-gray-800">
                     <span class="ml-2 text-sm text-gray-700">Recordarme</span>
                 </label>
-                @if (Route::has('password.request'))
-                <a href="{{ route('password.request') }}" class="text-sm text-blue-600 hover:text-blue-800 hover:underline">
+                <a href="#" onclick="alert('Contacta al administrador para recuperar tu contraseña'); return false;" class="text-sm text-blue-600 hover:text-blue-800 hover:underline">
                     ¿Olvidaste tu contraseña?
                 </a>
-                @endif
             </div>
 
             <button 
