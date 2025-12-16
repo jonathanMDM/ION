@@ -1,183 +1,135 @@
 @extends('layouts.app')
 
-@section('page-title', 'Soporte')
+@section('page-title', 'Mis Tickets de Soporte')
 
 @section('content')
-<div class="max-w-3xl mx-auto">
-    <div class="bg-white rounded-lg shadow p-6">
-        <div class="mb-6">
-            <h1 class="text-2xl font-bold text-gray-800 mb-2">
-                <i class="fas fa-headset mr-2 text-gray-600"></i>Centro de Soporte
-            </h1>
-            <p class="text-gray-600">
-                ¿Necesitas ayuda? Completa el formulario y nuestro equipo te responderá lo antes posible.
-            </p>
+<div class="mb-6">
+    <!-- Header -->
+    <div class="flex justify-between items-center mb-6">
+        <div>
+            <h2 class="text-2xl font-bold text-gray-800">Tickets de Soporte</h2>
+            <p class="text-sm text-gray-600 mt-1">Gestiona tus solicitudes de soporte técnico</p>
         </div>
-
-        <form action="{{ route('support.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
-            @csrf
-
-            <!-- Subject -->
-            <div>
-                <label for="subject" class="block text-sm font-medium text-gray-700 mb-2">
-                    Asunto <span class="text-red-500">*</span>
-                </label>
-                <input 
-                    type="text" 
-                    name="subject" 
-                    id="subject" 
-                    value="{{ old('subject') }}"
-                    required
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent @error('subject') border-red-500 @enderror"
-                    placeholder="Describe brevemente tu consulta"
-                >
-                @error('subject')
-                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                @enderror
-            </div>
-
-            <!-- Category -->
-            <div>
-                <label for="category" class="block text-sm font-medium text-gray-700 mb-2">
-                    Categoría <span class="text-red-500">*</span>
-                </label>
-                <select 
-                    name="category" 
-                    id="category" 
-                    required
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent @error('category') border-red-500 @enderror"
-                >
-                    <option value="">Selecciona una categoría</option>
-                    <option value="technical" {{ old('category') == 'technical' ? 'selected' : '' }}>
-                        <i class="fas fa-cog"></i> Soporte Técnico
-                    </option>
-                    <option value="billing" {{ old('category') == 'billing' ? 'selected' : '' }}>
-                        <i class="fas fa-credit-card"></i> Facturación
-                    </option>
-                    <option value="general" {{ old('category') == 'general' ? 'selected' : '' }}>
-                        <i class="fas fa-question-circle"></i> Consulta General
-                    </option>
-                </select>
-                @error('category')
-                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                @enderror
-            </div>
-
-            <!-- Message -->
-            <div>
-                <label for="message" class="block text-sm font-medium text-gray-700 mb-2">
-                    Mensaje <span class="text-red-500">*</span>
-                </label>
-                <textarea 
-                    name="message" 
-                    id="message" 
-                    rows="8"
-                    required
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent @error('message') border-red-500 @enderror"
-                    placeholder="Describe tu consulta o problema en detalle..."
-                >{{ old('message') }}</textarea>
-                @error('message')
-                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                @enderror
-                <p class="mt-1 text-sm text-gray-500">
-                    Incluye toda la información relevante para ayudarnos a resolver tu consulta más rápido.
-                </p>
-            </div>
-
-            <!-- Attachment -->
-            <div>
-                <label for="attachment" class="block text-sm font-medium text-gray-700 mb-2">
-                    Adjuntar Archivo (Opcional)
-                </label>
-                <input 
-                    type="file" 
-                    name="attachment" 
-                    id="attachment"
-                    accept=".jpg,.jpeg,.png,.pdf,.doc,.docx"
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent @error('attachment') border-red-500 @enderror"
-                >
-                @error('attachment')
-                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                @enderror
-                <p class="mt-1 text-sm text-gray-500">
-                    Formatos permitidos: JPG, PNG, PDF, DOC, DOCX. Tamaño máximo: 5MB
-                </p>
-            </div>
-
-            <!-- User Info Display -->
-            <div class="bg-gray-50 rounded-lg p-4 border border-gray-200">
-                <h3 class="text-sm font-semibold text-gray-700 mb-2">Información de Contacto</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm text-gray-600">
-                    <div>
-                        <span class="font-medium">Nombre:</span> {{ Auth::user()->name }}
-                    </div>
-                    <div>
-                        <span class="font-medium">Email:</span> {{ Auth::user()->email }}
-                    </div>
-                    <div>
-                        <span class="font-medium">Empresa:</span> {{ Auth::user()->company ? Auth::user()->company->name : 'Sin empresa' }}
-                    </div>
-                    <div>
-                        <span class="font-medium">Rol:</span> 
-                        @if(Auth::user()->isAdmin())
-                            Administrador
-                        @elseif(Auth::user()->isEditor())
-                            Editor
-                        @else
-                            Visor
-                        @endif
-                    </div>
-                </div>
-            </div>
-
-            <!-- Submit Buttons -->
-            <div class="flex justify-end space-x-3 pt-4 border-t border-gray-200">
-                <a 
-                    href="{{ route('dashboard') }}" 
-                    class="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition"
-                >
-                    Cancelar
-                </a>
-                <button 
-                    type="submit" 
-                    class="px-6 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-900 transition"
-                >
-                    <i class="fas fa-paper-plane mr-2"></i>Enviar Solicitud
-                </button>
-            </div>
-        </form>
+        <a href="{{ route('support.create') }}" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            <i class="fas fa-plus mr-2"></i>Nuevo Ticket
+        </a>
     </div>
 
-    <!-- Help Section -->
-    <div class="mt-6 bg-white rounded-lg shadow p-6">
-        <h2 class="text-lg font-semibold text-gray-800 mb-4">
-            <i class="fas fa-info-circle mr-2 text-gray-600"></i>Información Útil
-        </h2>
-        <div class="space-y-3 text-sm text-gray-600">
-            <div class="flex items-start">
-                <i class="fas fa-clock text-gray-400 mt-1 mr-3"></i>
+    <!-- Statistics Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+        <div class="bg-white rounded-lg shadow p-6">
+            <div class="flex items-center justify-between">
                 <div>
-                    <span class="font-medium text-gray-700">Tiempo de Respuesta:</span> 
-                    Normalmente respondemos en 24-48 horas hábiles.
+                    <p class="text-sm text-gray-600">Total</p>
+                    <p class="text-2xl font-bold text-gray-800">{{ $stats['total'] }}</p>
                 </div>
-            </div>
-            <div class="flex items-start">
-                <i class="fas fa-envelope text-gray-400 mt-1 mr-3"></i>
-                <div>
-                    <span class="font-medium text-gray-700">Email Directo:</span> 
-                    <a href="mailto:support@ioninventory.com" class="text-gray-800 hover:text-gray-900 underline">
-                        support@ioninventory.com
-                    </a>
-                </div>
-            </div>
-            <div class="flex items-start">
-                <i class="fas fa-book text-gray-400 mt-1 mr-3"></i>
-                <div>
-                    <span class="font-medium text-gray-700">Documentación:</span> 
-                    Consulta nuestra <a href="#" class="text-gray-800 hover:text-gray-900 underline">guía de usuario</a> para respuestas rápidas.
-                </div>
+                <i class="fas fa-ticket-alt text-3xl text-gray-400"></i>
             </div>
         </div>
+        <div class="bg-white rounded-lg shadow p-6">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm text-gray-600">Abiertos</p>
+                    <p class="text-2xl font-bold text-blue-600">{{ $stats['open'] }}</p>
+                </div>
+                <i class="fas fa-folder-open text-3xl text-blue-400"></i>
+            </div>
+        </div>
+        <div class="bg-white rounded-lg shadow p-6">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm text-gray-600">En Proceso</p>
+                    <p class="text-2xl font-bold text-yellow-600">{{ $stats['in_progress'] }}</p>
+                </div>
+                <i class="fas fa-spinner text-3xl text-yellow-400"></i>
+            </div>
+        </div>
+        <div class="bg-white rounded-lg shadow p-6">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm text-gray-600">Resueltos</p>
+                    <p class="text-2xl font-bold text-green-600">{{ $stats['resolved'] }}</p>
+                </div>
+                <i class="fas fa-check-circle text-3xl text-green-400"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tickets List -->
+    <div class="bg-white rounded-lg shadow overflow-hidden">
+        <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gray-50">
+                <tr>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ticket</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Asunto</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Prioridad</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Estado</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fecha</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
+                </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200">
+                @forelse($tickets as $ticket)
+                <tr class="hover:bg-gray-50">
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <span class="text-sm font-mono font-bold text-gray-900">{{ $ticket->ticket_number }}</span>
+                    </td>
+                    <td class="px-6 py-4">
+                        <div class="text-sm text-gray-900">{{ Str::limit($ticket->subject, 50) }}</div>
+                        <div class="text-xs text-gray-500">{{ ucfirst($ticket->category) }}</div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
+                            @if($ticket->priority == 'urgent') bg-red-100 text-red-800
+                            @elseif($ticket->priority == 'high') bg-orange-100 text-orange-800
+                            @elseif($ticket->priority == 'medium') bg-yellow-100 text-yellow-800
+                            @else bg-green-100 text-green-800
+                            @endif">
+                            {{ ucfirst($ticket->priority) }}
+                        </span>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
+                            @if($ticket->status == 'open') bg-blue-100 text-blue-800
+                            @elseif($ticket->status == 'in_progress') bg-yellow-100 text-yellow-800
+                            @elseif($ticket->status == 'resolved') bg-green-100 text-green-800
+                            @else bg-gray-100 text-gray-800
+                            @endif">
+                            @if($ticket->status == 'open') Abierto
+                            @elseif($ticket->status == 'in_progress') En Proceso
+                            @elseif($ticket->status == 'resolved') Resuelto
+                            @else Cerrado
+                            @endif
+                        </span>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        {{ $ticket->created_at->format('d/m/Y H:i') }}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                        <a href="{{ route('support.show', $ticket) }}" class="text-blue-600 hover:text-blue-900">
+                            <i class="fas fa-eye mr-1"></i>Ver
+                        </a>
+                    </td>
+                </tr>
+                @empty
+                <tr>
+                    <td colspan="6" class="px-6 py-12 text-center text-gray-500">
+                        <i class="fas fa-inbox text-4xl mb-4 text-gray-300"></i>
+                        <p class="mb-4">No tienes tickets de soporte</p>
+                        <a href="{{ route('support.create') }}" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                            <i class="fas fa-plus mr-2"></i>Crear Primer Ticket
+                        </a>
+                    </td>
+                </tr>
+                @endforelse
+            </tbody>
+        </table>
+
+        @if($tickets->hasPages())
+        <div class="px-6 py-4 border-t border-gray-200">
+            {{ $tickets->links() }}
+        </div>
+        @endif
     </div>
 </div>
 @endsection

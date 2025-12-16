@@ -68,6 +68,15 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/notifications/recent', [\App\Http\Controllers\NotificationController::class, 'recent'])->name('notifications.recent');
     Route::post('/notifications/{id}/mark-as-read', [\App\Http\Controllers\NotificationController::class, 'markAsRead'])->name('notifications.mark-as-read');
     Route::post('/notifications/mark-all-as-read', [\App\Http\Controllers\NotificationController::class, 'markAllAsRead'])->name('notifications.mark-all-as-read');
+
+    // Support Tickets (Client Side)
+    Route::prefix('support')->name('support.')->group(function () {
+        Route::get('/', [\App\Http\Controllers\SupportTicketController::class, 'index'])->name('index');
+        Route::get('/create', [\App\Http\Controllers\SupportTicketController::class, 'create'])->name('create');
+        Route::post('/', [\App\Http\Controllers\SupportTicketController::class, 'store'])->name('store');
+        Route::get('/{ticket}', [\App\Http\Controllers\SupportTicketController::class, 'show'])->name('show');
+        Route::post('/{ticket}/notes', [\App\Http\Controllers\SupportTicketController::class, 'addNote'])->name('add-note');
+    });
     
     // Change password
     Route::get('/change-password', [UserController::class, 'changePassword'])->name('password.change');

@@ -133,6 +133,12 @@
                     <span class="ml-3 sidebar-text">Movimientos</span>
                 </a>
                 @endif
+                <!-- Support Tickets -->
+                <a href="{{ route('support.index') }}" class="flex items-center px-4 py-3 hover:bg-gray-700 {{ request()->routeIs('support.*') ? 'bg-gray-700 border-l-4 border-white' : '' }}" title="Soporte">
+                    <i class="fas fa-headset w-6"></i>
+                    <span class="ml-3 sidebar-text">Soporte</span>
+                </a>
+
                 @if(Auth::user()->isAdmin() || Auth::user()->hasPermission('view_employees'))
                 <a href="{{ route('employees.index') }}" class="flex items-center px-4 py-3 hover:bg-gray-700 {{ request()->routeIs('employees.*') ? 'bg-gray-700 border-l-4 border-white' : '' }}" title="Empleados">
                     <i class="fas fa-id-card w-6"></i>
