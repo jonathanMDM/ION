@@ -46,6 +46,18 @@ Route::prefix('v2')->group(function () {
         // Asset endpoints
         Route::apiResource('assets', AssetApiController::class);
         
+        // Category endpoints
+        Route::apiResource('categories', \App\Http\Controllers\Api\CategoryApiController::class);
+        
+        // Location endpoints
+        Route::apiResource('locations', \App\Http\Controllers\Api\LocationApiController::class);
+        
+        // Maintenance endpoints
+        Route::apiResource('maintenances', \App\Http\Controllers\Api\MaintenanceApiController::class);
+        
+        // User endpoints
+        Route::apiResource('users', \App\Http\Controllers\Api\UserApiController::class);
+        
     });
 });
 
