@@ -23,16 +23,11 @@
     @elseif(isset($subscriptionWarning['is_critical']) && $subscriptionWarning['is_critical'])
     <!-- Critical Warning (7 days or less) -->
     <div class="bg-gradient-to-r from-orange-500 to-red-500 rounded-lg shadow-lg p-6 text-white animate-pulse">
-        <div class="flex items-start">
-            <div class="flex-shrink-0">
-                <i class="fas fa-clock text-4xl"></i>
-            </div>
-            <div class="ml-4 flex-1">
-                <h3 class="text-xl font-bold mb-2">🚨 ¡Atención Urgente!</h3>
-                <p class="text-lg mb-3">Su suscripción expira en <strong class="text-2xl">{{ $subscriptionWarning['days_left'] }}</strong> {{ $subscriptionWarning['days_left'] == 1 ? 'día' : 'días' }}</p>
-                <p class="text-sm opacity-90">Fecha de expiración: {{ $subscriptionWarning['expires_at'] }}</p>
-                <p class="text-sm mt-2 font-semibold">Por favor, renueve su suscripción lo antes posible para evitar interrupciones en el servicio.</p>
-            </div>
+        <div>
+            <h3 class="text-xl font-bold mb-2">🚨 ¡Atención Urgente!</h3>
+            <p class="text-lg mb-3">Su suscripción expira en <strong class="text-2xl">{{ $subscriptionWarning['days_left'] }}</strong> {{ $subscriptionWarning['days_left'] == 1 ? 'día' : 'días' }}</p>
+            <p class="text-sm opacity-90">Fecha de expiración: {{ $subscriptionWarning['expires_at'] }}</p>
+            <p class="text-sm mt-2 font-semibold">Por favor, renueve su suscripción lo antes posible para evitar interrupciones en el servicio.</p>
         </div>
     </div>
     @else
