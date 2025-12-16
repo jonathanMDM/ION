@@ -116,7 +116,7 @@
                 </div>
                 @if($company->subscription_expires_at)
                     @php
-                        $daysLeft = now()->diffInDays($company->subscription_expires_at, false);
+                        $daysLeft = (int) now()->diffInDays($company->subscription_expires_at, false);
                     @endphp
                     <p class="text-xs mt-2 {{ $daysLeft < 30 ? 'text-red-600' : 'text-green-600' }}">
                         {{ $daysLeft > 0 ? $daysLeft . ' días restantes' : 'Expirada' }}
