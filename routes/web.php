@@ -82,12 +82,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/change-password', [UserController::class, 'changePassword'])->name('password.change');
     Route::post('/change-password', [UserController::class, 'updatePassword'])->name('password.update');
     
-    Route::get('/support', [SupportController::class, 'index'])->name('support.index');
-    Route::post('/support', [SupportController::class, 'store'])->name('support.store');
-    Route::get('/support/{supportRequest}', [SupportController::class, 'show'])->name('support.show');
-    Route::post('/support/{supportRequest}/respond', [SupportController::class, 'respond'])->name('support.respond');
-    Route::post('/support/{supportRequest}/resolve', [SupportController::class, 'resolve'])->name('support.resolve');
-    
     // Notifications
     Route::get('/notifications', [\App\Http\Controllers\NotificationController::class, 'index'])->name('notifications.index');
     Route::post('/notifications/{notification}/read', [\App\Http\Controllers\NotificationController::class, 'markAsRead'])->name('notifications.read');
@@ -215,10 +209,6 @@ Route::middleware(['auth', 'superadmin'])->prefix('superadmin')->name('superadmi
     // Webhooks
     Route::resource('webhooks', \App\Http\Controllers\WebhookController::class);
     
-    // Support Requests
-    Route::get('support', [\App\Http\Controllers\Superadmin\SuperadminSupportController::class, 'index'])->name('support.index');
-    Route::get('support/{supportRequest}', [\App\Http\Controllers\Superadmin\SuperadminSupportController::class, 'show'])->name('support.show');
-    Route::patch('support/{supportRequest}/status', [\App\Http\Controllers\Superadmin\SuperadminSupportController::class, 'updateStatus'])->name('support.update-status');
     // Field Configuration
     Route::get('/fields', [\App\Http\Controllers\Superadmin\FieldConfigController::class, 'index'])->name('fields.index');
     Route::post('/fields', [\App\Http\Controllers\Superadmin\FieldConfigController::class, 'update'])->name('fields.update');
