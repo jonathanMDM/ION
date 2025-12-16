@@ -12,6 +12,12 @@ class SupportTicketController extends Controller
     {
         $user = auth()->user();
         
+        // Check if user has a company
+        if (!$user->company_id) {
+            return redirect()->route('dashboard')
+                ->with('error', 'No tienes una empresa asignada. Contacta al administrador.');
+        }
+        
         // Get tickets for user's company
         $tickets = SupportTicket::with(['user', 'superadmin'])
             ->where('company_id', $user->company_id)
@@ -44,6 +50,12 @@ class SupportTicketController extends Controller
         ]);
 
         $user = auth()->user();
+
+        // Check if user has a company
+        if (!$user->company_id) {
+            return redirect()->route('dashboard')
+                ->with('error', 'No tienes una empresa asignada. Contacta al administrador.');
+        }
 
         $ticket = SupportTicket::create([
             'company_id' => $user->company_id,
