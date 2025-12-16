@@ -1,479 +1,381 @@
-# API Documentation - Paladin Asset Management System
+# ION Inventory API Documentation
 
-## Overview
+## 🚀 Base URL
 
-The Paladin API provides programmatic access to your asset management system. Use it to integrate with external tools, create status pages, or build custom applications.
+```
+Production: https://ion-app-120e60a9275c.herokuapp.com/api/v2
+Local: http://localhost:8000/api/v2
+```
 
-**Base URL**: `https://your-domain.com/api`  
-**API Version**: v1  
-**Authentication**: Bearer Token
+## 🔐 Authentication
 
----
+The API uses Laravel Sanctum for authentication. You need to obtain a token by logging in.
 
-## Authentication
+### Login
 
-### Generating an API Token
+```http
+POST /api/v2/auth/login
+Content-Type: application/json
 
-API tokens must be generated from the web interface while logged in.
-
-**Endpoint**: `POST /api/v1/auth/token/generate`  
-**Authentication**: Web session (must be logged in)
-
-**Request Body**:
-
-```json
 {
-    "token_name": "My API Token",
-    "expires_in_days": 90
+  "email": "user@example.com",
+  "password": "your-password"
 }
 ```
 
-**Response**:
+**Response:**
 
 ```json
 {
-    "message": "API token generated successfully",
-    "token": "your-api-token-here",
-    "token_name": "My API Token",
-    "expires_at": "2025-03-04T21:10:37Z",
-    "warning": "Please save this token securely. You will not be able to see it again."
-}
-```
-
-⚠️ **Important**: Save the token immediately. It cannot be retrieved again.
-
-### Using the API Token
-
-Include the token in the `Authorization` header of all API requests:
-
-```bash
-Authorization: Bearer your-api-token-here
-```
-
-### Checking Token Status
-
-**Endpoint**: `GET /api/v1/auth/token/status`  
-**Authentication**: Web session
-
-**Response**:
-
-```json
-{
-    "has_token": true,
-    "is_expired": false,
-    "expires_at": "2025-03-04T21:10:37Z",
-    "status": "active"
-}
-```
-
-### Revoking a Token
-
-**Endpoint**: `DELETE /api/v1/auth/token/revoke`  
-**Authentication**: Web session
-
-**Response**:
-
-```json
-{
-    "message": "API token revoked successfully"
-}
-```
-
----
-
-## Health & Status Endpoints
-
-These endpoints are **public** and don't require authentication. Perfect for status pages and monitoring tools.
-
-### Health Check
-
-Simple endpoint to verify the API is operational.
-
-**Endpoint**: `GET /api/health`  
-**Authentication**: None
-
-**Response**:
-
-```json
-{
-    "status": "ok",
-    "timestamp": "2025-12-03T21:10:37Z"
-}
-```
-
-### System Status
-
-Detailed system status including database, cache, and statistics.
-
-**Endpoint**: `GET /api/status`  
-**Authentication**: None
-
-**Response**:
-
-```json
-{
-    "status": "operational",
-    "timestamp": "2025-12-03T21:10:37Z",
-    "version": "1.0.0",
-    "environment": "production",
-    "checks": {
-        "database": {
-            "status": "ok",
-            "message": "Database connection successful"
-        },
-        "cache": {
-            "status": "ok",
-            "message": "Cache working"
+    "success": true,
+    "message": "Login successful",
+    "data": {
+        "token": "1|abc123...",
+        "user": {
+            "id": 1,
+            "name": "John Doe",
+            "email": "user@example.com",
+            "role": "admin",
+            "company_id": 1
         }
-    },
-    "statistics": {
-        "total_companies": 15,
-        "total_users": 127,
-        "total_assets": 1543
     }
 }
 ```
 
+### Using the Token
+
+Include the token in all subsequent requests:
+
+```http
+Authorization: Bearer 1|abc123...
+```
+
+### Logout
+
+```http
+POST /api/v2/auth/logout
+Authorization: Bearer {your-token}
+```
+
+### Get Current User
+
+```http
+GET /api/v2/auth/user
+Authorization: Bearer {your-token}
+```
+
+### Refresh Token
+
+```http
+POST /api/v2/auth/refresh
+Authorization: Bearer {your-token}
+```
+
 ---
 
-## Assets
+## 📦 Assets API
 
 ### List Assets
 
-Get a paginated list of assets with optional filtering.
+```http
+GET /api/v2/assets
+Authorization: Bearer {your-token}
 
-**Endpoint**: `GET /api/v1/assets`  
-**Authentication**: Required
-
-**Query Parameters**:
-
--   `page` (integer): Page number (default: 1)
--   `per_page` (integer): Items per page (max: 100, default: 15)
--   `status` (string): Filter by status (`available`, `in_use`, `in_maintenance`, `retired`)
--   `condition` (string): Filter by condition (`excellent`, `good`, `fair`, `poor`)
--   `category_id` (integer): Filter by category ID
--   `location_id` (integer): Filter by location ID
--   `search` (string): Search by name, code, or serial number
-
-**Example Request**:
-
-```bash
-curl -H "Authorization: Bearer your-token" \
-  "https://your-domain.com/api/v1/assets?status=available&per_page=20"
+Query Parameters:
+- page (integer): Page number
+- per_page (integer): Items per page (default: 15)
+- search (string): Search term
 ```
 
-**Response**:
+**Response:**
 
 ```json
 {
+    "success": true,
+    "message": "Assets retrieved successfully",
     "data": [
         {
             "id": 1,
-            "name": "Dell Laptop XPS 15",
-            "code": "LAPTOP-001",
-            "serial_number": "SN123456789",
-            "model": "XPS 15 9520",
-            "brand": "Dell",
-            "description": "High-performance laptop",
-            "purchase_date": "2024-01-15",
-            "purchase_price": 2500.0,
-            "current_value": 2000.0,
+            "name": "Laptop Dell",
+            "code": "ASSET-001",
+            "serial_number": "SN123456",
             "status": "available",
-            "condition": "excellent",
-            "warranty_expiration": "2027-01-15",
-            "notes": null,
-            "qr_code_path": "https://your-domain.com/storage/qr_codes/asset_1.png",
-            "image_path": null,
             "category": {
                 "id": 1,
                 "name": "Electronics"
             },
-            "subcategory": {
-                "id": 3,
-                "name": "Laptops"
-            },
             "location": {
-                "id": 2,
-                "name": "Main Office",
-                "address": "123 Main St"
-            },
-            "supplier": {
-                "id": 5,
-                "name": "Tech Supplier Inc"
-            },
-            "employee": null,
-            "created_at": "2024-01-15T10:30:00Z",
-            "updated_at": "2024-12-03T21:10:37Z"
+                "id": 1,
+                "name": "Office A"
+            }
         }
     ],
-    "links": {
-        "first": "https://your-domain.com/api/v1/assets?page=1",
-        "last": "https://your-domain.com/api/v1/assets?page=10",
-        "prev": null,
-        "next": "https://your-domain.com/api/v1/assets?page=2"
-    },
     "meta": {
         "current_page": 1,
-        "from": 1,
-        "last_page": 10,
+        "last_page": 5,
         "per_page": 15,
-        "to": 15,
-        "total": 150
+        "total": 75
+    },
+    "links": {
+        "first": "...",
+        "last": "...",
+        "prev": null,
+        "next": "..."
     }
 }
 ```
 
 ### Get Single Asset
 
-**Endpoint**: `GET /api/v1/assets/{id}`  
-**Authentication**: Required
-
-**Response**: Same structure as individual asset in list response.
+```http
+GET /api/v2/assets/{id}
+Authorization: Bearer {your-token}
+```
 
 ### Create Asset
 
-**Endpoint**: `POST /api/v1/assets`  
-**Authentication**: Required (Admin only)
+```http
+POST /api/v2/assets
+Authorization: Bearer {your-token}
+Content-Type: application/json
 
-**Request Body**:
-
-```json
 {
-    "name": "New Laptop",
-    "code": "LAPTOP-002",
-    "serial_number": "SN987654321",
-    "model": "ThinkPad X1",
-    "brand": "Lenovo",
-    "description": "Business laptop",
-    "purchase_date": "2024-12-03",
-    "purchase_price": 1800.0,
-    "current_value": 1800.0,
-    "status": "available",
-    "condition": "excellent",
-    "category_id": 1,
-    "subcategory_id": 3,
-    "location_id": 2,
-    "supplier_id": 5
+  "name": "Laptop Dell",
+  "code": "ASSET-001",
+  "category_id": 1,
+  "subcategory_id": 2,
+  "location_id": 1,
+  "serial_number": "SN123456",
+  "model": "Latitude 5420",
+  "brand": "Dell",
+  "purchase_date": "2024-01-15",
+  "purchase_price": 1200.00,
+  "status": "available",
+  "description": "New laptop for development"
 }
 ```
+
+**Required Fields:**
+
+-   name (string)
+-   code (string, unique)
+-   category_id (integer)
+
+**Optional Fields:**
+
+-   subcategory_id (integer)
+-   location_id (integer)
+-   serial_number (string)
+-   model (string)
+-   brand (string)
+-   purchase_date (date: YYYY-MM-DD)
+-   purchase_price (number)
+-   status (string: available, in_use, maintenance, retired)
+-   description (string)
 
 ### Update Asset
 
-**Endpoint**: `PUT /api/v1/assets/{id}` or `PATCH /api/v1/assets/{id}`  
-**Authentication**: Required (Admin only)
+```http
+PUT /api/v2/assets/{id}
+Authorization: Bearer {your-token}
+Content-Type: application/json
 
-**Request Body**: Same as create, all fields optional for PATCH.
+{
+  "name": "Updated Name",
+  "status": "in_use",
+  "location_id": 2
+}
+```
 
 ### Delete Asset
 
-**Endpoint**: `DELETE /api/v1/assets/{id}`  
-**Authentication**: Required (Admin only)
-
-**Response**:
-
-```json
-{
-    "message": "Asset deleted successfully"
-}
+```http
+DELETE /api/v2/assets/{id}
+Authorization: Bearer {your-token}
 ```
 
 ---
 
-## Users
+## 📊 Response Format
 
-### List Users
+All API responses follow this structure:
 
-**Endpoint**: `GET /api/v1/users`  
-**Authentication**: Required
-
-**Query Parameters**:
-
--   `page`, `per_page`: Pagination
--   `role` (string): Filter by role
--   `is_active` (boolean): Filter by active status
--   `search` (string): Search by name or email
-
-**Response**:
+### Success Response
 
 ```json
 {
-  "data": [
-    {
-      "id": 1,
-      "name": "John Doe",
-      "email": "john@example.com",
-      "role": "admin",
-      "is_active": true,
-      "company": {
-        "id": 1,
-        "name": "Acme Corp"
-      },
-      "created_at": "2024-01-01T00:00:00Z",
-      "updated_at": "2024-12-03T21:10:37Z"
-    }
-  ],
-  "links": { ... },
-  "meta": { ... }
+  "success": true,
+  "message": "Operation successful",
+  "data": { ... }
 }
 ```
 
-### Get Single User
-
-**Endpoint**: `GET /api/v1/users/{id}`  
-**Authentication**: Required
-
-### Get Current User
-
-**Endpoint**: `GET /api/v1/users/me`  
-**Authentication**: Required
-
-**Response**: Same structure as single user.
-
----
-
-## Companies
-
-### List Companies
-
-**Endpoint**: `GET /api/v1/companies`  
-**Authentication**: Required (Superadmin only)
-
-**Query Parameters**:
-
--   `page`, `per_page`: Pagination
--   `is_active` (boolean): Filter by active status
--   `subscription_status` (string): Filter by subscription status
--   `search` (string): Search by name, NIT, or email
-
-**Response**:
+### Error Response
 
 ```json
 {
-  "data": [
-    {
-      "id": 1,
-      "name": "Acme Corp",
-      "nit": "900123456-7",
-      "email": "contact@acme.com",
-      "phone": "+57 300 1234567",
-      "address": "123 Business Ave",
-      "is_active": true,
-      "subscription_status": "active",
-      "subscription_expires_at": "2025-12-31",
-      "statistics": {
-        "users_count": 25,
-        "assets_count": 150
-      },
-      "created_at": "2024-01-01T00:00:00Z",
-      "updated_at": "2024-12-03T21:10:37Z"
-    }
-  ],
-  "links": { ... },
-  "meta": { ... }
-}
-```
-
-### Get Single Company
-
-**Endpoint**: `GET /api/v1/companies/{id}`  
-**Authentication**: Required
-
-### Get Company Statistics
-
-**Endpoint**: `GET /api/v1/companies/{id}/stats`  
-**Authentication**: Required
-
-**Response**:
-
-```json
-{
-    "company_id": 1,
-    "company_name": "Acme Corp",
-    "statistics": {
-        "total_users": 25,
-        "active_users": 23,
-        "total_assets": 150,
-        "assets_by_status": {
-            "available": 45,
-            "in_use": 95,
-            "in_maintenance": 8,
-            "retired": 2
-        },
-        "total_asset_value": 125000.0
-    }
-}
-```
-
----
-
-## Rate Limiting
-
-API requests are limited to **60 requests per minute** per token.
-
-When rate limited, you'll receive a `429 Too Many Requests` response:
-
-```json
-{
-    "message": "Too Many Attempts."
-}
-```
-
-Response headers include:
-
--   `X-RateLimit-Limit`: Total requests allowed
--   `X-RateLimit-Remaining`: Requests remaining
--   `Retry-After`: Seconds until limit resets
-
----
-
-## Error Responses
-
-### Standard Error Format
-
-```json
-{
-    "message": "Error description"
-}
-```
-
-### HTTP Status Codes
-
--   `200 OK`: Success
--   `201 Created`: Resource created
--   `400 Bad Request`: Invalid request data
--   `401 Unauthorized`: Missing or invalid token
--   `403 Forbidden`: Insufficient permissions
--   `404 Not Found`: Resource not found
--   `422 Unprocessable Entity`: Validation errors
--   `429 Too Many Requests`: Rate limit exceeded
--   `500 Internal Server Error`: Server error
-
-### Validation Errors
-
-```json
-{
-    "message": "The given data was invalid.",
+    "success": false,
+    "message": "Error message",
     "errors": {
-        "name": ["The name field is required."],
-        "email": ["The email must be a valid email address."]
+        "field": ["Error detail"]
     }
 }
 ```
 
 ---
 
-## Best Practices
+## 🔢 HTTP Status Codes
 
-1. **Store tokens securely**: Never commit tokens to version control
-2. **Use HTTPS**: Always use HTTPS in production
-3. **Handle rate limits**: Implement exponential backoff
-4. **Cache responses**: Cache data when appropriate
-5. **Monitor token expiration**: Renew tokens before they expire
-6. **Use pagination**: Don't request all data at once
-7. **Filter results**: Use query parameters to reduce payload size
+-   `200` - OK: Request successful
+-   `201` - Created: Resource created successfully
+-   `400` - Bad Request: Invalid request
+-   `401` - Unauthorized: Invalid or missing token
+-   `403` - Forbidden: Insufficient permissions
+-   `404` - Not Found: Resource not found
+-   `422` - Unprocessable Entity: Validation failed
+-   `500` - Internal Server Error: Server error
 
 ---
 
-## Support
+## 🛡️ Rate Limiting
 
-For API support, contact your system administrator or visit the support portal.
+API requests are rate-limited to prevent abuse:
+
+-   60 requests per minute per user
+
+When rate limit is exceeded, you'll receive a `429 Too Many Requests` response.
+
+---
+
+## 💡 Examples
+
+### cURL Example
+
+```bash
+# Login
+curl -X POST https://ion-app-120e60a9275c.herokuapp.com/api/v2/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"email":"user@example.com","password":"password"}'
+
+# Get Assets
+curl -X GET https://ion-app-120e60a9275c.herokuapp.com/api/v2/assets \
+  -H "Authorization: Bearer YOUR_TOKEN_HERE"
+
+# Create Asset
+curl -X POST https://ion-app-120e60a9275c.herokuapp.com/api/v2/assets \
+  -H "Authorization: Bearer YOUR_TOKEN_HERE" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "New Laptop",
+    "code": "ASSET-100",
+    "category_id": 1
+  }'
+```
+
+### JavaScript Example
+
+```javascript
+// Login
+const login = async () => {
+    const response = await fetch(
+        "https://ion-app-120e60a9275c.herokuapp.com/api/v2/auth/login",
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                email: "user@example.com",
+                password: "password",
+            }),
+        }
+    );
+
+    const data = await response.json();
+    const token = data.data.token;
+    return token;
+};
+
+// Get Assets
+const getAssets = async (token) => {
+    const response = await fetch(
+        "https://ion-app-120e60a9275c.herokuapp.com/api/v2/assets",
+        {
+            headers: {
+                Authorization: `Bearer ${token}`,
+                Accept: "application/json",
+            },
+        }
+    );
+
+    const data = await response.json();
+    return data.data;
+};
+
+// Usage
+const token = await login();
+const assets = await getAssets(token);
+console.log(assets);
+```
+
+### Python Example
+
+```python
+import requests
+
+# Login
+def login():
+    response = requests.post(
+        'https://ion-app-120e60a9275c.herokuapp.com/api/v2/auth/login',
+        json={
+            'email': 'user@example.com',
+            'password': 'password'
+        }
+    )
+    data = response.json()
+    return data['data']['token']
+
+# Get Assets
+def get_assets(token):
+    response = requests.get(
+        'https://ion-app-120e60a9275c.herokuapp.com/api/v2/assets',
+        headers={
+            'Authorization': f'Bearer {token}',
+            'Accept': 'application/json'
+        }
+    )
+    data = response.json()
+    return data['data']
+
+# Usage
+token = login()
+assets = get_assets(token)
+print(assets)
+```
+
+---
+
+## 🔄 Versioning
+
+The API uses URL versioning:
+
+-   **v1**: Legacy API (existing system)
+-   **v2**: New Sanctum-based API (recommended)
+
+---
+
+## 📞 Support
+
+For API support, please contact the development team or create a support ticket in the system.
+
+---
+
+## 📝 Changelog
+
+### v2.0.0 (2024-12-16)
+
+-   Initial release of Sanctum-based API
+-   Authentication endpoints
+-   Asset CRUD operations
+-   Standardized response format
+-   Comprehensive documentation

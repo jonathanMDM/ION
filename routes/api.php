@@ -7,6 +7,8 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\V1\AssetController;
 use App\Http\Controllers\Api\V1\UserController;
 use App\Http\Controllers\Api\V1\CompanyController;
+use App\Http\Controllers\Api\AuthApiController;
+use App\Http\Controllers\Api\AssetApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +27,31 @@ Route::get('/status', [HealthController::class, 'status']);
 // Protected health check (requires authentication)
 Route::middleware(['api.token', 'throttle:60,1'])->get('/health', [HealthController::class, 'health']);
 
-// API v1 routes
+// ========================================
+// NEW: Sanctum-based API (v2)
+// ========================================
+Route::prefix('v2')->group(function () {
+    
+    // Public authentication endpoints
+    Route::post('/auth/login', [AuthApiController::class, 'login']);
+    
+    // Protected endpoints (require Sanctum token)
+    Route::middleware('auth:sanctum')->group(function () {
+        
+        // Auth endpoints
+        Route::post('/auth/logout', [AuthApiController::class, 'logout']);
+        Route::get('/auth/user', [AuthApiController::class, 'user']);
+        Route::post('/auth/refresh', [AuthApiController::class, 'refresh']);
+        
+        // Asset endpoints
+        Route::apiResource('assets', AssetApiController::class);
+        
+    });
+});
+
+// ========================================
+// EXISTING: API v1 routes (keep for backwards compatibility)
+// ========================================
 Route::prefix('v1')->group(function () {
     
     // Authentication endpoints (require web auth)
