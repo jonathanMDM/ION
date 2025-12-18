@@ -143,7 +143,7 @@
             </div>
 
             @if(Auth::user()->isAdmin())
-            <div class="mt-2">
+            <div class="mt-2 pb-20">
                 <div class="px-4 py-2 text-xs text-gray-400 uppercase sidebar-text">Administración</div>
                 <a href="{{ route('users.index') }}" class="flex items-center px-4 py-3 hover:bg-gray-700 {{ request()->routeIs('users.*') ? 'bg-gray-700 border-l-4 border-white' : '' }}" title="Usuarios">
                     <i class="fas fa-users w-6"></i>
@@ -156,18 +156,14 @@
             </div>
             @endif
 
-            <div class="mt-2 border-t border-gray-700 pt-2">
-                @if(Auth::user()->isSuperAdmin())
+            @if(Auth::user()->isSuperAdmin())
+            <div class="mt-2 border-t border-gray-700 pt-2 pb-20">
                 <a href="{{ route('superadmin.api.token.index') }}" class="flex items-center px-4 py-3 hover:bg-gray-700" title="API Token">
                     <i class="fas fa-code w-6"></i>
                     <span class="ml-3 sidebar-text">API Token</span>
                 </a>
-                @endif
-                <a href="{{ route('support.index') }}" class="flex items-center px-4 py-3 hover:bg-gray-700 {{ request()->routeIs('support.*') ? 'bg-gray-700 border-l-4 border-white' : '' }}" title="Soporte">
-                    <i class="fas fa-headset w-6"></i>
-                    <span class="ml-3 sidebar-text">Soporte</span>
-                </a>
             </div>
+            @endif
         </nav>
     </div>
 
