@@ -26,6 +26,31 @@
         </div>
     </div>
 
+    <!-- Search Bar -->
+    <div class="mb-4 bg-white p-4 rounded-lg shadow-md">
+        <div class="flex items-center gap-3">
+            <div class="flex-1 relative">
+                <input 
+                    type="text" 
+                    id="searchInput" 
+                    placeholder="Buscar por ID, Nombre, Ubicación, Categoría..." 
+                    class="w-full px-4 py-2 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-800 focus:border-transparent"
+                >
+                <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+            </div>
+            <button 
+                type="button" 
+                onclick="clearSearch()" 
+                class="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg transition-colors"
+            >
+                <i class="fas fa-times mr-2"></i>Limpiar
+            </button>
+        </div>
+        <p class="text-sm text-gray-500 mt-2">
+            <span id="resultCount">{{ $assets->total() }}</span> activo(s) encontrado(s)
+        </p>
+    </div>
+
 <div class="bg-white shadow-md rounded my-6 overflow-x-auto">
     <table class="w-full table-auto" style="min-width: 1400px;">
         <thead>
@@ -256,6 +281,43 @@ function confirmBulkDelete() {
             document.getElementById('bulkDeleteForm').submit();
         }
     });
+}
+
+// Search functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('searchInput');
+    const tableRows = document.querySelectorAll('tbody tr');
+    const resultCount = document.getElementById('resultCount');
+    const totalRows = tableRows.length;
+
+    searchInput.addEventListener('input', function() {
+        const searchTerm = this.value.toLowerCase().trim();
+        let visibleCount = 0;
+
+        tableRows.forEach(row => {
+            const text = row.textContent.toLowerCase();
+            if (text.includes(searchTerm)) {
+                row.style.display = '';
+                visibleCount++;
+            } else {
+                row.style.display = 'none';
+            }
+        });
+
+        resultCount.textContent = visibleCount;
+    });
+});
+
+function clearSearch() {
+    const searchInput = document.getElementById('searchInput');
+    const tableRows = document.querySelectorAll('tbody tr');
+    const resultCount = document.getElementById('resultCount');
+    
+    searchInput.value = '';
+    tableRows.forEach(row => {
+        row.style.display = '';
+    });
+    resultCount.textContent = tableRows.length;
 }
 </script>
 
