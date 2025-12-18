@@ -31,22 +31,30 @@ class ImportController extends Controller
         try {
             $extension = $file->getClientOriginalExtension();
             
-            // Handle Excel files (.xlsx, .xls) - Process in background
+            // Handle Excel files (.xlsx, .xls) - Process synchronously but optimized
             if (in_array($extension, ['xlsx', 'xls'])) {
                 // Store file temporarily
                 $filePath = $file->store('imports');
                 
-                // Dispatch background job
-                \App\Jobs\ProcessExcelImport::dispatch($filePath, $companyId, Auth::id());
-                
-                \Log::info('Excel import job dispatched', [
+                \Log::info('Excel import started', [
                     'file' => $filePath,
                     'company_id' => $companyId,
                     'user_id' => Auth::id()
                 ]);
                 
-                return redirect()->route('assets.index')->with('info', 
-                    'La importación de Excel se está procesando en segundo plano. Recibirás una notificación cuando termine. Esto puede tomar varios minutos dependiendo del tamaño del archivo.');
+                try {
+                    // Process synchronously with optimizations
+                    $job = new \App\Jobs\ProcessExcelImport($filePath, $companyId, Auth::id());
+                    $job->handle();
+                    
+                    return redirect()->route('assets.index')->with('success', 
+                        'La importación de Excel se completó exitosamente. Revisa la lista de activos.');
+                        
+                } catch (\Exception $e) {
+                    \Log::error('Excel import failed', ['error' => $e->getMessage()]);
+                    return redirect()->route('assets.index')->with('error', 
+                        'Error al importar Excel: ' . $e->getMessage());
+                }
             }
             
             // Handle CSV/TXT files
