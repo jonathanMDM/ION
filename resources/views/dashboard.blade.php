@@ -217,34 +217,34 @@
 <!-- Quick Actions & Recent Activity -->
 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
     <!-- Quick Actions -->
-    <div class="bg-white rounded-lg shadow p-6">
-        <h3 class="text-lg font-semibold text-gray-800 mb-4">Acciones Rápidas</h3>
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900 p-6 transition-colors">
+        <h3 class="text-lg font-semibold text-gray-800 dark:text-white mb-4">Acciones Rápidas</h3>
         <div class="space-y-3">
             @if(Auth::user()->hasPermission('create_assets'))
-            <a href="{{ route('assets.create') }}" class="flex items-center p-3 bg-blue-50 hover:bg-gray-200 rounded-lg transition">
-                <i class="fas fa-plus-circle text-gray-800 mr-3"></i>
-                <span class="text-gray-700">Agregar Nuevo Activo</span>
+            <a href="{{ route('assets.create') }}" class="flex items-center p-3 bg-blue-50 dark:bg-blue-900/20 hover:bg-blue-100 dark:hover:bg-blue-800/30 rounded-lg transition-colors">
+                <i class="fas fa-plus-circle text-blue-600 dark:text-blue-400 mr-3"></i>
+                <span class="text-gray-700 dark:text-gray-300">Agregar Nuevo Activo</span>
             </a>
             @endif
             
             @if(Auth::user()->hasPermission('import_assets'))
-            <a href="{{ route('imports.create') }}" class="flex items-center p-3 bg-green-50 hover:bg-green-100 rounded-lg transition">
-                <i class="fas fa-file-excel text-green-600 mr-3"></i>
-                <span class="text-gray-700">Importar desde Excel</span>
+            <a href="{{ route('imports.create') }}" class="flex items-center p-3 bg-green-50 dark:bg-green-900/20 hover:bg-green-100 dark:hover:bg-green-800/30 rounded-lg transition-colors">
+                <i class="fas fa-file-excel text-green-600 dark:text-green-400 mr-3"></i>
+                <span class="text-gray-700 dark:text-gray-300">Importar desde Excel</span>
             </a>
             @endif
             
             @if(Auth::user()->hasPermission('create_maintenance'))
-            <a href="{{ route('maintenances.create') }}" class="flex items-center p-3 bg-yellow-50 hover:bg-yellow-100 rounded-lg transition">
-                <i class="fas fa-tools text-yellow-600 mr-3"></i>
-                <span class="text-gray-700">Agregar Mantenimiento</span>
+            <a href="{{ route('maintenances.create') }}" class="flex items-center p-3 bg-yellow-50 dark:bg-yellow-900/20 hover:bg-yellow-100 dark:hover:bg-yellow-800/30 rounded-lg transition-colors">
+                <i class="fas fa-tools text-yellow-600 dark:text-yellow-400 mr-3"></i>
+                <span class="text-gray-700 dark:text-gray-300">Agregar Mantenimiento</span>
             </a>
             @endif
             
             @if(Auth::user()->hasPermission('manage_locations'))
-            <a href="{{ route('locations.create') }}" class="flex items-center p-3 bg-purple-50 hover:bg-purple-100 rounded-lg transition">
-                <i class="fas fa-map-marker-alt text-purple-600 mr-3"></i>
-                <span class="text-gray-700">Agregar Ubicación</span>
+            <a href="{{ route('locations.create') }}" class="flex items-center p-3 bg-purple-50 dark:bg-purple-900/20 hover:bg-purple-100 dark:hover:bg-purple-800/30 rounded-lg transition-colors">
+                <i class="fas fa-map-marker-alt text-purple-600 dark:text-purple-400 mr-3"></i>
+                <span class="text-gray-700 dark:text-gray-300">Agregar Ubicación</span>
             </a>
             @endif
             
@@ -261,29 +261,29 @@
     </div>
 
     <!-- Recent Assets -->
-    <div class="lg:col-span-2 bg-white rounded-lg shadow p-6">
-        <h3 class="text-lg font-semibold text-gray-800 mb-4">Activos Recientes</h3>
+    <div class="lg:col-span-2 bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900 p-6 transition-colors">
+        <h3 class="text-lg font-semibold text-gray-800 dark:text-white mb-4">Activos Recientes</h3>
         @if($recent_assets->count() > 0)
             <div class="overflow-x-auto">
                 <table class="min-w-full">
                     <thead>
-                        <tr class="border-b border-gray-200">
-                            <th class="text-left py-2 text-sm font-semibold text-gray-600">Nombre</th>
-                            <th class="text-left py-2 text-sm font-semibold text-gray-600">Ubicación</th>
-                            <th class="text-left py-2 text-sm font-semibold text-gray-600">Categoría</th>
-                            <th class="text-center py-2 text-sm font-semibold text-gray-600">Estado</th>
+                        <tr class="border-b border-gray-200 dark:border-gray-700">
+                            <th class="text-left py-2 text-sm font-semibold text-gray-600 dark:text-gray-400">Nombre</th>
+                            <th class="text-left py-2 text-sm font-semibold text-gray-600 dark:text-gray-400">Ubicación</th>
+                            <th class="text-left py-2 text-sm font-semibold text-gray-600 dark:text-gray-400">Categoría</th>
+                            <th class="text-center py-2 text-sm font-semibold text-gray-600 dark:text-gray-400">Estado</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($recent_assets as $asset)
                         <tr class="border-b border-gray-100 hover:bg-gray-50">
                             <td class="py-3">
-                                <a href="{{ route('assets.show', $asset->id) }}" class="text-gray-800 hover:text-gray-900 font-medium">
+                                <a href="{{ route('assets.show', $asset->id) }}" class="text-gray-800 dark:text-white hover:text-gray-900 dark:hover:text-gray-300 font-medium transition-colors">
                                     {{ $asset->name }}
                                 </a>
                             </td>
-                            <td class="py-3 text-sm text-gray-600">{{ $asset->location->name }}</td>
-                            <td class="py-3 text-sm text-gray-600">{{ $asset->subcategory->category->name }}</td>
+                            <td class="py-3 text-sm text-gray-600 dark:text-gray-400">{{ $asset->location->name }}</td>
+                            <td class="py-3 text-sm text-gray-600 dark:text-gray-400">{{ $asset->subcategory->category->name }}</td>
                             <td class="py-3 text-center">
                                 <span class="px-2 py-1 text-xs rounded-full 
                                     {{ $asset->status == 'active' ? 'bg-green-100 text-green-800' : '' }}
@@ -298,10 +298,10 @@
                 </table>
             </div>
         @else
-            <p class="text-gray-500 text-center py-4">
+            <p class="text-gray-500 dark:text-gray-400 text-center py-4">
                 No se encontraron activos.
                 @if(Auth::user()->hasPermission('create_assets'))
-                    <a href="{{ route('assets.create') }}" class="text-gray-800 hover:text-gray-900">Agrega tu primer activo</a>
+                    <a href="{{ route('assets.create') }}" class="text-gray-800 dark:text-white hover:text-gray-900 dark:hover:text-gray-300">Agrega tu primer activo</a>
                 @endif
             </p>
         @endif
@@ -310,31 +310,31 @@
 
 <!-- Additional Stats -->
 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
-    <div class="bg-white rounded-lg shadow p-6">
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900 p-6 transition-colors">
         <div class="flex items-center justify-between">
             <div>
-                <p class="text-sm text-gray-600 mb-1">Ubicaciones</p>
-                <p class="text-2xl font-bold text-gray-800">{{ $stats['total_locations'] }}</p>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mb-1">Ubicaciones</p>
+                <p class="text-2xl font-bold text-gray-800 dark:text-white">{{ $stats['total_locations'] }}</p>
             </div>
             <i class="fas fa-map-marker-alt text-gray-400 text-xl"></i>
         </div>
     </div>
 
-    <div class="bg-white rounded-lg shadow p-6">
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900 p-6 transition-colors">
         <div class="flex items-center justify-between">
             <div>
-                <p class="text-sm text-gray-600 mb-1">Categorías</p>
-                <p class="text-2xl font-bold text-gray-800">{{ $stats['total_categories'] }}</p>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mb-1">Categorías</p>
+                <p class="text-2xl font-bold text-gray-800 dark:text-white">{{ $stats['total_categories'] }}</p>
             </div>
             <i class="fas fa-folder text-gray-400 text-xl"></i>
         </div>
     </div>
 
-    <div class="bg-white rounded-lg shadow p-6">
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900 p-6 transition-colors">
         <div class="flex items-center justify-between">
             <div>
-                <p class="text-sm text-gray-600 mb-1">Registros de Mantenimiento</p>
-                <p class="text-2xl font-bold text-gray-800">{{ $stats['total_maintenances'] }}</p>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mb-1">Registros de Mantenimiento</p>
+                <p class="text-2xl font-bold text-gray-800 dark:text-white">{{ $stats['total_maintenances'] }}</p>
             </div>
             <i class="fas fa-wrench text-gray-400 text-xl"></i>
         </div>

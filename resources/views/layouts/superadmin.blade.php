@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +8,11 @@
     <link rel="manifest" href="/manifest.json">
     <meta name="theme-color" content="#1f2937">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -22,7 +27,7 @@
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<body class="bg-gray-100">
+<body class="bg-gray-100 dark:bg-gray-900 transition-colors duration-200">
     <!-- Mobile Overlay -->
     <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden md:hidden" onclick="toggleMobileSidebar()"></div>
 
@@ -92,18 +97,23 @@
     <div id="main-content" class="ml-0 md:ml-64 transition-all duration-300 flex flex-col min-h-screen">
         <div class="flex-1 flex flex-col">
         <!-- Top Bar -->
-        <div class="bg-white shadow-sm border-b border-gray-200 px-4 md:px-6 py-4">
+        <header class="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700 px-4 md:px-6 py-4 transition-colors">
             <div class="flex justify-between items-center">
                 <div class="flex items-center">
                     <button onclick="toggleMobileSidebar()" class="mr-4 text-gray-600 md:hidden">
                         <i class="fas fa-bars text-xl"></i>
                     </button>
-                    <h2 class="text-xl md:text-2xl font-semibold text-gray-800">@yield('page-title', 'Panel Superadmin')</h2>
+                    <h2 class="text-xl md:text-2xl font-semibold text-gray-800 dark:text-white">@yield('page-title', 'Panel Superadmin')</h2>
                 </div>
                 <div class="flex items-center space-x-4">
+                    <!-- Dark Mode Toggle -->
+                    <button id="darkModeToggle" class="p-2 text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors focus:outline-none" title="Cambiar tema">
+                        <i id="darkModeIcon" class="fas fa-moon text-xl"></i>
+                    </button>
+                    
                     <!-- Notifications Dropdown -->
                     <div class="relative">
-                        <button id="notification-btn" class="text-gray-500 hover:text-gray-700 relative focus:outline-none">
+                        <button id="notification-btn" class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-white relative focus:outline-none p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
                             <i class="fas fa-bell text-xl"></i>
                             @php
                                 $unreadCount = Auth::user()->notifications()->unread()->count();
@@ -117,13 +127,13 @@
 
                         <!-- Dropdown -->
                         <div id="notification-dropdown" 
-                             class="hidden absolute right-0 mt-2 w-[calc(100vw-1rem)] min-w-[320px] bg-white rounded-lg shadow-lg border border-gray-200 z-50 sm:w-[32rem] origin-top-right transform transition-all duration-200">
-                            <div class="p-4 border-b border-gray-200 flex justify-between items-center">
-                                <h3 class="font-semibold text-gray-800">Notificaciones</h3>
+                             class="hidden absolute right-0 mt-2 w-[calc(100vw-1rem)] min-w-[320px] bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 z-50 sm:w-[32rem] origin-top-right transform transition-all duration-200">
+                            <div class="p-4 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
+                                <h3 class="font-semibold text-gray-800 dark:text-white">Notificaciones</h3>
                                 @if($unreadCount > 0)
                                 <form action="{{ route('notifications.read-all') }}" method="POST" class="inline">
                                     @csrf
-                                    <button type="submit" class="text-xs text-gray-600 hover:text-gray-800">
+                                    <button type="submit" class="text-xs text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white">
                                         Marcar todas como leídas
                                     </button>
                                 </form>
@@ -137,7 +147,7 @@
                                 @forelse($recentNotifications as $notification)
                                     <a href="{{ route('notifications.read', $notification) }}" 
                                        onclick="event.preventDefault(); document.getElementById('read-form-{{ $notification->id }}').submit();"
-                                       class="block px-5 py-4 hover:bg-gray-50 border-b border-gray-100 {{ $notification->read_at ? 'opacity-60' : 'bg-blue-50' }}">
+                                       class="block px-5 py-4 hover:bg-gray-50 dark:hover:bg-gray-700 border-b border-gray-100 dark:border-gray-700 {{ $notification->read_at ? 'opacity-60' : 'bg-blue-50 dark:bg-blue-900/20' }}">
                                         <div class="flex items-start">
                                             <div class="flex-shrink-0">
                                                 @php
@@ -183,34 +193,34 @@
 
                     <!-- User Menu Dropdown -->
                     <div class="relative">
-                        <button id="user-menu-btn" class="flex items-center text-sm focus:outline-none hover:bg-gray-50 rounded-lg p-2 transition-colors">
+                        <button id="user-menu-btn" class="flex items-center text-sm focus:outline-none hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg p-2 transition-colors">
                             <div class="flex items-center space-x-2">
                                 <div class="w-8 h-8 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-full flex items-center justify-center text-white font-bold">
                                     {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
                                 </div>
                                 <div class="hidden md:block text-left">
-                                    <div class="text-sm font-medium text-gray-700">{{ Auth::user()->name }}</div>
-                                    <div class="text-xs text-gray-500">Superadministrador</div>
+                                    <div class="text-sm font-medium text-gray-700 dark:text-gray-300">{{ Auth::user()->name }}</div>
+                                    <div class="text-xs text-gray-500 dark:text-gray-400">Superadministrador</div>
                                 </div>
                                 <i class="fas fa-chevron-down text-gray-400 text-xs"></i>
                             </div>
                         </button>
 
                         <!-- Dropdown Menu -->
-                        <div id="user-menu-dropdown" class="hidden absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-lg border border-gray-100 py-1 z-50 origin-top-right transition-all duration-200">
+                        <div id="user-menu-dropdown" class="hidden absolute right-0 mt-2 w-56 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-100 dark:border-gray-700 py-1 z-50 origin-top-right transition-all duration-200">
                             <!-- User Info -->
-                            <div class="px-4 py-3 border-b border-gray-100">
-                                <p class="text-sm font-medium text-gray-900">{{ Auth::user()->name }}</p>
-                                <p class="text-xs text-gray-500 truncate">{{ Auth::user()->email }}</p>
+                             <div class="px-4 py-3 border-b border-gray-100 dark:border-gray-700">
+                                <p class="text-sm font-medium text-gray-900 dark:text-white">{{ Auth::user()->name }}</p>
+                                <p class="text-xs text-gray-500 dark:text-gray-400 truncate">{{ Auth::user()->email }}</p>
                             </div>
 
                             <!-- Logout -->
                             <div class="py-1">
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
-                                    <button type="submit" class="flex items-center w-full px-4 py-2 text-sm text-red-600 hover:bg-red-50">
+                                    <button type="submit" class="flex items-center w-full px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors">
                                         <i class="fas fa-sign-out-alt w-5"></i>
-                                        <span class="ml-3">Cerrar Sesión</span>
+                                        <span class="ml-3 font-medium">Cerrar Sesión</span>
                                     </button>
                                 </form>
                             </div>
@@ -227,11 +237,11 @@
         </div>
 
         <!-- Footer -->
-        <footer class="mt-auto py-6 px-4 md:px-6 border-t border-gray-200 bg-gray-50">
+        <footer class="mt-auto py-6 px-4 md:px-6 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 transition-colors">
             <div class="max-w-7xl mx-auto w-full">
                 <div class="flex flex-col md:flex-row justify-between items-center gap-4">
                     <div class="text-center md:text-left">
-                        <p class="text-sm text-gray-600">
+                        <p class="text-sm text-gray-600 dark:text-gray-400">
                             © {{ date('Y') }} <strong>ION</strong>. Todos los derechos reservados.
                         </p>
                     </div>
@@ -309,6 +319,25 @@
                 });
             }
         });
+        // Dark Mode Logic
+        (function() {
+            const toggle = document.getElementById('darkModeToggle');
+            const icon = document.getElementById('darkModeIcon');
+            const html = document.documentElement;
+            if (toggle && icon) {
+                const theme = localStorage.getItem('theme') || 'light';
+                if (theme === 'dark') {
+                    html.classList.add('dark');
+                    icon.className = 'fas fa-sun text-xl';
+                }
+                toggle.onclick = () => {
+                    html.classList.toggle('dark');
+                    const isDark = html.classList.contains('dark');
+                    icon.className = isDark ? 'fas fa-sun text-xl' : 'fas fa-moon text-xl';
+                    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+                };
+            }
+        })();
     </script>
     <script>
         // User Menu Dropdown

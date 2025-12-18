@@ -254,13 +254,13 @@
                     
                     <!-- User Menu -->
                     <div class="relative ml-3">
-                        <button id="user-menu-btn" class="flex items-center text-sm focus:outline-none hover:bg-gray-50 rounded-lg p-2 transition-colors">
+                        <button id="user-menu-btn" class="flex items-center text-sm focus:outline-none hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg p-2 transition-colors">
                             <div class="flex flex-col items-end mr-3 hidden md:flex">
-                                <span class="font-bold text-gray-800 text-xs">
+                                <span class="font-bold text-gray-800 dark:text-white text-xs transition-colors">
                                     {{ Auth::user()->company ? Str::limit(Auth::user()->company->name, 20) : 'Sin Empresa' }}
                                 </span>
                                 <div class="flex items-center">
-                                    <span class="text-gray-600">
+                                    <span class="text-gray-600 dark:text-gray-400 transition-colors">
                                         @php
                                             $names = explode(' ', Auth::user()->name);
                                             $firstName = $names[0] ?? '';
@@ -284,20 +284,20 @@
                         </button>
 
                         <!-- User Dropdown -->
-                        <div id="user-menu-dropdown" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-100 py-1 z-50 origin-top-right transition-all duration-200">
-                            <div class="px-4 py-3 border-b border-gray-50 md:hidden">
-                                <p class="text-sm font-medium text-gray-900">{{ Auth::user()->name }}</p>
-                                <p class="text-xs text-gray-500 truncate">{{ Auth::user()->email }}</p>
+                        <div id="user-menu-dropdown" class="hidden absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-100 dark:border-gray-700 py-1 z-50 origin-top-right transition-all duration-200">
+                            <div class="px-4 py-3 border-b border-gray-50 dark:border-gray-700 md:hidden">
+                                <p class="text-sm font-medium text-gray-900 dark:text-white">{{ Auth::user()->name }}</p>
+                                <p class="text-xs text-gray-500 dark:text-gray-400 truncate">{{ Auth::user()->email }}</p>
                             </div>
                             
-                            <a href="{{ route('profile.show') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900">
+                            <a href="{{ route('profile.show') }}" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white transition-colors">
                                 <i class="fas fa-user-circle mr-2 text-gray-400 w-4"></i> Mi Perfil
                             </a>
                             <a href="{{ route('profile.settings') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900">
                                 <i class="fas fa-cog mr-2 text-gray-400 w-4"></i> Configuración
                             </a>
                             
-                            <div class="border-t border-gray-100 my-1"></div>
+                            <div class="border-t border-gray-100 dark:border-gray-700 my-1"></div>
                             
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
