@@ -12,20 +12,18 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        // Excluir la empresa del superadmin (company_id null o la primera empresa creada)
-        // Asumiendo que la empresa del superadmin tiene un identificador específico
-        // o es la que no tiene company_id asignado a usuarios
+        // Obtener IDs de empresas que solo tienen superadmins o no tienen usuarios
+        $superadminCompanyIds = Company::whereDoesntHave('users', function($query) {
+            $query->where('role', '!=', 'superadmin');
+        })->pluck('id');
         
         $stats = [
-            // Solo contar empresas de clientes (excluir empresa del superadmin)
-            'total_companies' => Company::whereHas('users', function($query) {
-                $query->where('role', '!=', 'superadmin');
-            })->count(),
+            // Solo contar empresas de clientes (excluir empresas sin usuarios o solo con superadmin)
+            'total_companies' => Company::whereNotIn('id', $superadminCompanyIds)->count(),
             
             'active_companies' => Company::where('status', 'active')
-                ->whereHas('users', function($query) {
-                    $query->where('role', '!=', 'superadmin');
-                })->count(),
+                ->whereNotIn('id', $superadminCompanyIds)
+                ->count(),
             
             // Solo contar usuarios que NO son superadmin
             'total_users' => User::where('role', '!=', 'superadmin')->count(),
@@ -33,10 +31,11 @@ class DashboardController extends Controller
             'total_assets' => Asset::count(),
         ];
 
-        // Solo mostrar empresas de clientes (no la del superadmin)
-        $recent_companies = Company::whereHas('users', function($query) {
-            $query->where('role', '!=', 'superadmin');
-        })->latest()->take(10)->get();
+        // Solo mostrar empresas de clientes (no las del superadmin)
+        $recent_companies = Company::whereNotIn('id', $superadminCompanyIds)
+            ->latest()
+            ->take(10)
+            ->get();
 
         return view('superadmin.dashboard', compact('stats', 'recent_companies'));
     }
