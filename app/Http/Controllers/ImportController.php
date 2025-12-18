@@ -249,6 +249,25 @@ class ImportController extends Controller
             }
         }
         
+        // Map status from Excel to valid database values
+        $statusMapping = [
+            'OPERACION' => 'in_use',
+            'OPERACIÓN' => 'in_use',
+            'EN USO' => 'in_use',
+            'DISPONIBLE' => 'available',
+            'ACTIVO' => 'available',
+            'ACTIVE' => 'available',
+            'MANTENIMIENTO' => 'maintenance',
+            'BAJA' => 'retired',
+            'RETIRADO' => 'retired',
+            'PERDIDO' => 'lost',
+            'DAÑADO' => 'damaged',
+            'DAMAGED' => 'damaged',
+        ];
+        
+        $rawStatus = !empty($row[6]) ? strtoupper(trim($row[6])) : 'DISPONIBLE';
+        $mappedStatus = $statusMapping[$rawStatus] ?? 'available';
+        
         // Map columns to asset fields
         $assetData = [
             'custom_id' => $customId,
@@ -257,7 +276,7 @@ class ImportController extends Controller
             'quantity' => !empty($row[3]) ? (int)$row[3] : 1,
             'value' => !empty($row[4]) ? (float)$row[4] : 0,
             'purchase_date' => $purchaseDate,
-            'status' => !empty($row[6]) ? $row[6] : 'active',
+            'status' => $mappedStatus,
             'municipality_plate' => $row[11] ?? null,
             'notes' => $row[12] ?? null,
             'company_id' => $companyId,
