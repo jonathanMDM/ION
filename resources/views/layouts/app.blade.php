@@ -187,7 +187,7 @@
         </div>
         @endif
         <!-- Top Bar -->
-        <header class="bg-white dark:bg-gray-800 shadow-sm sticky top-0 z-30 transition-colors duration-200 border-b border-gray-200 px-4 md:px-6 py-4">
+        <header class="bg-white dark:bg-gray-800 shadow-sm transition-colors duration-200 border-b border-gray-200 dark:border-gray-700 px-4 md:px-6 py-4">
             <div class="flex justify-between items-center">
                 <div class="flex items-center">
                     <button onclick="toggleMobileSidebar()" class="mr-4 text-gray-600 md:hidden">
