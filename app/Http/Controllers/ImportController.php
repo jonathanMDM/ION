@@ -36,7 +36,7 @@ class ImportController extends Controller
                 // Use file directly from upload
                 
                 \Log::info('Excel import started', [
-                    'file' => $filePath,
+                    'filename' => $file->getClientOriginalName(),
                     'company_id' => $companyId,
                     'user_id' => Auth::id()
                 ]);
