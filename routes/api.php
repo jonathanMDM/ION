@@ -44,19 +44,49 @@ Route::prefix('v2')->group(function () {
         Route::post('/auth/refresh', [AuthApiController::class, 'refresh']);
         
         // Asset endpoints
-        Route::apiResource('assets', AssetApiController::class);
+        Route::apiResource('assets', AssetApiController::class)->names([
+            'index' => 'api.assets.index',
+            'store' => 'api.assets.store',
+            'show' => 'api.assets.show',
+            'update' => 'api.assets.update',
+            'destroy' => 'api.assets.destroy',
+        ]);
         
         // Category endpoints
-        Route::apiResource('categories', \App\Http\Controllers\Api\CategoryApiController::class);
+        Route::apiResource('categories', \App\Http\Controllers\Api\CategoryApiController::class)->names([
+            'index' => 'api.categories.index',
+            'store' => 'api.categories.store',
+            'show' => 'api.categories.show',
+            'update' => 'api.categories.update',
+            'destroy' => 'api.categories.destroy',
+        ]);
         
         // Location endpoints
-        Route::apiResource('locations', \App\Http\Controllers\Api\LocationApiController::class);
+        Route::apiResource('locations', \App\Http\Controllers\Api\LocationApiController::class)->names([
+            'index' => 'api.locations.index',
+            'store' => 'api.locations.store',
+            'show' => 'api.locations.show',
+            'update' => 'api.locations.update',
+            'destroy' => 'api.locations.destroy',
+        ]);
         
         // Maintenance endpoints
-        Route::apiResource('maintenances', \App\Http\Controllers\Api\MaintenanceApiController::class);
+        Route::apiResource('maintenances', \App\Http\Controllers\Api\MaintenanceApiController::class)->names([
+            'index' => 'api.maintenances.index',
+            'store' => 'api.maintenances.store',
+            'show' => 'api.maintenances.show',
+            'update' => 'api.maintenances.update',
+            'destroy' => 'api.maintenances.destroy',
+        ]);
         
         // User endpoints
-        Route::apiResource('users', \App\Http\Controllers\Api\UserApiController::class);
+        Route::apiResource('users', \App\Http\Controllers\Api\UserApiController::class)->names([
+            'index' => 'api.users.index',
+            'store' => 'api.users.store',
+            'show' => 'api.users.show',
+            'update' => 'api.users.update',
+            'destroy' => 'api.users.destroy',
+        ]);
         
     });
 });
