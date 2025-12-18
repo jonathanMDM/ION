@@ -9,7 +9,9 @@
         @method('PUT')
         
         <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="asset_id">Activo</label>
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="asset_id">
+                <i class="fas fa-search mr-2"></i>Buscar Activo
+            </label>
             <select name="asset_id" id="asset_id" class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
                 @foreach($assets as $asset)
                     <option value="{{ $asset->id }}" 
@@ -20,7 +22,12 @@
                     </option>
                 @endforeach
             </select>
-            <p class="text-gray-500 text-xs mt-1">Escribe para buscar por ID, nombre o ubicación</p>
+            <div class="mt-2 p-2 bg-blue-50 border border-blue-200 rounded">
+                <p class="text-blue-700 text-sm">
+                    <i class="fas fa-info-circle mr-1"></i>
+                    <strong>Tip:</strong> Escribe cualquier parte del ID, nombre o ubicación del activo para buscarlo rápidamente
+                </p>
+            </div>
         </div>
 
         <div class="mb-4">
