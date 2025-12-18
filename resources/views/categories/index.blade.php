@@ -6,7 +6,7 @@
     @method('DELETE')
     
     <div class="mb-6 flex flex-col md:flex-row md:items-center gap-4">
-        <h2 class="text-2xl font-bold text-gray-800 md:flex-1">Categorías</h2>
+        <h2 class="text-2xl font-bold text-gray-800 dark:text-white md:flex-1">Categorías</h2>
         <div class="flex flex-col md:flex-row gap-3 shrink-0">
             <!-- Bulk delete button (hidden by default) -->
             <button type="button" id="bulkDeleteBtn" class="hidden bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded text-center whitespace-nowrap" onclick="confirmBulkDelete('categoría')">
@@ -19,10 +19,10 @@
         </div>
     </div>
 
-    <div class="bg-white shadow-md rounded my-6 overflow-x-auto">
+    <div class="bg-white dark:bg-gray-800 shadow-md rounded my-6 overflow-x-auto">
         <table class="min-w-full w-full table-auto">
             <thead>
-                <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+                <tr class="bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300 uppercase text-sm leading-normal">
                     <th class="py-3 px-6 text-center">
                         <input type="checkbox" id="selectAll" class="form-checkbox h-5 w-5 text-gray-600" onchange="toggleAll(this)">
                     </th>

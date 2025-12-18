@@ -33,10 +33,10 @@
     </p>
 </div>
 
-<div class="bg-white shadow-md rounded my-6 overflow-x-auto">
+<div class="bg-white dark:bg-gray-800 shadow-md rounded my-6 overflow-x-auto">
     <table class="min-w-full w-full table-auto">
         <thead>
-            <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+            <tr class="bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300 uppercase text-sm leading-normal">
                 <th class="py-3 px-6 text-left whitespace-nowrap">Activo</th>
                 <th class="py-3 px-6 text-left whitespace-nowrap">Fecha</th>
                 <th class="py-3 px-6 text-left whitespace-nowrap">Descripción</th>
