@@ -6,12 +6,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 use App\Traits\LogActivity;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, LogActivity, \App\Traits\BelongsToCompany;
+    use HasFactory, Notifiable, HasApiTokens, LogActivity, \App\Traits\BelongsToCompany;
 
     /**
      * The "booted" method of the model.
