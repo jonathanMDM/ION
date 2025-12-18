@@ -133,11 +133,6 @@
                     <span class="ml-3 sidebar-text">Movimientos</span>
                 </a>
                 @endif
-                <!-- Support Tickets -->
-                <a href="{{ route('support.index') }}" class="flex items-center px-4 py-3 hover:bg-gray-700 {{ request()->routeIs('support.*') ? 'bg-gray-700 border-l-4 border-white' : '' }}" title="Soporte">
-                    <i class="fas fa-headset w-6"></i>
-                    <span class="ml-3 sidebar-text">Soporte</span>
-                </a>
 
                 @if(Auth::user()->isAdmin() || Auth::user()->hasPermission('view_employees'))
                 <a href="{{ route('employees.index') }}" class="flex items-center px-4 py-3 hover:bg-gray-700 {{ request()->routeIs('employees.*') ? 'bg-gray-700 border-l-4 border-white' : '' }}" title="Empleados">
@@ -719,16 +714,29 @@
         });
     </script>
 
-    <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/573127168837?text=Hola,%20necesito%20ayuda%20con%20ION%20Inventory" 
-       target="_blank" 
-       class="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white rounded-full p-4 shadow-lg hover:shadow-xl transition-all duration-300 z-50 flex items-center justify-center group"
-       title="Contactar por WhatsApp">
-        <i class="fab fa-whatsapp text-3xl"></i>
-        <span class="absolute right-full mr-3 bg-gray-800 text-white px-3 py-2 rounded-lg text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-            ¿Necesitas ayuda? Escríbenos
-        </span>
-    </a>
+    <!-- Floating Action Buttons -->
+    <div class="fixed bottom-6 right-6 flex flex-col gap-3 z-50">
+        <!-- Support Button -->
+        <a href="{{ route('support.index') }}" 
+           class="bg-blue-600 hover:bg-blue-700 text-white rounded-full w-14 h-14 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group relative"
+           title="Soporte Técnico">
+            <i class="fas fa-headset text-xl"></i>
+            <span class="absolute right-full mr-3 bg-gray-800 text-white px-3 py-2 rounded-lg text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                Soporte Técnico
+            </span>
+        </a>
+        
+        <!-- WhatsApp Button -->
+        <a href="https://wa.me/573127168837?text=Hola,%20necesito%20ayuda%20con%20ION%20Inventory" 
+           target="_blank" 
+           class="bg-green-500 hover:bg-green-600 text-white rounded-full w-14 h-14 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group relative"
+           title="WhatsApp">
+            <i class="fab fa-whatsapp text-xl"></i>
+            <span class="absolute right-full mr-3 bg-gray-800 text-white px-3 py-2 rounded-lg text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                Chat por WhatsApp
+            </span>
+        </a>
+    </div>
 
 </body>
 </html>
