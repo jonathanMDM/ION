@@ -49,7 +49,14 @@ class DashboardController extends Controller
             'cache_driver' => config('cache.default'),
         ];
 
-        $companies = Company::with('users')->latest()->get();
+        // Excluir empresas que solo tienen superadmins o no tienen usuarios
+        $companies = Company::with('users')
+            ->where('nit', '!=', 'N/A')
+            ->whereHas('users', function($query) {
+                $query->where('role', '!=', 'superadmin');
+            })
+            ->latest()
+            ->get();
 
         return view('superadmin.system-status', compact('systemInfo', 'companies'));
     }
