@@ -43,16 +43,14 @@ class ProcessExcelImport implements ShouldQueue
                 'company_id' => $this->companyId
             ]);
 
-            // Load Excel file from storage
-            $fullPath = storage_path('app/' . $this->filePath);
-            
-            if (!file_exists($fullPath)) {
-                \Log::error('Excel file not found', ['path' => $fullPath]);
+            // Use file path directly
+            if (!file_exists($this->filePath)) {
+                \Log::error('Excel file not found', ['path' => $this->filePath]);
                 return;
             }
 
             // Use PhpSpreadsheet to read Excel file
-            $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($fullPath);
+            $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($this->filePath);
             $worksheet = $spreadsheet->getActiveSheet();
             $rows = $worksheet->toArray();
             

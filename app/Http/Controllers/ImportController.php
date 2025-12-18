@@ -33,8 +33,7 @@ class ImportController extends Controller
             
             // Handle Excel files (.xlsx, .xls) - Process synchronously but optimized
             if (in_array($extension, ['xlsx', 'xls'])) {
-                // Store file temporarily
-                $filePath = $file->store('imports');
+                // Use file directly from upload
                 
                 \Log::info('Excel import started', [
                     'file' => $filePath,
@@ -44,7 +43,7 @@ class ImportController extends Controller
                 
                 try {
                     // Process synchronously with optimizations
-                    $job = new \App\Jobs\ProcessExcelImport($filePath, $companyId, Auth::id());
+                    $job = new \App\Jobs\ProcessExcelImport($file->getRealPath(), $companyId, Auth::id());
                     $job->handle();
                     
                     return redirect()->route('assets.index')->with('success', 
