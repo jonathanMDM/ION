@@ -187,7 +187,7 @@
         </div>
         @endif
         <!-- Top Bar -->
-        <div class="bg-white shadow-sm border-b border-gray-200 px-4 md:px-6 py-4">
+        <header class="bg-white dark:bg-gray-800 shadow-sm sticky top-0 z-30 transition-colors duration-200 border-b border-gray-200 px-4 md:px-6 py-4">
             <div class="flex justify-between items-center">
                 <div class="flex items-center">
                     <button onclick="toggleMobileSidebar()" class="mr-4 text-gray-600 md:hidden">
@@ -204,13 +204,13 @@
                                 name="q" 
                                 id="globalSearch"
                                 placeholder="Buscar... (Ctrl+K)" 
-                                class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent"
+                                class="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 focus:border-transparent"
                             >
                             <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
                         </form>
                     </div>
                     
-                    <h2 class="text-xl md:text-2xl font-semibold text-gray-800">@yield('page-title', 'Panel')</h2>
+                    <h2 class="text-xl md:text-2xl font-semibold text-gray-800 dark:text-white">@yield('page-title', 'Panel')</h2>
                 </div>
                 <div class="flex items-center space-x-2 md:space-x-4">
                     <!-- PWA Install Button -->
@@ -225,15 +225,15 @@
                     
                     <!-- Notifications Bell -->
                     <div class="relative ml-3">
-                        <button id="notifications-btn" class="relative p-2 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-lg transition-colors focus:outline-none">
+                        <button id="notifications-btn" class="relative p-2 text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors focus:outline-none">
                             <i class="fas fa-bell text-xl"></i>
                             <span id="notification-badge" class="hidden absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full"></span>
                         </button>
 
                         <!-- Notifications Dropdown -->
-                        <div id="notifications-dropdown" class="hidden absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-xl border border-gray-200 z-50 max-h-96 overflow-hidden">
-                            <div class="px-4 py-3 border-b border-gray-200 flex items-center justify-between">
-                                <h3 class="text-sm font-semibold text-gray-800">Notificaciones</h3>
+                        <div id="notifications-dropdown" class="hidden absolute right-0 mt-2 w-80 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 z-50 max-h-96 overflow-hidden">
+                            <div class="px-4 py-3 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between">
+                                <h3 class="text-sm font-semibold text-gray-800 dark:text-white">Notificaciones</h3>
                                 <button id="mark-all-read" class="text-xs text-indigo-600 hover:text-indigo-800 font-medium">
                                     Marcar todas como leídas
                                 </button>
