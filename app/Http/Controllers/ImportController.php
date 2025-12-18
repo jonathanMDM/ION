@@ -302,6 +302,16 @@ class ImportController extends Controller
         $rawStatus = !empty($row[6]) ? strtoupper(trim($row[6])) : 'DISPONIBLE';
         $mappedStatus = $statusMapping[$rawStatus] ?? 'available';
         
+        // Debug log for first few rows
+        if ($rowNumber <= 5) {
+            \Log::info("Status mapping debug", [
+                'row' => $rowNumber,
+                'raw_status' => $row[6] ?? 'empty',
+                'uppercase_status' => $rawStatus,
+                'mapped_status' => $mappedStatus
+            ]);
+        }
+        
         // Map columns to asset fields
         $assetData = [
             'custom_id' => $customId,
