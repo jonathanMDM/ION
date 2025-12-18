@@ -137,6 +137,25 @@ class ImportController extends Controller
             $header = array_shift($rows);
             \Log::info('Excel Headers', ['headers' => $header]);
             
+            // Pre-load existing custom_ids for this company to avoid repeated queries
+            $existingCustomIds = \App\Models\Asset::where('company_id', $companyId)
+                ->pluck('custom_id')
+                ->flip()
+                ->toArray();
+            
+            // Pre-load existing locations, categories, subcategories, suppliers
+            $existingLocations = \App\Models\Location::where('company_id', $companyId)
+                ->pluck('id', 'name')
+                ->toArray();
+            
+            $existingCategories = \App\Models\Category::where('company_id', $companyId)
+                ->pluck('id', 'name')
+                ->toArray();
+            
+            $existingSuppliers = \App\Models\Supplier::where('company_id', $companyId)
+                ->pluck('id', 'name')
+                ->toArray();
+            
             $imported = 0;
             $errors = [];
             $rowNumber = 1;
@@ -146,23 +165,38 @@ class ImportController extends Controller
                 
                 // Skip empty rows
                 if (empty(array_filter($row))) {
-                    \Log::warning("Skipping empty row $rowNumber");
                     continue;
                 }
                 
-                \Log::info("Processing Excel row $rowNumber", ['custom_id' => $row[0] ?? 'N/A', 'name' => $row[1] ?? 'N/A']);
+                // Log every 100 rows to avoid too much logging
+                if ($rowNumber % 100 == 0) {
+                    \Log::info("Processing row $rowNumber");
+                }
                 
                 try {
-                    $result = $this->processRow($row, $rowNumber, $companyId);
+                    $result = $this->processRow(
+                        $row, 
+                        $rowNumber, 
+                        $companyId, 
+                        $existingCustomIds,
+                        $existingLocations,
+                        $existingCategories,
+                        $existingSuppliers
+                    );
+                    
                     if ($result['success']) {
                         $imported++;
+                        // Add newly created custom_id to the cache
+                        if (isset($result['custom_id'])) {
+                            $existingCustomIds[$result['custom_id']] = true;
+                        }
                     } else {
                         $errors[] = $result['error'];
                     }
                 } catch (\Exception $e) {
                     $error = "Fila $rowNumber: " . $e->getMessage();
                     $errors[] = $error;
-                    \Log::error($error, ['exception' => $e]);
+                    \Log::error($error);
                 }
             }
             
@@ -191,7 +225,7 @@ class ImportController extends Controller
         }
     }
     
-    private function processRow($row, $rowNumber, $companyId)
+    private function processRow($row, $rowNumber, $companyId, &$existingCustomIds, &$existingLocations, &$existingCategories, &$existingSuppliers)
     {
         // Validate required fields
         if (empty($row[0]) || empty($row[1])) {
@@ -201,11 +235,11 @@ class ImportController extends Controller
             ];
         }
                     
-        // Check if custom_id already exists and make it unique if needed
+        // Check if custom_id already exists using cached data
         $customId = trim($row[0]);
         $originalCustomId = $customId;
         $counter = 1;
-        while (\App\Models\Asset::where('custom_id', $customId)->where('company_id', $companyId)->exists()) {
+        while (isset($existingCustomIds[$customId])) {
             $customId = $originalCustomId . '-' . $counter;
             $counter++;
         }
@@ -282,37 +316,60 @@ class ImportController extends Controller
             'company_id' => $companyId,
         ];
         
-        // Find or create location
+        // Find or create location using cache
         if (!empty($row[7])) {
-            $location = \App\Models\Location::firstOrCreate(
-                ['name' => trim($row[7]), 'company_id' => $companyId],
-                ['address' => '']
-            );
-            $assetData['location_id'] = $location->id;
-            \Log::info("Location processed", ['location' => $location->name, 'id' => $location->id]);
+            $locationName = trim($row[7]);
+            if (isset($existingLocations[$locationName])) {
+                $assetData['location_id'] = $existingLocations[$locationName];
+            } else {
+                $location = \App\Models\Location::create([
+                    'name' => $locationName,
+                    'company_id' => $companyId,
+                    'address' => ''
+                ]);
+                $assetData['location_id'] = $location->id;
+                $existingLocations[$locationName] = $location->id;
+            }
         }
         
-        // Find or create category and subcategory
+        // Find or create category and subcategory using cache
         if (!empty($row[8]) && !empty($row[9])) {
-            $category = \App\Models\Category::firstOrCreate(
-                ['name' => trim($row[8]), 'company_id' => $companyId]
-            );
+            $categoryName = trim($row[8]);
             
+            if (isset($existingCategories[$categoryName])) {
+                $categoryId = $existingCategories[$categoryName];
+            } else {
+                $category = \App\Models\Category::create([
+                    'name' => $categoryName,
+                    'company_id' => $companyId
+                ]);
+                $categoryId = $category->id;
+                $existingCategories[$categoryName] = $categoryId;
+            }
+            
+            // For subcategories, we need a different cache structure
+            $subcategoryName = trim($row[9]);
             $subcategory = \App\Models\Subcategory::firstOrCreate(
-                ['name' => trim($row[9]), 'category_id' => $category->id, 'company_id' => $companyId]
+                ['name' => $subcategoryName, 'category_id' => $categoryId, 'company_id' => $companyId]
             );
             $assetData['subcategory_id'] = $subcategory->id;
-            \Log::info("Category/Subcategory processed", ['category' => $category->name, 'subcategory' => $subcategory->name]);
         }
         
-        // Find or create supplier
+        // Find or create supplier using cache
         if (!empty($row[10])) {
-            $supplier = \App\Models\Supplier::firstOrCreate(
-                ['name' => trim($row[10]), 'company_id' => $companyId],
-                ['email' => '', 'phone' => '']
-            );
-            $assetData['supplier_id'] = $supplier->id;
-            \Log::info("Supplier processed", ['supplier' => $supplier->name]);
+            $supplierName = trim($row[10]);
+            if (isset($existingSuppliers[$supplierName])) {
+                $assetData['supplier_id'] = $existingSuppliers[$supplierName];
+            } else {
+                $supplier = \App\Models\Supplier::create([
+                    'name' => $supplierName,
+                    'company_id' => $companyId,
+                    'email' => '',
+                    'phone' => ''
+                ]);
+                $assetData['supplier_id'] = $supplier->id;
+                $existingSuppliers[$supplierName] = $supplier->id;
+            }
         }
         
         $asset = \App\Models\Asset::create($assetData);
@@ -320,7 +377,7 @@ class ImportController extends Controller
         
         return [
             'success' => true,
-            'asset_id' => $asset->id
+            'custom_id' => $customId
         ];
     }
     
