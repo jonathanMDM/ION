@@ -126,6 +126,10 @@ class ImportController extends Controller
     private function importExcel($file, $companyId)
     {
         try {
+            // Increase time limit for large imports
+            set_time_limit(300); // 5 minutes
+            ini_set('max_execution_time', 300);
+            
             // Use PhpSpreadsheet to read Excel file
             $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($file->getRealPath());
             $worksheet = $spreadsheet->getActiveSheet();
