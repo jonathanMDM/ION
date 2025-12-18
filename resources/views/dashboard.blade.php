@@ -81,23 +81,23 @@
 <!-- Statistics Cards -->
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
     <!-- Total Assets -->
-    <div class="bg-white rounded-lg shadow p-6">
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900 p-6">
         <div class="flex items-center justify-between">
             <div>
-                <p class="text-sm text-gray-600 mb-1">Total de Activos</p>
-                <p class="text-3xl font-bold text-gray-800">{{ $stats['total_assets'] }}</p>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mb-1">Total de Activos</p>
+                <p class="text-3xl font-bold text-gray-800 dark:text-white">{{ $stats['total_assets'] }}</p>
             </div>
-            <div class="bg-gray-200 rounded-full p-3">
-                <i class="fas fa-box text-gray-800 text-2xl"></i>
+            <div class="bg-gray-200 dark:bg-gray-700 rounded-full p-3">
+                <i class="fas fa-box text-gray-800 dark:text-gray-300 text-2xl"></i>
             </div>
         </div>
     </div>
 
     <!-- Active Assets -->
-    <div class="bg-white rounded-lg shadow p-6">
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900 p-6">
         <div class="flex items-center justify-between">
             <div>
-                <p class="text-sm text-gray-600 mb-1">Activos</p>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mb-1">Activos</p>
                 <p class="text-3xl font-bold text-green-600">{{ $stats['active_assets'] }}</p>
             </div>
             <div class="bg-green-100 rounded-full p-3">
@@ -107,10 +107,10 @@
     </div>
 
     <!-- Maintenance -->
-    <div class="bg-white rounded-lg shadow p-6">
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900 p-6">
         <div class="flex items-center justify-between">
             <div>
-                <p class="text-sm text-gray-600 mb-1">En Mantenimiento</p>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mb-1">En Mantenimiento</p>
                 <p class="text-3xl font-bold text-yellow-600">{{ $stats['maintenance_assets'] }}</p>
             </div>
             <div class="bg-yellow-100 rounded-full p-3">
@@ -120,10 +120,10 @@
     </div>
 
     <!-- Decommissioned -->
-    <div class="bg-white rounded-lg shadow p-6">
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900 p-6">
         <div class="flex items-center justify-between">
             <div>
-                <p class="text-sm text-gray-600 mb-1">Dados de Baja</p>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mb-1">Dados de Baja</p>
                 <p class="text-3xl font-bold text-red-600">{{ $stats['decommissioned_assets'] }}</p>
             </div>
             <div class="bg-red-100 rounded-full p-3">
