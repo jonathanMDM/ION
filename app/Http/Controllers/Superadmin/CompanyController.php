@@ -10,8 +10,13 @@ class CompanyController extends Controller
 {
     public function index()
     {
+        // Exclude the main company (NIT: N/A) and companies with only superadmin users
         $companies = Company::withCount(['users', 'assets'])
             ->with('users')
+            ->where('nit', '!=', 'N/A')
+            ->whereHas('users', function($query) {
+                $query->where('role', '!=', 'superadmin');
+            })
             ->latest()
             ->paginate(15);
         return view('superadmin.companies.index', compact('companies'));
