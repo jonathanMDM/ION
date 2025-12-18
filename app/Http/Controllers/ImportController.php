@@ -284,23 +284,26 @@ class ImportController extends Controller
         }
         
         // Map status from Excel to valid database values
+        // Valid values: 'active', 'decommissioned', 'maintenance'
         $statusMapping = [
-            'OPERACION' => 'in_use',
-            'OPERACIÓN' => 'in_use',
-            'EN USO' => 'in_use',
-            'DISPONIBLE' => 'available',
-            'ACTIVO' => 'available',
-            'ACTIVE' => 'available',
+            'OPERACION' => 'active',
+            'OPERACIÓN' => 'active',
+            'EN USO' => 'active',
+            'DISPONIBLE' => 'active',
+            'ACTIVO' => 'active',
+            'ACTIVE' => 'active',
             'MANTENIMIENTO' => 'maintenance',
-            'BAJA' => 'retired',
-            'RETIRADO' => 'retired',
-            'PERDIDO' => 'lost',
-            'DAÑADO' => 'damaged',
-            'DAMAGED' => 'damaged',
+            'MAINTENANCE' => 'maintenance',
+            'BAJA' => 'decommissioned',
+            'RETIRADO' => 'decommissioned',
+            'DECOMMISSIONED' => 'decommissioned',
+            'PERDIDO' => 'decommissioned',
+            'DAÑADO' => 'decommissioned',
+            'DAMAGED' => 'decommissioned',
         ];
         
         $rawStatus = !empty($row[6]) ? strtoupper(trim($row[6])) : 'DISPONIBLE';
-        $mappedStatus = $statusMapping[$rawStatus] ?? 'available';
+        $mappedStatus = $statusMapping[$rawStatus] ?? 'active';
         
         // Debug log for first few rows
         if ($rowNumber <= 5) {
