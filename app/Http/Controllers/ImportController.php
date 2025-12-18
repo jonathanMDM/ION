@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 use App\Imports\AssetsImport;
 use Maatwebsite\Excel\Facades\Excel;
@@ -30,9 +31,22 @@ class ImportController extends Controller
         try {
             $extension = $file->getClientOriginalExtension();
             
-            // Handle Excel files (.xlsx, .xls)
+            // Handle Excel files (.xlsx, .xls) - Process in background
             if (in_array($extension, ['xlsx', 'xls'])) {
-                return $this->importExcel($file, $companyId);
+                // Store file temporarily
+                $filePath = $file->store('imports');
+                
+                // Dispatch background job
+                \App\Jobs\ProcessExcelImport::dispatch($filePath, $companyId, Auth::id());
+                
+                \Log::info('Excel import job dispatched', [
+                    'file' => $filePath,
+                    'company_id' => $companyId,
+                    'user_id' => Auth::id()
+                ]);
+                
+                return redirect()->route('assets.index')->with('info', 
+                    'La importación de Excel se está procesando en segundo plano. Recibirás una notificación cuando termine. Esto puede tomar varios minutos dependiendo del tamaño del archivo.');
             }
             
             // Handle CSV/TXT files
