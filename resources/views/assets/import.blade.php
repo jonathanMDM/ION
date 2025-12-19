@@ -10,18 +10,18 @@
         </a>
     </div>
 
-    <div class="bg-white rounded-lg shadow p-6">
-        <h2 class="text-2xl font-bold text-gray-800 mb-6">Importación Masiva de Activos</h2>
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6 transition-colors">
+        <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-6">Importación Masiva de Activos</h2>
 
         <!-- Instrucciones -->
-        <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6">
+        <div class="bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500 p-4 mb-6 transition-colors">
             <div class="flex">
                 <div class="flex-shrink-0">
-                    <i class="fas fa-info-circle text-blue-600 text-xl"></i>
+                    <i class="fas fa-info-circle text-blue-600 dark:text-blue-400 text-xl"></i>
                 </div>
                 <div class="ml-3">
-                    <h3 class="text-sm font-bold text-blue-900">📋 Instrucciones de Importación</h3>
-                    <div class="mt-2 text-sm text-blue-800 space-y-2">
+                    <h3 class="text-sm font-bold text-blue-900 dark:text-blue-300">📋 Instrucciones de Importación</h3>
+                    <div class="mt-2 text-sm text-blue-800 dark:text-blue-200 space-y-2">
                         <ol class="list-decimal list-inside space-y-2">
                             <li><strong>Descarga la plantilla Excel</strong> haciendo clic en el botón verde</li>
                             <li><strong>Abre el archivo</strong> (se abrirá automáticamente en Excel)</li>
@@ -29,7 +29,7 @@
                             <li><strong>Guarda el archivo</strong> (Ctrl+S o Cmd+S)</li>
                             <li><strong>Sube el archivo</strong> usando el formulario de abajo</li>
                         </ol>
-                        <p class="text-xs bg-green-100 p-2 rounded mt-2">
+                        <p class="text-xs bg-green-100 dark:bg-green-900/30 p-2 rounded mt-2 text-green-800 dark:text-green-300">
                             ✅ <strong>¡Así de fácil!</strong> El archivo ya está en formato Excel (.xlsx) - Solo llena y sube
                         </p>
                     </div>
@@ -38,18 +38,18 @@
         </div>
 
         <!-- Tip sobre cantidades -->
-        <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 mb-6">
+        <div class="bg-yellow-50 dark:bg-yellow-900/20 border-l-4 border-yellow-500 p-4 mb-6 transition-colors">
             <div class="flex">
                 <div class="flex-shrink-0">
-                    <i class="fas fa-lightbulb text-yellow-600 text-xl"></i>
+                    <i class="fas fa-lightbulb text-yellow-600 dark:text-yellow-400 text-xl"></i>
                 </div>
                 <div class="ml-3">
-                    <h3 class="text-sm font-bold text-yellow-900">💡 Importar Múltiples Unidades del Mismo Activo</h3>
-                    <div class="mt-2 text-sm text-yellow-800">
+                    <h3 class="text-sm font-bold text-yellow-900 dark:text-yellow-300">💡 Importar Múltiples Unidades del Mismo Activo</h3>
+                    <div class="mt-2 text-sm text-yellow-800 dark:text-yellow-200">
                         <p class="mb-2"><strong>Opción 1 - Campo Cantidad:</strong></p>
                         <p class="mb-3">Usa el campo "Cantidad" para especificar cuántas unidades del mismo activo tienes. Por ejemplo:</p>
-                        <div class="bg-white p-2 rounded text-xs font-mono mb-3">
-                            ACT-001, Silla Ejecutiva, ..., <strong class="text-red-600">10</strong>, ...
+                        <div class="bg-white dark:bg-gray-700 p-2 rounded text-xs font-mono mb-3 text-gray-800 dark:text-gray-200">
+                            ACT-001, Silla Ejecutiva, ..., <strong class="text-red-600 dark:text-red-400">10</strong>, ...
                         </div>
                         <p class="mb-2"><strong>Opción 2 - Filas Separadas:</strong></p>
                         <p>Si necesitas IDs únicos para cada unidad, crea una fila por cada activo:</p>
@@ -66,7 +66,7 @@
         <!-- Opciones de descarga de plantilla -->
         <div class="mb-6">
             <!-- Opción 1: Google Sheets (Recomendado) -->
-            <div class="bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-500 rounded-lg p-6 mb-4">
+            <div class="bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/10 dark:to-emerald-900/10 border-2 border-green-500 rounded-lg p-6 mb-4 transition-colors">
                 <div class="flex items-start">
                     <div class="flex-shrink-0">
                         <i class="fas fa-star text-yellow-500 text-2xl"></i>
@@ -111,7 +111,7 @@
             </div>
 
             <!-- Opción 2: Descarga directa -->
-            <div class="bg-gray-50 border border-gray-300 rounded-lg p-6">
+            <div class="bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg p-6 transition-colors">
                 <div class="flex items-start">
                     <div class="flex-shrink-0">
                         <i class="fas fa-download text-gray-600 text-xl"></i>
@@ -136,9 +136,9 @@
         </div>
 
         <!-- Campos de la plantilla -->
-        <div class="bg-gray-50 p-4 rounded-lg mb-6">
-            <h3 class="font-bold text-gray-800 mb-3 flex items-center">
-                <i class="fas fa-table mr-2"></i>
+        <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg mb-6 transition-colors">
+            <h3 class="font-bold text-gray-800 dark:text-white mb-3 flex items-center">
+                <i class="fas fa-table mr-2 text-gray-600 dark:text-gray-400"></i>
                 Campos de la Plantilla
             </h3>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">

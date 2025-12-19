@@ -10,18 +10,18 @@
         </a>
     </div>
 
-    <div class="bg-white rounded-lg shadow p-6">
-        <h2 class="text-2xl font-bold text-gray-800 mb-2">Asignar Activo</h2>
-        <p class="text-gray-600 mb-6">
-            Asignando: <span class="font-semibold">{{ $asset->name }}</span> ({{ $asset->custom_id }})
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6 transition-colors">
+        <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-2">Asignar Activo</h2>
+        <p class="text-gray-600 dark:text-gray-400 mb-6">
+            Asignando: <span class="font-semibold text-gray-800 dark:text-gray-200">{{ $asset->name }}</span> ({{ $asset->custom_id }})
         </p>
 
         <form action="{{ route('assets.assign.store', $asset->id) }}" method="POST">
             @csrf
             
             <div class="mb-6">
-                <label class="block text-sm font-medium text-gray-700 mb-2">Empleado *</label>
-                <select name="employee_id" required class="w-full border-gray-300 rounded-md shadow-sm">
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Empleado *</label>
+                <select name="employee_id" required class="w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-700 text-gray-800 dark:text-white transition-colors">
                     <option value="">Seleccionar Empleado</option>
                     @foreach($employees as $employee)
                         <option value="{{ $employee->id }}" {{ old('employee_id') == $employee->id ? 'selected' : '' }}>
@@ -34,21 +34,21 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Fecha de Asignación *</label>
-                    <input type="date" name="assigned_date" value="{{ date('Y-m-d') }}" required class="w-full border-gray-300 rounded-md shadow-sm">
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Fecha de Asignación *</label>
+                    <input type="date" name="assigned_date" value="{{ date('Y-m-d') }}" required class="w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-700 text-gray-800 dark:text-white transition-colors">
                     @error('assigned_date') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Fecha Esperada de Retorno</label>
-                    <input type="date" name="expected_return_date" value="{{ old('expected_return_date') }}" class="w-full border-gray-300 rounded-md shadow-sm">
-                    <p class="text-xs text-gray-500 mt-1">Opcional</p>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Fecha Esperada de Retorno</label>
+                    <input type="date" name="expected_return_date" value="{{ old('expected_return_date') }}" class="w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-700 text-gray-800 dark:text-white transition-colors">
+                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Opcional</p>
                 </div>
             </div>
 
             <div class="mb-6">
-                <label class="block text-sm font-medium text-gray-700 mb-2">Notas</label>
-                <textarea name="notes" rows="3" class="w-full border-gray-300 rounded-md shadow-sm" placeholder="Condiciones de entrega, accesorios incluidos, etc.">{{ old('notes') }}</textarea>
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Notas</label>
+                <textarea name="notes" rows="3" class="w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-700 text-gray-800 dark:text-white transition-colors" placeholder="Condiciones de entrega, accesorios incluidos, etc.">{{ old('notes') }}</textarea>
             </div>
 
             <div class="flex justify-end gap-3">
