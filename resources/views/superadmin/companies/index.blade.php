@@ -4,18 +4,18 @@
 
 @section('content')
 <div class="mb-6 flex flex-col md:flex-row md:items-center gap-4">
-    <p class="text-gray-600 md:flex-1">Administra las empresas registradas en la plataforma.</p>
+    <p class="text-gray-600 dark:text-gray-400 md:flex-1">Administra las empresas registradas en la plataforma.</p>
     <a href="{{ route('superadmin.companies.create') }}" class="bg-gray-800 hover:bg-black text-white font-bold py-2 px-4 rounded shadow whitespace-nowrap text-center shrink-0">
         <i class="fas fa-plus mr-2"></i>Nueva Empresa
     </a>
 </div>
 
-<div class="bg-white shadow-md rounded-lg overflow-hidden">
+<div class="bg-white dark:bg-gray-800 shadow-md rounded-lg overflow-hidden transition-colors">
     <div class="overflow-x-auto">
-    <table class="min-w-full divide-y divide-gray-200">
-        <thead class="bg-gray-50">
+    <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+        <thead class="bg-gray-50 dark:bg-gray-700">
             <tr>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Empresa</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Empresa</th>
                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Contacto</th>
                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Estadísticas</th>
                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Estado</th>
@@ -23,17 +23,17 @@
                 <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
             </tr>
         </thead>
-        <tbody class="bg-white divide-y divide-gray-200">
+        <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
             @forelse($companies as $company)
             <tr>
                 <td class="px-6 py-4 whitespace-nowrap">
                     <div class="flex items-center">
-                        <div class="flex-shrink-0 h-10 w-10 bg-gray-200 rounded-full flex items-center justify-center text-gray-500">
+                        <div class="flex-shrink-0 h-10 w-10 bg-gray-200 dark:bg-gray-700 rounded-full flex items-center justify-center text-gray-500 dark:text-gray-400">
                             <i class="fas fa-building"></i>
                         </div>
                         <div class="ml-4">
-                            <div class="text-sm font-medium text-gray-900">{{ $company->name }}</div>
-                            <div class="text-sm text-gray-500">NIT: {{ $company->nit ?? 'N/A' }}</div>
+                            <div class="text-sm font-medium text-gray-900 dark:text-white">{{ $company->name }}</div>
+                            <div class="text-sm text-gray-500 dark:text-gray-400">NIT: {{ $company->nit ?? 'N/A' }}</div>
                         </div>
                     </div>
                 </td>

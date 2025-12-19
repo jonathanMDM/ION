@@ -31,6 +31,46 @@
             -ms-overflow-style: none;  /* IE and Edge */
             scrollbar-width: none;  /* Firefox */
         }
+
+        /* Dark mode for SweetAlert2 */
+        .dark .swal2-popup {
+            background-color: #1f2937 !important;
+            color: #f3f4f6 !important;
+            border: 1px solid #374151;
+        }
+        .dark .swal2-title, .dark .swal2-html-container, .dark .swal2-content {
+            color: #f3f4f6 !important;
+        }
+        .dark .swal2-footer {
+            border-top: 1px solid #374151 !important;
+            color: #9ca3af !important;
+        }
+        .dark .swal2-close:hover {
+            color: #ffffff !important;
+        }
+
+        /* Dark mode for Select2 */
+        .dark .select2-container--default .select2-selection--single {
+            background-color: #374151 !important;
+            border-color: #4b5563 !important;
+            color: #f3f4f6 !important;
+        }
+        .dark .select2-container--default .select2-selection--single .select2-selection__rendered {
+            color: #f3f4f6 !important;
+        }
+        .dark .select2-dropdown {
+            background-color: #1f2937 !important;
+            border-color: #374151 !important;
+            color: #f3f4f6 !important;
+        }
+        .dark .select2-container--default .select2-results__option--highlighted[aria-selected] {
+            background-color: #3b82f6 !important;
+        }
+        .dark .select2-container--default .select2-search--dropdown .select2-search__field {
+            background-color: #374151 !important;
+            border-color: #4b5563 !important;
+            color: #f3f4f6 !important;
+        }
     </style>
 </head>
 <body class="bg-gray-100 dark:bg-gray-900 transition-colors duration-200">
@@ -326,19 +366,19 @@
 
         </div>
         <!-- Footer -->
-        <footer class="mt-auto py-6 px-4 md:px-6 border-t border-gray-200 bg-gray-50">
+        <footer class="mt-auto py-6 px-4 md:px-6 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 transition-colors">
             <div class="max-w-7xl mx-auto">
                 <div class="flex flex-col md:flex-row justify-between items-center gap-4">
                     <div class="text-center md:text-left">
-                        <p class="text-sm text-gray-600">
-                            © {{ date('Y') }} <strong>ION</strong>. Todos los derechos reservados.
+                        <p class="text-sm text-gray-600 dark:text-gray-400">
+                            © {{ date('Y') }} <strong class="dark:text-white">ION</strong>. Todos los derechos reservados.
                         </p>
                     </div>
                     <div class="text-center md:text-right">
-                        <p class="text-sm text-gray-600">
-                            Desarrollado por <a href="#" class="text-gray-700 hover:text-gray-900 font-semibold transition duration-200">OurDeveloper</a>
+                        <p class="text-sm text-gray-600 dark:text-gray-400">
+                            Desarrollado por <a href="#" class="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white font-semibold transition duration-200">OurDeveloper</a>
                         </p>
-                        <p class="text-xs text-gray-500 mt-1">
+                        <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">
                             Versión 1.0.0
                         </p>
                     </div>

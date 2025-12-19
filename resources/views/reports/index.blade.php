@@ -4,7 +4,7 @@
 
 @section('content')
 <!-- Search Bar -->
-<div class="bg-white rounded-lg shadow p-4 mb-6">
+<div class="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900 p-4 mb-6 transition-colors">
     <form method="GET" action="{{ route('reports.index') }}" class="flex gap-4">
         <div class="flex-1">
             <div class="relative">
@@ -13,7 +13,7 @@
                     name="search" 
                     value="{{ request('search') }}" 
                     placeholder="Buscar por nombre, ID único, placa, especificaciones..."
-                    class="w-full border-gray-300 rounded-md shadow-sm pl-10 py-2"
+                    class="w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm pl-10 py-2 bg-white dark:bg-gray-700 text-gray-800 dark:text-white transition-colors"
                 >
                 <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
             </div>
@@ -30,13 +30,13 @@
 </div>
 
 <!-- Filters -->
-<div class="bg-white rounded-lg shadow p-6 mb-6">
-    <h3 class="text-lg font-semibold text-gray-800 mb-4">Filtros Avanzados</h3>
+<div class="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900 p-6 mb-6 transition-colors">
+    <h3 class="text-lg font-semibold text-gray-800 dark:text-white mb-4">Filtros Avanzados</h3>
     <form method="GET" action="{{ route('reports.index') }}" class="grid grid-cols-1 md:grid-cols-3 gap-4">
         <input type="hidden" name="search" value="{{ request('search') }}">
         <div>
-            <label class="block text-sm font-medium text-gray-700 mb-2">Estado</label>
-            <select name="status" class="w-full border-gray-300 rounded-md shadow-sm">
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Estado</label>
+            <select name="status" class="w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-700 text-gray-800 dark:text-white transition-colors">
                 <option value="">Todos los Estados</option>
                 <option value="active" {{ request('status') == 'active' ? 'selected' : '' }}>Activo</option>
                 <option value="maintenance" {{ request('status') == 'maintenance' ? 'selected' : '' }}>Mantenimiento</option>
@@ -45,8 +45,8 @@
         </div>
 
         <div>
-            <label class="block text-sm font-medium text-gray-700 mb-2">Ubicación</label>
-            <select name="location_id" class="w-full border-gray-300 rounded-md shadow-sm">
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Ubicación</label>
+            <select name="location_id" class="w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-700 text-gray-800 dark:text-white transition-colors">
                 <option value="">Todas las Ubicaciones</option>
                 @foreach($locations as $location)
                     <option value="{{ $location->id }}" {{ request('location_id') == $location->id ? 'selected' : '' }}>
@@ -57,8 +57,8 @@
         </div>
 
         <div>
-            <label class="block text-sm font-medium text-gray-700 mb-2">Categoría</label>
-            <select name="category_id" class="w-full border-gray-300 rounded-md shadow-sm">
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Categoría</label>
+            <select name="category_id" class="w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-700 text-gray-800 dark:text-white transition-colors">
                 <option value="">Todas las Categorías</option>
                 @foreach($categories as $category)
                     <option value="{{ $category->id }}" {{ request('category_id') == $category->id ? 'selected' : '' }}>
@@ -69,8 +69,8 @@
         </div>
 
         <div>
-            <label class="block text-sm font-medium text-gray-700 mb-2">Subcategoría</label>
-            <select name="subcategory_id" class="w-full border-gray-300 rounded-md shadow-sm">
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Subcategoría</label>
+            <select name="subcategory_id" class="w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-700 text-gray-800 dark:text-white transition-colors">
                 <option value="">Todas las Subcategorías</option>
                 @foreach($subcategories as $subcategory)
                     <option value="{{ $subcategory->id }}" {{ request('subcategory_id') == $subcategory->id ? 'selected' : '' }}>
@@ -81,8 +81,8 @@
         </div>
 
         <div>
-            <label class="block text-sm font-medium text-gray-700 mb-2">Proveedor</label>
-            <select name="supplier_id" class="w-full border-gray-300 rounded-md shadow-sm">
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Proveedor</label>
+            <select name="supplier_id" class="w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-700 text-gray-800 dark:text-white transition-colors">
                 <option value="">Todos los Proveedores</option>
                 @foreach($suppliers as $supplier)
                     <option value="{{ $supplier->id }}" {{ request('supplier_id') == $supplier->id ? 'selected' : '' }}>
@@ -93,29 +93,29 @@
         </div>
 
         <div>
-            <label class="block text-sm font-medium text-gray-700 mb-2">Modelo</label>
-            <input type="text" name="model" value="{{ request('model') }}" class="w-full border-gray-300 rounded-md shadow-sm">
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Modelo</label>
+            <input type="text" name="model" value="{{ request('model') }}" class="w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-700 text-gray-800 dark:text-white transition-colors">
         </div>
 
         <div>
-            <label class="block text-sm font-medium text-gray-700 mb-2">Fecha Desde</label>
-            <input type="date" name="date_from" value="{{ request('date_from') }}" class="w-full border-gray-300 rounded-md shadow-sm">
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Fecha Desde</label>
+            <input type="date" name="date_from" value="{{ request('date_from') }}" class="w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-700 text-gray-800 dark:text-white transition-colors">
         </div>
 
         <div>
-            <label class="block text-sm font-medium text-gray-700 mb-2">Fecha Hasta</label>
-            <input type="date" name="date_to" value="{{ request('date_to') }}" class="w-full border-gray-300 rounded-md shadow-sm">
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Fecha Hasta</label>
+            <input type="date" name="date_to" value="{{ request('date_to') }}" class="w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-700 text-gray-800 dark:text-white transition-colors">
         </div>
 
         <div>
-            <label class="block text-sm font-medium text-gray-700 mb-2">ID Único</label>
-            <input type="text" name="custom_id" value="{{ request('custom_id') }}" class="w-full border-gray-300 rounded-md shadow-sm">
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">ID Único</label>
+            <input type="text" name="custom_id" value="{{ request('custom_id') }}" class="w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-700 text-gray-800 dark:text-white transition-colors">
         </div>
 
         @if(\App\Helpers\FieldHelper::isVisible('municipality_plate'))
         <div>
-            <label class="block text-sm font-medium text-gray-700 mb-2">Placa Municipio</label>
-            <input type="text" name="municipality_plate" value="{{ request('municipality_plate') }}" class="w-full border-gray-300 rounded-md shadow-sm">
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Placa Municipio</label>
+            <input type="text" name="municipality_plate" value="{{ request('municipality_plate') }}" class="w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-700 text-gray-800 dark:text-white transition-colors">
         </div>
         @endif
 
@@ -125,8 +125,8 @@
         @foreach($customFields as $field)
             @if(\App\Helpers\FieldHelper::isVisible($field->name))
             <div>
-                <label class="block text-sm font-medium text-gray-700 mb-2">{{ $field->label }}</label>
-                <input type="text" name="custom_{{ $field->name }}" value="{{ request('custom_' . $field->name) }}" class="w-full border-gray-300 rounded-md shadow-sm">
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{{ $field->label }}</label>
+                <input type="text" name="custom_{{ $field->name }}" value="{{ request('custom_' . $field->name) }}" class="w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-700 text-gray-800 dark:text-white transition-colors">
             </div>
             @endif
         @endforeach
@@ -141,29 +141,29 @@
 
 <!-- Statistics -->
 <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-6">
-    <div class="bg-white rounded-lg shadow p-4">
-        <p class="text-sm text-gray-600">Total de Activos</p>
-        <p class="text-2xl font-bold text-gray-800">{{ $stats['total_assets'] }}</p>
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900 p-4 transition-colors">
+        <p class="text-sm text-gray-600 dark:text-gray-400">Total de Activos</p>
+        <p class="text-2xl font-bold text-gray-800 dark:text-white">{{ $stats['total_assets'] }}</p>
     </div>
-    <div class="bg-white rounded-lg shadow p-4">
-        <p class="text-sm text-gray-600">Valor Total</p>
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900 p-4 transition-colors">
+        <p class="text-sm text-gray-600 dark:text-gray-400">Valor Total</p>
         <p class="text-2xl font-bold text-green-600">${{ number_format($stats['total_value'], 2) }}</p>
     </div>
-    <div class="bg-white rounded-lg shadow p-4">
-        <p class="text-sm text-gray-600">Activos</p>
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900 p-4 transition-colors">
+        <p class="text-sm text-gray-600 dark:text-gray-400">Activos</p>
         <p class="text-2xl font-bold text-green-600">{{ $stats['active'] }}</p>
     </div>
-    <div class="bg-white rounded-lg shadow p-4">
-        <p class="text-sm text-gray-600">Mantenimiento</p>
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900 p-4 transition-colors">
+        <p class="text-sm text-gray-600 dark:text-gray-400">Mantenimiento</p>
         <p class="text-2xl font-bold text-yellow-600">{{ $stats['maintenance'] }}</p>
     </div>
-    <div class="bg-white rounded-lg shadow p-4">
-        <p class="text-sm text-gray-600">Dados de Baja</p>
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900 p-4 transition-colors">
+        <p class="text-sm text-gray-600 dark:text-gray-400">Dados de Baja</p>
         <p class="text-2xl font-bold text-red-600">{{ $stats['decommissioned'] }}</p>
     </div>
-    <div class="bg-white rounded-lg shadow p-4">
-        <p class="text-sm text-gray-600">Con Placa</p>
-        <p class="text-2xl font-bold text-gray-800">{{ $stats['with_plate'] }}</p>
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900 p-4 transition-colors">
+        <p class="text-sm text-gray-600 dark:text-gray-400">Con Placa</p>
+        <p class="text-2xl font-bold text-gray-800 dark:text-white">{{ $stats['with_plate'] }}</p>
     </div>
 </div>
 
@@ -207,10 +207,10 @@
 </div>
 
 <!-- Results Table -->
-<div class="bg-white shadow-md rounded overflow-x-auto">
+<div class="bg-white dark:bg-gray-800 shadow-md rounded overflow-x-auto transition-colors">
     <table class="min-w-full w-full table-auto">
         <thead>
-            <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+            <tr class="bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300 uppercase text-sm leading-normal">
                 <th class="py-3 px-6 text-left">ID Único</th>
                 <th class="py-3 px-6 text-left">Nombre</th>
                 <th class="py-3 px-6 text-left">Modelo</th>
@@ -231,9 +231,9 @@
                 <th class="py-3 px-6 text-center">Fecha de Compra</th>
             </tr>
         </thead>
-        <tbody class="text-gray-600 text-sm font-light">
+        <tbody class="text-gray-600 dark:text-gray-300 text-sm font-light">
             @foreach($assets as $asset)
-            <tr class="border-b border-gray-200 hover:bg-gray-100">
+            <tr class="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700/50 transition-colors">
                 <td class="py-3 px-6 text-left">{{ $asset->custom_id }}</td>
                 <td class="py-3 px-6 text-left">
                     <a href="{{ route('assets.show', $asset->id) }}" class="text-gray-800 hover:text-gray-900 font-medium">

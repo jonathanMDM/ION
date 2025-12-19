@@ -8,7 +8,7 @@
     @method('DELETE')
     
     <div class="mb-6 flex flex-col md:flex-row md:items-center gap-4">
-        <h2 class="text-2xl font-bold text-gray-800 md:flex-1">Activos</h2>
+        <h2 class="text-2xl font-bold text-gray-800 dark:text-white md:flex-1">Activos</h2>
         <div class="flex flex-col md:flex-row gap-3 shrink-0">
             <!-- Bulk delete button (hidden by default) -->
             <button type="button" id="bulkDeleteBtn" class="hidden bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded text-center whitespace-nowrap" onclick="confirmBulkDelete()">
@@ -27,34 +27,34 @@
     </div>
 
     <!-- Search Bar -->
-    <div class="mb-4 bg-white p-4 rounded-lg shadow-md">
+    <div class="mb-4 bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md transition-colors">
         <div class="flex items-center gap-3">
             <div class="flex-1 relative">
                 <input 
                     type="text" 
                     id="searchInput" 
                     placeholder="Buscar por ID, Nombre, Ubicación, Categoría..." 
-                    class="w-full px-4 py-2 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-800 focus:border-transparent"
+                    class="w-full px-4 py-2 pl-10 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-800 dark:focus:ring-gray-400 focus:border-transparent bg-white dark:bg-gray-700 text-gray-800 dark:text-white transition-colors"
                 >
                 <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
             </div>
             <button 
                 type="button" 
                 onclick="clearSearch()" 
-                class="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg transition-colors"
+                class="px-4 py-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 rounded-lg transition-colors"
             >
                 <i class="fas fa-times mr-2"></i>Limpiar
             </button>
         </div>
-        <p class="text-sm text-gray-500 mt-2">
+        <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">
             <span id="resultCount">{{ $assets->total() }}</span> activo(s) encontrado(s)
         </p>
     </div>
 
-<div class="bg-white shadow-md rounded my-6 overflow-x-auto">
+<div class="bg-white dark:bg-gray-800 shadow-md rounded my-6 overflow-x-auto transition-colors">
     <table class="w-full table-auto" style="min-width: 1400px;">
         <thead>
-            <tr class="bg-gray-200 text-gray-600 uppercase text-xs leading-normal">
+            <tr class="bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300 uppercase text-xs leading-normal">
                 <th class="py-3 px-4 text-center" style="width: 50px;">
                     <input type="checkbox" id="selectAll" class="form-checkbox h-5 w-5 text-gray-600" onchange="toggleAll(this)">
                 </th>
@@ -82,9 +82,9 @@
                 <th class="py-3 px-4 text-center whitespace-nowrap" style="min-width: 120px;">Acciones</th>
             </tr>
         </thead>
-        <tbody class="text-gray-600 text-sm font-light">
+        <tbody class="text-gray-600 dark:text-gray-300 text-sm font-light">
             @foreach($assets as $asset)
-            <tr class="border-b border-gray-200 hover:bg-gray-100">
+            <tr class="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700/50 transition-colors">
                 <td class="py-3 px-4 text-center">
                     <input type="checkbox" name="selected_assets[]" value="{{ $asset->id }}" class="form-checkbox h-5 w-5 text-gray-600 row-checkbox" onchange="updateSelectedCount()">
                 </td>

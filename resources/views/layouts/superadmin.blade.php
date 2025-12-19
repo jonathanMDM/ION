@@ -24,6 +24,23 @@
             .sidebar-mobile-visible { transform: translateX(0); }
         }
         .font-logo { font-family: 'Orbitron', sans-serif; }
+
+        /* Dark mode for SweetAlert2 */
+        .dark .swal2-popup {
+            background-color: #1f2937 !important;
+            color: #f3f4f6 !important;
+            border: 1px solid #374151;
+        }
+        .dark .swal2-title, .dark .swal2-html-container, .dark .swal2-content {
+            color: #f3f4f6 !important;
+        }
+        .dark .swal2-footer {
+            border-top: 1px solid #374151 !important;
+            color: #9ca3af !important;
+        }
+        .dark .swal2-close:hover {
+            color: #ffffff !important;
+        }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>

@@ -1,17 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="max-w-xl mx-auto bg-white p-6 rounded shadow">
-    <h2 class="text-2xl font-bold mb-6">Agregar Registro de Mantenimiento</h2>
+<div class="max-w-xl mx-auto bg-white dark:bg-gray-800 p-6 rounded shadow transition-colors">
+    <h2 class="text-2xl font-bold mb-6 text-gray-800 dark:text-white">Agregar Registro de Mantenimiento</h2>
     
     <form action="{{ route('maintenances.store') }}" method="POST">
         @csrf
         
         <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="asset_id">
+            <label class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2" for="asset_id">
                 <i class="fas fa-search mr-2"></i>Buscar Activo
             </label>
-            <select name="asset_id" id="asset_id" class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+            <select name="asset_id" id="asset_id" class="shadow border dark:border-gray-600 rounded w-full py-2 px-3 text-gray-700 dark:text-white bg-white dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline transition-colors" required>
                 <option value="">🔍 Escribe para buscar por ID, Nombre o Ubicación...</option>
                 @foreach($assets as $asset)
                     <option value="{{ $asset->id }}" 
@@ -21,8 +21,8 @@
                     </option>
                 @endforeach
             </select>
-            <div class="mt-2 p-2 bg-blue-50 border border-blue-200 rounded">
-                <p class="text-blue-700 text-sm">
+            <div class="mt-2 p-2 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded">
+                <p class="text-blue-700 dark:text-blue-300 text-sm">
                     <i class="fas fa-info-circle mr-1"></i>
                     <strong>Tip:</strong> Escribe cualquier parte del ID, nombre o ubicación del activo para buscarlo rápidamente
                 </p>
@@ -30,18 +30,18 @@
         </div>
 
         <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="date">Fecha</label>
-            <input type="date" name="date" id="date" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+            <label class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2" for="date">Fecha</label>
+            <input type="date" name="date" id="date" class="shadow appearance-none border dark:border-gray-600 rounded w-full py-2 px-3 text-gray-700 dark:text-white bg-white dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline transition-colors" required>
         </div>
 
         <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="cost">Costo</label>
-            <input type="number" step="0.01" name="cost" id="cost" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+            <label class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2" for="cost">Costo</label>
+            <input type="number" step="0.01" name="cost" id="cost" class="shadow appearance-none border dark:border-gray-600 rounded w-full py-2 px-3 text-gray-700 dark:text-white bg-white dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline transition-colors" required>
         </div>
 
         <div class="mb-6">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="description">Descripción</label>
-            <textarea name="description" id="description" rows="4" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required></textarea>
+            <label class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2" for="description">Descripción</label>
+            <textarea name="description" id="description" rows="4" class="shadow appearance-none border dark:border-gray-600 rounded w-full py-2 px-3 text-gray-700 dark:text-white bg-white dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline transition-colors" required></textarea>
         </div>
 
         <div class="flex items-center justify-between">

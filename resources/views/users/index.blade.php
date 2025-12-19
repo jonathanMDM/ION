@@ -2,16 +2,16 @@
 
 @section('content')
 <div class="flex flex-col md:flex-row md:items-center mb-6 gap-4">
-    <h1 class="text-3xl font-bold text-gray-800 md:flex-1">Gestión de Usuarios</h1>
+    <h1 class="text-3xl font-bold text-gray-800 dark:text-white md:flex-1">Gestión de Usuarios</h1>
     <a href="{{ route('users.create') }}" class="bg-gray-800 hover:bg-black text-white font-bold py-2 px-4 rounded text-center whitespace-nowrap shrink-0">
         <i class="fas fa-plus mr-2"></i>Agregar Usuario
     </a>
 </div>
 
-<div class="bg-white shadow-md rounded my-6 overflow-x-auto">
+<div class="bg-white dark:bg-gray-800 shadow-md rounded my-6 overflow-x-auto transition-colors">
     <table class="min-w-full w-full table-auto">
         <thead>
-            <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+            <tr class="bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300 uppercase text-sm leading-normal">
                 <th class="py-3 px-6 text-left whitespace-nowrap">Nombre</th>
                 <th class="py-3 px-6 text-left whitespace-nowrap">Email</th>
                 <th class="py-3 px-6 text-center whitespace-nowrap">Rol</th>
@@ -19,20 +19,20 @@
                 <th class="py-3 px-6 text-center whitespace-nowrap">Acciones</th>
             </tr>
         </thead>
-        <tbody class="text-gray-600 text-sm font-light">
+        <tbody class="text-gray-600 dark:text-gray-300 text-sm font-light">
             @foreach($users as $user)
-            <tr class="border-b border-gray-200 hover:bg-gray-100">
+            <tr class="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700/50 transition-colors">
                 <td class="py-3 px-6 text-left">
                     <span class="font-medium">{{ $user->name }}</span>
                 </td>
                 <td class="py-3 px-6 text-left">{{ $user->email }}</td>
                 <td class="py-3 px-6 text-center">
                     @if($user->isAdmin())
-                        <span class="bg-gray-200 text-gray-900 px-3 py-1 rounded-full text-xs font-semibold">Admin</span>
+                        <span class="bg-gray-200 dark:bg-gray-600 text-gray-900 dark:text-gray-100 px-3 py-1 rounded-full text-xs font-semibold">Admin</span>
                     @elseif($user->isEditor())
                         <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs font-semibold">Editor</span>
                     @else
-                        <span class="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-xs font-semibold">Visor</span>
+                        <span class="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 px-3 py-1 rounded-full text-xs font-semibold">Visor</span>
                     @endif
                 </td>
                 <td class="py-3 px-6 text-center">

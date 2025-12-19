@@ -3,25 +3,25 @@
 @section('page-title', 'Agregar Nuevo Activo')
 
 @section('content')
-<div class="max-w-2xl mx-auto bg-white p-4 md:p-6 rounded shadow">
-    <h2 class="text-2xl font-bold mb-6">Agregar Nuevo Activo</h2>
+<div class="max-w-2xl mx-auto bg-white dark:bg-gray-800 p-4 md:p-6 rounded shadow transition-colors">
+    <h2 class="text-2xl font-bold mb-6 text-gray-800 dark:text-white">Agregar Nuevo Activo</h2>
     
     <form action="{{ route('assets.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         
         <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="custom_id">ID Único (Opcional)</label>
-            <input type="text" name="custom_id" id="custom_id" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Dejar en blanco para autogenerar">
+            <label class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2" for="custom_id">ID Único (Opcional)</label>
+            <input type="text" name="custom_id" id="custom_id" class="shadow appearance-none border dark:border-gray-600 rounded w-full py-2 px-3 text-gray-700 dark:text-white bg-white dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline transition-colors" placeholder="Dejar en blanco para autogenerar">
         </div>
 
         <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="name">Nombre del Activo</label>
-            <input type="text" name="name" id="name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+            <label class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2" for="name">Nombre del Activo</label>
+            <input type="text" name="name" id="name" class="shadow appearance-none border dark:border-gray-600 rounded w-full py-2 px-3 text-gray-700 dark:text-white bg-white dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline transition-colors" required>
         </div>
 
         <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="location_id">Ubicación</label>
-            <select name="location_id" id="location_id" class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+            <label class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2" for="location_id">Ubicación</label>
+            <select name="location_id" id="location_id" class="shadow border dark:border-gray-600 rounded w-full py-2 px-3 text-gray-700 dark:text-white bg-white dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline transition-colors" required>
                 @foreach($locations as $location)
                     <option value="{{ $location->id }}">{{ $location->name }}</option>
                 @endforeach
@@ -29,8 +29,8 @@
         </div>
 
         <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="subcategory_id">Categoría / Subcategoría</label>
-            <select name="subcategory_id" id="subcategory_id" class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+            <label class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2" for="subcategory_id">Categoría / Subcategoría</label>
+            <select name="subcategory_id" id="subcategory_id" class="shadow border dark:border-gray-600 rounded w-full py-2 px-3 text-gray-700 dark:text-white bg-white dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline transition-colors" required>
                 @foreach($subcategories as $subcategory)
                     <option value="{{ $subcategory->id }}">{{ $subcategory->category->name }} - {{ $subcategory->name }}</option>
                 @endforeach
@@ -38,8 +38,8 @@
         </div>
 
         <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="supplier_id">Proveedor</label>
-            <select name="supplier_id" id="supplier_id" class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            <label class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2" for="supplier_id">Proveedor</label>
+            <select name="supplier_id" id="supplier_id" class="shadow border dark:border-gray-600 rounded w-full py-2 px-3 text-gray-700 dark:text-white bg-white dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline transition-colors">
                 <option value="">Sin proveedor</option>
                 @foreach($suppliers as $supplier)
                     <option value="{{ $supplier->id }}">{{ $supplier->name }}</option>
@@ -48,23 +48,23 @@
         </div>
 
         <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="value">Valor</label>
-            <input type="number" step="0.01" name="value" id="value" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+            <label class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2" for="value">Valor</label>
+            <input type="number" step="0.01" name="value" id="value" class="shadow appearance-none border dark:border-gray-600 rounded w-full py-2 px-3 text-gray-700 dark:text-white bg-white dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline transition-colors" required>
         </div>
 
             <div class="mb-4">
-                <label for="model" class="block text-gray-700 font-bold mb-2">Modelo</label>
-                <input type="text" name="model" id="model" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" value="{{ old('model') }}">
+                <label for="model" class="block text-gray-700 dark:text-gray-300 font-bold mb-2">Modelo</label>
+                <input type="text" name="model" id="model" class="shadow appearance-none border dark:border-gray-600 rounded w-full py-2 px-3 text-gray-700 dark:text-white bg-white dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline transition-colors" value="{{ old('model') }}">
             </div>
 
             <div class="mb-4">
-                <label for="quantity" class="block text-gray-700 font-bold mb-2">Cantidad</label>
-                <input type="number" name="quantity" id="quantity" min="1" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" value="{{ old('quantity', 1) }}" required>
+                <label for="quantity" class="block text-gray-700 dark:text-gray-300 font-bold mb-2">Cantidad</label>
+                <input type="number" name="quantity" id="quantity" min="1" class="shadow appearance-none border dark:border-gray-600 rounded w-full py-2 px-3 text-gray-700 dark:text-white bg-white dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline transition-colors" value="{{ old('quantity', 1) }}" required>
             </div>
 
             @if(auth()->user()->company && auth()->user()->company->low_stock_alerts_enabled)
             <div class="mb-4">
-                <label for="minimum_quantity" class="block text-gray-700 font-bold mb-2">
+                <label for="minimum_quantity" class="block text-gray-700 dark:text-gray-300 font-bold mb-2">
                     Cantidad Mínima (Stock Bajo)
                     <span class="text-gray-500 font-normal text-sm">- Opcional</span>
                 </label>
