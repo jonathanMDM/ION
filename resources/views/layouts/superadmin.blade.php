@@ -112,7 +112,7 @@
 
     <!-- Main Content -->
     <div id="main-content" class="ml-0 md:ml-64 transition-all duration-300 flex flex-col min-h-screen">
-        <div class="flex-1 flex flex-col">
+        <div class="flex flex-col">
         <!-- Top Bar -->
         <header class="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700 px-4 md:px-6 py-2 transition-colors">
             <div class="flex justify-between items-center">
