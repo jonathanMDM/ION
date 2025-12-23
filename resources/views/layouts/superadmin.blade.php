@@ -248,7 +248,7 @@
         </div>
 
         <!-- Content Area -->
-        <div class="px-4 md:px-6 py-1 md:py-2">
+        <div class="px-4 md:px-6 pt-4 pb-6">
             @yield('content')
         </div>
         </div>
