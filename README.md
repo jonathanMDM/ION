@@ -341,7 +341,7 @@ Este proyecto es privado y propietario de OurDeveloper.
 
 ## 📧 Contacto
 
--   **Email**: info@ourdeveloper.com
+-   **Email**: ion.outdeveloper@gmail.com
 -   **WhatsApp**: +1 234 567 890
 -   **Website**: [OurDeveloper](https://ourdeveloper.com)
 
