@@ -1,3 +1,9 @@
+@extends('layouts.app')
+
+@section('page-title', 'Panel')
+
+@section('content')
+
 <!-- Global Dashboard Header -->
 <div class="mb-10">
     <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
