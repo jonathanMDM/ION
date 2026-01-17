@@ -178,8 +178,8 @@
         @foreach(request()->all() as $key => $value)
             <input type="hidden" name="{{ $key }}" value="{{ $value }}">
         @endforeach
-        <button type="submit" class="bg-red-700 hover:bg-red-800 text-white font-bold py-2 px-6 rounded shadow transition duration-200 flex items-center border border-red-800">
-            <i class="fas fa-file-pdf mr-2"></i>Descargar PDF
+        <button type="submit" style="background-color: #b91c1c; border: 1px solid #991b1b; color: white; font-weight: bold; padding: 10px 24px; border-radius: 6px; cursor: pointer; display: flex; align-items: center; transition: background 0.2s;">
+            <i class="fas fa-file-pdf" style="margin-right: 8px;"></i>Descargar PDF
         </button>
     </form>
 
@@ -188,8 +188,8 @@
         @foreach(request()->all() as $key => $value)
             <input type="hidden" name="{{ $key }}" value="{{ $value }}">
         @endforeach
-        <button type="submit" class="bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-6 rounded shadow transition duration-200 flex items-center border border-green-800">
-            <i class="fas fa-file-excel mr-2"></i>Exportar Excel (CSV)
+        <button type="submit" style="background-color: #15803d; border: 1px solid #166534; color: white; font-weight: bold; padding: 10px 24px; border-radius: 6px; cursor: pointer; display: flex; align-items: center; transition: background 0.2s;">
+            <i class="fas fa-file-excel" style="margin-right: 8px;"></i>Exportar Excel (CSV)
         </button>
     </form>
 </div>
