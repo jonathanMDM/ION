@@ -260,13 +260,6 @@
                     <span class="ml-3 sidebar-text font-medium text-sm truncate">Reportes</span>
                 </a>
                 @endif
-                @if(Auth::user()->isAdmin() || Auth::user()->hasPermission('view_movements'))
-                <a href="{{ route('asset-movements.index') }}" id="tour-movements" class="flex items-center px-4 py-3 rounded-xl transition-all hover:bg-white/5 hover:text-white mb-1 {{ request()->routeIs('asset-movements.*') ? 'sidebar-item-active' : '' }}" title="Movimientos">
-                    <i class="fas fa-exchange-alt w-6"></i>
-                    <span class="ml-3 sidebar-text font-medium text-sm truncate">Movimientos</span>
-                </a>
-                @endif
-
                 @if(Auth::user()->isAdmin() || Auth::user()->hasPermission('view_employees'))
                 <a href="{{ route('employees.index') }}" id="tour-employees" class="flex items-center px-4 py-3 rounded-xl transition-all hover:bg-white/5 hover:text-white mb-1 {{ request()->routeIs('employees.*') ? 'sidebar-item-active' : '' }}" title="Empleados">
                     <i class="fas fa-id-card w-6"></i>

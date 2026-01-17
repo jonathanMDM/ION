@@ -39,6 +39,7 @@
                     @error('assigned_date') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
                 </div>
 
+                @if(auth()->user()->company->hasModule('loans'))
                 <div>
                     <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">¿Es un préstamo temporal?</label>
                     <div class="flex items-center mt-3">
@@ -49,12 +50,15 @@
                         </label>
                     </div>
                 </div>
+                @endif
             </div>
 
+            @if(auth()->user()->company->hasModule('loans'))
             <div id="return_date_container" class="mb-6 hidden">
                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Fecha Esperada de Retorno *</label>
                 <input type="date" name="expected_return_date" id="expected_return_date" class="w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-700 text-gray-800 dark:text-white transition-colors">
             </div>
+            @endif
 
             <div class="mb-6">
                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Notas</label>

@@ -104,6 +104,10 @@ class ReportController extends Controller
 
     public function movements(Request $request)
     {
+        if (!auth()->user()->company->hasModule('transfers')) {
+            abort(403, 'El módulo de transferencias no está habilitado para su empresa.');
+        }
+
         $query = AssetMovement::with(['asset' => function($q) {
             $q->withTrashed();
         }, 'fromLocation', 'toLocation', 'user'])

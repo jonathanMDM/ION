@@ -11,11 +11,13 @@
                 <i class="fas fa-box mr-2"></i>Inventario de Activos
             </a>
         </li>
+        @if(auth()->user()->company->hasModule('transfers'))
         <li class="me-2">
             <a href="{{ route('reports.movements') }}" class="inline-block p-4 border-b-2 {{ request()->routeIs('reports.movements') ? 'text-indigo-600 border-indigo-600 active' : 'border-transparent hover:text-gray-600 hover:border-gray-300' }} rounded-t-lg">
                 <i class="fas fa-exchange-alt mr-2"></i>Historial de Movimientos
             </a>
         </li>
+        @endif
     </ul>
 </div>
 

@@ -11,12 +11,14 @@
                 <i class="fas fa-qrcode mr-2"></i> Imprimir QR
             </a>
             @if(Auth::user()->hasPermission('edit_assets'))
-            <button onclick="document.getElementById('transferModal').classList.remove('hidden')" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded shadow transition duration-200 flex items-center">
-                <i class="fas fa-exchange-alt mr-2"></i> Trasladar
-            </button>
-            <a href="{{ route('assets.edit', $asset->id) }}" class="bg-gray-800 hover:bg-black text-white font-bold py-2 px-4 rounded shadow transition duration-200 flex items-center">
-                <i class="fas fa-edit mr-2"></i> Editar
-            </a>
+                @if(auth()->user()->company->hasModule('transfers'))
+                <button onclick="document.getElementById('transferModal').classList.remove('hidden')" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded shadow transition duration-200 flex items-center">
+                    <i class="fas fa-exchange-alt mr-2"></i> Trasladar
+                </button>
+                @endif
+                <a href="{{ route('assets.edit', $asset->id) }}" class="bg-gray-800 hover:bg-black text-white font-bold py-2 px-4 rounded shadow transition duration-200 flex items-center">
+                    <i class="fas fa-edit mr-2"></i> Editar
+                </a>
             @endif
         </div>
     </div>
