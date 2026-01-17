@@ -165,6 +165,138 @@
             @endif
         @endforeach
 
+        {{-- Financial & Depreciation Section --}}
+        <div class="border-t-2 border-gray-300 pt-6 mt-6 mb-6">
+            <h3 class="text-lg font-bold text-gray-800 mb-4">
+                <i class="fas fa-dollar-sign text-indigo-600 mr-2"></i>Información Financiera y Depreciación
+            </h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <!-- Precio de Compra -->
+                <div>
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="purchase_price">
+                        Precio de Compra <span class="text-red-500">*</span>
+                    </label>
+                    <div class="relative">
+                        <span class="absolute left-3 top-2.5 text-gray-500">$</span>
+                        <input type="number" 
+                               step="0.01" 
+                               name="purchase_price" 
+                               id="purchase_price" 
+                               value="{{ old('purchase_price') }}"
+                               class="shadow appearance-none border rounded w-full py-2 pl-8 pr-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                               placeholder="0.00"
+                               required>
+                    </div>
+                    <p class="text-gray-600 text-xs italic mt-1">Valor original de compra del activo</p>
+                </div>
+
+                <!-- Centro de Costo -->
+                <div>
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="cost_center_id">
+                        Centro de Costo
+                    </label>
+                    <select name="cost_center_id" 
+                            id="cost_center_id" 
+                            class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                        <option value="">Sin asignar</option>
+                        @php
+                            $costCenters = \App\Models\CostCenter::where('company_id', Auth::user()->company_id)
+                                ->where('is_active', true)
+                                ->orderBy('code')
+                                ->get();
+                        @endphp
+                        @foreach($costCenters as $center)
+                            <option value="{{ $center->id }}" {{ old('cost_center_id') == $center->id ? 'selected' : '' }}>
+                                {{ $center->code }} - {{ $center->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                    <p class="text-gray-600 text-xs italic mt-1">Asignar a un centro de costo para control presupuestario</p>
+                </div>
+            </div>
+
+            <!-- Depreciation Settings -->
+            <div class="bg-indigo-50 p-4 rounded-lg border border-indigo-200 mb-4">
+                <h4 class="font-semibold text-indigo-900 mb-3">Configuración de Depreciación</h4>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Método de Depreciación -->
+                    <div class="md:col-span-2">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="depreciation_method">
+                            Método de Depreciación
+                        </label>
+                        <select name="depreciation_method" 
+                                id="depreciation_method" 
+                                class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                onchange="toggleDepreciationFields()">
+                            <option value="none" {{ old('depreciation_method', 'none') == 'none' ? 'selected' : '' }}>
+                                Sin depreciación
+                            </option>
+                            <option value="straight_line" {{ old('depreciation_method') == 'straight_line' ? 'selected' : '' }}>
+                                Línea Recta (Depreciación constante)
+                            </option>
+                            <option value="declining_balance" {{ old('depreciation_method') == 'declining_balance' ? 'selected' : '' }}>
+                                Saldo Decreciente (Mayor depreciación inicial)
+                            </option>
+                            <option value="units_of_production" {{ old('depreciation_method') == 'units_of_production' ? 'selected' : '' }}>
+                                Unidades de Producción
+                            </option>
+                        </select>
+                    </div>
+
+                    <div id="depreciation_fields" style="display: {{ old('depreciation_method', 'none') != 'none' ? 'contents' : 'none' }}">
+                        <!-- Vida Útil -->
+                        <div>
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="useful_life_years">
+                                Vida Útil (años)
+                            </label>
+                            <input type="number" 
+                                   name="useful_life_years" 
+                                   id="useful_life_years" 
+                                   value="{{ old('useful_life_years') }}"
+                                   min="1"
+                                   class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                                   placeholder="Ej: 5">
+                            <p class="text-gray-600 text-xs italic mt-1">Años de vida útil estimada</p>
+                        </div>
+
+                        <!-- Valor de Salvamento -->
+                        <div>
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="salvage_value">
+                                Valor de Salvamento
+                            </label>
+                            <div class="relative">
+                                <span class="absolute left-3 top-2.5 text-gray-500">$</span>
+                                <input type="number" 
+                                       step="0.01" 
+                                       name="salvage_value" 
+                                       id="salvage_value" 
+                                       value="{{ old('salvage_value', 0) }}"
+                                       min="0"
+                                       class="shadow appearance-none border rounded w-full py-2 pl-8 pr-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                                       placeholder="0.00">
+                            </div>
+                            <p class="text-gray-600 text-xs italic mt-1">Valor residual al final de la vida útil</p>
+                        </div>
+
+                        <!-- Fecha de Inicio de Depreciación -->
+                        <div class="md:col-span-2">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="depreciation_start_date">
+                                Fecha de Inicio de Depreciación
+                            </label>
+                            <input type="date" 
+                                   name="depreciation_start_date" 
+                                   id="depreciation_start_date" 
+                                   value="{{ old('depreciation_start_date') }}"
+                                   class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                            <p class="text-gray-600 text-xs italic mt-1">Fecha desde la cual comenzará a depreciarse</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="specifications">Especificaciones</label>
             <textarea name="specifications" id="specifications" rows="4" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="e.g., Processor: Intel i7, RAM: 16GB, Storage: 512GB SSD"></textarea>
@@ -186,4 +318,24 @@
         </div>
     </form>
 </div>
+
+@push('scripts')
+<script>
+function toggleDepreciationFields() {
+    const method = document.getElementById('depreciation_method').value;
+    const fields = document.getElementById('depreciation_fields');
+    
+    if (method === 'none') {
+        fields.style.display = 'none';
+    } else {
+        fields.style.display = 'contents';
+    }
+}
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', function() {
+    toggleDepreciationFields();
+});
+</script>
+@endpush
 @endsection

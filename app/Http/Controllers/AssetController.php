@@ -50,6 +50,13 @@ class AssetController extends Controller
             'next_maintenance_date' => 'nullable|date',
             'maintenance_frequency_days' => 'nullable|integer|min:1',
             'minimum_quantity' => 'nullable|integer|min:0',
+            // Financial fields
+            'purchase_price' => 'required|numeric|min:0',
+            'cost_center_id' => 'nullable|exists:cost_centers,id',
+            'depreciation_method' => 'required|in:none,straight_line,declining_balance,units_of_production',
+            'useful_life_years' => 'nullable|integer|min:1',
+            'salvage_value' => 'nullable|numeric|min:0',
+            'depreciation_start_date' => 'nullable|date',
         ]);
         
         $data = $request->all();
