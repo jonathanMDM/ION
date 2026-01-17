@@ -147,7 +147,7 @@
                     <a href="{{ route('superadmin.index') }}" class="flex flex-col items-center justify-center w-full group">
                         <div class="flex items-center gap-2">
                             <img src="{{ asset('img/logo-horizontal.png') }}" alt="ION Inventory" class="h-10 w-auto transition-all group-hover:opacity-90">
-                            <span class="text-[10px] font-sans font-bold text-sky-300 bg-sky-500/10 px-1.5 py-0.5 rounded border border-sky-500/20 uppercase tracking-wider group-hover:border-sky-400 group-hover:text-sky-200 transition-colors">Admin</span>
+                            <span class="text-[10px] font-sans font-black text-cyan-100 bg-cyan-500/30 px-2 py-1 rounded-md border border-cyan-400/50 uppercase tracking-wider group-hover:border-cyan-300 group-hover:bg-cyan-500/40 group-hover:text-white transition-all shadow-sm shadow-cyan-500/20">Admin</span>
                         </div>
                     </a>
                 </div>

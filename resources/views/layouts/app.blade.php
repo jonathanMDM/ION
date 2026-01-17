@@ -299,17 +299,17 @@
         @if(session()->has('impersonator_id'))
         <div class="bg-slate-900/90 backdrop-blur-xl text-white px-3 py-2 md:px-6 flex flex-row justify-between items-center shadow-2xl border-b border-white/10 relative z-[60]">
             <div class="flex items-center gap-2 md:gap-4 overflow-hidden">
-                <div class="flex h-7 w-7 md:h-9 md:w-9 items-center justify-center rounded-xl bg-sky-500/20 border border-sky-400/30 shadow-inner flex-shrink-0">
-                    <i class="fas fa-user-secret text-indigo-400 animate-pulse text-xs md:text-lg"></i>
+                <div class="flex h-7 w-7 md:h-9 md:w-9 items-center justify-center rounded-xl bg-cyan-500/30 border border-cyan-400/50 shadow-inner flex-shrink-0">
+                    <i class="fas fa-user-secret text-cyan-300 animate-pulse text-xs md:text-lg"></i>
                 </div>
                 <div class="min-w-0">
                     <div class="hidden md:flex items-center gap-2">
-                        <span class="text-[10px] uppercase tracking-[0.2em] font-black text-indigo-400">Modo Admin</span>
-                        <span class="h-1 w-1 rounded-full bg-sky-500"></span>
+                        <span class="text-[10px] uppercase tracking-[0.2em] font-black text-cyan-300">Modo Admin</span>
+                        <span class="h-1 w-1 rounded-full bg-cyan-400"></span>
                         <span class="text-[10px] uppercase tracking-[0.2em] font-black text-emerald-400">Sesión Activa</span>
                     </div>
                     <p class="text-xs md:text-sm font-medium text-slate-200 truncate flex items-center">
-                        <span class="md:hidden text-indigo-400 font-bold mr-1">Admin:</span>
+                        <span class="md:hidden text-cyan-300 font-bold mr-1">Admin:</span>
                         <span class="font-bold text-white tracking-tight truncate">{{ Str::limit(Auth::user()->name, 15) }}</span>
                     </p>
                 </div>
