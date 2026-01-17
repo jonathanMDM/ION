@@ -92,56 +92,58 @@
 <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 mb-12">
     <!-- Total Asset Master Card -->
     <div class="group bg-gradient-to-br from-gray-900 to-indigo-950 rounded-[2rem] p-8 shadow-2xl relative overflow-hidden transition-all duration-500 hover:scale-[1.02] border border-white/5 min-h-[160px] flex flex-col justify-center">
-        <div class="absolute -right-6 -bottom-6 text-white/5 transform group-hover:-translate-x-4 group-hover:-translate-y-4 transition-transform duration-700">
-            <i class="fas fa-box-open text-9xl"></i>
+        <div class="absolute -right-2 -bottom-2 text-white/5 transform group-hover:-translate-x-2 group-hover:-translate-y-2 transition-transform duration-700">
+            <i class="fas fa-box-open text-8xl"></i>
         </div>
         <div class="relative z-10">
-            <div class="flex items-center gap-3 mb-2 opacity-60">
+            <div class="flex items-center gap-3 mb-3 opacity-60">
                 <i class="fas fa-inventory text-indigo-400"></i>
-                <span class="text-xs font-black uppercase tracking-widest text-white">Inventario Total</span>
+                <span class="text-[10px] font-black uppercase tracking-[0.2em] text-white">Inventario Total</span>
             </div>
-            <div class="flex items-baseline gap-2">
-                <span class="text-5xl font-black text-white leading-none tracking-tighter">{{ $stats['total_assets'] }}</span>
-                <span class="text-indigo-400 font-bold text-sm tracking-wide uppercase">Unidades</span>
+            <div class="flex items-baseline gap-3">
+                <span class="text-6xl font-black text-white leading-none tracking-tighter">{{ $stats['total_assets'] ?? 0 }}</span>
+                <span class="text-indigo-400 font-bold text-xs tracking-widest uppercase">Unidades</span>
             </div>
         </div>
     </div>
 
     <!-- Active Status Card -->
     <div class="group bg-white dark:bg-gray-800 rounded-[2rem] p-8 shadow-xl shadow-gray-200/50 dark:shadow-none relative overflow-hidden transition-all duration-500 hover:scale-[1.02] border border-gray-50 dark:border-gray-700 min-h-[160px] flex flex-col justify-center">
-        <div class="absolute -right-4 top-1/2 -translate-y-1/2 text-green-50 dark:text-green-900/10 transition-transform duration-700 group-hover:scale-125">
-            <i class="fas fa-check-double text-9xl"></i>
+        <div class="absolute -right-2 -bottom-2 text-green-500/5 dark:text-green-500/10 transition-transform duration-700 group-hover:scale-110">
+            <i class="fas fa-check-double text-8xl"></i>
         </div>
         <div class="relative z-10">
-            <p class="text-sm font-bold text-gray-500 dark:text-gray-400 mb-1 flex items-center">
+            <p class="text-[10px] font-black text-gray-400 dark:text-gray-500 mb-3 flex items-center uppercase tracking-widest">
                 <span class="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
                 Activos Operativos
             </p>
-            <p class="text-5xl font-black text-gray-900 dark:text-white tracking-tighter">{{ $stats['active_assets'] }}</p>
+            <p class="text-6xl font-black text-gray-900 dark:text-white tracking-tighter leading-none">{{ $stats['active_assets'] ?? 0 }}</p>
         </div>
     </div>
 
     <!-- Maintenance Status Card -->
     <div class="group bg-white dark:bg-gray-800 rounded-[2rem] p-8 shadow-xl shadow-gray-200/50 dark:shadow-none relative overflow-hidden transition-all duration-500 hover:scale-[1.02] border border-gray-50 dark:border-gray-700 min-h-[160px] flex flex-col justify-center">
-        <div class="absolute -right-4 top-1/2 -translate-y-1/2 text-orange-50 dark:text-orange-900/10 transition-transform duration-700 group-hover:rotate-12">
-            <i class="fas fa-screwdriver-wrench text-9xl"></i>
+        <div class="absolute -right-2 -bottom-2 text-orange-500/5 dark:text-orange-500/10 transition-transform duration-700 group-hover:rotate-12">
+            <i class="fas fa-screwdriver-wrench text-8xl"></i>
         </div>
         <div class="relative z-10">
-            <p class="text-sm font-bold text-gray-500 dark:text-gray-400 mb-1 flex items-center">
+            <p class="text-[10px] font-black text-gray-400 dark:text-gray-500 mb-3 flex items-center uppercase tracking-widest">
                 <span class="w-2 h-2 bg-orange-500 rounded-full mr-2"></span>
                 En Servicio Técnico
             </p>
-            <p class="text-5xl font-black text-orange-600 tracking-tighter">{{ $stats['maintenance_assets'] }}</p>
+            <p class="text-6xl font-black text-orange-600 tracking-tighter leading-none">{{ $stats['maintenance_assets'] ?? 0 }}</p>
         </div>
     </div>
 
     <!-- Security/Withdrawal Card -->
     <div class="group bg-white dark:bg-gray-800 rounded-[2rem] p-8 shadow-xl shadow-gray-200/50 dark:shadow-none relative overflow-hidden transition-all duration-500 hover:scale-[1.02] border border-gray-50 dark:border-gray-700 min-h-[160px] flex flex-col justify-center">
-        <div class="absolute -right-4 top-1/2 -translate-y-1/2 text-rose-50 dark:text-rose-900/10 transition-transform duration-700 group-hover:-rotate-12 italic font-black text-9xl">OUT</div>
+        <div class="absolute -right-2 -bottom-2 text-rose-500/5 dark:text-rose-500/10 transition-transform duration-700 group-hover:-rotate-6">
+            <i class="fas fa-trash-can text-8xl"></i>
+        </div>
         <div class="relative z-10">
-            <p class="text-sm font-bold text-gray-500 dark:text-gray-400 mb-1">Activos de Baja</p>
-            <div class="flex items-baseline gap-2">
-                <p class="text-5xl font-black text-rose-600 tracking-tighter">{{ $stats['decommissioned_assets'] }}</p>
+            <p class="text-[10px] font-black text-gray-400 dark:text-gray-500 mb-3 uppercase tracking-widest">Activos de Baja</p>
+            <div class="flex items-baseline gap-3">
+                <p class="text-6xl font-black text-rose-600 tracking-tighter leading-none">{{ $stats['decommissioned_assets'] ?? 0 }}</p>
                 <span class="text-rose-400 font-bold text-xs uppercase tracking-tighter">Histórico</span>
             </div>
         </div>
