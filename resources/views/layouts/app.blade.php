@@ -51,14 +51,38 @@
 
         /* Sidebar Item States */
         .sidebar-item-active {
-            background: linear-gradient(to right, rgba(99, 102, 241, 0.15), transparent);
-            border-left: 4px solid #6366f1;
-            color: #818cf8 !important;
+            background: linear-gradient(to right, rgba(0, 245, 255, 0.15), transparent);
+            border-left: 4px solid #00f5ff;
+            color: #00f5ff !important;
         }
         .dark .sidebar-item-active {
-            background: linear-gradient(to right, rgba(99, 102, 241, 0.2), transparent);
-            border-left: 4px solid #818cf8;
-            color: #a5b4fc !important;
+            background: linear-gradient(to right, rgba(0, 245, 255, 0.2), transparent);
+            border-left: 4px solid #00f5ff;
+            color: #00f5ff !important;
+        }
+        
+        /* SweetAlert Neon Styling */
+        .swal-neon-popup {
+            background: #1a1a1a !important;
+            border: 1px solid rgba(0, 245, 255, 0.3) !important;
+            box-shadow: 0 0 30px rgba(0, 245, 255, 0.2) !important;
+        }
+        .swal-neon-popup .swal2-title {
+            color: #ffffff !important;
+        }
+        .swal-neon-popup .swal2-html-container {
+            color: #e0e0e0 !important;
+        }
+        .swal-neon-confirm {
+            background: #00ff4e !important;
+            color: #000000 !important;
+            border: none !important;
+            box-shadow: 0 0 20px rgba(0, 255, 78, 0.5) !important;
+            font-weight: 800 !important;
+        }
+        .swal-neon-confirm:hover {
+            background: #00ff4e !important;
+            box-shadow: 0 0 30px rgba(0, 255, 78, 0.7) !important;
         }
 
         /* Modern SweetAlert2 Premium Theme */

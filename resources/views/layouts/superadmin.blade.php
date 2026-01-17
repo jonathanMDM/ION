@@ -409,7 +409,8 @@
                 showConfirmButton: true,
                 confirmButtonText: 'Entendido',
                 customClass: {
-                    confirmButton: 'bg-gradient-to-r from-sky-600 to-cyan-600'
+                    popup: 'swal-neon-popup',
+                    confirmButton: 'swal-neon-confirm'
                 }
             });
         @endif
@@ -418,7 +419,7 @@
             Swal.fire({
                 icon: 'error',
                 title: 'Errores de Validación',
-                html: '<ul style="text-align: left; font-size: 0.9rem;">@foreach($errors->all() as $error)<li><i class="fas fa-chevron-right mr-2 text-sky-400"></i>{{ $error }}</li>@endforeach</ul>',
+                html: '<ul style="text-align: left; font-size: 0.9rem;">@foreach($errors->all() as $error)<li><i class="fas fa-chevron-right mr-2" style="color: #00f5ff;"></i>{{ $error }}</li>@endforeach</ul>',
                 showConfirmButton: true,
                 confirmButtonText: 'Revisar',
                 customClass: {

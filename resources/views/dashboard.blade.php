@@ -222,28 +222,28 @@
         <div class="space-y-8">
             
             <!-- Quick Actions -->
-            <div class="bg-white dark:bg-gray-800 rounded-3xl border border-gray-100 dark:border-gray-700 shadow-sm p-6">
-                <h4 class="text-lg font-bold text-gray-900 dark:text-white mb-6">Acciones Rápidas</h4>
+            <div class="rounded-3xl shadow-sm p-6" style="background: #242424; border: 1px solid rgba(0, 245, 255, 0.2);">
+                <h4 class="text-lg font-bold text-white mb-6">Acciones Rápidas</h4>
                 <div class="grid grid-cols-1 gap-3">
                     @if(Auth::user()->hasPermission('create_assets'))
-                    <a href="{{ route('assets.create') }}" class="group flex items-center p-4 bg-sky-50 dark:bg-sky-900/20 hover:bg-sky-600 rounded-2xl transition-all border border-sky-100 dark:border-sky-800/30">
-                        <div class="w-10 h-10 bg-white dark:bg-gray-800 text-sky-600 rounded-xl flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform">
+                    <a href="{{ route('assets.create') }}" class="group flex items-center p-4 rounded-2xl transition-all" style="background: rgba(0, 255, 78, 0.1); border: 1px solid rgba(0, 255, 78, 0.3);">
+                        <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform" style="background: rgba(0, 255, 78, 0.2); color: #00ff4e;">
                             <i class="fas fa-plus"></i>
                         </div>
                         <div class="ml-4">
-                            <span class="text-sm font-bold text-sky-900 dark:text-sky-100 group-hover:text-white transition-colors">Nuevo Activo</span>
-                            <span class="block text-[10px] text-sky-400 group-hover:text-sky-100 transition-colors uppercase tracking-widest font-black">Registro Central</span>
+                            <span class="text-sm font-bold group-hover:text-white transition-colors" style="color: #00ff4e;">Nuevo Activo</span>
+                            <span class="block text-[10px] text-gray-400 group-hover:text-gray-300 transition-colors uppercase tracking-widest font-black">Registro Central</span>
                         </div>
                     </a>
                     @endif
 
                     @if(Auth::user()->hasPermission('import_assets'))
-                    <a href="{{ route('imports.create') }}" class="group flex items-center p-4 bg-emerald-50 dark:bg-emerald-900/20 hover:bg-emerald-600 rounded-2xl transition-all border border-emerald-100 dark:border-emerald-800/30">
-                        <div class="w-10 h-10 bg-white dark:bg-gray-800 text-emerald-600 rounded-xl flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform">
+                    <a href="{{ route('imports.create') }}" class="group flex items-center p-4 rounded-2xl transition-all" style="background: rgba(0, 245, 255, 0.1); border: 1px solid rgba(0, 245, 255, 0.3);">
+                        <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform" style="background: rgba(0, 245, 255, 0.2); color: #00f5ff;">
                             <i class="fas fa-file-excel"></i>
                         </div>
                         <div class="ml-4">
-                            <span class="text-sm font-bold text-emerald-900 dark:text-emerald-100 group-hover:text-white transition-colors">Importar Excel</span>
+                            <span class="text-sm font-bold group-hover:text-white transition-colors" style="color: #00f5ff;">Importar Excel</span>
                         </div>
                     </a>
                     @endif
