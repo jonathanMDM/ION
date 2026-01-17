@@ -250,6 +250,7 @@ Route::middleware(['auth', 'superadmin'])->prefix('superadmin')->name('superadmi
     // Invoices
     Route::get('companies/{company}/invoices/create', [\App\Http\Controllers\Superadmin\InvoiceController::class, 'create'])->name('companies.invoices.create');
     Route::post('companies/{company}/invoices', [\App\Http\Controllers\Superadmin\InvoiceController::class, 'store'])->name('companies.invoices.store');
+    Route::get('invoices/{invoice}/download', [\App\Http\Controllers\Superadmin\InvoiceController::class, 'download'])->name('invoices.download');
 });
 
 // Stop Impersonation

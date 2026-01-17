@@ -19,12 +19,14 @@
     <div class="invoice-box">
         <div class="header">
             <div>
-                <h1 style="color: #000; margin: 0;">ION Inventory</h1>
-                <p>Comprobante de Pago</p>
+                <img src="{{ public_path('img/logo.png') }}" alt="ION Logo" style="width: 120px; margin-bottom: 10px;">
+                <h1 style="color: #4F46E5; margin: 0;">ION Inventory</h1>
+                <p style="color: #6B7280; margin: 5px 0;">Sistema de Gestión de Activos</p>
             </div>
             <div class="company-info">
                 <p><strong>Fecha:</strong> {{ $payment_date }}</p>
                 <p><strong>Factura #:</strong> {{ $invoice_number }}</p>
+                <p style="color: #10B981; font-weight: bold;">PAGADO</p>
             </div>
         </div>
 

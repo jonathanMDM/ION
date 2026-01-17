@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Symfony\Component\HttpFoundation\Response;
 
 class InvoiceController extends Controller
 {
@@ -92,5 +93,16 @@ class InvoiceController extends Controller
 
         return redirect()->route('superadmin.companies.show', $company->id)
             ->with('success', 'Factura generada y enviada exitosamente.');
+    }
+
+    public function download(Invoice $invoice)
+    {
+        $path = storage_path('app/public/' . $invoice->pdf_path);
+        
+        if (!file_exists($path)) {
+            return redirect()->back()->with('error', 'El archivo de la factura no existe en el servidor.');
+        }
+
+        return response()->file($path);
     }
 }
