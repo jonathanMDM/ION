@@ -27,7 +27,7 @@
     @if(!auth()->user()->company_id || isset($subscriptionWarning))
     <div class="grid grid-cols-1 gap-6">
         @if(!auth()->user()->company_id)
-        <div class="bg-indigo-600 rounded-3xl p-8 text-white relative overflow-hidden shadow-xl">
+        <div class="bg-sky-500 rounded-3xl p-8 text-white relative overflow-hidden shadow-xl">
             <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6 font-medium">
                 <div class="flex items-center gap-5">
                     <div class="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center text-2xl">
@@ -35,10 +35,10 @@
                     </div>
                     <div>
                         <h2 class="text-xl font-bold">Cuenta sin Organización</h2>
-                        <p class="text-indigo-100 opacity-90">Vincule su cuenta a una empresa para empezar a gestionar inventarios.</p>
+                        <p class="text-sky-100 opacity-90">Vincule su cuenta a una empresa para empezar a gestionar inventarios.</p>
                     </div>
                 </div>
-                <a href="https://wa.me/573145781261" target="_blank" class="px-6 py-3 bg-white text-indigo-600 rounded-xl font-bold shadow-lg hover:bg-gray-50 transition-all">
+                <a href="https://wa.me/573145781261" target="_blank" class="px-6 py-3 bg-white text-sky-600 rounded-xl font-bold shadow-lg hover:bg-gray-50 transition-all">
                     Soporte Técnico
                 </a>
             </div>
@@ -77,9 +77,9 @@
                     <h3 class="text-4xl font-extrabold text-gray-900 dark:text-white leading-tight">
                         {{ $stats['total_assets'] ?? 0 }}
                     </h3>
-                    <p class="text-xs font-bold text-indigo-500 mt-1">Unidades en sistema</p>
+                    <p class="text-xs font-bold text-sky-500 mt-1">Unidades en sistema</p>
                 </div>
-                <div class="w-12 h-12 bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 rounded-2xl flex items-center justify-center text-xl">
+                <div class="w-12 h-12 bg-sky-50 dark:bg-sky-900/30 text-sky-600 dark:text-sky-400 rounded-2xl flex items-center justify-center text-xl">
                     <i class="fas fa-boxes"></i>
                 </div>
             </div>
@@ -90,12 +90,12 @@
             <div class="flex items-start justify-between">
                 <div>
                     <p class="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-1">Operativos</p>
-                    <h3 class="text-4xl font-extrabold text-green-600 leading-tight">
+                    <h3 class="text-4xl font-extrabold text-emerald-600 leading-tight">
                         {{ $stats['active_assets'] ?? 0 }}
                     </h3>
                     <p class="text-xs font-bold text-gray-500 mt-1">Estado: Activo</p>
                 </div>
-                <div class="w-12 h-12 bg-green-50 dark:bg-green-900/30 text-green-600 dark:text-green-400 rounded-2xl flex items-center justify-center text-xl">
+                <div class="w-12 h-12 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 rounded-2xl flex items-center justify-center text-xl">
                     <i class="fas fa-check-circle"></i>
                 </div>
             </div>
@@ -122,12 +122,12 @@
             <div class="flex items-start justify-between">
                 <div>
                     <p class="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-1">Bajas</p>
-                    <h3 class="text-4xl font-extrabold text-rose-600 leading-tight">
+                    <h3 class="text-4xl font-extrabold text-red-600 leading-tight">
                         {{ $stats['decommissioned_assets'] ?? 0 }}
                     </h3>
                     <p class="text-xs font-bold text-gray-500 mt-1">Fuera de servicio</p>
                 </div>
-                <div class="w-12 h-12 bg-rose-50 dark:bg-rose-900/30 text-rose-600 dark:text-rose-400 rounded-2xl flex items-center justify-center text-xl">
+                <div class="w-12 h-12 bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400 rounded-2xl flex items-center justify-center text-xl">
                     <i class="fas fa-ban"></i>
                 </div>
             </div>
@@ -177,7 +177,7 @@
             <div class="bg-white dark:bg-gray-800 rounded-3xl border border-gray-100 dark:border-gray-700 shadow-sm overflow-hidden">
                 <div class="p-6 border-b border-gray-50 dark:border-gray-700 flex justify-between items-center">
                     <h4 class="text-lg font-bold text-gray-900 dark:text-white">Activos Recientes</h4>
-                    <a href="{{ route('assets.index') }}" class="text-sm font-bold text-indigo-600 dark:text-indigo-400 hover:underline">Ver Todo</a>
+                    <a href="{{ route('assets.index') }}" class="text-sm font-bold text-sky-600 dark:text-sky-400 hover:underline">Ver Todo</a>
                 </div>
                 <div class="divide-y divide-gray-50 dark:divide-gray-700">
                     @forelse($recent_assets as $asset)
@@ -191,7 +191,7 @@
                                 @endif
                             </div>
                             <div>
-                                <a href="{{ route('assets.show', $asset->id) }}" class="text-sm font-bold text-gray-900 dark:text-white hover:text-indigo-600 transition-colors">{{ $asset->name }}</a>
+                                <a href="{{ route('assets.show', $asset->id) }}" class="text-sm font-bold text-gray-900 dark:text-white hover:text-sky-600 transition-colors">{{ $asset->name }}</a>
                                 <p class="text-xs text-gray-500 mt-0.5">{{ $asset->subcategory->category->name }} • {{ $asset->location->name }}</p>
                             </div>
                         </div>
@@ -201,9 +201,9 @@
                                 <p class="font-bold text-gray-600 dark:text-gray-400">{{ $asset->created_at->diffForHumans() }}</p>
                             </div>
                             <span class="px-2.5 py-1 text-[10px] font-black uppercase rounded-lg border
-                                {{ $asset->status == 'active' ? 'bg-green-50 text-green-600 border-green-100 dark:bg-green-900/20 dark:border-green-800/50' : '' }}
+                                {{ $asset->status == 'active' ? 'bg-emerald-50 text-emerald-600 border-emerald-100 dark:bg-emerald-900/20 dark:border-emerald-800/50' : '' }}
                                 {{ $asset->status == 'maintenance' ? 'bg-amber-50 text-amber-600 border-amber-100 dark:bg-amber-900/20 dark:border-amber-800/50' : '' }}
-                                {{ $asset->status == 'decommissioned' ? 'bg-rose-50 text-rose-600 border-rose-100 dark:bg-rose-900/20 dark:border-rose-800/50' : '' }}">
+                                {{ $asset->status == 'decommissioned' ? 'bg-red-50 text-red-600 border-red-100 dark:bg-red-900/20 dark:border-red-800/50' : '' }}">
                                 {{ ucfirst($asset->status) }}
                             </span>
                         </div>
@@ -226,13 +226,13 @@
                 <h4 class="text-lg font-bold text-gray-900 dark:text-white mb-6">Acciones Rápidas</h4>
                 <div class="grid grid-cols-1 gap-3">
                     @if(Auth::user()->hasPermission('create_assets'))
-                    <a href="{{ route('assets.create') }}" class="group flex items-center p-4 bg-indigo-50 dark:bg-indigo-900/20 hover:bg-indigo-600 rounded-2xl transition-all border border-indigo-100 dark:border-indigo-800/30">
-                        <div class="w-10 h-10 bg-white dark:bg-gray-800 text-indigo-600 rounded-xl flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform">
+                    <a href="{{ route('assets.create') }}" class="group flex items-center p-4 bg-sky-50 dark:bg-sky-900/20 hover:bg-sky-600 rounded-2xl transition-all border border-sky-100 dark:border-sky-800/30">
+                        <div class="w-10 h-10 bg-white dark:bg-gray-800 text-sky-600 rounded-xl flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform">
                             <i class="fas fa-plus"></i>
                         </div>
                         <div class="ml-4">
-                            <span class="text-sm font-bold text-indigo-900 dark:text-indigo-100 group-hover:text-white transition-colors">Nuevo Activo</span>
-                            <span class="block text-[10px] text-indigo-400 group-hover:text-indigo-100 transition-colors uppercase tracking-widest font-black">Registro Central</span>
+                            <span class="text-sm font-bold text-sky-900 dark:text-sky-100 group-hover:text-white transition-colors">Nuevo Activo</span>
+                            <span class="block text-[10px] text-sky-400 group-hover:text-sky-100 transition-colors uppercase tracking-widest font-black">Registro Central</span>
                         </div>
                     </a>
                     @endif
@@ -264,7 +264,7 @@
                 <div class="flex flex-col gap-6">
                     <div class="flex items-center justify-between">
                         <span class="text-xs font-black uppercase text-gray-400 tracking-[0.2em]">Ocupación Regional</span>
-                        <span class="text-xs font-bold text-indigo-600 dark:text-indigo-400">{{ $stats['total_locations'] }} Sedes</span>
+                        <span class="text-xs font-bold text-sky-600 dark:text-sky-400">{{ $stats['total_locations'] }} Sedes</span>
                     </div>
                     
                     <div class="space-y-4">
