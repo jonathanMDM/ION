@@ -237,14 +237,13 @@ class AssetController extends Controller
             'custom_attributes' => 'nullable|array',
         ]);
         
-        $data = $request->all();
-
+        $data = $request->except(['image', 'image_public_id']);
+        
         // Copy purchase_price to value for backward compatibility
-        if (isset($data['purchase_price'])) {
-            $data['value'] = $data['purchase_price'];
+        if ($request->has('purchase_price')) {
+            $data['value'] = $request->purchase_price;
         }
         
-        // Handle image upload to Cloudinary
         // Handle image upload with local fallback
         if ($request->hasFile('image')) {
             $file = $request->file('image');
@@ -253,9 +252,6 @@ class AssetController extends Controller
             if ($asset->image_public_id) {
                 \App\Helpers\CloudinaryHelper::delete($asset->image_public_id);
             }
-            // If it was local (no public_id) but has a path, we could delete it, 
-            // but for safety we'll just overwrite the reference. 
-            // Ideally: Storage::disk('public')->delete($asset->image); if it wasn't a URL.
             
             $result = \App\Helpers\CloudinaryHelper::upload($file, 'assets');
             
@@ -282,7 +278,7 @@ class AssetController extends Controller
         }
         
         $asset->update($data);
-        return redirect()->route('assets.index')->with('success', 'Activo actualizado exitosamente.');
+        return redirect()->route('assets.show', $asset->id)->with('success', 'Activo actualizado exitosamente.');
     }
 
     /**
