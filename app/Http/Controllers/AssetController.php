@@ -42,7 +42,6 @@ class AssetController extends Controller
             'location_id' => 'required|exists:locations,id',
             'subcategory_id' => 'required|exists:subcategories,id',
             'name' => 'required|string|max:255',
-            'value' => 'required|numeric',
             'purchase_date' => 'nullable|date',
             'status' => 'required|in:active,decommissioned,maintenance',
             'municipality_plate' => 'nullable|string|max:255',
@@ -63,6 +62,11 @@ class AssetController extends Controller
         
         // Add company_id from authenticated user
         $data['company_id'] = auth()->user()->company_id;
+
+        // Copy purchase_price to value for backward compatibility
+        if (isset($data['purchase_price'])) {
+            $data['value'] = $data['purchase_price'];
+        }
 
         if (empty($data['custom_id'])) {
             $data['custom_id'] = 'AST-' . time() . '-' . rand(1000, 9999);

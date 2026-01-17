@@ -168,29 +168,31 @@
         {{-- Financial & Depreciation Section --}}
         <div class="border-t-2 border-gray-300 pt-6 mt-6 mb-6">
             <h3 class="text-lg font-bold text-gray-800 mb-4">
-                <i class="fas fa-dollar-sign text-indigo-600 mr-2"></i>Información Financiera y Depreciación
+                <i class="fas fa-dollar-sign text-indigo-600 mr-2"></i>Información Financiera
             </h3>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                <!-- Precio de Compra -->
-                <div>
-                    <label class="block text-gray-700 text-sm font-bold mb-2" for="purchase_price">
-                        Precio de Compra <span class="text-red-500">*</span>
-                    </label>
-                    <div class="relative">
-                        <span class="absolute left-3 top-2.5 text-gray-500">$</span>
-                        <input type="number" 
-                               step="0.01" 
-                               name="purchase_price" 
-                               id="purchase_price" 
-                               value="{{ old('purchase_price') }}"
-                               class="shadow appearance-none border rounded w-full py-2 pl-8 pr-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
-                               placeholder="0.00"
-                               required>
-                    </div>
-                    <p class="text-gray-600 text-xs italic mt-1">Valor original de compra del activo</p>
+            {{-- Purchase Price - Always visible --}}
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="purchase_price">
+                    Precio de Compra <span class="text-red-500">*</span>
+                </label>
+                <div class="relative">
+                    <span class="absolute left-3 top-2.5 text-gray-500">$</span>
+                    <input type="number" 
+                           step="0.01" 
+                           name="purchase_price" 
+                           id="purchase_price" 
+                           value="{{ old('purchase_price') }}"
+                           class="shadow appearance-none border rounded w-full py-2 pl-8 pr-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                           placeholder="0.00"
+                           required>
                 </div>
+                <p class="text-gray-600 text-xs italic mt-1">Valor original de compra del activo</p>
+            </div>
 
+            @if(auth()->user()->company->hasModule('financial_control'))
+            {{-- Advanced Financial Features - Only if module enabled --}}
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                 <!-- Centro de Costo -->
                 <div>
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="cost_center_id">
@@ -295,6 +297,7 @@
                     </div>
                 </div>
             </div>
+            @endif
         </div>
 
         <div class="mb-4">
