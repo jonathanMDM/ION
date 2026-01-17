@@ -173,6 +173,7 @@
                     <th>{{ $field->label }}</th>
                     @endif
                 @endforeach
+                <th>Cant.</th>
                 <th>Estado</th>
                 <th style="text-align: right">P. Compra</th>
                 @if(auth()->user()->company->hasModule('depreciation'))
@@ -198,6 +199,7 @@
                     <td>{{ $asset->custom_attributes[$field->name] ?? '-' }}</td>
                     @endif
                 @endforeach
+                <td style="text-align: center">{{ $asset->quantity }}</td>
                 <td class="status-{{ $asset->status }}">{{ ucfirst($asset->status) }}</td>
                 <td class="currency">${{ number_format($asset->purchase_price, 2) }}</td>
                 @if(auth()->user()->company->hasModule('depreciation'))

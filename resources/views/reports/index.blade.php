@@ -214,6 +214,7 @@
                         <th class="py-4 px-6 text-left">{{ $field->label }}</th>
                         @endif
                     @endforeach
+                    <th class="py-4 px-6 text-center">Cant.</th>
                     <th class="py-4 px-6 text-center">Estado</th>
                     <th class="py-4 px-6 text-right">P. Compra</th>
                     @if(auth()->user()->company->hasModule('depreciation'))
@@ -261,6 +262,9 @@
                         </td>
                         @endif
                     @endforeach
+                    <td class="py-4 px-6 text-center font-bold">
+                        {{ $asset->quantity }}
+                    </td>
                     <td class="py-4 px-6 text-center">
                         <span class="px-3 py-1 text-[10px] font-bold uppercase rounded-full
                             {{ $asset->status == 'active' ? 'bg-green-100 text-green-700 border border-green-200' : '' }}
