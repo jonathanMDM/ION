@@ -59,14 +59,30 @@ class InvoiceController extends Controller
 
         // Save PDF to storage
         $pdfPath = 'invoices/' . $invoiceNumber . '.pdf';
-        Storage::put('public/' . $pdfPath, $pdf->output());
-        $invoice->update(['pdf_path' => $pdfPath]);
-
-        // Send Email
+        $fullPath = storage_path('app/public/' . $pdfPath);
+        
         try {
-            Mail::to($company->email)->send(new CompanyInvoiceMail($invoice, storage_path('app/public/' . $pdfPath)));
+            // Ensure directory exists
+            $dir = dirname($fullPath);
+            if (!is_dir($dir)) {
+                mkdir($dir, 0755, true);
+                chown($dir, 'www-data');
+            }
+            
+            file_put_contents($fullPath, $pdf->output());
+            
+            if (!file_exists($fullPath)) {
+                throw new \Exception("Failed to create PDF file at: " . $fullPath);
+            }
+            
+            $invoice->update(['pdf_path' => $pdfPath]);
+
+            // Send Email
+            Mail::to($company->email)->send(new CompanyInvoiceMail($invoice, $fullPath));
+            
         } catch (\Exception $e) {
-            \Log::error('Error sending invoice email: ' . $e->getMessage());
+            \Log::error('Invoice Error: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Error al generar o enviar la factura: ' . $e->getMessage());
         }
 
         // Update company subscription expiration
