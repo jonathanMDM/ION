@@ -44,6 +44,14 @@ class SupplierController extends Controller
     }
 
     /**
+     * Display the specified supplier
+     */
+    public function show(Supplier $supplier)
+    {
+        return redirect()->route('suppliers.edit', $supplier);
+    }
+
+    /**
      * Show the form for editing the specified supplier
      */
     public function edit(Supplier $supplier)

@@ -3,6 +3,39 @@
 @section('page-title', 'Panel')
 
 @section('content')
+
+@if(!auth()->user()->company_id)
+<div class="mb-8">
+    <div class="bg-gradient-to-r from-indigo-900 to-violet-900 rounded-2xl p-8 shadow-2xl relative overflow-hidden border border-indigo-500/30">
+        <!-- Background Decoration -->
+        <div class="absolute top-0 right-0 -mt-10 -mr-10 w-64 h-64 bg-indigo-500/20 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 left-0 -mb-10 -ml-10 w-40 h-40 bg-purple-500/20 rounded-full blur-2xl"></div>
+        
+        <div class="relative z-10 flex flex-col md:flex-row items-center gap-6 text-center md:text-left">
+            <div class="flex-shrink-0 bg-white/10 p-4 rounded-full backdrop-blur-sm border border-white/10 shadow-inner">
+                <i class="fas fa-building text-4xl text-indigo-300"></i>
+            </div>
+            <div class="flex-1">
+                <h2 class="text-2xl font-bold text-white mb-2 font-display">¡Bienvenido a ION INVENTORY!</h2>
+                <p class="text-indigo-200 text-lg">
+                    Tu cuenta ha sido creada exitosamente, pero aún no estás vinculado a ninguna empresa.
+                </p>
+                <p class="text-indigo-300/80 text-sm mt-1">
+                    Para comenzar a gestionar activos, por favor contacta al administrador del sistema para que te asigne a una organización.
+                </p>
+            </div>
+            
+            <div class="flex-shrink-0">
+                <a href="mailto:soporte@ioninventory.com" class="inline-flex items-center px-6 py-3 bg-white text-indigo-900 font-bold rounded-xl hover:bg-indigo-50 transition-all shadow-lg hover:shadow-indigo-500/20 transform hover:-translate-y-0.5">
+                    <i class="fas fa-envelope mr-2"></i>
+                    Contactar Soporte
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+@endif
+
 <!-- Subscription Warning -->
 @if(isset($subscriptionWarning))
 <div class="mb-6">

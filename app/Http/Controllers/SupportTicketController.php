@@ -60,8 +60,7 @@ class SupportTicketController extends Controller
 
         // Check if user has a company
         if (!$user->company_id) {
-            return redirect()->route('dashboard')
-                ->with('error', 'No tienes una empresa asignada. Contacta al administrador.');
+            return redirect()->route('dashboard');
         }
 
         $ticket = SupportTicket::create([

@@ -53,7 +53,7 @@ class ApiTokenController extends Controller
         $user->save();
         
         return redirect()->route('superadmin.api.token.index')
-            ->with('success', 'API token generated successfully!')
+            ->with('success', '¡Token de API generado exitosamente!')
             ->with('token', $token);
     }
 
@@ -69,6 +69,6 @@ class ApiTokenController extends Controller
         $user->save();
         
         return redirect()->route('superadmin.api.token.index')
-            ->with('success', 'API token revoked successfully.');
+            ->with('success', 'Token de API revocado exitosamente.');
     }
 }

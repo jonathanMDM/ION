@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="max-w-xl mx-auto bg-white dark:bg-gray-800 p-6 rounded shadow transition-colors">
+<div id="tour-location-form" class="max-w-xl mx-auto bg-white dark:bg-gray-800 p-6 rounded shadow transition-colors">
     <h2 class="text-2xl font-bold mb-6 text-gray-800 dark:text-white">Agregar Nueva Ubicación</h2>
     
     <form action="{{ route('locations.store') }}" method="POST">

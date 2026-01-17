@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="max-w-4xl mx-auto">
+<div id="tour-import-form" class="max-w-4xl mx-auto">
     <div class="bg-white dark:bg-gray-800 p-4 md:p-6 rounded shadow mb-6 transition-colors">
         <h2 class="text-2xl font-bold mb-6 text-gray-800 dark:text-white">Importar Activos desde Excel</h2>
         

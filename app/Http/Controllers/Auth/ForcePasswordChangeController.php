@@ -23,10 +23,34 @@ class ForcePasswordChangeController extends Controller
     public function update(Request $request)
     {
         $request->validate([
-            'password' => ['required', 'min:8', 'confirmed', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/'],
+            'password' => [
+                'required', 
+                'min:8', 
+                'confirmed', 
+                'regex:/[a-z]/', 
+                'regex:/[A-Z]/', 
+                'regex:/[0-9]/', 
+                'regex:/[@$!%*?&#.]/'
+            ],
         ], [
-            'password.regex' => 'La contraseña debe contener al menos una letra mayúscula, una minúscula y un número.',
+            'password.required' => 'La nueva contraseña es obligatoria.',
+            'password.min' => 'La contraseña debe tener al menos 8 caracteres.',
+            'password.confirmed' => 'Las contraseñas ingresadas no coinciden.',
+            'password.regex' => 'La contraseña no cumple con los requisitos de seguridad.',
         ]);
+
+        // Specific custom validation checks for better user feedback
+        $password = $request->password;
+        $errors = [];
+        
+        if (!preg_match('/[a-z]/', $password)) $errors[] = 'Debe contener al menos una letra minúscula.';
+        if (!preg_match('/[A-Z]/', $password)) $errors[] = 'Debe contener al menos una letra mayúscula.';
+        if (!preg_match('/[0-9]/', $password)) $errors[] = 'Debe contener al menos un número.';
+        if (!preg_match('/[@$!%*?&#.]/', $password)) $errors[] = 'Debe contener al menos un carácter especial (@$!%*?&#.).';
+
+        if (!empty($errors)) {
+            return back()->withErrors(['password' => $errors])->withInput();
+        }
 
         $user = Auth::user();
         

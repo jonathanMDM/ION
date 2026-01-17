@@ -56,6 +56,7 @@ class User extends Authenticatable
         'company_id',
         'preferences',
         'must_change_password',
+        'onboarding_completed',
     ];
 
     /**
@@ -81,6 +82,7 @@ class User extends Authenticatable
         'permissions' => 'array', // Kept from original
         'is_superadmin' => 'boolean', // Added from instruction
         'must_change_password' => 'boolean',
+        'onboarding_completed' => 'boolean',
         'api_token_expires_at' => 'datetime',
         'preferences' => 'array',
     ];

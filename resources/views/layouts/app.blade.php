@@ -1,19 +1,15 @@
 <!DOCTYPE html>
-<html lang="en" class="">
+<html lang="es" class="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ION Inventory</title>
+    <title>ION INVENTORY</title>
     <link rel="manifest" href="/manifest.json">
     <meta name="theme-color" content="#1f2937">
     <link rel="icon" type="image/png" href="/favicon.png">
-    <link rel="apple-touch-icon" href="/icons/icon-192x192.png">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-        }
-    </script>
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <!-- Compiled Assets -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.10.1/sweetalert2.all.min.js"></script>
@@ -23,211 +19,309 @@
         .font-logo { font-family: 'Orbitron', sans-serif; }
         [x-cloak] { display: none !important; }
         
-        /* Hide scrollbar but keep functionality */
-        .scrollbar-hide::-webkit-scrollbar {
-            display: none;
+        /* Modern Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(99, 102, 241, 0.2); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(99, 102, 241, 0.4); }
+
+        /* Glassmorphism for Top Bar */
+        .glass-header {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
         }
-        .scrollbar-hide {
-            -ms-overflow-style: none;  /* IE and Edge */
-            scrollbar-width: none;  /* Firefox */
+        .dark .glass-header {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        /* Dark mode for SweetAlert2 */
-        .dark .swal2-popup {
-            background-color: #1f2937 !important;
-            color: #f3f4f6 !important;
-            border: 1px solid #374151;
+        /* Sidebar Item States */
+        .sidebar-item-active {
+            background: linear-gradient(to right, rgba(99, 102, 241, 0.15), transparent);
+            border-left: 4px solid #6366f1;
+            color: #818cf8 !important;
         }
-        .dark .swal2-title, .dark .swal2-html-container, .dark .swal2-content {
-            color: #f3f4f6 !important;
+        .dark .sidebar-item-active {
+            background: linear-gradient(to right, rgba(99, 102, 241, 0.2), transparent);
+            border-left: 4px solid #818cf8;
+            color: #a5b4fc !important;
         }
-        .dark .swal2-footer {
-            border-top: 1px solid #374151 !important;
-            color: #9ca3af !important;
+
+        /* Modern SweetAlert2 Premium Theme */
+        .swal2-popup {
+            background: rgba(15, 23, 42, 0.95) !important;
+            backdrop-filter: blur(16px) !important;
+            border: 1px solid rgba(255, 255, 255, 0.08) !important;
+            border-radius: 1.5rem !important;
+            padding: 2rem !important;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5) !important;
+            font-family: 'Plus Jakarta Sans', sans-serif !important;
         }
-        .dark .swal2-close:hover {
+        .swal2-title {
             color: #ffffff !important;
+            font-weight: 800 !important;
+            font-size: 1.5rem !important;
+            letter-spacing: -0.025em !important;
+        }
+        .swal2-html-container {
+            color: rgba(203, 213, 225, 0.9) !important;
+            font-size: 1rem !important;
+            line-height: 1.6 !important;
+        }
+        .swal2-confirm {
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%) !important;
+            border-radius: 0.8rem !important;
+            padding: 0.8rem 2rem !important;
+            font-weight: 700 !important;
+            font-size: 0.9rem !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.05em !important;
+            box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.3) !important;
+            transition: all 0.3s !important;
+        }
+        .swal2-confirm:hover {
+            transform: translateY(-2px) !important;
+            box-shadow: 0 15px 20px -3px rgba(99, 102, 241, 0.4) !important;
+        }
+        .swal2-cancel {
+            background: rgba(255, 255, 255, 0.05) !important;
+            color: #ffffff !important;
+            border-radius: 0.8rem !important;
+            padding: 0.8rem 2rem !important;
+            font-weight: 600 !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        }
+        .swal2-icon {
+            border-width: 3px !important;
+            transform: scale(1.1) !important;
+            margin-bottom: 1.5rem !important;
+        }
+        .swal2-success-circular-line, .swal2-success-fix, .swal2-success-aside-line {
+            display: none !important;
+        }
+        .swal2-timer-progress-bar {
+            background: linear-gradient(to right, #6366f1, #a855f7) !important;
+            height: 4px !important;
         }
 
-        /* Dark mode for Select2 */
-        .dark .select2-container--default .select2-selection--single {
-            background-color: #374151 !important;
-            border-color: #4b5563 !important;
-            color: #f3f4f6 !important;
-        }
-        .dark .select2-container--default .select2-selection--single .select2-selection__rendered {
-            color: #f3f4f6 !important;
-        }
-        .dark .select2-dropdown {
-            background-color: #1f2937 !important;
-            border-color: #374151 !important;
-            color: #f3f4f6 !important;
-        }
-        .dark .select2-container--default .select2-results__option--highlighted[aria-selected] {
-            background-color: #3b82f6 !important;
-        }
-        .dark .select2-container--default .select2-search--dropdown .select2-search__field {
-            background-color: #374151 !important;
-            border-color: #4b5563 !important;
-            color: #f3f4f6 !important;
+        /* Mobile Responsive SweetAlert */
+        @media (max-width: 640px) {
+            .swal2-popup {
+                width: auto !important;
+                max-width: 340px !important;
+                padding: 1rem !important;
+                border-radius: 1rem !important;
+            }
+            .swal2-title {
+                font-size: 1.1rem !important;
+                margin-bottom: 0.5rem !important;
+            }
+            .swal2-html-container {
+                font-size: 0.85rem !important;
+                margin: 0.5rem 0 !important;
+            }
+            .swal2-icon {
+                margin-bottom: 0.75rem !important;
+                transform: scale(0.7) !important;
+                margin-top: 0 !important;
+            }
+            .swal2-confirm, .swal2-cancel {
+                padding: 0.5rem 1rem !important;
+                font-size: 0.75rem !important;
+                margin: 0.25rem 0.25rem !important;
+                width: auto !important;
+                display: inline-block !important;
+            }
+            .swal2-actions {
+                flex-direction: row !important;
+                gap: 0.25rem !important;
+                width: 100% !important;
+                justify-content: center !important;
+                margin-top: 1rem !important;
+            }
         }
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
 </head>
 <body class="bg-gray-100 dark:bg-gray-900 transition-colors duration-200">
     <!-- Mobile Overlay -->
     <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden md:hidden" onclick="toggleMobileSidebar()"></div>
 
     <!-- Sidebar -->
-    <div id="sidebar" class="sidebar-expanded fixed left-0 top-0 h-full bg-gray-800 text-white transition-all duration-300 z-50 md:z-10 -translate-x-full md:translate-x-0">
-        <div class="p-4 border-b border-gray-700">
+    <div id="sidebar" class="sidebar-expanded fixed left-0 top-0 h-full bg-indigo-950 text-slate-400 transition-all duration-300 z-50 md:z-10 -translate-x-full md:translate-x-0 border-r border-white/5">
+        <div class="p-6 border-b border-white/5">
             <div class="flex items-center justify-between">
                 <div class="flex items-center">
-                    <h1 class="text-3xl font-bold sidebar-text font-logo tracking-wider">ion</h1>
+                <div class="flex flex-col sidebar-text">
+                    <a href="{{ route('dashboard') }}" class="flex flex-col items-center group">
+                        <h1 class="text-3xl font-black font-logo tracking-widest text-white group-hover:text-indigo-100 transition-colors">ION</h1>
+                        <span class="text-[10px] text-indigo-400 font-bold uppercase tracking-[0.35em] font-sans ml-1 group-hover:text-indigo-300 transition-colors">Inventory</span>
+                    </a>
                 </div>
-                <button onclick="toggleSidebar()" class="text-gray-400 hover:text-white hidden md:block">
+                </div>
+                <button onclick="toggleSidebar()" class="text-slate-500 hover:text-white transition-colors hidden md:block">
                     <i class="fas fa-bars"></i>
                 </button>
-                <button onclick="toggleMobileSidebar()" class="text-gray-400 hover:text-white md:hidden">
+                <button onclick="toggleMobileSidebar()" class="text-slate-500 hover:text-white md:hidden">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
         </div>
         
-        <nav class="mt-4 overflow-y-auto h-[calc(100vh-80px)] scrollbar-hide">
-            <a href="{{ route('dashboard') }}" class="flex items-center px-4 py-3 hover:bg-gray-700 {{ request()->routeIs('dashboard') ? 'bg-gray-700 border-l-4 border-white' : '' }}" title="Panel">
+        <nav class="mt-4 overflow-y-auto h-[calc(100vh-80px)] px-2">
+            <a href="{{ route('dashboard') }}" class="flex items-center px-4 py-3 rounded-xl transition-all hover:bg-white/5 hover:text-white mb-1 {{ request()->routeIs('dashboard') ? 'sidebar-item-active' : '' }}" title="Panel">
                 <i class="fas fa-chart-line w-6"></i>
-                <span class="ml-3 sidebar-text">Panel</span>
+                <span class="ml-3 sidebar-text font-medium text-sm truncate">Panel</span>
             </a>
             <!-- Scanner - Solo visible en móvil -->
-            <a href="{{ route('scanner.index') }}" class="md:hidden flex items-center px-4 py-3 hover:bg-gray-700 {{ request()->routeIs('scanner.*') ? 'bg-gray-700 border-l-4 border-white' : '' }}" title="Escáner">
+            <a href="{{ route('scanner.index') }}" class="md:hidden flex items-center px-4 py-3 rounded-xl transition-all hover:bg-white/5 hover:text-white mb-1 {{ request()->routeIs('scanner.*') ? 'sidebar-item-active' : '' }}" title="Escáner">
                 <i class="fas fa-qrcode w-6"></i>
-                <span class="ml-3 sidebar-text">Escáner</span>
+                <span class="ml-3 sidebar-text font-medium text-sm truncate">Escáner</span>
             </a>
             
-            <div class="mt-2">
-                <div class="px-4 py-2 text-xs text-gray-400 uppercase sidebar-text">Activos</div>
+            <div class="mt-4">
+                <div class="px-4 py-2 text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] sidebar-text">Activos</div>
                 @if(Auth::user()->isAdmin() || Auth::user()->hasPermission('view_assets'))
-                <a href="{{ route('assets.index') }}" class="flex items-center px-4 py-3 hover:bg-gray-700 {{ request()->routeIs('assets.*') ? 'bg-gray-700 border-l-4 border-white' : '' }}" title="Todos los Activos">
+                <a href="{{ route('assets.index') }}" class="flex items-center px-4 py-3 rounded-xl transition-all hover:bg-white/5 hover:text-white mb-1 {{ request()->routeIs('assets.*') ? 'sidebar-item-active' : '' }}" title="Todos los Activos">
                     <i class="fas fa-box w-6"></i>
-                    <span class="ml-3 sidebar-text">Todos los Activos</span>
+                    <span class="ml-3 sidebar-text font-medium text-sm truncate">Todos los Activos</span>
                 </a>
                 @endif
                 @if(Auth::user()->isAdmin() || Auth::user()->hasPermission('create_assets'))
-                <a href="{{ route('assets.create') }}" class="flex items-center px-4 py-3 hover:bg-gray-700" title="Agregar Nuevo Activo">
+                <a href="{{ route('assets.create') }}" id="tour-add-asset" class="flex items-center px-4 py-3 rounded-xl transition-all hover:bg-white/5 hover:text-white mb-1 {{ request()->routeIs('assets.create') ? 'sidebar-item-active' : '' }}" title="Agregar Nuevo Activo">
                     <i class="fas fa-plus w-6"></i>
-                    <span class="ml-3 sidebar-text">Agregar Nuevo Activo</span>
+                    <span class="ml-3 sidebar-text font-medium text-sm truncate">Agregar Nuevo Activo</span>
                 </a>
                 @endif
                 @if(Auth::user()->isAdmin() || Auth::user()->hasPermission('import_assets'))
-                <a href="{{ route('imports.create') }}" class="flex items-center px-4 py-3 hover:bg-gray-700" title="Importar desde Excel">
+                <a href="{{ route('imports.create') }}" id="tour-import" class="flex items-center px-4 py-3 rounded-xl transition-all hover:bg-white/5 hover:text-white mb-1 {{ request()->routeIs('imports.*') ? 'sidebar-item-active' : '' }}" title="Importar desde Excel">
                     <i class="fas fa-file-excel w-6"></i>
-                    <span class="ml-3 sidebar-text">Importar desde Excel</span>
+                    <span class="ml-3 sidebar-text font-medium text-sm truncate">Importar desde Excel</span>
                 </a>
                 @endif
             </div>
 
             @if(Auth::user()->isAdmin() || Auth::user()->hasPermission('manage_locations') || Auth::user()->hasPermission('manage_categories'))
-            <div class="mt-2">
-                <div class="px-4 py-2 text-xs text-gray-400 uppercase sidebar-text">Organización</div>
+            <div class="mt-4">
+                <div class="px-4 py-2 text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] sidebar-text">Organización</div>
                 @if(Auth::user()->isAdmin() || Auth::user()->hasPermission('manage_locations'))
-                <a href="{{ route('locations.index') }}" class="flex items-center px-4 py-3 hover:bg-gray-700 {{ request()->routeIs('locations.*') ? 'bg-gray-700 border-l-4 border-white' : '' }}" title="Ubicaciones">
+                <a href="{{ route('locations.index') }}" id="tour-locations" class="flex items-center px-4 py-3 rounded-xl transition-all hover:bg-white/5 hover:text-white mb-1 {{ request()->routeIs('locations.*') ? 'sidebar-item-active' : '' }}" title="Ubicaciones">
                     <i class="fas fa-map-marker-alt w-6"></i>
-                    <span class="ml-3 sidebar-text">Ubicaciones</span>
+                    <span class="ml-3 sidebar-text font-medium text-sm truncate">Ubicaciones</span>
                 </a>
                 @endif
                 @if(Auth::user()->isAdmin() || Auth::user()->hasPermission('manage_categories'))
-                <a href="{{ route('categories.index') }}" class="flex items-center px-4 py-3 hover:bg-gray-700 {{ request()->routeIs('categories.*') ? 'bg-gray-700 border-l-4 border-white' : '' }}" title="Categorías">
+                <a href="{{ route('categories.index') }}" id="tour-categories" class="flex items-center px-4 py-3 rounded-xl transition-all hover:bg-white/5 hover:text-white mb-1 {{ request()->routeIs('categories.*') ? 'sidebar-item-active' : '' }}" title="Categorías">
                     <i class="fas fa-folder w-6"></i>
-                    <span class="ml-3 sidebar-text">Categorías</span>
+                    <span class="ml-3 sidebar-text font-medium text-sm truncate">Categorías</span>
                 </a>
                 @endif
                 @if(Auth::user()->isAdmin() || Auth::user()->hasPermission('manage_subcategories'))
-                <a href="{{ route('subcategories.index') }}" class="flex items-center px-4 py-3 hover:bg-gray-700 {{ request()->routeIs('subcategories.*') ? 'bg-gray-700 border-l-4 border-white' : '' }}" title="Subcategorías">
+                <a href="{{ route('subcategories.index') }}" id="tour-subcategories" class="flex items-center px-4 py-3 rounded-xl transition-all hover:bg-white/5 hover:text-white mb-1 {{ request()->routeIs('subcategories.*') ? 'sidebar-item-active' : '' }}" title="Subcategorías">
                     <i class="fas fa-folder-open w-6"></i>
-                    <span class="ml-3 sidebar-text">Subcategorías</span>
+                    <span class="ml-3 sidebar-text font-medium text-sm truncate">Subcategorías</span>
                 </a>
                 @endif
                 @if(Auth::user()->isAdmin() || Auth::user()->hasPermission('manage_suppliers'))
-                <a href="{{ route('suppliers.index') }}" class="flex items-center px-4 py-3 hover:bg-gray-700 {{ request()->routeIs('suppliers.*') ? 'bg-gray-700 border-l-4 border-white' : '' }}" title="Proveedores">
+                <a href="{{ route('suppliers.index') }}" id="tour-suppliers" class="flex items-center px-4 py-3 rounded-xl transition-all hover:bg-white/5 hover:text-white mb-1 {{ request()->routeIs('suppliers.*') ? 'sidebar-item-active' : '' }}" title="Proveedores">
                     <i class="fas fa-truck w-6"></i>
-                    <span class="ml-3 sidebar-text">Proveedores</span>
+                    <span class="ml-3 sidebar-text font-medium text-sm truncate">Proveedores</span>
                 </a>
                 @endif
             </div>
             @endif
 
-
-
-
-            <div class="mt-2">
+            <div class="mt-4">
+                <div class="px-4 py-2 text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] sidebar-text">Operaciones</div>
                 @if(Auth::user()->isAdmin() || Auth::user()->hasPermission('view_maintenance'))
-                <a href="{{ route('maintenances.index') }}" class="flex items-center px-4 py-3 hover:bg-gray-700 {{ request()->routeIs('maintenances.*') ? 'bg-gray-700 border-l-4 border-white' : '' }}" title="Mantenimiento">
+                <a href="{{ route('maintenances.index') }}" id="tour-maintenance" class="flex items-center px-4 py-3 rounded-xl transition-all hover:bg-white/5 hover:text-white mb-1 {{ request()->routeIs('maintenances.*') ? 'sidebar-item-active' : '' }}" title="Mantenimiento">
                     <i class="fas fa-wrench w-6"></i>
-                    <span class="ml-3 sidebar-text">Mantenimiento</span>
+                    <span class="ml-3 sidebar-text font-medium text-sm truncate">Mantenimiento</span>
                 </a>
                 @endif
                 @if(Auth::user()->isAdmin() || Auth::user()->hasPermission('view_reports'))
-                <a href="{{ route('reports.index') }}" class="flex items-center px-4 py-3 hover:bg-gray-700 {{ request()->routeIs('reports.*') ? 'bg-gray-700 border-l-4 border-white' : '' }}" title="Reportes">
+                <a href="{{ route('reports.index') }}" id="tour-reports" class="flex items-center px-4 py-3 rounded-xl transition-all hover:bg-white/5 hover:text-white mb-1 {{ request()->routeIs('reports.*') ? 'sidebar-item-active' : '' }}" title="Reportes">
                     <i class="fas fa-chart-bar w-6"></i>
-                    <span class="ml-3 sidebar-text">Reportes</span>
+                    <span class="ml-3 sidebar-text font-medium text-sm truncate">Reportes</span>
                 </a>
                 @endif
                 @if(Auth::user()->isAdmin() || Auth::user()->hasPermission('view_movements'))
-                <a href="{{ route('asset-movements.index') }}" class="flex items-center px-4 py-3 hover:bg-gray-700 {{ request()->routeIs('asset-movements.*') ? 'bg-gray-700 border-l-4 border-white' : '' }}" title="Movimientos">
+                <a href="{{ route('asset-movements.index') }}" id="tour-movements" class="flex items-center px-4 py-3 rounded-xl transition-all hover:bg-white/5 hover:text-white mb-1 {{ request()->routeIs('asset-movements.*') ? 'sidebar-item-active' : '' }}" title="Movimientos">
                     <i class="fas fa-exchange-alt w-6"></i>
-                    <span class="ml-3 sidebar-text">Movimientos</span>
+                    <span class="ml-3 sidebar-text font-medium text-sm truncate">Movimientos</span>
                 </a>
                 @endif
 
                 @if(Auth::user()->isAdmin() || Auth::user()->hasPermission('view_employees'))
-                <a href="{{ route('employees.index') }}" class="flex items-center px-4 py-3 hover:bg-gray-700 {{ request()->routeIs('employees.*') ? 'bg-gray-700 border-l-4 border-white' : '' }}" title="Empleados">
+                <a href="{{ route('employees.index') }}" id="tour-employees" class="flex items-center px-4 py-3 rounded-xl transition-all hover:bg-white/5 hover:text-white mb-1 {{ request()->routeIs('employees.*') ? 'sidebar-item-active' : '' }}" title="Empleados">
                     <i class="fas fa-id-card w-6"></i>
-                    <span class="ml-3 sidebar-text">Empleados</span>
+                    <span class="ml-3 sidebar-text font-medium text-sm truncate">Empleados</span>
                 </a>
                 @endif
             </div>
 
-            @if(Auth::user()->isAdmin())
-            <div class="mt-2 pb-20">
-                <div class="px-4 py-2 text-xs text-gray-400 uppercase sidebar-text">Administración</div>
-                <a href="{{ route('users.index') }}" class="flex items-center px-4 py-3 hover:bg-gray-700 {{ request()->routeIs('users.*') ? 'bg-gray-700 border-l-4 border-white' : '' }}" title="Usuarios">
-                    <i class="fas fa-users w-6"></i>
-                    <span class="ml-3 sidebar-text">Usuarios</span>
-                </a>
-                <a href="{{ route('backups.index') }}" class="flex items-center px-4 py-3 hover:bg-gray-700 {{ request()->routeIs('backups.*') ? 'bg-gray-700 border-l-4 border-white' : '' }}" title="Respaldos">
-                    <i class="fas fa-database w-6"></i>
-                    <span class="ml-3 sidebar-text">Respaldos</span>
-                </a>
-            </div>
-            @endif
+            <div class="mt-4 pb-20">
+                <div class="px-4 py-2 text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] sidebar-text">Configuración</div>
 
-            @if(Auth::user()->isSuperAdmin())
-            <div class="mt-2 border-t border-gray-700 pt-2 pb-20">
-                <a href="{{ route('superadmin.api.token.index') }}" class="flex items-center px-4 py-3 hover:bg-gray-700" title="API Token">
-                    <i class="fas fa-code w-6"></i>
-                    <span class="ml-3 sidebar-text">API Token</span>
+                @if(Auth::user()->isAdmin())
+                <a href="{{ route('users.index') }}" id="tour-users" class="flex items-center px-4 py-3 rounded-xl transition-all hover:bg-white/5 hover:text-white mb-1 {{ request()->routeIs('users.*') ? 'sidebar-item-active' : '' }}" title="Usuarios">
+                    <i class="fas fa-users w-6"></i>
+                    <span class="ml-3 sidebar-text font-medium text-sm truncate">Usuarios</span>
                 </a>
+                <a href="{{ route('backups.index') }}" id="tour-backups" class="flex items-center px-4 py-3 rounded-xl transition-all hover:bg-white/5 hover:text-white mb-1 {{ request()->routeIs('backups.*') ? 'sidebar-item-active' : '' }}" title="Respaldos">
+                    <i class="fas fa-database w-6"></i>
+                    <span class="ml-3 sidebar-text font-medium text-sm truncate">Respaldos</span>
+                </a>
+                @endif
+
+                @if(Auth::user()->isSuperAdmin())
+                <div class="mt-4 border-t border-white/5 pt-4">
+                    <a href="{{ route('superadmin.api.token.index') }}" class="flex items-center px-4 py-3 rounded-xl transition-all hover:bg-white/5 hover:text-white mb-1" title="API Token">
+                        <i class="fas fa-code w-6"></i>
+                        <span class="ml-3 sidebar-text font-medium text-indigo-400">API Token</span>
+                    </a>
+                </div>
+                @endif
             </div>
-            @endif
         </nav>
     </div>
 
     <!-- Main Content -->
-    <div id="main-content" class="ml-0 md:ml-64 transition-all duration-300 relative z-20 md:z-0 flex flex-col min-h-screen">
-        <div class="flex-1 flex flex-col">
+    <div id="main-content" class="ml-0 md:ml-64 transition-all duration-300 relative z-20 md:z-0 flex flex-col min-h-screen bg-slate-100 dark:bg-navy-900">
+        <div class="flex flex-col">
         @if(session()->has('impersonator_id'))
-        <div class="bg-red-600 text-white px-4 py-2 flex justify-between items-center shadow-md relative z-50">
-            <span class="font-bold"><i class="fas fa-user-secret mr-2"></i>Estás suplantando a {{ Auth::user()->name }}</span>
-            <form action="{{ route('impersonate.stop') }}" method="POST">
+        <div class="bg-indigo-950/90 backdrop-blur-xl text-white px-3 py-2 md:px-6 flex flex-row justify-between items-center shadow-2xl border-b border-white/10 relative z-[60]">
+            <div class="flex items-center gap-2 md:gap-4 overflow-hidden">
+                <div class="flex h-7 w-7 md:h-9 md:w-9 items-center justify-center rounded-xl bg-indigo-500/20 border border-indigo-400/30 shadow-inner flex-shrink-0">
+                    <i class="fas fa-user-secret text-indigo-400 animate-pulse text-xs md:text-lg"></i>
+                </div>
+                <div class="min-w-0">
+                    <div class="hidden md:flex items-center gap-2">
+                        <span class="text-[10px] uppercase tracking-[0.2em] font-black text-indigo-400">Modo Admin</span>
+                        <span class="h-1 w-1 rounded-full bg-indigo-500"></span>
+                        <span class="text-[10px] uppercase tracking-[0.2em] font-black text-emerald-400">Sesión Activa</span>
+                    </div>
+                    <p class="text-xs md:text-sm font-medium text-slate-200 truncate flex items-center">
+                        <span class="md:hidden text-indigo-400 font-bold mr-1">Admin:</span>
+                        <span class="font-bold text-white tracking-tight truncate">{{ Str::limit(Auth::user()->name, 15) }}</span>
+                    </p>
+                </div>
+            </div>
+            <form action="{{ route('impersonate.stop') }}" method="POST" class="flex-shrink-0 ml-2">
                 @csrf
-                <button type="submit" class="bg-white text-red-600 px-3 py-1 rounded-full text-sm font-bold hover:bg-gray-100 transition">
-                    <i class="fas fa-times mr-1"></i>Volver a Superadmin
+                <button type="submit" class="group relative flex items-center justify-center gap-2 bg-white/10 hover:bg-white text-white hover:text-indigo-950 px-3 py-1.5 md:px-5 md:py-2 rounded-lg md:rounded-xl text-[10px] md:text-xs font-bold transition-all duration-300 border border-white/20 hover:border-white shadow-lg active:scale-95">
+                    <i class="fas fa-power-off opacity-70 group-hover:rotate-90 transition-transform duration-500"></i>
+                    <span class="hidden md:inline">SALIR DEL MODO</span>
+                    <span class="md:hidden">SALIR</span>
                 </button>
             </form>
         </div>
         @endif
         <!-- Top Bar -->
-        <header class="bg-white dark:bg-gray-800 shadow-sm transition-colors duration-200 border-b border-gray-200 dark:border-gray-700 px-4 md:px-6 py-4">
+        <header class="glass-header sticky top-0 z-40 px-4 md:px-6 py-3 transition-colors">
             <div class="flex justify-between items-center">
                 <div class="flex items-center">
                     <button onclick="toggleMobileSidebar()" class="mr-4 text-gray-600 md:hidden">
@@ -253,43 +347,6 @@
                     <h2 class="text-xl md:text-2xl font-semibold text-gray-800 dark:text-white">@yield('page-title', 'Panel')</h2>
                 </div>
                 <div class="flex items-center space-x-2 md:space-x-4">
-                    <!-- PWA Install Button -->
-                    <button id="installBtn" class="hidden text-gray-600 hover:text-gray-800 p-2 rounded-lg hover:bg-gray-100 transition">
-                        <i class="fas fa-download text-lg"></i>
-                    </button>
-                    
-                    <!-- Dark Mode Toggle -->
-                    <button id="darkModeToggle" class="p-2 text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors focus:outline-none" title="Cambiar tema">
-                        <i id="darkModeIcon" class="fas fa-moon text-xl"></i>
-                    </button>
-                    
-                    <!-- Notifications Bell -->
-                    <div class="relative ml-3">
-                        <button id="notifications-btn" class="relative p-2 text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors focus:outline-none">
-                            <i class="fas fa-bell text-xl"></i>
-                            <span id="notification-badge" class="hidden absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full"></span>
-                        </button>
-
-                        <!-- Notifications Dropdown -->
-                        <div id="notifications-dropdown" class="hidden absolute right-0 mt-2 w-80 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 z-50 max-h-96 overflow-hidden">
-                            <div class="px-4 py-3 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between">
-                                <h3 class="text-sm font-semibold text-gray-800 dark:text-white">Notificaciones</h3>
-                                <button id="mark-all-read" class="text-xs text-indigo-600 hover:text-indigo-800 font-medium">
-                                    Marcar todas como leídas
-                                </button>
-                            </div>
-                            <div id="notifications-list" class="overflow-y-auto max-h-80">
-                                <!-- Notifications will be loaded here via AJAX -->
-                                <div class="flex items-center justify-center py-8">
-                                    <i class="fas fa-spinner fa-spin text-gray-400 text-2xl"></i>
-                                </div>
-                            </div>
-                            <div class="px-4 py-3 border-t border-gray-200 text-center">
-                                <a href="{{ route('notifications.index') }}" class="text-sm text-indigo-600 hover:text-indigo-800 font-medium">
-                                    Ver todas las notificaciones
-                                </a>
-                            </div>
-                        </div>
                     </div>
                     
                     <!-- User Menu -->
@@ -333,15 +390,22 @@
                             <a href="{{ route('profile.show') }}" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white transition-colors">
                                 <i class="fas fa-user-circle mr-2 text-gray-400 w-4"></i> Mi Perfil
                             </a>
-                            <a href="{{ route('profile.settings') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900">
+                            <a href="{{ route('profile.settings') }}" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white transition-colors">
                                 <i class="fas fa-cog mr-2 text-gray-400 w-4"></i> Configuración
                             </a>
+
+                            <div class="border-t border-gray-100 dark:border-gray-700 my-1"></div>
+
+                            <!-- PWA Install Button -->
+                            <button id="installBtn" class="hidden w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white transition-colors">
+                                <i class="fas fa-download mr-2 text-gray-400 w-4"></i> Instalar App
+                            </button>
                             
                             <div class="border-t border-gray-100 dark:border-gray-700 my-1"></div>
                             
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
-                                <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 hover:text-red-700 transition-colors">
+                                <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-900/30 hover:text-red-700 transition-colors">
                                     <i class="fas fa-sign-out-alt mr-2 text-red-400 w-4"></i> Cerrar Sesión
                                 </button>
                             </form>
@@ -354,7 +418,7 @@
 
 
         <!-- Content Area -->
-        <div class="max-w-full mx-auto p-4 md:p-6 w-full">
+        <div class="max-w-full mx-auto p-2 md:p-6 w-full">
 
 
             <!-- Global Announcements -->
@@ -376,10 +440,10 @@
                     </div>
                     <div class="text-center md:text-right">
                         <p class="text-sm text-gray-600 dark:text-gray-400">
-                            Desarrollado por <a href="#" class="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white font-semibold transition duration-200">OurDeveloper</a>
+                            Desarrollado por <a href="#" class="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white font-semibold transition duration-200">OutDeveloper</a>
                         </p>
                         <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                            Versión 1.0.0
+                            Versión 1.1.0
                         </p>
                     </div>
                 </div>
@@ -492,36 +556,7 @@
             installBtn.classList.add('hidden');
         });
 
-        // Dark Mode Toggle
-        const darkModeToggle = document.getElementById('darkModeToggle');
-        const darkModeIcon = document.getElementById('darkModeIcon');
-        const htmlElement = document.documentElement;
 
-        // Check for saved theme preference or default to 'light' mode
-        const currentTheme = localStorage.getItem('theme') || 'light';
-        
-        // Apply the theme on page load
-        if (currentTheme === 'dark') {
-            htmlElement.classList.add('dark');
-            darkModeIcon.classList.remove('fa-moon');
-            darkModeIcon.classList.add('fa-sun');
-        }
-
-        // Toggle dark mode
-        darkModeToggle.addEventListener('click', () => {
-            htmlElement.classList.toggle('dark');
-            
-            // Update icon
-            if (htmlElement.classList.contains('dark')) {
-                darkModeIcon.classList.remove('fa-moon');
-                darkModeIcon.classList.add('fa-sun');
-                localStorage.setItem('theme', 'dark');
-            } else {
-                darkModeIcon.classList.remove('fa-sun');
-                darkModeIcon.classList.add('fa-moon');
-                localStorage.setItem('theme', 'light');
-            }
-        });
 
 
         if ('serviceWorker' in navigator) {
@@ -592,20 +627,28 @@
             @if(session('success'))
                 Swal.fire({
                     icon: 'success',
-                    title: '¡Éxito!',
+                    title: '¡Operación Exitosa!',
                     text: {!! json_encode(session('success')) !!},
-                    confirmButtonColor: '#4f46e5',
-                    timer: 3000,
-                    timerProgressBar: true
+                    timer: 3500,
+                    timerProgressBar: true,
+                    showConfirmButton: false,
+                    position: 'top-end',
+                    toast: true,
+                    background: 'rgba(15, 23, 42, 0.95)',
+                    color: '#fff'
                 });
             @endif
 
             @if(session('error'))
                 Swal.fire({
                     icon: 'error',
-                    title: '¡Error!',
+                    title: 'Ha ocurrido un error',
                     text: {!! json_encode(session('error')) !!},
-                    confirmButtonColor: '#ef4444',
+                    showConfirmButton: true,
+                    confirmButtonText: 'Entendido',
+                    customClass: {
+                        confirmButton: 'bg-gradient-to-r from-indigo-600 to-purple-600'
+                    }
                 });
             @endif
         });
@@ -805,16 +848,17 @@
         </a>
         
         <!-- WhatsApp Button -->
-        <a href="https://wa.me/573127168837?text=Hola,%20necesito%20ayuda%20con%20ION%20Inventory" 
+        <a href="https://wa.me/573145781261?text=Hola%20equipo%20de%20OutDeveloper,%20necesito%20soporte%20técnico%20con%20ION%20Inventory.%20Mi%20consulta%20es:%20" 
            target="_blank" 
-           class="bg-green-500 hover:bg-green-600 text-white rounded-full w-14 h-14 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group relative"
-           title="WhatsApp">
-            <i class="fab fa-whatsapp text-xl"></i>
-            <span class="absolute right-full mr-3 bg-gray-800 text-white px-3 py-2 rounded-lg text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                Chat por WhatsApp
+           class="bg-green-500 hover:bg-green-600 text-white rounded-full w-14 h-14 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group relative animate-pulse hover:animate-none"
+           title="Soporte por WhatsApp">
+            <i class="fab fa-whatsapp text-2xl"></i>
+            <span class="absolute right-full mr-3 bg-green-600 text-white px-4 py-2 rounded-lg text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none shadow-lg">
+                💬 Soporte ION Inventory
             </span>
         </a>
     </div>
 
+    @include('components.onboarding-tour')
 </body>
 </html>

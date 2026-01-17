@@ -1,15 +1,20 @@
 #!/bin/bash
 set -e # Detener el script si ocurre algún error
 
-echo "🚀 Iniciando despliegue..."
+echo "🚀 Iniciando despliegue en PRODUCCIÓN..."
+
+# Asegurarse de estar en la rama correcta
+echo "🌿 Sincronizando con GitHub (Rama main)..."
+git checkout main
+git pull origin main
 
 # Instalar dependencias de PHP
-echo "📦 Instalando dependencias de PHP..."
+echo "📦 Instalando dependencias de PHP (Producción)..."
 composer install --no-dev --optimize-autoloader --no-interaction
 
 # Instalar dependencias de JS y compilar
 echo "🎨 Compilando Assets..."
-npm install
+npm install --no-interaction
 npm run build
 
 # Limpiar y optimizar configuración
@@ -22,4 +27,7 @@ php artisan view:cache
 echo "🗄️ Ejecutando migraciones..."
 php artisan migrate --force
 
-echo "✅ ¡Despliegue completado con éxito!"
+# Recargar PHP-FPM si es necesario (opcional, depende de tu VPS)
+# sudo service php8.2-fpm reload
+
+echo "✅ ¡Despliegue en PRODUCCIÓN completado con éxito!"

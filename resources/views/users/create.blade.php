@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="max-w-2xl mx-auto bg-white p-4 md:p-6 rounded shadow">
+<div id="tour-user-form" class="max-w-2xl mx-auto bg-white p-4 md:p-6 rounded shadow">
     <h2 class="text-2xl font-bold mb-6">Crear Nuevo Usuario</h2>
     
     @if ($errors->any())

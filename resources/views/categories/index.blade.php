@@ -44,6 +44,9 @@
                     <td class="py-3 px-6 text-left whitespace-nowrap">
                         <span class="font-medium">{{ $category->name }}</span>
                     </td>
+                    <td class="py-3 px-6 text-left">
+                        <span class="text-gray-400 italic text-xs">Sin descripción</span>
+                    </td>
                     <td class="py-3 px-6 text-center">
                         <div class="flex item-center justify-center">
                             <a href="{{ route('categories.edit', $category->id) }}" class="w-4 mr-2 transform hover:text-gray-600 hover:scale-110">
