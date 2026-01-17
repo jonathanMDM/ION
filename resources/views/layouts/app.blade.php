@@ -156,9 +156,8 @@
             <div class="flex items-center justify-between">
                 <div class="flex items-center">
                 <div class="flex flex-col sidebar-text">
-                    <a href="{{ route('dashboard') }}" class="flex flex-col items-center group">
-                        <h1 class="text-3xl font-black font-logo tracking-widest text-white group-hover:text-indigo-100 transition-colors">ION</h1>
-                        <span class="text-[10px] text-indigo-400 font-bold uppercase tracking-[0.35em] font-sans ml-1 group-hover:text-indigo-300 transition-colors">Inventory</span>
+                    <a href="{{ route('dashboard') }}" class="flex items-center justify-center group">
+                        <img src="{{ asset('img/logo-horizontal.png') }}" alt="ION Inventory" class="h-12 w-auto transition-all group-hover:opacity-90">
                     </a>
                 </div>
                 </div>

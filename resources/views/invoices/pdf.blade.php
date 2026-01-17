@@ -20,13 +20,11 @@
         <div class="header">
             <div>
                 @php
-                    $logoPath = public_path('img/logo.png');
+                    $logoPath = public_path('img/logo-horizontal.png');
                 @endphp
                 @if(file_exists($logoPath))
-                    <img src="{{ $logoPath }}" alt="ION Logo" style="width: 120px; margin-bottom: 10px;">
+                    <img src="{{ $logoPath }}" alt="ION Inventory" style="width: 150px; margin-bottom: 10px;">
                 @endif
-                <h1 style="color: #4F46E5; margin: 0;">ION Inventory</h1>
-                <p style="color: #6B7280; margin: 5px 0;">Sistema de Gestión de Activos</p>
             </div>
             <div class="company-info">
                 <p><strong>Fecha:</strong> {{ $payment_date }}</p>

@@ -56,8 +56,10 @@
 <body>
     <div class="container">
         <div class="header">
+            <div style="margin-bottom: 15px;">
+                <img src="{{ asset('img/logo-horizontal.png') }}" alt="ION Inventory" style="height: 35px; width: auto;">
+            </div>
             <h1 style="margin: 0; font-size: 24px;">Nueva Solicitud de Soporte</h1>
-            <p style="margin: 5px 0 0 0; font-size: 14px;">ION Inventory</p>
         </div>
         
         <div class="content">

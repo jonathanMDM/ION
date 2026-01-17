@@ -146,10 +146,9 @@
                 <div class="flex flex-col sidebar-text w-full">
                     <a href="{{ route('superadmin.index') }}" class="flex flex-col items-center justify-center w-full group">
                         <div class="flex items-center gap-2">
-                            <h1 class="text-2xl font-black text-white font-logo tracking-widest group-hover:text-indigo-100 transition-colors">ION</h1>
+                            <img src="{{ asset('img/logo-horizontal.png') }}" alt="ION Inventory" class="h-10 w-auto transition-all group-hover:opacity-90">
                             <span class="text-[10px] font-sans font-bold text-indigo-300 bg-indigo-500/10 px-1.5 py-0.5 rounded border border-indigo-500/20 uppercase tracking-wider group-hover:border-indigo-400 group-hover:text-indigo-200 transition-colors">Admin</span>
                         </div>
-                        <span class="text-[10px] text-indigo-400 font-bold uppercase tracking-[0.35em] font-sans ml-0.5 group-hover:text-indigo-300 transition-colors">Inventory</span>
                     </a>
                 </div>
                 <button onclick="toggleSidebar()" class="text-slate-500 hover:text-white transition-colors hidden md:block">

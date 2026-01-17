@@ -124,6 +124,9 @@
 <body>
     <div class="container">
         <div class="header">
+            <div style="margin-bottom: 15px;">
+                <img src="{{ asset('img/logo-horizontal.png') }}" alt="ION Inventory" style="height: 40px; width: auto;">
+            </div>
             <div class="icon">🎉</div>
             <h1>¡Bienvenido a ION Inventory!</h1>
             <p style="margin: 5px 0 0 0; font-size: 14px; opacity: 0.9;">{{ $company->name }}</p>
