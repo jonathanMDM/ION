@@ -31,7 +31,7 @@ class LocationController extends Controller
     {
         $request->validate(['name' => 'required|string|max:255', 'address' => 'nullable|string|max:255']);
         Location::create($request->all());
-        return redirect()->route('locations.index')->with('success', 'Location created successfully.');
+        return redirect()->route('locations.index')->with('success', 'Ubicación creada exitosamente.');
     }
 
     /**
@@ -39,7 +39,7 @@ class LocationController extends Controller
      */
     public function show(Location $location)
     {
-        return view('locations.show', compact('location'));
+        return redirect()->route('locations.edit', $location);
     }
 
     /**
@@ -57,7 +57,7 @@ class LocationController extends Controller
     {
         $request->validate(['name' => 'required|string|max:255', 'address' => 'nullable|string|max:255']);
         $location->update($request->all());
-        return redirect()->route('locations.index')->with('success', 'Location updated successfully.');
+        return redirect()->route('locations.index')->with('success', 'Ubicación actualizada exitosamente.');
     }
 
     /**

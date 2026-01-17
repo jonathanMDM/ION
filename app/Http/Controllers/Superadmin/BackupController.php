@@ -57,43 +57,13 @@ class BackupController extends Controller
         try {
             $company = \App\Models\Company::findOrFail($companyId);
             
-            // Create backup filename
-            $filename = 'backup-' . $company->name . '-' . date('Y-m-d-His') . '.sql';
-            $filepath = storage_path('app/backups/' . $filename);
+            // Use the artisan command for portable backup
+            \Artisan::call('backup:company', [
+                'company_id' => $companyId,
+                '--full' => true
+            ]);
             
-            // Ensure backups directory exists
-            if (!file_exists(storage_path('app/backups'))) {
-                mkdir(storage_path('app/backups'), 0755, true);
-            }
-            
-            // Get database connection details
-            $dbHost = config('database.connections.pgsql.host');
-            $dbPort = config('database.connections.pgsql.port');
-            $dbName = config('database.connections.pgsql.database');
-            $dbUser = config('database.connections.pgsql.username');
-            $dbPass = config('database.connections.pgsql.password');
-            
-            // Build pg_dump command
-            $command = sprintf(
-                'PGPASSWORD=%s pg_dump -h %s -p %s -U %s -d %s --clean --if-exists > %s 2>&1',
-                escapeshellarg($dbPass),
-                escapeshellarg($dbHost),
-                escapeshellarg($dbPort),
-                escapeshellarg($dbUser),
-                escapeshellarg($dbName),
-                escapeshellarg($filepath)
-            );
-            
-            // Execute backup
-            exec($command, $output, $returnVar);
-            
-            if ($returnVar === 0 && file_exists($filepath)) {
-                \Log::info('Backup created successfully', ['company_id' => $companyId, 'file' => $filename]);
-                return redirect()->back()->with('success', 'Backup creado exitosamente: ' . $filename);
-            } else {
-                \Log::error('Backup failed', ['company_id' => $companyId, 'output' => $output, 'return' => $returnVar]);
-                return redirect()->back()->with('error', 'Error al crear el backup. Esta funcionalidad requiere pg_dump instalado en el servidor.');
-            }
+            return redirect()->back()->with('success', 'Backup (incluyendo registro de empresa) creado exitosamente.');
             
         } catch (\Exception $e) {
             \Log::error('Backup exception', ['error' => $e->getMessage()]);
@@ -130,34 +100,54 @@ class BackupController extends Controller
                 return redirect()->back()->with('error', 'Backup no encontrado.');
             }
             
-            // Get database connection details
-            $dbHost = config('database.connections.pgsql.host');
-            $dbPort = config('database.connections.pgsql.port');
-            $dbName = config('database.connections.pgsql.database');
-            $dbUser = config('database.connections.pgsql.username');
-            $dbPass = config('database.connections.pgsql.password');
-            
-            // Build psql restore command
-            $command = sprintf(
-                'PGPASSWORD=%s psql -h %s -p %s -U %s -d %s < %s 2>&1',
-                escapeshellarg($dbPass),
-                escapeshellarg($dbHost),
-                escapeshellarg($dbPort),
-                escapeshellarg($dbUser),
-                escapeshellarg($dbName),
-                escapeshellarg($filepath)
-            );
-            
-            // Execute restore
-            exec($command, $output, $returnVar);
-            
-            if ($returnVar === 0) {
-                \Log::info('Backup restored successfully', ['file' => $filename]);
-                return redirect()->back()->with('success', 'Backup restaurado exitosamente.');
-            } else {
-                \Log::error('Backup restore failed', ['file' => $filename, 'output' => $output, 'return' => $returnVar]);
-                return redirect()->back()->with('error', 'Error al restaurar el backup. Esta funcionalidad requiere psql instalado en el servidor.');
+            $sql = file_get_contents($filepath);
+            if (empty($sql)) {
+                return redirect()->back()->with('error', 'El archivo de backup está vacío.');
             }
+
+            // Superadmins can restore any backup without company check constraints
+            
+            $driver = \DB::getDriverName();
+            
+            if ($driver === 'mysql') {
+                \DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+            } elseif ($driver === 'sqlite') {
+                \DB::statement('PRAGMA foreign_keys = OFF;');
+            }
+            
+            // Split SQL into individual statements more safely
+            $statements = preg_split('/;\s*$/m', $sql);
+            
+            $statements = array_filter(
+                array_map('trim', $statements),
+                function($statement) {
+                    return !empty($statement) && !str_starts_with($statement, '--') && !str_starts_with($statement, '/*');
+                }
+            );
+
+            $executedCount = 0;
+            foreach ($statements as $statement) {
+                if (!empty($statement)) {
+                    try {
+                        \DB::statement($statement);
+                        $executedCount++;
+                    } catch (\Exception $e) {
+                        \Log::warning("Error executing statement in superadmin restore: " . $e->getMessage());
+                    }
+                }
+            }
+            
+            if ($driver === 'mysql') {
+                \DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+            } elseif ($driver === 'sqlite') {
+                \DB::statement('PRAGMA foreign_keys = ON;');
+            }
+
+            if ($executedCount === 0) {
+                return redirect()->back()->with('error', 'El archivo no contenía instrucciones válidas para procesar.');
+            }
+
+            return redirect()->back()->with('success', "Backup restaurado exitosamente. Se procesaron {$executedCount} instrucciones.");
             
         } catch (\Exception $e) {
             \Log::error('Backup restore exception', ['error' => $e->getMessage()]);

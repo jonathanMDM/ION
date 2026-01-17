@@ -43,6 +43,11 @@ self.addEventListener("fetch", (event) => {
         return;
     }
 
+    // Skip non-http/https schemes (like chrome-extension://)
+    if (!url.protocol.startsWith("http")) {
+        return;
+    }
+
     // Handle static assets (CSS, JS, Images, Fonts) with Cache First
     if (
         url.pathname.startsWith("/build/") ||

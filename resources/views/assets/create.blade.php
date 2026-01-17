@@ -3,7 +3,7 @@
 @section('page-title', 'Agregar Nuevo Activo')
 
 @section('content')
-<div class="max-w-2xl mx-auto bg-white dark:bg-gray-800 p-4 md:p-6 rounded shadow transition-colors">
+<div id="tour-asset-form" class="max-w-2xl mx-auto bg-white dark:bg-gray-800 p-4 md:p-6 rounded shadow transition-colors">
     <h2 class="text-2xl font-bold mb-6 text-gray-800 dark:text-white">Agregar Nuevo Activo</h2>
     
     <form action="{{ route('assets.store') }}" method="POST" enctype="multipart/form-data">
@@ -173,7 +173,7 @@
         <div class="mb-6">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="image">Imagen del Activo</label>
             <input type="file" name="image" id="image" accept="image/*" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-            <p class="text-gray-600 text-xs italic mt-1">Tamaño máx: 2MB. Formatos: JPG, PNG, GIF</p>
+            <p class="text-gray-600 text-xs italic mt-1">Tamaño máx: 2MB. Formatos: JPG, PNG, GIF, WebP</p>
         </div>
 
         <div class="flex items-center justify-between">

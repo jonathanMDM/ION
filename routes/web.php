@@ -191,6 +191,12 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware(['role:admin'])->group(function () {
         Route::resource('users', UserController::class);
     });
+
+    // Onboarding
+    Route::post('/onboarding/complete', function() {
+        Auth::user()->update(['onboarding_completed' => true]);
+        return response()->json(['success' => true]);
+    })->name('onboarding.complete');
 });
 
 // Superadmin Routes

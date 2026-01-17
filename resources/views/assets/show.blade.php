@@ -34,11 +34,11 @@
             </div>
             <div class="mb-4">
                 <label class="font-bold text-gray-700">Categoría:</label>
-                <p>{{ $asset->subcategory->category->name }}</p>
+                <p>{{ $asset->subcategory?->category?->name ?? 'Sin categoría' }}</p>
             </div>
             <div class="mb-4">
                 <label class="font-bold text-gray-700">Subcategoría:</label>
-                <p>{{ $asset->subcategory->name }}</p>
+                <p>{{ $asset->subcategory?->name ?? 'Sin subcategoría' }}</p>
             </div>
             <div class="mb-4">
                 <label class="font-bold text-gray-700">Estado:</label>

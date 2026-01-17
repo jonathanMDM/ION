@@ -48,7 +48,7 @@ class MaintenanceController extends Controller
             ]);
         }
 
-        return redirect()->route('maintenances.index')->with('success', 'Maintenance record created successfully.');
+        return redirect()->route('maintenances.index')->with('success', 'Registro de mantenimiento creado exitosamente.');
     }
 
     /**
@@ -80,7 +80,7 @@ class MaintenanceController extends Controller
             'cost' => 'required|numeric',
         ]);
         $maintenance->update($request->all());
-        return redirect()->route('maintenances.index')->with('success', 'Maintenance record updated successfully.');
+        return redirect()->route('maintenances.index')->with('success', 'Registro de mantenimiento actualizado exitosamente.');
     }
 
     /**
@@ -89,6 +89,6 @@ class MaintenanceController extends Controller
     public function destroy(Maintenance $maintenance)
     {
         $maintenance->delete();
-        return redirect()->route('maintenances.index')->with('success', 'Maintenance record deleted successfully.');
+        return redirect()->route('maintenances.index')->with('success', 'Registro de mantenimiento eliminado exitosamente.');
     }
 }

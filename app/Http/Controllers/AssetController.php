@@ -46,24 +46,35 @@ class AssetController extends Controller
             'purchase_date' => 'nullable|date',
             'status' => 'required|in:active,decommissioned,maintenance',
             'municipality_plate' => 'nullable|string|max:255',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'next_maintenance_date' => 'nullable|date',
             'maintenance_frequency_days' => 'nullable|integer|min:1',
             'minimum_quantity' => 'nullable|integer|min:0',
         ]);
         
         $data = $request->all();
+        
+        // Add company_id from authenticated user
+        $data['company_id'] = auth()->user()->company_id;
 
         if (empty($data['custom_id'])) {
             $data['custom_id'] = 'AST-' . time() . '-' . rand(1000, 9999);
         }
         
         // Handle image upload to Cloudinary
+        // Handle image upload with local fallback
         if ($request->hasFile('image')) {
-            $result = \App\Helpers\CloudinaryHelper::upload($request->file('image'), 'assets');
+            $file = $request->file('image');
+            $result = \App\Helpers\CloudinaryHelper::upload($file, 'assets');
+            
             if ($result) {
                 $data['image'] = $result['url'];
                 $data['image_public_id'] = $result['public_id'];
+            } else {
+                // Fallback to local storage with optimization
+                // Uses custom helper to resize and convert to WebP/JPG
+                $data['image'] = \App\Helpers\ImageOptimizer::save($file, 'assets');
+                $data['image_public_id'] = null;
             }
         }
         
@@ -72,7 +83,7 @@ class AssetController extends Controller
         // Generate QR Code logic here (placeholder)
         // $asset->update(['qr_code' => '...']);
 
-        return redirect()->route('assets.index')->with('success', 'Asset created successfully.');
+        return redirect()->route('assets.index')->with('success', 'Activo creado exitosamente.');
     }
 
     /**
@@ -108,7 +119,7 @@ class AssetController extends Controller
             'purchase_date' => 'nullable|date',
             'status' => 'required|in:active,decommissioned,maintenance',
             'municipality_plate' => 'nullable|string|max:255',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'next_maintenance_date' => 'nullable|date',
             'maintenance_frequency_days' => 'nullable|integer|min:1',
             'minimum_quantity' => 'nullable|integer|min:0',
@@ -117,16 +128,27 @@ class AssetController extends Controller
         $data = $request->all();
         
         // Handle image upload to Cloudinary
+        // Handle image upload with local fallback
         if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            
             // Delete old image from Cloudinary if exists
             if ($asset->image_public_id) {
                 \App\Helpers\CloudinaryHelper::delete($asset->image_public_id);
             }
+            // If it was local (no public_id) but has a path, we could delete it, 
+            // but for safety we'll just overwrite the reference. 
+            // Ideally: Storage::disk('public')->delete($asset->image); if it wasn't a URL.
             
-            $result = \App\Helpers\CloudinaryHelper::upload($request->file('image'), 'assets');
+            $result = \App\Helpers\CloudinaryHelper::upload($file, 'assets');
+            
             if ($result) {
                 $data['image'] = $result['url'];
                 $data['image_public_id'] = $result['public_id'];
+            } else {
+                // Fallback to local with optimization
+                $data['image'] = \App\Helpers\ImageOptimizer::save($file, 'assets');
+                $data['image_public_id'] = null;
             }
         }
         
@@ -143,7 +165,7 @@ class AssetController extends Controller
         }
         
         $asset->update($data);
-        return redirect()->route('assets.index')->with('success', 'Asset updated successfully.');
+        return redirect()->route('assets.index')->with('success', 'Activo actualizado exitosamente.');
     }
 
     /**

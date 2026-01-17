@@ -36,7 +36,7 @@ class SubcategoryController extends Controller
             'name' => 'required|string|max:255'
         ]);
         Subcategory::create($request->all());
-        return redirect()->route('subcategories.index')->with('success', 'Subcategory created successfully.');
+        return redirect()->route('subcategories.index')->with('success', 'Subcategoría creada exitosamente.');
     }
 
     /**
@@ -66,7 +66,7 @@ class SubcategoryController extends Controller
             'name' => 'required|string|max:255'
         ]);
         $subcategory->update($request->all());
-        return redirect()->route('subcategories.index')->with('success', 'Subcategory updated successfully.');
+        return redirect()->route('subcategories.index')->with('success', 'Subcategoría actualizada exitosamente.');
     }
 
     /**

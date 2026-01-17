@@ -125,7 +125,7 @@
                     <span>{{ $asset->location->name }}</span>
                 </td>
                 <td class="py-3 px-4 text-left">
-                    <span>{{ $asset->subcategory->category->name }} / {{ $asset->subcategory->name }}</span>
+                    <span>{{ $asset->subcategory?->category?->name ?? 'Sin categoría' }} / {{ $asset->subcategory?->name ?? 'Sin subcategoría' }}</span>
                 </td>
                 <td class="py-3 px-4 text-left">
                     <span class="text-sm">{{ Str::limit($asset->specifications, 50) }}</span>

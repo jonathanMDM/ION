@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual de Usuario - ION Inventory</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        h1, h2, h3, h4 {
+            color: #2c3e50;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        
+        h1 {
+            font-size: 2.5em;
+            border-bottom: 4px solid #667eea;
+            padding-bottom: 15px;
+        }
+        
+        h2 {
+            font-size: 2em;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 10px;
+            margin-top: 50px;
+        }
+        
+        h3 {
+            font-size: 1.5em;
+            color: #667eea;
+        }
+        
+        p {
+            margin: 15px 0;
+            text-align: justify;
+        }
+        
+        ul, ol {
+            margin: 15px 0 15px 30px;
+        }
+        
+        li {
+            margin: 8px 0;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+            margin: 30px 0;
+            display: block;
+            border: 1px solid #e0e0e0;
+        }
+        
+        code {
+            background: #f4f4f4;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #e74c3c;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+        
+        pre code {
+            background: none;
+            color: inherit;
+            padding: 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 15px;
+            text-align: left;
+        }
+        
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        tr:hover {
+            background-color: #f0f0f0;
+        }
+        
+        blockquote {
+            border-left: 4px solid #667eea;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+            background: #f9f9f9;
+            padding: 15px 20px;
+            border-radius: 4px;
+        }
+        
+        hr {
+            border: none;
+            border-top: 2px solid #e0e0e0;
+            margin: 40px 0;
+        }
+        
+        .toc {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 30px 0;
+            border-left: 4px solid #667eea;
+        }
+        
+        .toc h2 {
+            margin-top: 0;
+            color: #667eea;
+        }
+        
+        .toc ul {
+            list-style: none;
+            margin-left: 0;
+        }
+        
+        .toc li {
+            margin: 10px 0;
+        }
+        
+        .toc a {
+            color: #2c3e50;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .toc a:hover {
+            color: #667eea;
+        }
+        
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 30px;
+            margin-top: 50px;
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            .container {
+                box-shadow: none;
+            }
+            
+            img {
+                page-break-inside: avoid;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            h2 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📘 Manual de Usuario</h1>
+            <p>ION Inventory - Sistema de Gestión de Activos</p>
+            <p style="font-size: 0.9em; margin-top: 10px;">Versión 1.1.0 | OutDeveloper © 2026</p>
+        </header>
+        
+        <div class="content">
+            <h1 id="manual-de-usuario-ion-inventory">📘 Manual de Usuario - ION Inventory</h1>
+<p><strong>Versión 1.1.0</strong><br />
+<strong>Desarrollado por OutDeveloper</strong></p>
+<hr />
+<h2 id="tabla-de-contenidos">Tabla de Contenidos</h2>
+<ol>
+<li><a href="#introducción">Introducción</a></li>
+<li><a href="#inicio-de-sesión">Inicio de Sesión</a></li>
+<li><a href="#panel-principal-dashboard">Panel Principal (Dashboard)</a></li>
+<li><a href="#gestión-de-activos">Gestión de Activos</a></li>
+<li><a href="#importación-masiva-desde-excel">Importación Masiva desde Excel</a></li>
+<li><a href="#asignación-de-activos-a-empleados">Asignación de Activos a Empleados</a></li>
+<li><a href="#gestión-de-empleados">Gestión de Empleados</a></li>
+<li><a href="#mantenimiento-de-activos">Mantenimiento de Activos</a></li>
+<li><a href="#reportes-y-exportación">Reportes y Exportación</a></li>
+<li><a href="#escáner-de-códigos-qr">Escáner de Códigos QR</a></li>
+<li><a href="#configuración-de-categorías-y-ubicaciones">Configuración de Categorías y Ubicaciones</a></li>
+<li><a href="#gestión-de-usuarios-solo-administradores">Gestión de Usuarios (Solo Administradores)</a></li>
+<li><a href="#soporte-técnico">Soporte Técnico</a></li>
+<li><a href="#preguntas-frecuentes">Preguntas Frecuentes</a></li>
+</ol>
+<hr />
+<h2 id="introduccion">Introducción</h2>
+<p><strong>ION Inventory</strong> es un sistema completo de gestión de inventario, activos fijos y mantenimiento empresarial diseñado para ayudarte a:</p>
+<ul>
+<li>✅ Controlar todos tus activos desde un solo lugar</li>
+<li>✅ Asignar equipos a empleados y hacer seguimiento</li>
+<li>✅ Programar y registrar mantenimientos preventivos y correctivos</li>
+<li>✅ Generar reportes detallados en PDF y Excel</li>
+<li>✅ Escanear códigos QR para búsqueda rápida</li>
+<li>✅ Acceder desde cualquier dispositivo (PC, tablet, móvil)</li>
+</ul>
+<hr />
+<h2 id="inicio-de-sesion">Inicio de Sesión</h2>
+<h3 id="acceso-al-sistema">Acceso al Sistema</h3>
+<ol>
+<li>Abre tu navegador web (Chrome, Safari, Firefox)</li>
+<li>Ingresa a la URL proporcionada por tu administrador (ej: <code>https://ion.outdeveloper.com</code>)</li>
+<li>Verás la pantalla de inicio de sesión</li>
+</ol>
+<p><img alt="Pantalla de Login" src="imagenes-manual/01-login.png" /></p>
+<h3 id="credenciales">Credenciales</h3>
+<ul>
+<li><strong>Correo electrónico:</strong> El proporcionado por tu administrador</li>
+<li><strong>Contraseña:</strong> La contraseña que configuraste o la temporal enviada por correo</li>
+</ul>
+<h3 id="primer-acceso">Primer Acceso</h3>
+<p>Si es tu primera vez:</p>
+<ol>
+<li>Ingresa con la contraseña temporal</li>
+<li>El sistema te pedirá cambiarla por seguridad</li>
+<li>Crea una contraseña segura (mínimo 8 caracteres, con mayúsculas, números y símbolos)</li>
+</ol>
+<h3 id="autenticacion-de-dos-factores-2fa-opcional">Autenticación de Dos Factores (2FA) - Opcional</h3>
+<p>Si tu administrador habilitó 2FA:</p>
+<ol>
+<li>Después de ingresar tu contraseña, se te pedirá un código</li>
+<li>Abre tu app de autenticación (Google Authenticator, Authy)</li>
+<li>Ingresa el código de 6 dígitos</li>
+<li>Haz clic en "Verificar"</li>
+</ol>
+<hr />
+<h2 id="panel-principal-dashboard">Panel Principal (Dashboard)</h2>
+<p>Al iniciar sesión, llegarás al <strong>Dashboard</strong> o Panel Principal.</p>
+<p><img alt="Dashboard Principal" src="imagenes-manual/02-dashboard.png" /></p>
+<h3 id="elementos-del-dashboard">Elementos del Dashboard:</h3>
+<h4 id="1-barra-superior">1. Barra Superior</h4>
+<ul>
+<li><strong>Menú hamburguesa</strong> (☰): Abre/cierra el menú lateral</li>
+<li><strong>Título de la página actual</strong></li>
+<li><strong>Buscador global</strong>: Busca activos por nombre, código o serial</li>
+<li><strong>Icono de usuario</strong>: Acceso a tu perfil y configuración</li>
+</ul>
+<h4 id="2-menu-lateral-sidebar">2. Menú Lateral (Sidebar)</h4>
+<p><strong>Sección Activos:</strong></p>
+<ul>
+<li>📦 <strong>Todos los Activos</strong>: Lista completa de activos</li>
+<li>➕ <strong>Agregar Nuevo Activo</strong>: Registrar un activo manualmente</li>
+<li>📊 <strong>Importar desde Excel</strong>: Carga masiva de activos</li>
+</ul>
+<p><strong>Sección Organización:</strong></p>
+<ul>
+<li>📍 <strong>Ubicaciones</strong>: Gestionar oficinas, bodegas, sucursales</li>
+<li>📁 <strong>Categorías</strong>: Tipos de activos (Computadores, Muebles, etc.)</li>
+<li>📂 <strong>Subcategorías</strong>: Clasificación más específica</li>
+<li>🚚 <strong>Proveedores</strong>: Empresas que suministran los activos</li>
+</ul>
+<p><strong>Sección Operaciones:</strong></p>
+<ul>
+<li>🔧 <strong>Mantenimiento</strong>: Programar y registrar mantenimientos</li>
+<li>📈 <strong>Reportes</strong>: Generar informes en PDF/Excel</li>
+<li>🔄 <strong>Movimientos</strong>: Historial de transferencias de activos</li>
+<li>👥 <strong>Empleados</strong>: Gestionar personal de la empresa</li>
+</ul>
+<p><strong>Sección Configuración:</strong></p>
+<ul>
+<li>👤 <strong>Usuarios</strong>: Administrar cuentas (solo Admin)</li>
+<li>💾 <strong>Respaldos</strong>: Crear copias de seguridad (solo Admin)</li>
+</ul>
+<h4 id="3-tarjetas-de-estadisticas">3. Tarjetas de Estadísticas</h4>
+<p>El dashboard muestra 4 tarjetas principales:</p>
+<p><img alt="Tarjetas de Estadísticas" src="imagenes-manual/02-dashboard.png" /></p>
+<ul>
+<li><strong>Total de Activos</strong>: Cantidad total registrada</li>
+<li><strong>Activos Asignados</strong>: Equipos en uso por empleados</li>
+<li><strong>Activos Disponibles</strong>: Equipos sin asignar</li>
+<li><strong>Mantenimientos Pendientes</strong>: Tareas programadas</li>
+</ul>
+<h4 id="4-graficos-y-tablas">4. Gráficos y Tablas</h4>
+<ul>
+<li><strong>Gráfico de Activos por Categoría</strong>: Visualización de distribución</li>
+<li><strong>Actividad Reciente</strong>: Últimas acciones realizadas en el sistema</li>
+<li><strong>Alertas de Stock Bajo</strong>: Avisos de activos con cantidad mínima</li>
+</ul>
+<hr />
+<h2 id="gestion-de-activos">Gestión de Activos</h2>
+<h3 id="ver-todos-los-activos">Ver Todos los Activos</h3>
+<ol>
+<li>Haz clic en <strong>"Todos los Activos"</strong> en el menú lateral</li>
+<li>Verás una tabla con todos los activos registrados</li>
+</ol>
+<p><img alt="Lista de Activos" src="imagenes-manual/03-lista-activos.png" /></p>
+<p><strong>Columnas de la tabla:</strong></p>
+<ul>
+<li><strong>Imagen</strong>: Foto del activo</li>
+<li><strong>Código</strong>: Identificador único</li>
+<li><strong>Nombre</strong>: Descripción del activo</li>
+<li><strong>Categoría</strong>: Tipo de activo</li>
+<li><strong>Estado</strong>: Disponible, Asignado, En Mantenimiento, Dado de Baja</li>
+<li><strong>Ubicación</strong>: Dónde se encuentra físicamente</li>
+<li><strong>Acciones</strong>: Botones para Ver, Editar, Eliminar</li>
+</ul>
+<h3 id="crear-un-nuevo-activo">Crear un Nuevo Activo</h3>
+<ol>
+<li>Clic en <strong>"Agregar Nuevo Activo"</strong></li>
+<li>Completa el formulario:</li>
+</ol>
+<p><img alt="Formulario de Creación de Activo" src="imagenes-manual/04-formulario-activo.png" /></p>
+<p><strong>Campos obligatorios:</strong></p>
+<ul>
+<li><strong>Nombre</strong>: Ej: "Laptop Dell Latitude 5420"</li>
+<li><strong>Código</strong>: Identificador único (ej: "LAP-001")</li>
+<li><strong>Categoría</strong>: Selecciona de la lista desplegable</li>
+<li><strong>Estado</strong>: Disponible, Asignado, etc.</li>
+<li><strong>Ubicación</strong>: Oficina, bodega, etc.</li>
+</ul>
+<p><strong>Campos opcionales:</strong></p>
+<ul>
+<li><strong>Número de Serie</strong>: Serial del fabricante</li>
+<li><strong>Modelo</strong>: Ej: "Latitude 5420"</li>
+<li><strong>Marca</strong>: Ej: "Dell"</li>
+<li><strong>Proveedor</strong>: Empresa que lo vendió</li>
+<li><strong>Fecha de Compra</strong>: Cuándo se adquirió</li>
+<li><strong>Valor de Compra</strong>: Precio pagado</li>
+<li><strong>Garantía hasta</strong>: Fecha de vencimiento de garantía</li>
+<li><strong>Descripción</strong>: Detalles adicionales</li>
+<li>
+<p><strong>Imagen</strong>: Foto del activo (JPG, PNG)</p>
+</li>
+<li>
+<p>Haz clic en <strong>"Guardar"</strong></p>
+</li>
+<li>El sistema generará automáticamente un <strong>código QR</strong> para ese activo</li>
+</ul>
+<h3 id="ver-detalles-de-un-activo">Ver Detalles de un Activo</h3>
+<ol>
+<li>En la lista de activos, haz clic en el botón <strong>"Ver"</strong> (ícono de ojo 👁️)</li>
+<li>Se abrirá la página de detalles</li>
+</ol>
+<p><img alt="Detalles del Activo" src="imagenes-manual/05-detalles-activo.png" /></p>
+<p><strong>Información mostrada:</strong></p>
+<ul>
+<li>Datos generales del activo</li>
+<li>Código QR para imprimir</li>
+<li>Historial de asignaciones</li>
+<li>Historial de mantenimientos</li>
+<li>Movimientos entre ubicaciones</li>
+</ul>
+<p><strong>Acciones disponibles:</strong></p>
+<ul>
+<li><strong>Editar</strong>: Modificar información</li>
+<li><strong>Asignar a Empleado</strong>: Entregar el activo</li>
+<li><strong>Programar Mantenimiento</strong>: Crear tarea de mantenimiento</li>
+<li><strong>Imprimir QR</strong>: Descargar código QR en PDF</li>
+<li><strong>Eliminar</strong>: Dar de baja el activo (requiere confirmación)</li>
+</ul>
+<h3 id="editar-un-activo">Editar un Activo</h3>
+<ol>
+<li>Clic en <strong>"Editar"</strong> en la lista o en la página de detalles</li>
+<li>Modifica los campos necesarios</li>
+<li>Haz clic en <strong>"Actualizar"</strong></li>
+</ol>
+<h3 id="eliminar-un-activo">Eliminar un Activo</h3>
+<p>⚠️ <strong>Precaución</strong>: Esta acción no se puede deshacer.</p>
+<ol>
+<li>Clic en <strong>"Eliminar"</strong> (ícono de papelera 🗑️)</li>
+<li>Confirma la acción en el mensaje emergente</li>
+<li>El activo será marcado como "Dado de Baja"</li>
+</ol>
+<hr />
+<h2 id="importacion-masiva-desde-excel">Importación Masiva desde Excel</h2>
+<p>Si tienes muchos activos, puedes importarlos todos de una vez usando un archivo Excel.</p>
+<h3 id="paso-1-descargar-la-plantilla">Paso 1: Descargar la Plantilla</h3>
+<ol>
+<li>Ve a <strong>"Importar desde Excel"</strong></li>
+<li>Haz clic en <strong>"Descargar Plantilla"</strong></li>
+</ol>
+<p><img alt="Importación desde Excel" src="imagenes-manual/06-importacion.png" /></p>
+<ol>
+<li>Se descargará un archivo <code>plantilla_activos.xlsx</code></li>
+</ol>
+<h3 id="paso-2-llenar-la-plantilla">Paso 2: Llenar la Plantilla</h3>
+<p>Abre el archivo Excel y completa las columnas:</p>
+<table>
+<thead>
+<tr>
+<th>Código</th>
+<th>Nombre</th>
+<th>Categoría</th>
+<th>Marca</th>
+<th>Modelo</th>
+<th>Serial</th>
+<th>Estado</th>
+<th>Ubicación</th>
+<th>Valor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LAP-001</td>
+<td>Laptop Dell</td>
+<td>Computadores</td>
+<td>Dell</td>
+<td>Latitude</td>
+<td>ABC123</td>
+<td>Disponible</td>
+<td>Oficina Principal</td>
+<td>1500000</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Notas importantes:</strong></p>
+<ul>
+<li>El <strong>Código</strong> debe ser único para cada activo</li>
+<li>La <strong>Categoría</strong> y <strong>Ubicación</strong> deben existir previamente en el sistema</li>
+<li>El <strong>Estado</strong> debe ser uno de: Disponible, Asignado, En Mantenimiento, Dado de Baja</li>
+</ul>
+<h3 id="paso-3-importar-el-archivo">Paso 3: Importar el Archivo</h3>
+<ol>
+<li>Haz clic en <strong>"Seleccionar Archivo"</strong></li>
+<li>Elige tu archivo Excel completado</li>
+<li>Clic en <strong>"Importar"</strong></li>
+<li>El sistema procesará el archivo y mostrará un resumen:<ul>
+<li>✅ Activos importados correctamente</li>
+<li>⚠️ Errores encontrados (si los hay)</li>
+</ul>
+</li>
+</ol>
+<p><img alt="Resultado de Importación" src="imagenes-manual/06-importacion.png" /></p>
+<hr />
+<h2 id="asignacion-de-activos-a-empleados">Asignación de Activos a Empleados</h2>
+<h3 id="asignar-un-activo">Asignar un Activo</h3>
+<ol>
+<li>Ve a la página de detalles del activo</li>
+<li>Haz clic en <strong>"Asignar a Empleado"</strong></li>
+</ol>
+<p><img alt="Formulario de Asignación" src="imagenes-manual/07-asignacion.png" /></p>
+<ol>
+<li>
+<p>Completa el formulario:</p>
+<ul>
+<li><strong>Empleado</strong>: Selecciona de la lista</li>
+<li><strong>Fecha de Asignación</strong>: Por defecto es hoy</li>
+<li><strong>Notas</strong>: Observaciones adicionales (opcional)</li>
+</ul>
+</li>
+<li>
+<p>Haz clic en <strong>"Asignar"</strong></p>
+</li>
+</ol>
+<h3 id="ver-asignaciones-activas">Ver Asignaciones Activas</h3>
+<p>En la página del activo, verás la sección <strong>"Asignaciones"</strong>:</p>
+<ul>
+<li>Empleado actual</li>
+<li>Fecha de asignación</li>
+<li>Botón para <strong>"Devolver Activo"</strong></li>
+</ul>
+<h3 id="devolver-un-activo">Devolver un Activo</h3>
+<ol>
+<li>En la página del activo, sección "Asignaciones"</li>
+<li>Haz clic en <strong>"Devolver"</strong></li>
+<li>Confirma la devolución</li>
+<li>El activo vuelve al estado "Disponible"</li>
+</ol>
+<hr />
+<h2 id="gestion-de-empleados">Gestión de Empleados</h2>
+<h3 id="agregar-un-empleado">Agregar un Empleado</h3>
+<ol>
+<li>Ve a <strong>"Empleados"</strong> en el menú lateral</li>
+<li>Clic en <strong>"Agregar Empleado"</strong></li>
+</ol>
+<p><img alt="Lista de Empleados" src="imagenes-manual/08-empleados.png" /></p>
+<ol>
+<li>
+<p>Completa los datos:</p>
+<ul>
+<li><strong>Nombre Completo</strong></li>
+<li><strong>Identificación</strong> (Cédula/DNI)</li>
+<li><strong>Cargo</strong></li>
+<li><strong>Departamento</strong></li>
+<li><strong>Correo Electrónico</strong></li>
+<li><strong>Teléfono</strong></li>
+</ul>
+</li>
+<li>
+<p>Haz clic en <strong>"Guardar"</strong></p>
+</li>
+</ol>
+<h3 id="ver-activos-asignados-a-un-empleado">Ver Activos Asignados a un Empleado</h3>
+<ol>
+<li>En la lista de empleados, haz clic en <strong>"Ver"</strong></li>
+<li>Verás todos los activos que tiene asignados</li>
+</ol>
+<p><img alt="Detalles de Empleado" src="imagenes-manual/08-empleados.png" /></p>
+<hr />
+<h2 id="mantenimiento-de-activos">Mantenimiento de Activos</h2>
+<h3 id="programar-un-mantenimiento">Programar un Mantenimiento</h3>
+<ol>
+<li>Ve a <strong>"Mantenimiento"</strong> en el menú lateral</li>
+<li>Clic en <strong>"Programar Mantenimiento"</strong></li>
+</ol>
+<p><img alt="Formulario de Mantenimiento" src="imagenes-manual/05-detalles-activo.png" /></p>
+<ol>
+<li>
+<p>Completa:</p>
+<ul>
+<li><strong>Activo</strong>: Selecciona el equipo</li>
+<li><strong>Tipo</strong>: Preventivo o Correctivo</li>
+<li><strong>Fecha Programada</strong></li>
+<li><strong>Descripción</strong>: Qué se va a hacer</li>
+<li><strong>Costo Estimado</strong> (opcional)</li>
+<li><strong>Proveedor</strong> (si es externo)</li>
+</ul>
+</li>
+<li>
+<p>Haz clic en <strong>"Guardar"</strong></p>
+</li>
+</ol>
+<h3 id="registrar-un-mantenimiento-realizado">Registrar un Mantenimiento Realizado</h3>
+<ol>
+<li>En la lista de mantenimientos, busca el pendiente</li>
+<li>Haz clic en <strong>"Completar"</strong></li>
+<li>
+<p>Ingresa:</p>
+<ul>
+<li><strong>Fecha de Realización</strong></li>
+<li><strong>Costo Real</strong></li>
+<li><strong>Notas</strong>: Qué se hizo exactamente</li>
+</ul>
+</li>
+<li>
+<p>Haz clic en <strong>"Guardar"</strong></p>
+</li>
+</ol>
+<p>El mantenimiento cambiará a estado "Completado".</p>
+<hr />
+<h2 id="reportes-y-exportacion">Reportes y Exportación</h2>
+<h3 id="generar-un-reporte">Generar un Reporte</h3>
+<ol>
+<li>Ve a <strong>"Reportes"</strong> en el menú lateral</li>
+</ol>
+<p><img alt="Página de Reportes" src="imagenes-manual/10-reportes.png" /></p>
+<ol>
+<li>
+<p>Selecciona los filtros:</p>
+<ul>
+<li><strong>Categoría</strong>: Todos o una específica</li>
+<li><strong>Estado</strong>: Todos, Disponibles, Asignados, etc.</li>
+<li><strong>Ubicación</strong>: Todas o una específica</li>
+<li><strong>Rango de Fechas</strong>: Desde - Hasta</li>
+</ul>
+</li>
+<li>
+<p>Elige el formato:</p>
+<ul>
+<li><strong>PDF</strong>: Para imprimir o compartir</li>
+<li><strong>Excel</strong>: Para análisis de datos</li>
+</ul>
+</li>
+<li>
+<p>Haz clic en <strong>"Generar Reporte"</strong></p>
+</li>
+</ol>
+<h3 id="tipos-de-reportes-disponibles">Tipos de Reportes Disponibles</h3>
+<ul>
+<li><strong>Inventario General</strong>: Todos los activos</li>
+<li><strong>Activos por Categoría</strong>: Agrupados por tipo</li>
+<li><strong>Activos por Ubicación</strong>: Agrupados por lugar</li>
+<li><strong>Activos Asignados</strong>: Solo los que están en uso</li>
+<li><strong>Historial de Mantenimientos</strong>: Todos los mantenimientos realizados</li>
+<li><strong>Valorización de Activos</strong>: Valor total del inventario</li>
+</ul>
+<hr />
+<h2 id="escaner-de-codigos-qr">Escáner de Códigos QR</h2>
+<h3 id="usar-el-escaner-solo-en-movil">Usar el Escáner (Solo en Móvil)</h3>
+<ol>
+<li>En el menú lateral, haz clic en <strong>"Escáner"</strong> (solo visible en móvil)</li>
+</ol>
+<p><img alt="Escáner de Códigos QR" src="imagenes-manual/09-escaner.png" /></p>
+<ol>
+<li>Haz clic en <strong>"Iniciar Escáner"</strong></li>
+<li>Permite el acceso a la cámara cuando el navegador lo solicite</li>
+<li>Apunta la cámara hacia el código QR del activo</li>
+<li>El sistema detectará automáticamente el código y te redirigirá a la página del activo</li>
+</ol>
+<h3 id="imprimir-codigos-qr">Imprimir Códigos QR</h3>
+<ol>
+<li>Ve a la página de detalles de cualquier activo</li>
+<li>Haz clic en <strong>"Imprimir QR"</strong></li>
+<li>Se descargará un PDF con el código QR</li>
+<li>Imprime y pega en el activo físico</li>
+</ol>
+<hr />
+<h2 id="configuracion-de-categorias-y-ubicaciones">Configuración de Categorías y Ubicaciones</h2>
+<h3 id="crear-una-categoria">Crear una Categoría</h3>
+<ol>
+<li>Ve a <strong>"Categorías"</strong></li>
+<li>Clic en <strong>"Agregar Categoría"</strong></li>
+<li>
+<p>Ingresa:</p>
+<ul>
+<li><strong>Nombre</strong>: Ej: "Computadores"</li>
+<li><strong>Descripción</strong>: Detalles adicionales</li>
+</ul>
+</li>
+<li>
+<p>Haz clic en <strong>"Guardar"</strong></p>
+</li>
+</ol>
+<h3 id="crear-una-ubicacion">Crear una Ubicación</h3>
+<ol>
+<li>Ve a <strong>"Ubicaciones"</strong></li>
+<li>Clic en <strong>"Agregar Ubicación"</strong></li>
+<li>
+<p>Ingresa:</p>
+<ul>
+<li><strong>Nombre</strong>: Ej: "Oficina Principal"</li>
+<li><strong>Dirección</strong>: Dirección física</li>
+<li><strong>Descripción</strong>: Detalles adicionales</li>
+</ul>
+</li>
+<li>
+<p>Haz clic en <strong>"Guardar"</strong></p>
+</li>
+</ol>
+<h3 id="crear-un-proveedor">Crear un Proveedor</h3>
+<ol>
+<li>Ve a <strong>"Proveedores"</strong></li>
+<li>Clic en <strong>"Agregar Proveedor"</strong></li>
+<li>
+<p>Completa:</p>
+<ul>
+<li><strong>Nombre</strong>: Nombre de la empresa</li>
+<li><strong>NIT/RUC</strong>: Identificación tributaria</li>
+<li><strong>Contacto</strong>: Persona de contacto</li>
+<li><strong>Teléfono</strong></li>
+<li><strong>Correo Electrónico</strong></li>
+</ul>
+</li>
+<li>
+<p>Haz clic en <strong>"Guardar"</strong></p>
+</li>
+</ol>
+<hr />
+<h2 id="gestion-de-usuarios-solo-administradores">Gestión de Usuarios (Solo Administradores)</h2>
+<h3 id="crear-un-usuario">Crear un Usuario</h3>
+<ol>
+<li>Ve a <strong>"Usuarios"</strong> (solo visible para administradores)</li>
+<li>Clic en <strong>"Agregar Usuario"</strong></li>
+</ol>
+<p><img alt="Formulario de Usuario" src="imagenes-manual/08-empleados.png" /></p>
+<ol>
+<li>
+<p>Completa:</p>
+<ul>
+<li><strong>Nombre Completo</strong></li>
+<li><strong>Correo Electrónico</strong></li>
+<li><strong>Contraseña Temporal</strong></li>
+<li><strong>Rol</strong>: Administrador o Usuario</li>
+</ul>
+</li>
+<li>
+<p>Haz clic en <strong>"Crear"</strong></p>
+</li>
+</ol>
+<p>El usuario recibirá un correo con sus credenciales.</p>
+<h3 id="roles-y-permisos">Roles y Permisos</h3>
+<p><strong>Administrador:</strong></p>
+<ul>
+<li>Acceso total al sistema</li>
+<li>Puede crear/editar/eliminar activos</li>
+<li>Puede gestionar usuarios</li>
+<li>Puede crear respaldos</li>
+<li>Puede ver todos los reportes</li>
+</ul>
+<p><strong>Usuario:</strong></p>
+<ul>
+<li>Puede ver activos</li>
+<li>Puede crear activos (si el admin lo permite)</li>
+<li>No puede eliminar activos</li>
+<li>No puede gestionar usuarios</li>
+</ul>
+<hr />
+<h2 id="soporte-tecnico">Soporte Técnico</h2>
+<h3 id="crear-un-ticket-de-soporte">Crear un Ticket de Soporte</h3>
+<ol>
+<li>Ve a <strong>"Soporte"</strong> en el menú lateral</li>
+<li>Clic en <strong>"Crear Ticket"</strong></li>
+</ol>
+<p><img alt="Formulario de Ticket de Soporte" src="imagenes-manual/05-detalles-activo.png" /></p>
+<ol>
+<li>
+<p>Completa:</p>
+<ul>
+<li><strong>Asunto</strong>: Resumen del problema</li>
+<li><strong>Descripción</strong>: Explica detalladamente</li>
+<li><strong>Prioridad</strong>: Baja, Media, Alta</li>
+<li><strong>Adjuntos</strong>: Capturas de pantalla (opcional)</li>
+</ul>
+</li>
+<li>
+<p>Haz clic en <strong>"Enviar"</strong></p>
+</li>
+</ol>
+<h3 id="ver-estado-de-tus-tickets">Ver Estado de tus Tickets</h3>
+<ol>
+<li>En <strong>"Soporte"</strong>, verás la lista de tus tickets</li>
+<li>Estados posibles:<ul>
+<li>🟡 <strong>Abierto</strong>: Recién creado</li>
+<li>🔵 <strong>En Proceso</strong>: El equipo está trabajando en ello</li>
+<li>🟢 <strong>Resuelto</strong>: Problema solucionado</li>
+<li>🔴 <strong>Cerrado</strong>: Ticket finalizado</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h2 id="preguntas-frecuentes">Preguntas Frecuentes</h2>
+<h3 id="puedo-usar-ion-desde-mi-celular">¿Puedo usar ION desde mi celular?</h3>
+<p>Sí, ION es completamente responsive y funciona en cualquier dispositivo móvil.</p>
+<h3 id="los-datos-estan-seguros">¿Los datos están seguros?</h3>
+<p>Sí, todos los datos están encriptados y se realizan respaldos automáticos diarios.</p>
+<h3 id="puedo-exportar-mi-informacion">¿Puedo exportar mi información?</h3>
+<p>Sí, puedes exportar reportes en PDF y Excel en cualquier momento.</p>
+<h3 id="cuantos-usuarios-puedo-tener">¿Cuántos usuarios puedo tener?</h3>
+<p>Depende de tu plan contratado. Consulta con tu administrador.</p>
+<h3 id="que-pasa-si-olvido-mi-contrasena">¿Qué pasa si olvido mi contraseña?</h3>
+<p>En la pantalla de login, haz clic en "¿Olvidaste tu contraseña?" y sigue las instrucciones.</p>
+<h3 id="puedo-personalizar-las-categorias">¿Puedo personalizar las categorías?</h3>
+<p>Sí, los administradores pueden crear categorías personalizadas según las necesidades de la empresa.</p>
+<h3 id="el-sistema-funciona-sin-internet">¿El sistema funciona sin internet?</h3>
+<p>No, ION requiere conexión a internet para funcionar. Sin embargo, estamos trabajando en una versión offline.</p>
+<hr />
+<h2 id="contacto-y-soporte">Contacto y Soporte</h2>
+<p><strong>OutDeveloper</strong><br />
+📧 Email: soporte@outdeveloper.com<br />
+🌐 Web: https://outdeveloper.com<br />
+📱 WhatsApp: [Número de contacto]</p>
+<p><strong>Horario de Atención:</strong><br />
+Lunes a Viernes: 8:00 AM - 6:00 PM<br />
+Sábados: 9:00 AM - 1:00 PM</p>
+<hr />
+<p><strong>© 2026 OutDeveloper. Todos los derechos reservados.</strong></p>
+        </div>
+        
+        <footer>
+            <p><strong>OutDeveloper</strong></p>
+            <p>📧 soporte@outdeveloper.com | 🌐 https://outdeveloper.com</p>
+            <p style="margin-top: 15px; font-size: 0.9em;">© 2026 OutDeveloper. Todos los derechos reservados.</p>
+        </footer>
+    </div>
+</body>
+</html>

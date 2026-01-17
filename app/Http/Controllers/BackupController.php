@@ -161,9 +161,15 @@ class BackupController extends Controller
             // Get company ID from authenticated user
             $companyId = Auth::user()->company_id;
 
-            // Verify that this backup belongs to the user's company
-            if (!str_contains($sql, "company_id` = {$companyId}") && !str_contains($sql, "`id` = {$companyId}")) {
-                return back()->with('error', 'Este backup no pertenece a tu empresa.');
+            // Verify that this backup belongs to the user's company using headers
+            $hasHeader = preg_match('/-- COMPANY_ID: (\d+)/', $sql, $matches);
+            $backupCompanyId = $hasHeader ? $matches[1] : null;
+
+            if (!$hasHeader || (int)$backupCompanyId !== (int)$companyId) {
+                // Fallback to old check for backward compatibility
+                if (!str_contains($sql, "company_id` = {$companyId}") && !str_contains($sql, "`id` = {$companyId}") && !str_contains($sql, "({$companyId},") && !str_contains($sql, ", {$companyId},") && !str_contains($sql, ", {$companyId})")) {
+                    return back()->with('error', 'Este backup no pertenece a tu empresa o el formato no es válido.');
+                }
             }
 
             // Detect database driver
@@ -176,19 +182,24 @@ class BackupController extends Controller
                 \DB::statement('PRAGMA foreign_keys = OFF;');
             }
             
-            // Split SQL into individual statements
+            // Split SQL into individual statements more safely
+            // Using a simple regex to split by semicolon at the end of lines
+            $statements = preg_split('/;\s*$/m', $sql);
+            
             $statements = array_filter(
-                array_map('trim', explode(';', $sql)),
+                array_map('trim', $statements),
                 function($statement) {
-                    return !empty($statement) && !str_starts_with($statement, '--');
+                    return !empty($statement) && !str_starts_with($statement, '--') && !str_starts_with($statement, '/*');
                 }
             );
 
+            $executedCount = 0;
             // Execute each statement
             foreach ($statements as $statement) {
                 if (!empty($statement)) {
                     try {
                         \DB::statement($statement);
+                        $executedCount++;
                     } catch (\Exception $e) {
                         // Log the error but continue with other statements
                         \Log::warning("Error executing statement: " . $e->getMessage());
@@ -203,7 +214,11 @@ class BackupController extends Controller
                 \DB::statement('PRAGMA foreign_keys = ON;');
             }
 
-            return back()->with('success', 'Backup restaurado exitosamente. Los datos han sido recuperados.');
+            if ($executedCount === 0) {
+                return back()->with('error', 'El archivo no contenía datos válidos para tu empresa.');
+            }
+
+            return back()->with('success', "Backup restaurado exitosamente. Se han recuperado {$executedCount} registros/instrucciones.");
         } catch (\Exception $e) {
             // Re-enable foreign key checks in case of error
             $driver = \DB::getDriverName();

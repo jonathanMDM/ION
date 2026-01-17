@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('companies', function (Blueprint $table) {
-            $table->boolean('low_stock_alerts_enabled')->default(false)->after('status');
+        Schema::table('users', function (Blueprint $blueprint) {
+            $blueprint->boolean('onboarding_completed')->default(false)->after('is_active');
         });
     }
 
@@ -21,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('companies', function (Blueprint $table) {
-            $table->dropColumn('low_stock_alerts_enabled');
+        Schema::table('users', function (Blueprint $blueprint) {
+            $blueprint->dropColumn('onboarding_completed');
         });
     }
 };

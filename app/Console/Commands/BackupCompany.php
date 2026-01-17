@@ -67,26 +67,53 @@ class BackupCompany extends Command
             'employees',
             'maintenances',
             'asset_movements',
+            'asset_assignments',
+            'custom_fields',
+            'field_visibilities',
+            'user_notifications',
+            'support_tickets',
+            'support_ticket_notes',
         ]);
 
-        $sqlContent = "-- Backup for Company: {$company->name} (ID: {$companyId})\n";
-        $sqlContent .= "-- Created at: " . now()->toDateTimeString() . "\n\n";
+        $sqlContent = "-- ION BACKUP METADATA\n";
+        $sqlContent .= "-- VERSION: 1.0\n";
+        $sqlContent .= "-- COMPANY_ID: {$companyId}\n";
+        $sqlContent .= "-- COMPANY_NAME: {$company->name}\n";
+        $sqlContent .= "-- CREATED_AT: " . now()->toDateTimeString() . "\n";
+        $sqlContent .= "-- END METADATA\n\n";
         
         // Add database-agnostic foreign key disable
         $sqlContent .= "-- Disable foreign key checks\n";
-        $sqlContent .= "-- For MySQL: SET FOREIGN_KEY_CHECKS=0;\n";
-        $sqlContent .= "-- For SQLite: PRAGMA foreign_keys = OFF;\n\n";
 
         foreach ($tables as $table) {
             $this->info("Backing up table: {$table}");
             
-            // Get records for this company
-            // For 'companies' table, get only this specific company
-            // For other tables, get all records with this company_id
+            $query = DB::table($table);
+            $deleteQuery = "";
+
             if ($table === 'companies') {
-                $records = DB::table($table)->where('id', $companyId)->get();
+                $records = $query->where('id', $companyId)->get();
+                $deleteQuery = "DELETE FROM `{$table}` WHERE `id` = {$companyId};\n";
+            } elseif (in_array($table, ['user_notifications'])) {
+                $records = $query->whereIn('user_id', function($q) use ($companyId) {
+                    $q->select('id')->from('users')->where('company_id', $companyId);
+                })->get();
+                // For restoration, we need a way to delete these. Since they don't have company_id, 
+                // we'll use same subquery logic in the SQL file.
+                $deleteQuery = "DELETE FROM `{$table}` WHERE `user_id` IN (SELECT `id` FROM `users` WHERE `company_id` = {$companyId});\n";
+            } elseif (in_array($table, ['asset_assignments'])) {
+                $records = $query->whereIn('asset_id', function($q) use ($companyId) {
+                    $q->select('id')->from('assets')->where('company_id', $companyId);
+                })->get();
+                $deleteQuery = "DELETE FROM `{$table}` WHERE `asset_id` IN (SELECT `id` FROM `assets` WHERE `company_id` = {$companyId});\n";
+            } elseif (in_array($table, ['support_ticket_notes'])) {
+                $records = $query->whereIn('support_ticket_id', function($q) use ($companyId) {
+                    $q->select('id')->from('support_tickets')->where('company_id', $companyId);
+                })->get();
+                $deleteQuery = "DELETE FROM `{$table}` WHERE `support_ticket_id` IN (SELECT `id` FROM `support_tickets` WHERE `company_id` = {$companyId});\n";
             } else {
-                $records = DB::table($table)->where('company_id', $companyId)->get();
+                $records = $query->where('company_id', $companyId)->get();
+                $deleteQuery = "DELETE FROM `{$table}` WHERE `company_id` = {$companyId};\n";
             }
             
             if ($records->isEmpty()) {
@@ -94,13 +121,7 @@ class BackupCompany extends Command
             }
 
             $sqlContent .= "-- Table: {$table}\n";
-            
-            // Add DELETE statement to remove existing records before inserting
-            if ($table === 'companies') {
-                $sqlContent .= "DELETE FROM `{$table}` WHERE `id` = {$companyId};\n";
-            } else {
-                $sqlContent .= "DELETE FROM `{$table}` WHERE `company_id` = {$companyId};\n";
-            }
+            $sqlContent .= $deleteQuery;
             
             foreach ($records as $record) {
                 $columns = array_keys((array) $record);
