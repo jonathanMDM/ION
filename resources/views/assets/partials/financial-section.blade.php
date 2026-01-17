@@ -29,7 +29,7 @@
         <div class="bg-yellow-50 rounded-lg p-4">
             <p class="text-sm text-yellow-600 mb-1">Costos Acumulados</p>
             <p class="text-2xl font-bold text-yellow-900">${{ number_format($asset->total_costs ?? 0, 0) }}</p>
-            <p class="text-xs text-yellow-600 mt-1">{{ $asset->costs->count() }} registros</p>
+            <p class="text-xs text-yellow-600 mt-1">{{ isset($asset->costs) ? $asset->costs->count() : 0 }} registros</p>
         </div>
     </div>
 
@@ -119,7 +119,7 @@
         </a>
     </div>
 
-    @if($asset->costs->isEmpty())
+    @if(!isset($asset->costs) || $asset->costs->isEmpty())
         <div class="text-center py-8">
             <i class="fas fa-receipt text-4xl text-gray-300 mb-3"></i>
             <p class="text-gray-500">No hay costos registrados para este activo</p>
