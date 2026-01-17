@@ -216,7 +216,10 @@ class AssetController extends Controller
             'custom_id' => 'nullable|string|unique:assets,custom_id,' . $asset->id,
             'location_id' => 'required|exists:locations,id',
             'subcategory_id' => 'required|exists:subcategories,id',
+            'supplier_id' => 'nullable|exists:suppliers,id',
             'name' => 'required|string|max:255',
+            'model' => 'nullable|string|max:255',
+            'quantity' => 'required|integer|min:0',
             'purchase_price' => 'required|numeric|min:0',
             'purchase_date' => 'nullable|date',
             'status' => 'required|in:active,decommissioned,maintenance',
@@ -225,6 +228,13 @@ class AssetController extends Controller
             'next_maintenance_date' => 'nullable|date',
             'maintenance_frequency_days' => 'nullable|integer|min:1',
             'minimum_quantity' => 'nullable|integer|min:0',
+            'specifications' => 'nullable|string',
+            'cost_center_id' => 'nullable|exists:cost_centers,id',
+            'depreciation_method' => 'required|in:none,straight_line,declining_balance,units_of_production',
+            'useful_life_years' => 'nullable|integer|min:1',
+            'salvage_value' => 'nullable|numeric|min:0',
+            'depreciation_start_date' => 'nullable|date',
+            'custom_attributes' => 'nullable|array',
         ]);
         
         $data = $request->all();

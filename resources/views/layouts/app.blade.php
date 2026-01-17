@@ -698,14 +698,17 @@
 
             // Update notification count
             function updateNotificationCount() {
+                const badge = document.getElementById('notification-badge');
+                if (!badge) return;
+
                 fetch('{{ route("notifications.unread-count") }}')
                     .then(response => response.json())
                     .then(data => {
                         if (data.count > 0) {
-                            notificationBadge.textContent = data.count > 99 ? '99+' : data.count;
-                            notificationBadge.classList.remove('hidden');
+                            badge.textContent = data.count > 99 ? '99+' : data.count;
+                            badge.classList.remove('hidden');
                         } else {
-                            notificationBadge.classList.add('hidden');
+                            badge.classList.add('hidden');
                         }
                     })
                     .catch(error => console.error('Error loading notification count:', error));
