@@ -19,7 +19,12 @@
     <div class="invoice-box">
         <div class="header">
             <div>
-                <img src="{{ public_path('img/logo.png') }}" alt="ION Logo" style="width: 120px; margin-bottom: 10px;">
+                @php
+                    $logoPath = public_path('img/logo.png');
+                @endphp
+                @if(file_exists($logoPath))
+                    <img src="{{ $logoPath }}" alt="ION Logo" style="width: 120px; margin-bottom: 10px;">
+                @endif
                 <h1 style="color: #4F46E5; margin: 0;">ION Inventory</h1>
                 <p style="color: #6B7280; margin: 5px 0;">Sistema de Gestión de Activos</p>
             </div>
@@ -62,7 +67,6 @@
 
         <div class="footer">
             <p>Gracias por confiar en ION Inventory para la gestión de sus activos.</p>
-            <p>Este es un comprobante electrónico válido.</p>
         </div>
     </div>
 </body>
