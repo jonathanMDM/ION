@@ -217,7 +217,7 @@ class AssetController extends Controller
             'location_id' => 'required|exists:locations,id',
             'subcategory_id' => 'required|exists:subcategories,id',
             'name' => 'required|string|max:255',
-            'value' => 'required|numeric',
+            'purchase_price' => 'required|numeric|min:0',
             'purchase_date' => 'nullable|date',
             'status' => 'required|in:active,decommissioned,maintenance',
             'municipality_plate' => 'nullable|string|max:255',
@@ -228,6 +228,11 @@ class AssetController extends Controller
         ]);
         
         $data = $request->all();
+
+        // Copy purchase_price to value for backward compatibility
+        if (isset($data['purchase_price'])) {
+            $data['value'] = $data['purchase_price'];
+        }
         
         // Handle image upload to Cloudinary
         // Handle image upload with local fallback

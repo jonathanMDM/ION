@@ -14,6 +14,24 @@
             <i class="fas fa-eye mr-2"></i> Ver Perfil
         </a>
     </div>
+    
+    @if ($errors->any())
+        <div class="bg-red-50 dark:bg-red-900/10 border-l-4 border-red-500 p-4 mb-8 rounded-r-xl">
+            <div class="flex">
+                <div class="flex-shrink-0">
+                    <i class="fas fa-exclamation-circle text-red-500"></i>
+                </div>
+                <div class="ml-3">
+                    <p class="text-sm text-red-700 dark:text-red-400 font-bold">Por favor corrija los siguientes errores:</p>
+                    <ul class="mt-1 text-xs text-red-600 dark:text-red-400 list-disc list-inside">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+        </div>
+    @endif
 
     <form action="{{ route('employees.update', $employee->id) }}" method="POST">
         @csrf
