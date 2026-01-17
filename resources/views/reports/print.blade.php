@@ -17,7 +17,7 @@
         
         body {
             font-family: Arial, sans-serif;
-            font-size: 10px;
+            font-size: 9px;
             margin: 20px;
         }
         
@@ -25,20 +25,20 @@
             text-align: center;
             color: #333;
             margin-bottom: 5px;
-            font-size: 18px;
+            font-size: 16px;
         }
         
         .header-info {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             color: #666;
         }
         
         .stats {
             display: flex;
             justify-content: space-around;
-            margin-bottom: 20px;
-            padding: 10px;
+            margin-bottom: 15px;
+            padding: 8px;
             background: #f5f5f5;
             border-radius: 5px;
             border: 1px solid #ddd;
@@ -46,17 +46,17 @@
         
         .stat-item {
             text-align: center;
-            padding: 0 10px;
+            padding: 0 5px;
         }
         
         .stat-value {
-            font-size: 16px;
+            font-size: 14px;
             font-weight: bold;
             color: #333;
         }
         
         .stat-label {
-            font-size: 9px;
+            font-size: 8px;
             color: #666;
             text-transform: uppercase;
         }
@@ -70,16 +70,16 @@
         th {
             background-color: #333;
             color: white;
-            padding: 5px;
+            padding: 4px;
             text-align: left;
-            font-size: 9px;
+            font-size: 8px;
             text-transform: uppercase;
         }
         
         td {
-            padding: 4px 5px;
+            padding: 3px 4px;
             border-bottom: 1px solid #ddd;
-            font-size: 9px;
+            font-size: 8px;
         }
         
         tr:nth-child(even) {
@@ -133,12 +133,12 @@
             <div class="stat-label">Total Activos</div>
         </div>
         <div class="stat-item">
-            <div class="stat-value text-green-600">${{ number_format($stats['total_purchase_price'], 2) }}</div>
+            <div class="stat-value" style="color: green;">${{ number_format($stats['total_purchase_price'], 2) }}</div>
             <div class="stat-label">Val. Compra Total</div>
         </div>
         @if(auth()->user()->company->hasModule('depreciation'))
         <div class="stat-item">
-            <div class="stat-value text-blue-600">${{ number_format($stats['total_current_value'], 2) }}</div>
+            <div class="stat-value" style="color: blue;">${{ number_format($stats['total_current_value'], 2) }}</div>
             <div class="stat-label">Val. Libros Total</div>
         </div>
         @endif
@@ -152,22 +152,30 @@
         </div>
     </div>
     
+    @php
+        $customFields = \App\Models\CustomField::where('company_id', auth()->user()->company_id)->get();
+    @endphp
+
     <table>
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Nombre del Activo</th>
+                <th>Activo</th>
                 <th>Ubicación</th>
                 @if(auth()->user()->company->hasModule('cost_centers'))
-                <th>Centro de Costo</th>
+                <th>Centro Costo</th>
                 @endif
+                @foreach($customFields as $field)
+                    @if(\App\Helpers\FieldHelper::isVisible($field->name))
+                    <th>{{ $field->label }}</th>
+                    @endif
+                @endforeach
                 <th>Estado</th>
                 <th style="text-align: right">P. Compra</th>
                 @if(auth()->user()->company->hasModule('depreciation'))
                 <th style="text-align: right">V. Actual</th>
                 @endif
-                <th>Proveedor</th>
-                <th>Fecha Compra</th>
+                <th>Compra</th>
             </tr>
         </thead>
         <tbody>
@@ -179,19 +187,23 @@
                 @if(auth()->user()->company->hasModule('cost_centers'))
                 <td>{{ $asset->costCenter->name ?? 'N/A' }}</td>
                 @endif
+                @foreach($customFields as $field)
+                    @if(\App\Helpers\FieldHelper::isVisible($field->name))
+                    <td>{{ $asset->custom_attributes[$field->name] ?? '-' }}</td>
+                    @endif
+                @endforeach
                 <td class="status-{{ $asset->status }}">{{ ucfirst($asset->status) }}</td>
                 <td class="currency">${{ number_format($asset->purchase_price, 2) }}</td>
                 @if(auth()->user()->company->hasModule('depreciation'))
                 <td class="currency" style="color: #4F46E5">${{ number_format($asset->value, 2) }}</td>
                 @endif
-                <td>{{ $asset->supplier->name ?? 'N/A' }}</td>
                 <td>{{ $asset->purchase_date ? $asset->purchase_date->format('d/m/Y') : 'N/A' }}</td>
             </tr>
             @endforeach
         </tbody>
     </table>
     
-    <div style="margin-top: 30px; text-align: right; color: #999; font-size: 8px;">
+    <div style="margin-top: 20px; text-align: right; color: #999; font-size: 7px;">
         ION Inventory Management System - Trazabilidad y Control de Activos
     </div>
 

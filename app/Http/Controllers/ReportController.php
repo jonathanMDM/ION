@@ -6,6 +6,7 @@ use App\Models\Asset;
 use App\Models\Location;
 use App\Models\Category;
 use App\Models\AssetMovement;
+use App\Models\CustomField;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Maatwebsite\Excel\Facades\Excel;
@@ -16,69 +17,7 @@ class ReportController extends Controller
     public function index(Request $request)
     {
         $query = Asset::with(['location', 'subcategory.category', 'supplier', 'costCenter']);
-
-        // Apply filters
-        if ($request->filled('status')) {
-            $query->where('status', $request->status);
-        }
-
-        if ($request->filled('location_id')) {
-            $query->where('location_id', $request->location_id);
-        }
-
-        if ($request->filled('cost_center_id')) {
-            $query->where('cost_center_id', $request->cost_center_id);
-        }
-
-        if ($request->filled('category_id')) {
-            $query->whereHas('subcategory', function($q) use ($request) {
-                $q->where('category_id', $request->category_id);
-            });
-        }
-
-        if ($request->filled('subcategory_id')) {
-            $query->where('subcategory_id', $request->subcategory_id);
-        }
-
-        if ($request->filled('supplier_id')) {
-            $query->where('supplier_id', $request->supplier_id);
-        }
-
-        if ($request->filled('date_from')) {
-            $query->where('purchase_date', '>=', $request->date_from);
-        }
-
-        if ($request->filled('date_to')) {
-            $query->where('purchase_date', '<=', $request->date_to);
-        }
-
-        if ($request->filled('custom_id')) {
-            $query->where('custom_id', 'like', '%' . $request->custom_id . '%');
-        }
-
-        if ($request->filled('municipality_plate')) {
-            $query->where('municipality_plate', 'like', '%' . $request->municipality_plate . '%');
-        }
-
-        // Filter by custom fields
-        $customFields = \App\Models\CustomField::where('company_id', \Auth::user()->company_id)->get();
-        foreach ($customFields as $field) {
-            $filterKey = 'custom_' . $field->name;
-            if ($request->filled($filterKey)) {
-                $query->whereRaw("JSON_EXTRACT(custom_attributes, '$.{$field->name}') LIKE ?", ['%' . $request->$filterKey . '%']);
-            }
-        }
-
-        // General search across multiple fields
-        if ($request->filled('search')) {
-            $search = $request->search;
-            $query->where(function($q) use ($search) {
-                $q->where('name', 'like', '%' . $search . '%')
-                  ->orWhere('custom_id', 'like', '%' . $search . '%')
-                  ->orWhere('municipality_plate', 'like', '%' . $search . '%')
-                  ->orWhere('specifications', 'like', '%' . $search . '%');
-            });
-        }
+        $query = $this->applyFilters($request, $query);
 
         $assets = $query->orderBy('purchase_date', 'desc')->get();
 
@@ -100,6 +39,47 @@ class ReportController extends Controller
         $costCenters = \App\Models\CostCenter::where('company_id', \Auth::user()->company_id)->orderBy('name')->get();
 
         return view('reports.index', compact('assets', 'stats', 'locations', 'categories', 'subcategories', 'suppliers', 'costCenters'));
+    }
+
+    private function applyFilters(Request $request, $query)
+    {
+        // Apply basic filters
+        if ($request->filled('status')) $query->where('status', $request->status);
+        if ($request->filled('location_id')) $query->where('location_id', $request->location_id);
+        if ($request->filled('cost_center_id')) $query->where('cost_center_id', $request->cost_center_id);
+        if ($request->filled('category_id')) {
+            $query->whereHas('subcategory', function($q) use ($request) {
+                $q->where('category_id', $request->category_id);
+            });
+        }
+        if ($request->filled('subcategory_id')) $query->where('subcategory_id', $request->subcategory_id);
+        if ($request->filled('supplier_id')) $query->where('supplier_id', $request->supplier_id);
+        if ($request->filled('date_from')) $query->where('purchase_date', '>=', $request->date_from);
+        if ($request->filled('date_to')) $query->where('purchase_date', '<=', $request->date_to);
+        if ($request->filled('custom_id')) $query->where('custom_id', 'like', '%' . $request->custom_id . '%');
+        if ($request->filled('municipality_plate')) $query->where('municipality_plate', 'like', '%' . $request->municipality_plate . '%');
+
+        // Filter by custom fields
+        $customFields = CustomField::where('company_id', \Auth::user()->company_id)->get();
+        foreach ($customFields as $field) {
+            $filterKey = 'custom_' . $field->name;
+            if ($request->filled($filterKey)) {
+                $query->whereRaw("JSON_EXTRACT(custom_attributes, '$.{$field->name}') LIKE ?", ['%' . $request->$filterKey . '%']);
+            }
+        }
+
+        // General search
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function($q) use ($search) {
+                $q->where('name', 'like', '%' . $search . '%')
+                  ->orWhere('custom_id', 'like', '%' . $search . '%')
+                  ->orWhere('municipality_plate', 'like', '%' . $search . '%')
+                  ->orWhere('specifications', 'like', '%' . $search . '%');
+            });
+        }
+
+        return $query;
     }
 
     public function movements(Request $request)
@@ -141,27 +121,7 @@ class ReportController extends Controller
     public function exportPdf(Request $request)
     {
         $query = Asset::with(['location', 'subcategory.category', 'supplier', 'costCenter']);
-
-        // Apply filters (same as index)
-        if ($request->filled('status')) $query->where('status', $request->status);
-        if ($request->filled('location_id')) $query->where('location_id', $request->location_id);
-        if ($request->filled('cost_center_id')) $query->where('cost_center_id', $request->cost_center_id);
-        if ($request->filled('category_id')) {
-            $query->whereHas('subcategory', function($q) use ($request) {
-                $q->where('category_id', $request->category_id);
-            });
-        }
-        if ($request->filled('date_from')) $query->where('purchase_date', '>=', $request->date_from);
-        if ($request->filled('date_to')) $query->where('purchase_date', '<=', $request->date_to);
-        if ($request->filled('search')) {
-            $search = $request->search;
-            $query->where(function($q) use ($search) {
-                $q->where('name', 'like', '%' . $search . '%')
-                  ->orWhere('custom_id', 'like', '%' . $search . '%')
-                  ->orWhere('municipality_plate', 'like', '%' . $search . '%')
-                  ->orWhere('specifications', 'like', '%' . $search . '%');
-            });
-        }
+        $query = $this->applyFilters($request, $query);
 
         $assets = $query->orderBy('purchase_date', 'desc')->get();
 
@@ -180,22 +140,11 @@ class ReportController extends Controller
     public function exportExcel(Request $request)
     {
         $query = Asset::with(['location', 'subcategory.category', 'supplier', 'costCenter']);
-
-        // Apply same filters as index
-        if ($request->filled('status')) $query->where('status', $request->status);
-        if ($request->filled('location_id')) $query->where('location_id', $request->location_id);
-        if ($request->filled('cost_center_id')) $query->where('cost_center_id', $request->cost_center_id);
-        if ($request->filled('search')) {
-            $search = $request->search;
-            $query->where(function($q) use ($search) {
-                $q->where('name', 'like', '%' . $search . '%')
-                  ->orWhere('custom_id', 'like', '%' . $search . '%')
-                  ->orWhere('municipality_plate', 'like', '%' . $search . '%')
-                  ->orWhere('specifications', 'like', '%' . $search . '%');
-            });
-        }
+        $query = $this->applyFilters($request, $query);
 
         $assets = $query->orderBy('purchase_date', 'desc')->get();
+        $company = \Auth::user()->company;
+        $customFields = CustomField::where('company_id', $company->id)->get();
 
         // Create CSV
         $filename = 'assets-report-' . date('Y-m-d') . '.csv';
@@ -204,17 +153,30 @@ class ReportController extends Controller
             'Content-Disposition' => 'attachment; filename="' . $filename . '"',
         ];
 
-        $callback = function() use ($assets) {
+        $callback = function() use ($assets, $company, $customFields) {
             $file = fopen('php://output', 'w');
             fprintf($file, chr(0xEF).chr(0xBB).chr(0xBF));
             
-            fputcsv($file, [
+            $header = [
                 'ID Personalizado',
                 'Nombre',
                 'Categoría',
                 'Subcategoría',
-                'Ubicación',
-                'Centro de Costo',
+                'Ubicación'
+            ];
+
+            if ($company->hasModule('cost_centers')) {
+                $header[] = 'Centro de Costo';
+            }
+
+            // Dynamic headers for custom fields
+            foreach ($customFields as $field) {
+                if (\App\Helpers\FieldHelper::isVisible($field->name)) {
+                    $header[] = $field->label;
+                }
+            }
+
+            $header = array_merge($header, [
                 'Estado',
                 'Cantidad',
                 'Precio Compra',
@@ -224,14 +186,29 @@ class ReportController extends Controller
                 'Placa Municipal'
             ]);
 
+            fputcsv($file, $header);
+
             foreach ($assets as $asset) {
-                fputcsv($file, [
+                $row = [
                     $asset->custom_id,
                     $asset->name,
                     $asset->subcategory->category->name ?? 'N/A',
                     $asset->subcategory->name ?? 'N/A',
                     $asset->location->name ?? 'N/A',
-                    $asset->costCenter->name ?? 'N/A',
+                ];
+
+                if ($company->hasModule('cost_centers')) {
+                    $row[] = $asset->costCenter->name ?? 'N/A';
+                }
+
+                // Dynamic values for custom fields
+                foreach ($customFields as $field) {
+                    if (\App\Helpers\FieldHelper::isVisible($field->name)) {
+                        $row[] = $asset->custom_attributes[$field->name] ?? '-';
+                    }
+                }
+
+                $row = array_merge($row, [
                     ucfirst($asset->status),
                     $asset->quantity,
                     $asset->purchase_price,
@@ -240,6 +217,8 @@ class ReportController extends Controller
                     $asset->purchase_date ? $asset->purchase_date->format('Y-m-d') : 'N/A',
                     $asset->municipality_plate ?? 'N/A'
                 ]);
+
+                fputcsv($file, $row);
             }
 
             fclose($file);

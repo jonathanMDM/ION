@@ -108,10 +108,17 @@
             <input type="date" name="date_from" value="{{ request('date_from') }}" class="w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-700 text-gray-800 dark:text-white transition-colors text-sm">
         </div>
 
-        <div>
-            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Fecha Hasta (Compra)</label>
-            <input type="date" name="date_to" value="{{ request('date_to') }}" class="w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-700 text-gray-800 dark:text-white transition-colors text-sm">
-        </div>
+        @php
+            $customFields = \App\Models\CustomField::where('company_id', auth()->user()->company_id)->get();
+        @endphp
+        @foreach($customFields as $field)
+            @if(\App\Helpers\FieldHelper::isVisible($field->name))
+            <div>
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{{ $field->label }}</label>
+                <input type="text" name="custom_{{ $field->name }}" value="{{ request('custom_' . $field->name) }}" class="w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-700 text-gray-800 dark:text-white transition-colors text-sm" placeholder="Filtrar por {{ $field->label }}...">
+            </div>
+            @endif
+        @endforeach
 
         <div class="flex items-end lg:col-span-2">
             <button type="submit" class="w-full bg-gray-800 hover:bg-black text-white font-bold py-2 px-4 rounded shadow-sm transition-colors">
@@ -187,6 +194,11 @@
                     @if(auth()->user()->company->hasModule('cost_centers'))
                     <th class="py-4 px-6 text-left">Centro Costo</th>
                     @endif
+                    @foreach($customFields as $field)
+                        @if(\App\Helpers\FieldHelper::isVisible($field->name))
+                        <th class="py-4 px-6 text-left">{{ $field->label }}</th>
+                        @endif
+                    @endforeach
                     <th class="py-4 px-6 text-center">Estado</th>
                     <th class="py-4 px-6 text-right">P. Compra</th>
                     @if(auth()->user()->company->hasModule('depreciation'))
@@ -222,6 +234,13 @@
                         {{ $asset->costCenter->name ?? 'N/A' }}
                     </td>
                     @endif
+                    @foreach($customFields as $field)
+                        @if(\App\Helpers\FieldHelper::isVisible($field->name))
+                        <td class="py-4 px-6 text-left text-xs">
+                            {{ $asset->custom_attributes[$field->name] ?? '-' }}
+                        </td>
+                        @endif
+                    @endforeach
                     <td class="py-4 px-6 text-center">
                         <span class="px-3 py-1 text-[10px] font-bold uppercase rounded-full
                             {{ $asset->status == 'active' ? 'bg-green-100 text-green-700 border border-green-200' : '' }}
