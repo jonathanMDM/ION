@@ -151,7 +151,7 @@
     <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden md:hidden" onclick="toggleMobileSidebar()"></div>
 
     <!-- Sidebar -->
-    <div id="sidebar" class="sidebar-expanded fixed left-0 top-0 h-full bg-indigo-950 text-slate-400 transition-all duration-300 z-50 md:z-10 -translate-x-full md:translate-x-0 border-r border-white/5">
+    <div id="sidebar" class="sidebar-expanded fixed left-0 top-0 h-full bg-slate-900 text-slate-400 transition-all duration-300 z-50 md:z-10 -translate-x-full md:translate-x-0 border-r border-white/5">
         <div class="p-6 border-b border-white/5">
             <div class="flex items-center justify-between">
                 <div class="flex items-center">
@@ -297,15 +297,15 @@
     <div id="main-content" class="ml-0 md:ml-64 transition-all duration-300 relative z-20 md:z-0 flex flex-col min-h-screen bg-slate-100 dark:bg-navy-900">
         <div class="flex flex-col">
         @if(session()->has('impersonator_id'))
-        <div class="bg-indigo-950/90 backdrop-blur-xl text-white px-3 py-2 md:px-6 flex flex-row justify-between items-center shadow-2xl border-b border-white/10 relative z-[60]">
+        <div class="bg-slate-900/90 backdrop-blur-xl text-white px-3 py-2 md:px-6 flex flex-row justify-between items-center shadow-2xl border-b border-white/10 relative z-[60]">
             <div class="flex items-center gap-2 md:gap-4 overflow-hidden">
-                <div class="flex h-7 w-7 md:h-9 md:w-9 items-center justify-center rounded-xl bg-indigo-500/20 border border-indigo-400/30 shadow-inner flex-shrink-0">
+                <div class="flex h-7 w-7 md:h-9 md:w-9 items-center justify-center rounded-xl bg-sky-500/20 border border-sky-400/30 shadow-inner flex-shrink-0">
                     <i class="fas fa-user-secret text-indigo-400 animate-pulse text-xs md:text-lg"></i>
                 </div>
                 <div class="min-w-0">
                     <div class="hidden md:flex items-center gap-2">
                         <span class="text-[10px] uppercase tracking-[0.2em] font-black text-indigo-400">Modo Admin</span>
-                        <span class="h-1 w-1 rounded-full bg-indigo-500"></span>
+                        <span class="h-1 w-1 rounded-full bg-sky-500"></span>
                         <span class="text-[10px] uppercase tracking-[0.2em] font-black text-emerald-400">Sesión Activa</span>
                     </div>
                     <p class="text-xs md:text-sm font-medium text-slate-200 truncate flex items-center">

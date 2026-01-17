@@ -140,14 +140,14 @@
     <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden md:hidden" onclick="toggleMobileSidebar()"></div>
 
     <!-- Sidebar -->
-    <div id="sidebar" class="sidebar-expanded fixed left-0 top-0 h-full bg-indigo-950 text-slate-300 transition-all duration-300 z-50 sidebar-mobile-hidden md:sidebar-mobile-visible border-r border-white/5">
+    <div id="sidebar" class="sidebar-expanded fixed left-0 top-0 h-full bg-slate-900 text-slate-300 transition-all duration-300 z-50 sidebar-mobile-hidden md:sidebar-mobile-visible border-r border-white/5">
         <div class="p-6 border-b border-white/5">
             <div class="flex items-center justify-between">
                 <div class="flex flex-col sidebar-text w-full">
                     <a href="{{ route('superadmin.index') }}" class="flex flex-col items-center justify-center w-full group">
                         <div class="flex items-center gap-2">
                             <img src="{{ asset('img/logo-horizontal.png') }}" alt="ION Inventory" class="h-10 w-auto transition-all group-hover:opacity-90">
-                            <span class="text-[10px] font-sans font-bold text-indigo-300 bg-indigo-500/10 px-1.5 py-0.5 rounded border border-indigo-500/20 uppercase tracking-wider group-hover:border-indigo-400 group-hover:text-indigo-200 transition-colors">Admin</span>
+                            <span class="text-[10px] font-sans font-bold text-sky-300 bg-sky-500/10 px-1.5 py-0.5 rounded border border-sky-500/20 uppercase tracking-wider group-hover:border-sky-400 group-hover:text-sky-200 transition-colors">Admin</span>
                         </div>
                     </a>
                 </div>
@@ -228,7 +228,7 @@
                     <div class="relative">
                         <button id="user-menu-btn" class="flex items-center text-sm focus:outline-none hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg p-2 transition-colors">
                             <div class="flex items-center space-x-2">
-                                <div class="w-8 h-8 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-full flex items-center justify-center text-white font-bold">
+                                <div class="w-8 h-8 bg-gradient-to-br from-sky-500 to-cyan-600 rounded-full flex items-center justify-center text-white font-bold">
                                     {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
                                 </div>
                                 <div class="hidden md:block text-left">
@@ -409,7 +409,7 @@
                 showConfirmButton: true,
                 confirmButtonText: 'Entendido',
                 customClass: {
-                    confirmButton: 'bg-gradient-to-r from-indigo-600 to-purple-600'
+                    confirmButton: 'bg-gradient-to-r from-sky-600 to-cyan-600'
                 }
             });
         @endif
@@ -418,11 +418,11 @@
             Swal.fire({
                 icon: 'error',
                 title: 'Errores de Validación',
-                html: '<ul style="text-align: left; font-size: 0.9rem;">@foreach($errors->all() as $error)<li><i class="fas fa-chevron-right mr-2 text-indigo-400"></i>{{ $error }}</li>@endforeach</ul>',
+                html: '<ul style="text-align: left; font-size: 0.9rem;">@foreach($errors->all() as $error)<li><i class="fas fa-chevron-right mr-2 text-sky-400"></i>{{ $error }}</li>@endforeach</ul>',
                 showConfirmButton: true,
                 confirmButtonText: 'Revisar',
                 customClass: {
-                    confirmButton: 'bg-gradient-to-r from-indigo-600 to-purple-600'
+                    confirmButton: 'bg-gradient-to-r from-sky-600 to-cyan-600'
                 }
             });
         @endif
