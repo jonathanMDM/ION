@@ -20,11 +20,13 @@ class Company extends Model
         'user_limit',
         'subscription_expires_at',
         'low_stock_alerts_enabled',
+        'enabled_modules',
     ];
 
     protected $casts = [
         'subscription_expires_at' => 'date',
         'low_stock_alerts_enabled' => 'boolean',
+        'enabled_modules' => 'array',
     ];
 
     /**
@@ -68,5 +70,53 @@ class Company extends Model
     public function hasReachedUserLimit(): bool
     {
         return $this->users()->count() >= $this->user_limit;
+    }
+
+    /**
+     * Check if a module is enabled for this company
+     */
+    public function hasModule(string $module): bool
+    {
+        if (!$this->enabled_modules) {
+            return false;
+        }
+        
+        return $this->enabled_modules[$module] ?? false;
+    }
+
+    /**
+     * Get default enabled modules
+     */
+    public static function getDefaultModules(): array
+    {
+        return [
+            'financial_control' => true,
+            'depreciation' => true,
+            'cost_centers' => true,
+            'asset_costs' => true,
+            'transfers' => false,
+            'loans' => false,
+            'disposals' => false,
+            'advanced_audit' => false,
+            'compliance' => false,
+        ];
+    }
+
+    /**
+     * Get module display names
+     */
+    public static function getModuleNames(): array
+    {
+        return [
+            'financial_control' => 'Control Financiero',
+            'depreciation' => 'Depreciación de Activos',
+            'cost_centers' => 'Centros de Costo',
+            'asset_costs' => 'Costos Asociados',
+            'transfers' => 'Transferencias de Activos',
+            'loans' => 'Préstamos Temporales',
+            'disposals' => 'Gestión de Bajas',
+            'advanced_audit' => 'Auditoría Avanzada',
+            'compliance' => 'Cumplimiento Normativo',
+        ];
     }
 }

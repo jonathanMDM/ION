@@ -104,6 +104,13 @@ class CompanyController extends Controller
             'status' => 'required|in:active,inactive',
         ]);
 
+        // Process enabled_modules
+        $enabledModules = [];
+        foreach (Company::getDefaultModules() as $key => $default) {
+            $enabledModules[$key] = isset($request->enabled_modules[$key]) && $request->enabled_modules[$key] == '1';
+        }
+        $validated['enabled_modules'] = $enabledModules;
+
         $company->update($validated);
 
         return redirect()->route('superadmin.companies.index')
