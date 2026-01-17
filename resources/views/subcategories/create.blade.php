@@ -1,35 +1,75 @@
 @extends('layouts.app')
 
+@section('page-title', 'Agregar Subcategoría')
+
 @section('content')
-<div id="tour-subcategory-form" class="max-w-xl mx-auto bg-white dark:bg-gray-800 p-6 rounded shadow transition-colors">
-    <h2 class="text-2xl font-bold mb-6 text-gray-800 dark:text-white">Agregar Nueva Subcategoría</h2>
+<div class="max-w-2xl mx-auto pb-12">
+    <!-- Header Section -->
+    <div class="flex items-center justify-between mb-8">
+        <div>
+            <h2 class="text-3xl font-extrabold text-gray-900 dark:text-white tracking-tight">Agregar Subcategoría</h2>
+            <p class="text-gray-500 dark:text-gray-400 mt-1">Defina especificaciones detalladas para sus categorías principales.</p>
+        </div>
+        <a href="{{ route('subcategories.index') }}" class="flex items-center text-sm font-semibold text-gray-600 dark:text-gray-400 hover:text-indigo-600 transition-colors">
+            <i class="fas fa-arrow-left mr-2"></i> Volver
+        </a>
+    </div>
     
-    <form action="{{ route('subcategories.store') }}" method="POST">
-        @csrf
-        
-        <div class="mb-4">
-            <label class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2" for="category_id">Categoría</label>
-            <select name="category_id" id="category_id" class="shadow border dark:border-gray-600 rounded w-full py-2 px-3 text-gray-700 dark:text-white bg-white dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline transition-colors" required>
-                @foreach($categories as $category)
-                    <option value="{{ $category->id }}">{{ $category->name }}</option>
-                @endforeach
-            </select>
-        </div>
+    <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden">
+        <form action="{{ route('subcategories.store') }}" method="POST" class="p-8">
+            @csrf
+            
+            <div class="space-y-6">
+                <!-- Category Select -->
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2" for="category_id">
+                        Pertenece a la Categoría <span class="text-red-500">*</span>
+                    </label>
+                    <div class="relative group">
+                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                            <i class="fas fa-folder-open text-gray-400 group-focus-within:text-violet-500 transition-colors"></i>
+                        </div>
+                        <select name="category_id" id="category_id" 
+                            class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 pl-11 pr-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-violet-500 transition-all font-bold" required>
+                            <option value="" disabled selected>Seleccione una categoría principal</option>
+                            @foreach($categories as $category)
+                                <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
 
-        <div class="mb-4">
-            <label class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2" for="name">Nombre de la Subcategoría</label>
-            <input type="text" name="name" id="name" placeholder="Ej: Computadoras, Escritorios, Automóviles, Impresoras..." class="shadow appearance-none border dark:border-gray-600 rounded w-full py-2 px-3 text-gray-700 dark:text-white bg-white dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline transition-colors" required>
-            <p class="text-gray-500 dark:text-gray-400 text-xs mt-1">💡 Ejemplos para Tecnología: Computadoras, Servidores, Redes, Periféricos | Para Mobiliario: Escritorios, Sillas, Archivadores</p>
-        </div>
+                <!-- Name Field -->
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2" for="name">
+                        Nombre de la Subcategoría <span class="text-red-500">*</span>
+                    </label>
+                    <div class="relative group">
+                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                            <i class="fas fa-tag text-gray-400 group-focus-within:text-violet-500 transition-colors"></i>
+                        </div>
+                        <input type="text" name="name" id="name" value="{{ old('name') }}" 
+                            class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 pl-11 pr-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-violet-500 transition-all font-medium" 
+                            placeholder="Ej: Laptops, Escritorios, Servidores..." required>
+                    </div>
+                    <p class="text-[10px] text-gray-400 mt-2 italic flex items-center">
+                        <i class="fas fa-info-circle mr-1 text-violet-400"></i> Ejemplos: Periféricos, Vehículos Livianos, Herramientas Manuales.
+                    </p>
+                </div>
+            </div>
 
-        <div class="flex items-center justify-between">
-            <button type="submit" class="bg-gray-800 hover:bg-black text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                Guardar Subcategoría
-            </button>
-            <a href="{{ route('subcategories.index') }}" class="inline-block align-baseline font-bold text-sm text-gray-600 hover:text-gray-900">
-                Cancelar
-            </a>
-        </div>
-    </form>
+            <!-- Action Buttons -->
+            <div class="mt-10 pt-8 border-t border-gray-100 dark:border-gray-700 flex flex-col md:flex-row items-center justify-end gap-4">
+                <a href="{{ route('subcategories.index') }}" 
+                    class="w-full md:w-auto text-center px-8 py-3 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 font-bold rounded-xl transition-all">
+                    Cancelar
+                </a>
+                <button type="submit" 
+                    class="w-full md:w-auto px-12 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-black rounded-xl transition-all shadow-xl shadow-indigo-500/20 transform hover:-translate-y-0.5 uppercase tracking-wide text-xs">
+                    <i class="fas fa-plus mr-2 text-xs"></i> Guardar Subcategoría
+                </button>
+            </div>
+        </form>
+    </div>
 </div>
 @endsection

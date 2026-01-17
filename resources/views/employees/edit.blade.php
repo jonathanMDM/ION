@@ -3,67 +3,111 @@
 @section('page-title', 'Editar Empleado')
 
 @section('content')
-<div class="max-w-2xl mx-auto">
-    <div class="mb-6">
-        <a href="{{ route('employees.index') }}" class="text-gray-800 hover:text-gray-900">
-            <i class="fas fa-arrow-left mr-2"></i>Volver a Empleados
+<div class="max-w-4xl mx-auto pb-12">
+    <!-- Header Section -->
+    <div class="flex items-center justify-between mb-8">
+        <div>
+            <h2 class="text-3xl font-extrabold text-gray-900 dark:text-white tracking-tight">Editar Empleado</h2>
+            <p class="text-gray-500 dark:text-gray-400 mt-1">Modifique los datos de <strong>{{ $employee->full_name }}</strong>.</p>
+        </div>
+        <a href="{{ route('employees.show', $employee->id) }}" class="flex items-center text-sm font-semibold text-gray-600 dark:text-gray-400 hover:text-indigo-600 transition-colors">
+            <i class="fas fa-eye mr-2"></i> Ver Perfil
         </a>
     </div>
 
-    <div class="bg-white rounded-lg shadow p-6">
-        <h2 class="text-2xl font-bold text-gray-800 mb-6">Editar Empleado: {{ $employee->full_name }}</h2>
+    <form action="{{ route('employees.update', $employee->id) }}" method="POST">
+        @csrf
+        @method('PUT')
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Left: Personal Info (2 columns) -->
+            <div class="md:col-span-2 space-y-8">
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden">
+                    <div class="px-6 py-4 border-b border-gray-50 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-700/50 flex items-center">
+                        <i class="fas fa-user-edit text-indigo-500 mr-2"></i>
+                        <h3 class="text-sm font-bold text-gray-800 dark:text-white uppercase tracking-wider">Información Personal</h3>
+                    </div>
+                    <div class="p-6 space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2" for="first_name">
+                                    Nombres <span class="text-red-500">*</span>
+                                </label>
+                                <input type="text" name="first_name" id="first_name" value="{{ old('first_name', $employee->first_name) }}" 
+                                    class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-indigo-500 transition-all font-semibold" required>
+                                @error('first_name') <p class="text-red-500 text-xs mt-1 italic">{{ $message }}</p> @enderror
+                            </div>
 
-        <form action="{{ route('employees.update', $employee->id) }}" method="POST">
-            @csrf
-            @method('PUT')
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Nombre *</label>
-                    <input type="text" name="first_name" value="{{ old('first_name', $employee->first_name) }}" required class="w-full border-gray-300 rounded-md shadow-sm">
-                    @error('first_name') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
-                </div>
+                            <div>
+                                <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2" for="last_name">
+                                    Apellidos <span class="text-red-500">*</span>
+                                </label>
+                                <input type="text" name="last_name" id="last_name" value="{{ old('last_name', $employee->last_name) }}" 
+                                    class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-indigo-500 transition-all font-semibold" required>
+                                @error('last_name') <p class="text-red-500 text-xs mt-1 italic">{{ $message }}</p> @enderror
+                            </div>
 
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Apellido *</label>
-                    <input type="text" name="last_name" value="{{ old('last_name', $employee->last_name) }}" required class="w-full border-gray-300 rounded-md shadow-sm">
-                    @error('last_name') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
-                </div>
-
-                <div class="md:col-span-2">
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Email Corporativo *</label>
-                    <input type="email" name="email" value="{{ old('email', $employee->email) }}" required class="w-full border-gray-300 rounded-md shadow-sm">
-                    @error('email') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Departamento</label>
-                    <input type="text" name="department" value="{{ old('department', $employee->department) }}" class="w-full border-gray-300 rounded-md shadow-sm">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Cargo / Posición</label>
-                    <input type="text" name="position" value="{{ old('position', $employee->position) }}" class="w-full border-gray-300 rounded-md shadow-sm">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Estado</label>
-                    <select name="status" class="w-full border-gray-300 rounded-md shadow-sm">
-                        <option value="active" {{ old('status', $employee->status) == 'active' ? 'selected' : '' }}>Activo</option>
-                        <option value="inactive" {{ old('status', $employee->status) == 'inactive' ? 'selected' : '' }}>Inactivo</option>
-                    </select>
+                            <div class="md:col-span-2">
+                                <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2" for="email">
+                                    Correo Electrónico Corporativo <span class="text-red-500">*</span>
+                                </label>
+                                <div class="relative group">
+                                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                        <i class="fas fa-envelope text-gray-400 group-focus-within:text-indigo-500 transition-colors"></i>
+                                    </div>
+                                    <input type="email" name="email" id="email" value="{{ old('email', $employee->email) }}" 
+                                        class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 pl-11 pr-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-indigo-500 transition-all" required>
+                                </div>
+                                @error('email') <p class="text-red-500 text-xs mt-1 italic">{{ $message }}</p> @enderror
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="flex justify-end gap-3">
-                <a href="{{ route('employees.index') }}" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-6 rounded">
-                    Cancelar
-                </a>
-                <button type="submit" class="bg-gray-800 hover:bg-black text-white font-bold py-2 px-6 rounded">
-                    Actualizar Empleado
-                </button>
+            <!-- Right: Organizational Info -->
+            <div class="space-y-8">
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden">
+                    <div class="px-6 py-4 border-b border-gray-50 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-700/50 flex items-center">
+                        <i class="fas fa-briefcase text-emerald-500 mr-2"></i>
+                        <h3 class="text-sm font-bold text-gray-800 dark:text-white uppercase tracking-wider">Datos Laborales</h3>
+                    </div>
+                    <div class="p-6 space-y-6">
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2" for="department">Departamento</label>
+                            <input type="text" name="department" value="{{ old('department', $employee->department) }}" 
+                                class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-2 px-3 text-sm focus:ring-2 focus:ring-indigo-500 transition-all">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2" for="position">Cargo</label>
+                            <input type="text" name="position" value="{{ old('position', $employee->position) }}" 
+                                class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-2 px-3 text-sm focus:ring-2 focus:ring-indigo-500 transition-all">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2" for="status">Estado Lab.</label>
+                            <select name="status" class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-2 px-3 text-sm focus:ring-2 focus:ring-indigo-500 transition-all font-bold">
+                                <option value="active" {{ old('status', $employee->status) == 'active' ? 'selected' : '' }}>🟢 Activo</option>
+                                <option value="inactive" {{ old('status', $employee->status) == 'inactive' ? 'selected' : '' }}>🔴 Inactivo</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </form>
-    </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="mt-12 flex flex-col md:flex-row items-center justify-end gap-4">
+            <a href="{{ route('employees.show', $employee->id) }}" 
+                class="w-full md:w-auto text-center px-10 py-3.5 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 font-bold rounded-2xl transition-all active:scale-95">
+                Cancelar
+            </a>
+            <button type="submit" 
+                class="w-full md:w-auto px-16 py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-black rounded-2xl transition-all shadow-xl shadow-indigo-500/25 transform hover:-translate-y-0.5 active:scale-95 flex items-center justify-center tracking-wide uppercase text-sm">
+                <i class="fas fa-sync-alt mr-2 text-lg"></i> Actualizar Empleado
+            </button>
+        </div>
+    </form>
 </div>
 @endsection
