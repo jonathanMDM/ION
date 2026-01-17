@@ -196,6 +196,7 @@ Route::middleware(['auth'])->group(function () {
     
     // Reports
     Route::get('reports', [ReportController::class, 'index'])->name('reports.index');
+    Route::get('reports/movements', [ReportController::class, 'movements'])->name('reports.movements');
     Route::post('reports/pdf', [ReportController::class, 'exportPdf'])->name('reports.pdf');
     Route::post('reports/excel', [ReportController::class, 'exportExcel'])->name('reports.excel');
     
