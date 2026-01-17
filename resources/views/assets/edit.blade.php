@@ -342,16 +342,15 @@
             </div>
         </div>
 
-        <!-- Sticky Actions Footer -->
-        <div class="fixed bottom-0 left-0 right-0 md:left-64 bg-white/80 dark:bg-gray-800/80 backdrop-blur-md border-t border-gray-200 dark:border-gray-700 p-4 z-40 flex items-center justify-between shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]">
-            <div class="hidden md:block text-sm text-gray-500 dark:text-gray-400 italic">
-                Última actualización: {{ $asset->updated_at->format('d/m/Y H:i') }}
-            </div>
-            <div class="flex items-center gap-4 w-full md:w-auto">
-                <a href="{{ route('assets.show', $asset->id) }}" class="flex-1 md:flex-none text-center px-8 py-3 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 font-bold rounded-xl transition-all">
+        <!-- Action Buttons -->
+        <div class="mt-12 pt-8 border-t border-gray-100 dark:border-gray-700">
+            <div class="flex flex-col md:flex-row items-center justify-end gap-4">
+                <a href="{{ route('assets.show', $asset->id) }}" 
+                    class="w-full md:w-auto text-center px-10 py-3.5 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 font-bold rounded-2xl transition-all">
                     Cancelar
                 </a>
-                <button type="submit" class="flex-2 md:flex-none px-12 py-3 bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white font-extrabold rounded-xl transition-all shadow-xl shadow-blue-500/20 transform hover:-translate-y-0.5">
+                <button type="submit" 
+                    class="w-full md:w-auto px-16 py-3.5 bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white font-extrabold rounded-2xl transition-all shadow-xl shadow-blue-500/20 transform hover:-translate-y-0.5 flex items-center justify-center">
                     <i class="fas fa-sync-alt mr-2"></i> ACTUALIZAR DATOS
                 </button>
             </div>
@@ -361,6 +360,9 @@
 
 @push('scripts')
 <script>
+// Remove padding added for sticky footer
+document.body.style.paddingBottom = "0px";
+
 function toggleDepreciationFields() {
     const method = document.getElementById('depreciation_method').value;
     const fields = document.getElementById('depreciation_fields');
