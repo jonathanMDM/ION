@@ -37,7 +37,9 @@ class AssetController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $hasFinancialModule = auth()->user()->company->hasModule('financial_control');
+
+        $rules = [
             'custom_id' => 'nullable|string|unique:assets,custom_id',
             'location_id' => 'required|exists:locations,id',
             'subcategory_id' => 'required|exists:subcategories,id',
@@ -49,16 +51,25 @@ class AssetController extends Controller
             'next_maintenance_date' => 'nullable|date',
             'maintenance_frequency_days' => 'nullable|integer|min:1',
             'minimum_quantity' => 'nullable|integer|min:0',
-            // Financial fields
             'purchase_price' => 'required|numeric|min:0',
-            'cost_center_id' => 'nullable|exists:cost_centers,id',
-            'depreciation_method' => 'required|in:none,straight_line,declining_balance,units_of_production',
-            'useful_life_years' => 'nullable|integer|min:1',
-            'salvage_value' => 'nullable|numeric|min:0',
-            'depreciation_start_date' => 'nullable|date',
-        ]);
+        ];
+
+        if ($hasFinancialModule) {
+            $rules['cost_center_id'] = 'nullable|exists:cost_centers,id';
+            $rules['depreciation_method'] = 'required|in:none,straight_line,declining_balance,units_of_production';
+            $rules['useful_life_years'] = 'nullable|integer|min:1';
+            $rules['salvage_value'] = 'nullable|numeric|min:0';
+            $rules['depreciation_start_date'] = 'nullable|date';
+        }
+
+        $request->validate($rules);
         
         $data = $request->all();
+
+        // Default depreciation_method if not present
+        if (!$request->has('depreciation_method')) {
+            $data['depreciation_method'] = 'none';
+        }
         
         // Add company_id from authenticated user
         $data['company_id'] = auth()->user()->company_id;
@@ -212,7 +223,9 @@ class AssetController extends Controller
      */
     public function update(Request $request, Asset $asset)
     {
-        $request->validate([
+        $hasFinancialModule = auth()->user()->company->hasModule('financial_control');
+
+        $rules = [
             'custom_id' => 'nullable|string|unique:assets,custom_id,' . $asset->id,
             'location_id' => 'required|exists:locations,id',
             'subcategory_id' => 'required|exists:subcategories,id',
@@ -229,15 +242,25 @@ class AssetController extends Controller
             'maintenance_frequency_days' => 'nullable|integer|min:1',
             'minimum_quantity' => 'nullable|integer|min:0',
             'specifications' => 'nullable|string',
-            'cost_center_id' => 'nullable|exists:cost_centers,id',
-            'depreciation_method' => 'required|in:none,straight_line,declining_balance,units_of_production',
-            'useful_life_years' => 'nullable|integer|min:1',
-            'salvage_value' => 'nullable|numeric|min:0',
-            'depreciation_start_date' => 'nullable|date',
             'custom_attributes' => 'nullable|array',
-        ]);
+        ];
+
+        if ($hasFinancialModule) {
+            $rules['cost_center_id'] = 'nullable|exists:cost_centers,id';
+            $rules['depreciation_method'] = 'required|in:none,straight_line,declining_balance,units_of_production';
+            $rules['useful_life_years'] = 'nullable|integer|min:1';
+            $rules['salvage_value'] = 'nullable|numeric|min:0';
+            $rules['depreciation_start_date'] = 'nullable|date';
+        }
+
+        $request->validate($rules);
         
         $data = $request->except(['image', 'image_public_id']);
+
+        // Default depreciation_method if not present
+        if (!$request->has('depreciation_method')) {
+            $data['depreciation_method'] = $asset->depreciation_method ?? 'none';
+        }
         
         // Copy purchase_price to value for backward compatibility
         if ($request->has('purchase_price')) {
