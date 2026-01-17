@@ -34,6 +34,13 @@ class Asset extends Model
         'municipality_plate',
         'next_maintenance_date',
         'maintenance_frequency_days',
+        // Financial fields
+        'depreciation_method',
+        'useful_life_years',
+        'salvage_value',
+        'depreciation_start_date',
+        'accumulated_depreciation',
+        'cost_center_id',
     ];
 
     protected $casts = [
@@ -41,6 +48,9 @@ class Asset extends Model
         'next_maintenance_date' => 'date',
         'custom_attributes' => 'array',
         'value' => 'decimal:2',
+        'depreciation_start_date' => 'date',
+        'salvage_value' => 'decimal:2',
+        'accumulated_depreciation' => 'decimal:2',
     ];
 
     /**
@@ -114,5 +124,115 @@ class Asset extends Model
     public function isAssigned()
     {
         return $this->assignments()->where('status', 'active')->exists();
+    }
+
+    /**
+     * Get the cost center of this asset.
+     */
+    public function costCenter()
+    {
+        return $this->belongsTo(CostCenter::class);
+    }
+
+    /**
+     * Get all costs associated with this asset.
+     */
+    public function costs()
+    {
+        return $this->hasMany(AssetCost::class)->orderBy('date', 'desc');
+    }
+
+    /**
+     * Get total costs for this asset.
+     */
+    public function getTotalCostsAttribute()
+    {
+        return $this->costs()->sum('amount');
+    }
+
+    /**
+     * Calculate current book value.
+     */
+    public function getBookValueAttribute()
+    {
+        if ($this->depreciation_method === 'none' || !$this->purchase_price) {
+            return $this->purchase_price ?? 0;
+        }
+
+        return max(0, $this->purchase_price - $this->accumulated_depreciation);
+    }
+
+    /**
+     * Calculate annual depreciation amount.
+     */
+    public function calculateAnnualDepreciation()
+    {
+        if ($this->depreciation_method === 'none' || !$this->purchase_price || !$this->useful_life_years) {
+            return 0;
+        }
+
+        $depreciableAmount = $this->purchase_price - ($this->salvage_value ?? 0);
+
+        return match($this->depreciation_method) {
+            'straight_line' => $depreciableAmount / $this->useful_life_years,
+            'declining_balance' => $this->book_value * (2 / $this->useful_life_years),
+            'units_of_production' => 0, // Requires additional data
+            default => 0,
+        };
+    }
+
+    /**
+     * Calculate depreciation up to a specific date.
+     */
+    public function calculateDepreciationToDate($date = null)
+    {
+        $date = $date ?? now();
+        
+        if ($this->depreciation_method === 'none' || !$this->depreciation_start_date || !$this->purchase_price) {
+            return 0;
+        }
+
+        $startDate = $this->depreciation_start_date;
+        if ($date < $startDate) {
+            return 0;
+        }
+
+        $yearsElapsed = $startDate->diffInYears($date, true);
+        $annualDepreciation = $this->calculateAnnualDepreciation();
+        
+        $totalDepreciation = $annualDepreciation * $yearsElapsed;
+        $maxDepreciation = $this->purchase_price - ($this->salvage_value ?? 0);
+
+        return min($totalDepreciation, $maxDepreciation);
+    }
+
+    /**
+     * Update accumulated depreciation.
+     */
+    public function updateDepreciation()
+    {
+        $this->accumulated_depreciation = $this->calculateDepreciationToDate();
+        $this->save();
+    }
+
+    /**
+     * Get depreciation percentage.
+     */
+    public function getDepreciationPercentageAttribute()
+    {
+        if (!$this->purchase_price || $this->purchase_price == 0) {
+            return 0;
+        }
+
+        return ($this->accumulated_depreciation / $this->purchase_price) * 100;
+    }
+
+    /**
+     * Check if asset is fully depreciated.
+     */
+    public function isFullyDepreciated()
+    {
+        $maxDepreciation = $this->purchase_price - ($this->salvage_value ?? 0);
+        return $this->accumulated_depreciation >= $maxDepreciation;
     }
 }
