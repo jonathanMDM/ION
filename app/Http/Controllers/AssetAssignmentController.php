@@ -40,6 +40,7 @@ class AssetAssignmentController extends Controller
             'user_id' => auth()->id(),
             'assigned_date' => $request->assigned_date,
             'expected_return_date' => $request->expected_return_date,
+            'is_loan' => $request->boolean('is_loan'),
             'notes' => $request->notes,
             'status' => 'active',
         ]);

@@ -18,6 +18,7 @@ class AssetAssignment extends Model
         'assigned_date',
         'return_date',
         'expected_return_date',
+        'is_loan',
         'status',
         'notes',
     ];
@@ -26,6 +27,7 @@ class AssetAssignment extends Model
         'assigned_date' => 'date',
         'return_date' => 'date',
         'expected_return_date' => 'date',
+        'is_loan' => 'boolean',
     ];
 
     public function asset()
