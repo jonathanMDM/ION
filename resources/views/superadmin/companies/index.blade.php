@@ -77,6 +77,9 @@
                             <i class="fas fa-database"></i>
                         </button>
                     </form>
+                    <a href="{{ route('superadmin.companies.show', $company) }}" class="text-green-600 hover:text-green-900 mr-3" title="Ver Detalles y Facturación">
+                        <i class="fas fa-eye"></i>
+                    </a>
                     <a href="{{ route('superadmin.companies.edit', $company) }}" class="text-indigo-600 hover:text-indigo-900 mr-3" title="Editar">
                         <i class="fas fa-edit"></i>
                     </a>
