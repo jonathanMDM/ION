@@ -27,22 +27,22 @@
     @if(!auth()->user()->company_id || isset($subscriptionWarning))
     <div class="grid grid-cols-1 gap-6">
         @if(!auth()->user()->company_id)
-        <div class="bg-sky-500 rounded-3xl p-8 text-white relative overflow-hidden shadow-xl">
+        <div class="bg-gradient-to-r from-gray-900 to-black rounded-3xl p-8 text-white relative overflow-hidden shadow-2xl border border-[#00ff4e]/30">
             <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6 font-medium">
                 <div class="flex items-center gap-5">
-                    <div class="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center text-2xl">
-                        <i class="fas fa-building"></i>
+                    <div class="w-14 h-14 bg-[#00ff4e]/20 rounded-2xl flex items-center justify-center text-2xl border border-[#00ff4e]/40 shadow-lg shadow-[#00ff4e]/20">
+                        <i class="fas fa-building text-[#00ff4e]"></i>
                     </div>
                     <div>
                         <h2 class="text-xl font-bold">Cuenta sin Organización</h2>
-                        <p class="text-sky-100 opacity-90">Vincule su cuenta a una empresa para empezar a gestionar inventarios.</p>
+                        <p class="text-gray-300">Vincule su cuenta a una empresa para empezar a gestionar inventarios.</p>
                     </div>
                 </div>
-                <a href="https://wa.me/573145781261" target="_blank" class="px-6 py-3 bg-white text-sky-600 rounded-xl font-bold shadow-lg hover:bg-gray-50 transition-all">
+                <a href="https://wa.me/573145781261" target="_blank" class="px-6 py-3 bg-[#00ff4e] text-black rounded-xl font-black shadow-lg shadow-[#00ff4e]/50 hover:bg-[#00ff4e]/90 hover:shadow-[#00ff4e]/70 transition-all">
                     Soporte Técnico
                 </a>
             </div>
-            <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-white/10 rounded-full blur-3xl"></div>
+            <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-[#00ff4e]/10 rounded-full blur-3xl"></div>
         </div>
         @endif
         
@@ -70,64 +70,64 @@
     <!-- Metrics Grid -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         <!-- Total Assets -->
-        <div class="bg-white dark:bg-gray-800 p-6 rounded-3xl border border-gray-100 dark:border-gray-700 shadow-sm">
+        <div class="bg-[#242424] p-6 rounded-3xl border border-[#00f5ff]/30 shadow-lg shadow-[#00f5ff]/10 hover:border-[#00f5ff]/50 transition-all">
             <div class="flex items-start justify-between">
                 <div>
-                    <p class="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-1">Activos Totales</p>
-                    <h3 class="text-4xl font-extrabold text-gray-900 dark:text-white leading-tight">
+                    <p class="text-[10px] font-black uppercase tracking-widest text-gray-500 mb-1">Activos Totales</p>
+                    <h3 class="text-4xl font-extrabold text-white leading-tight">
                         {{ $stats['total_assets'] ?? 0 }}
                     </h3>
-                    <p class="text-xs font-bold text-sky-500 mt-1">Unidades en sistema</p>
+                    <p class="text-xs font-bold text-[#00f5ff] mt-1">Unidades en sistema</p>
                 </div>
-                <div class="w-12 h-12 bg-sky-50 dark:bg-sky-900/30 text-sky-600 dark:text-sky-400 rounded-2xl flex items-center justify-center text-xl">
+                <div class="w-12 h-12 bg-[#00f5ff]/20 text-[#00f5ff] rounded-2xl flex items-center justify-center text-xl border border-[#00f5ff]/40 shadow-lg shadow-[#00f5ff]/20">
                     <i class="fas fa-boxes"></i>
                 </div>
             </div>
         </div>
 
         <!-- Operative -->
-        <div class="bg-white dark:bg-gray-800 p-6 rounded-3xl border border-gray-100 dark:border-gray-700 shadow-sm">
+        <div class="bg-[#242424] p-6 rounded-3xl border border-[#00ff4e]/30 shadow-lg shadow-[#00ff4e]/10 hover:border-[#00ff4e]/50 transition-all">
             <div class="flex items-start justify-between">
                 <div>
-                    <p class="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-1">Operativos</p>
-                    <h3 class="text-4xl font-extrabold text-emerald-600 leading-tight">
+                    <p class="text-[10px] font-black uppercase tracking-widest text-gray-500 mb-1">Operativos</p>
+                    <h3 class="text-4xl font-extrabold text-[#00ff4e] leading-tight">
                         {{ $stats['active_assets'] ?? 0 }}
                     </h3>
-                    <p class="text-xs font-bold text-gray-500 mt-1">Estado: Activo</p>
+                    <p class="text-xs font-bold text-gray-400 mt-1">Estado: Activo</p>
                 </div>
-                <div class="w-12 h-12 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 rounded-2xl flex items-center justify-center text-xl">
+                <div class="w-12 h-12 bg-[#00ff4e]/20 text-[#00ff4e] rounded-2xl flex items-center justify-center text-xl border border-[#00ff4e]/40 shadow-lg shadow-[#00ff4e]/20">
                     <i class="fas fa-check-circle"></i>
                 </div>
             </div>
         </div>
 
         <!-- Maintenance -->
-        <div class="bg-white dark:bg-gray-800 p-6 rounded-3xl border border-gray-100 dark:border-gray-700 shadow-sm">
+        <div class="bg-[#242424] p-6 rounded-3xl border border-[#ffea00]/30 shadow-lg shadow-[#ffea00]/10 hover:border-[#ffea00]/50 transition-all">
             <div class="flex items-start justify-between">
                 <div>
-                    <p class="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-1">En Taller</p>
-                    <h3 class="text-4xl font-extrabold text-amber-500 leading-tight">
+                    <p class="text-[10px] font-black uppercase tracking-widest text-gray-500 mb-1">En Taller</p>
+                    <h3 class="text-4xl font-extrabold text-[#ffea00] leading-tight">
                         {{ $stats['maintenance_assets'] ?? 0 }}
                     </h3>
-                    <p class="text-xs font-bold text-gray-500 mt-1">Requiere atención</p>
+                    <p class="text-xs font-bold text-gray-400 mt-1">Requiere atención</p>
                 </div>
-                <div class="w-12 h-12 bg-amber-50 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 rounded-2xl flex items-center justify-center text-xl">
+                <div class="w-12 h-12 bg-[#ffea00]/20 text-[#ffea00] rounded-2xl flex items-center justify-center text-xl border border-[#ffea00]/40 shadow-lg shadow-[#ffea00]/20">
                     <i class="fas fa-tools"></i>
                 </div>
             </div>
         </div>
 
         <!-- Decommissioned -->
-        <div class="bg-white dark:bg-gray-800 p-6 rounded-3xl border border-gray-100 dark:border-gray-700 shadow-sm">
+        <div class="bg-[#242424] p-6 rounded-3xl border border-[#ff0055]/30 shadow-lg shadow-[#ff0055]/10 hover:border-[#ff0055]/50 transition-all">
             <div class="flex items-start justify-between">
                 <div>
-                    <p class="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-1">Bajas</p>
-                    <h3 class="text-4xl font-extrabold text-red-600 leading-tight">
+                    <p class="text-[10px] font-black uppercase tracking-widest text-gray-500 mb-1">Bajas</p>
+                    <h3 class="text-4xl font-extrabold text-[#ff0055] leading-tight">
                         {{ $stats['decommissioned_assets'] ?? 0 }}
                     </h3>
-                    <p class="text-xs font-bold text-gray-500 mt-1">Fuera de servicio</p>
+                    <p class="text-xs font-bold text-gray-400 mt-1">Fuera de servicio</p>
                 </div>
-                <div class="w-12 h-12 bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400 rounded-2xl flex items-center justify-center text-xl">
+                <div class="w-12 h-12 bg-[#ff0055]/20 text-[#ff0055] rounded-2xl flex items-center justify-center text-xl border border-[#ff0055]/40 shadow-lg shadow-[#ff0055]/20">
                     <i class="fas fa-ban"></i>
                 </div>
             </div>
