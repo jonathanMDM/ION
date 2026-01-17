@@ -18,7 +18,9 @@
 <body class="bg-gray-900 min-h-screen flex items-center justify-center p-4">
     <div class="bg-white rounded-lg shadow-2xl w-full max-w-md p-8">
         <div class="text-center mb-8">
-            <h1 class="text-5xl font-bold text-gray-800 font-logo tracking-widest">ion</h1>
+            <div class="mb-4">
+                <img src="{{ asset('img/logo-horizontal.png') }}" alt="ION Inventory" class="h-14 w-auto mx-auto">
+            </div>
             <p class="text-gray-600 mt-2">Recuperar Contraseña</p>
         </div>
 

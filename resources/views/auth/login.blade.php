@@ -79,9 +79,10 @@
             <div class="text-center mb-10">
                 <div class="inline-block relative mb-4">
                     <div class="absolute -inset-2 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl blur opacity-30"></div>
-                    <h1 class="relative text-6xl font-black text-white font-logo tracking-[0.1em] py-2">ION</h1>
+                    <div class="relative py-4 px-6">
+                        <img src="{{ asset('img/logo-horizontal.png') }}" alt="ION Inventory" class="h-16 w-auto mx-auto">
+                    </div>
                 </div>
-                <p class="text-indigo-400 font-bold text-sm uppercase tracking-[0.4em] font-sans">Inventory</p>
             </div>
 
             @if ($errors->any())
