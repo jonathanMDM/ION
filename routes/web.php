@@ -116,6 +116,19 @@ Route::middleware(['auth'])->group(function () {
     // Activity Logs
     Route::get('activity-logs', [ActivityLogController::class, 'index'])->name('activity-logs.index');
     
+    // Cost Centers
+    Route::resource('cost-centers', \App\Http\Controllers\CostCenterController::class);
+    Route::post('cost-centers/{costCenter}/toggle-status', [\App\Http\Controllers\CostCenterController::class, 'toggleStatus'])->name('cost-centers.toggle-status');
+    
+    // Asset Costs
+    Route::get('assets/{asset}/costs', [\App\Http\Controllers\AssetCostController::class, 'index'])->name('assets.costs.index');
+    Route::get('assets/{asset}/costs/create', [\App\Http\Controllers\AssetCostController::class, 'create'])->name('assets.costs.create');
+    Route::post('assets/{asset}/costs', [\App\Http\Controllers\AssetCostController::class, 'store'])->name('assets.costs.store');
+    Route::get('assets/{asset}/costs/{cost}', [\App\Http\Controllers\AssetCostController::class, 'show'])->name('assets.costs.show');
+    Route::get('assets/{asset}/costs/{cost}/edit', [\App\Http\Controllers\AssetCostController::class, 'edit'])->name('assets.costs.edit');
+    Route::put('assets/{asset}/costs/{cost}', [\App\Http\Controllers\AssetCostController::class, 'update'])->name('assets.costs.update');
+    Route::delete('assets/{asset}/costs/{cost}', [\App\Http\Controllers\AssetCostController::class, 'destroy'])->name('assets.costs.destroy');
+    Route::get('assets/{asset}/costs/{cost}/download', [\App\Http\Controllers\AssetCostController::class, 'downloadDocument'])->name('assets.costs.download');
 
     
 
