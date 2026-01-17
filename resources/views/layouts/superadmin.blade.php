@@ -140,14 +140,14 @@
     <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden md:hidden" onclick="toggleMobileSidebar()"></div>
 
     <!-- Sidebar -->
-    <div id="sidebar" class="sidebar-expanded fixed left-0 top-0 h-full bg-slate-900 text-slate-300 transition-all duration-300 z-50 sidebar-mobile-hidden md:sidebar-mobile-visible border-r border-white/5">
+    <div id="sidebar" class="sidebar-expanded fixed left-0 top-0 h-full text-slate-300 transition-all duration-300 z-50 sidebar-mobile-hidden md:sidebar-mobile-visible" style="background: #000000; border-right: 1px solid rgba(0, 245, 255, 0.1);">
         <div class="p-6 border-b border-white/5">
             <div class="flex items-center justify-between">
                 <div class="flex flex-col sidebar-text w-full">
                     <a href="{{ route('superadmin.index') }}" class="flex flex-col items-center justify-center w-full group">
                         <div class="flex items-center gap-2">
                             <img src="{{ asset('img/logo-horizontal.png') }}" alt="ION Inventory" class="h-10 w-auto transition-all group-hover:opacity-90">
-                            <span class="text-[10px] font-sans font-black text-cyan-100 bg-cyan-500/30 px-2 py-1 rounded-md border border-cyan-400/50 uppercase tracking-wider group-hover:border-cyan-300 group-hover:bg-cyan-500/40 group-hover:text-white transition-all shadow-sm shadow-cyan-500/20">Admin</span>
+                            <span class="text-[10px] font-sans font-black uppercase tracking-wider transition-all" style="color: #00f5ff; background: rgba(0, 245, 255, 0.15); padding: 0.375rem 0.5rem; border-radius: 0.375rem; border: 1px solid rgba(0, 245, 255, 0.4); box-shadow: 0 0 10px rgba(0, 245, 255, 0.2);">Admin</span>
                         </div>
                     </a>
                 </div>
