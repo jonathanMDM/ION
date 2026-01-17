@@ -27,22 +27,22 @@
     @if(!auth()->user()->company_id || isset($subscriptionWarning))
     <div class="grid grid-cols-1 gap-6">
         @if(!auth()->user()->company_id)
-        <div class="bg-gradient-to-r from-gray-900 to-black rounded-3xl p-8 text-white relative overflow-hidden shadow-2xl border border-[#00ff4e]/30">
+        <div class="rounded-3xl p-8 text-white relative overflow-hidden shadow-2xl" style="background: linear-gradient(to right, #1a1a1a, #000000); border: 1px solid rgba(0, 255, 78, 0.3);">
             <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6 font-medium">
                 <div class="flex items-center gap-5">
-                    <div class="w-14 h-14 bg-[#00ff4e]/20 rounded-2xl flex items-center justify-center text-2xl border border-[#00ff4e]/40 shadow-lg shadow-[#00ff4e]/20">
-                        <i class="fas fa-building text-[#00ff4e]"></i>
+                    <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl shadow-lg" style="background: rgba(0, 255, 78, 0.2); border: 1px solid rgba(0, 255, 78, 0.4); box-shadow: 0 10px 15px -3px rgba(0, 255, 78, 0.2);">
+                        <i class="fas fa-building" style="color: #00ff4e;"></i>
                     </div>
                     <div>
                         <h2 class="text-xl font-bold">Cuenta sin Organización</h2>
                         <p class="text-gray-300">Vincule su cuenta a una empresa para empezar a gestionar inventarios.</p>
                     </div>
                 </div>
-                <a href="https://wa.me/573145781261" target="_blank" class="px-6 py-3 bg-[#00ff4e] text-black rounded-xl font-black shadow-lg shadow-[#00ff4e]/50 hover:bg-[#00ff4e]/90 hover:shadow-[#00ff4e]/70 transition-all">
+                <a href="https://wa.me/573145781261" target="_blank" class="px-6 py-3 text-black rounded-xl font-black shadow-lg transition-all hover:opacity-90" style="background: #00ff4e; box-shadow: 0 10px 15px -3px rgba(0, 255, 78, 0.5);">
                     Soporte Técnico
                 </a>
             </div>
-            <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-[#00ff4e]/10 rounded-full blur-3xl"></div>
+            <div class="absolute -right-10 -bottom-10 w-40 h-40 rounded-full blur-3xl" style="background: rgba(0, 255, 78, 0.1);"></div>
         </div>
         @endif
         
@@ -70,64 +70,64 @@
     <!-- Metrics Grid -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         <!-- Total Assets -->
-        <div class="bg-[#242424] p-6 rounded-3xl border border-[#00f5ff]/30 shadow-lg shadow-[#00f5ff]/10 hover:border-[#00f5ff]/50 transition-all">
+        <div class="p-6 rounded-3xl shadow-lg transition-all hover:shadow-xl" style="background: #242424; border: 1px solid rgba(0, 245, 255, 0.3); box-shadow: 0 4px 6px -1px rgba(0, 245, 255, 0.1);">
             <div class="flex items-start justify-between">
                 <div>
                     <p class="text-[10px] font-black uppercase tracking-widest text-gray-500 mb-1">Activos Totales</p>
                     <h3 class="text-4xl font-extrabold text-white leading-tight">
                         {{ $stats['total_assets'] ?? 0 }}
                     </h3>
-                    <p class="text-xs font-bold text-[#00f5ff] mt-1">Unidades en sistema</p>
+                    <p class="text-xs font-bold mt-1" style="color: #00f5ff;">Unidades en sistema</p>
                 </div>
-                <div class="w-12 h-12 bg-[#00f5ff]/20 text-[#00f5ff] rounded-2xl flex items-center justify-center text-xl border border-[#00f5ff]/40 shadow-lg shadow-[#00f5ff]/20">
+                <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-xl shadow-lg" style="background: rgba(0, 245, 255, 0.2); color: #00f5ff; border: 1px solid rgba(0, 245, 255, 0.4); box-shadow: 0 10px 15px -3px rgba(0, 245, 255, 0.2);">
                     <i class="fas fa-boxes"></i>
                 </div>
             </div>
         </div>
 
         <!-- Operative -->
-        <div class="bg-[#242424] p-6 rounded-3xl border border-[#00ff4e]/30 shadow-lg shadow-[#00ff4e]/10 hover:border-[#00ff4e]/50 transition-all">
+        <div class="p-6 rounded-3xl shadow-lg transition-all hover:shadow-xl" style="background: #242424; border: 1px solid rgba(0, 255, 78, 0.3); box-shadow: 0 4px 6px -1px rgba(0, 255, 78, 0.1);">
             <div class="flex items-start justify-between">
                 <div>
                     <p class="text-[10px] font-black uppercase tracking-widest text-gray-500 mb-1">Operativos</p>
-                    <h3 class="text-4xl font-extrabold text-[#00ff4e] leading-tight">
+                    <h3 class="text-4xl font-extrabold leading-tight" style="color: #00ff4e;">
                         {{ $stats['active_assets'] ?? 0 }}
                     </h3>
                     <p class="text-xs font-bold text-gray-400 mt-1">Estado: Activo</p>
                 </div>
-                <div class="w-12 h-12 bg-[#00ff4e]/20 text-[#00ff4e] rounded-2xl flex items-center justify-center text-xl border border-[#00ff4e]/40 shadow-lg shadow-[#00ff4e]/20">
+                <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-xl shadow-lg" style="background: rgba(0, 255, 78, 0.2); color: #00ff4e; border: 1px solid rgba(0, 255, 78, 0.4); box-shadow: 0 10px 15px -3px rgba(0, 255, 78, 0.2);">
                     <i class="fas fa-check-circle"></i>
                 </div>
             </div>
         </div>
 
         <!-- Maintenance -->
-        <div class="bg-[#242424] p-6 rounded-3xl border border-[#ffea00]/30 shadow-lg shadow-[#ffea00]/10 hover:border-[#ffea00]/50 transition-all">
+        <div class="p-6 rounded-3xl shadow-lg transition-all hover:shadow-xl" style="background: #242424; border: 1px solid rgba(255, 234, 0, 0.3); box-shadow: 0 4px 6px -1px rgba(255, 234, 0, 0.1);">
             <div class="flex items-start justify-between">
                 <div>
                     <p class="text-[10px] font-black uppercase tracking-widest text-gray-500 mb-1">En Taller</p>
-                    <h3 class="text-4xl font-extrabold text-[#ffea00] leading-tight">
+                    <h3 class="text-4xl font-extrabold leading-tight" style="color: #ffea00;">
                         {{ $stats['maintenance_assets'] ?? 0 }}
                     </h3>
                     <p class="text-xs font-bold text-gray-400 mt-1">Requiere atención</p>
                 </div>
-                <div class="w-12 h-12 bg-[#ffea00]/20 text-[#ffea00] rounded-2xl flex items-center justify-center text-xl border border-[#ffea00]/40 shadow-lg shadow-[#ffea00]/20">
+                <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-xl shadow-lg" style="background: rgba(255, 234, 0, 0.2); color: #ffea00; border: 1px solid rgba(255, 234, 0, 0.4); box-shadow: 0 10px 15px -3px rgba(255, 234, 0, 0.2);">
                     <i class="fas fa-tools"></i>
                 </div>
             </div>
         </div>
 
         <!-- Decommissioned -->
-        <div class="bg-[#242424] p-6 rounded-3xl border border-[#ff0055]/30 shadow-lg shadow-[#ff0055]/10 hover:border-[#ff0055]/50 transition-all">
+        <div class="p-6 rounded-3xl shadow-lg transition-all hover:shadow-xl" style="background: #242424; border: 1px solid rgba(255, 0, 85, 0.3); box-shadow: 0 4px 6px -1px rgba(255, 0, 85, 0.1);">
             <div class="flex items-start justify-between">
                 <div>
                     <p class="text-[10px] font-black uppercase tracking-widest text-gray-500 mb-1">Bajas</p>
-                    <h3 class="text-4xl font-extrabold text-[#ff0055] leading-tight">
+                    <h3 class="text-4xl font-extrabold leading-tight" style="color: #ff0055;">
                         {{ $stats['decommissioned_assets'] ?? 0 }}
                     </h3>
                     <p class="text-xs font-bold text-gray-400 mt-1">Fuera de servicio</p>
                 </div>
-                <div class="w-12 h-12 bg-[#ff0055]/20 text-[#ff0055] rounded-2xl flex items-center justify-center text-xl border border-[#ff0055]/40 shadow-lg shadow-[#ff0055]/20">
+                <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-xl shadow-lg" style="background: rgba(255, 0, 85, 0.2); color: #ff0055; border: 1px solid rgba(255, 0, 85, 0.4); box-shadow: 0 10px 15px -3px rgba(255, 0, 85, 0.2);">
                     <i class="fas fa-ban"></i>
                 </div>
             </div>

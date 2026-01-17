@@ -19,11 +19,23 @@
         .font-logo { font-family: 'Orbitron', sans-serif; }
         [x-cloak] { display: none !important; }
         
+        /* Neon Cyberpunk Color Palette */
+        :root {
+            --neon-green: #00ff4e;
+            --neon-cyan: #00f5ff;
+            --neon-purple: #b026ff;
+            --neon-yellow: #ffea00;
+            --neon-red: #ff0055;
+            --dark-bg: #242424;
+            --darker-bg: #1a1a1a;
+            --black-bg: #000000;
+        }
+        
         /* Modern Scrollbar */
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: rgba(99, 102, 241, 0.2); border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: rgba(99, 102, 241, 0.4); }
+        ::-webkit-scrollbar-thumb { background: rgba(0, 245, 255, 0.3); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(0, 245, 255, 0.5); }
 
         /* Glassmorphism for Top Bar */
         .glass-header {
