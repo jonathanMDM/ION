@@ -232,6 +232,18 @@
                 </a>
                 @endif
             </div>
+
+@if(auth()->user()->company && auth()->user()->company->hasModule("cost_centers"))
+<div class="mt-4">
+    <div class="px-4 py-2 text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] sidebar-text">Finanzas</div>
+    @if(Auth::user()->isAdmin() || Auth::user()->hasPermission("view_cost_centers"))
+    <a href="{{ route("cost-centers.index") }}" class="flex items-center px-4 py-3 rounded-xl transition-all hover:bg-white/5 hover:text-white mb-1 {{ request()->routeIs("cost-centers.*") ? "sidebar-item-active" : "" }}" title="Centros de Costo">
+        <i class="fas fa-building w-6"></i>
+        <span class="ml-3 sidebar-text font-medium text-sm truncate">Centros de Costo</span>
+    </a>
+    @endif
+</div>
+@endif
             @endif
 
             <div class="mt-4">
@@ -860,5 +872,6 @@
     </div>
 
     @include('components.onboarding-tour')
+@stack("scripts")
 </body>
 </html>
