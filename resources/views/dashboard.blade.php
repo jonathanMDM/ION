@@ -278,14 +278,6 @@
                         </div>
                     </div>
 
-                    <div class="pt-6 border-t border-gray-100 dark:border-gray-700 flex justify-center">
-                        <div class="inline-flex items-center px-4 py-2 bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400 rounded-full border border-green-100 dark:border-green-800/30 text-[10px] font-black uppercase tracking-widest gap-2">
-                            <div class="relative flex h-2 w-2">
-                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                                <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-                            </div>
-                            Sistema Operativo
-                        </div>
                     </div>
                 </div>
             </div>
