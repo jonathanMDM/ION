@@ -68,7 +68,7 @@ class AssetMovementController extends Controller
         // Actualizar ubicación del activo
         $asset->update(['location_id' => $request->to_location_id]);
 
-        return redirect()->route('asset-movements.index')
+        return redirect()->back()
             ->with('success', 'Movimiento registrado exitosamente.');
     }
 }

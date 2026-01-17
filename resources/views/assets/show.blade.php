@@ -11,6 +11,9 @@
                 <i class="fas fa-qrcode mr-2"></i> Imprimir QR
             </a>
             @if(Auth::user()->hasPermission('edit_assets'))
+            <button onclick="document.getElementById('transferModal').classList.remove('hidden')" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded shadow transition duration-200 flex items-center">
+                <i class="fas fa-exchange-alt mr-2"></i> Trasladar
+            </button>
             <a href="{{ route('assets.edit', $asset->id) }}" class="bg-gray-800 hover:bg-black text-white font-bold py-2 px-4 rounded shadow transition duration-200 flex items-center">
                 <i class="fas fa-edit mr-2"></i> Editar
             </a>
@@ -211,70 +214,118 @@
         @endif
     </div>
 
-    <div class="mt-8">
-        <h3 class="text-xl font-bold mb-4">Historial de Mantenimiento</h3>
-        @if($asset->maintenances->count() > 0)
-            <table class="min-w-full w-full table-auto">
-                <thead>
-                    <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                        <th class="py-3 px-6 text-left">Fecha</th>
-                        <th class="py-3 px-6 text-left">Descripción</th>
-                        <th class="py-3 px-6 text-center">Costo</th>
-                    </tr>
-                </thead>
-                <tbody class="text-gray-600 text-sm font-light">
-                    @foreach($asset->maintenances as $maintenance)
-                    <tr class="border-b border-gray-200 hover:bg-gray-100">
-                        <td class="py-3 px-6 text-left">{{ $maintenance->date->format('Y-m-d') }}</td>
-                        <td class="py-3 px-6 text-left">{{ $maintenance->description }}</td>
-                        <td class="py-3 px-6 text-center">${{ number_format($maintenance->cost, 2) }}</td>
-                    </tr>
+    {{-- Unified Traceability Timeline (Sprint 2) --}}
+    <div class="mt-8 border-t-2 border-gray-100 pt-8">
+        <h3 class="text-xl font-bold text-gray-800 mb-6 flex items-center">
+            <i class="fas fa-history text-indigo-600 mr-2"></i>Historial de Trazabilidad
+        </h3>
+
+        @if($timeline->count() > 0)
+            <div class="relative">
+                <!-- Vertical Line -->
+                <div class="absolute left-4 md:left-6 top-0 bottom-0 w-0.5 bg-gray-200"></div>
+
+                <div class="space-y-8">
+                    @foreach($timeline as $event)
+                        <div class="relative pl-12 md:pl-16">
+                            <!-- Bullet -->
+                            <div class="absolute left-0 md:left-2 top-1 w-8 h-8 rounded-full bg-{{ $event->color }}-100 border-2 border-{{ $event->color }}-500 flex items-center justify-center z-10 shadow-sm">
+                                <i class="fas {{ $event->icon }} text-{{ $event->color }}-600 text-xs"></i>
+                            </div>
+
+                            <div class="bg-white rounded-lg border border-gray-100 p-4 shadow-sm hover:shadow-md transition-shadow">
+                                <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-2 gap-2">
+                                    <h4 class="font-bold text-gray-800">{{ $event->title }}</h4>
+                                    <span class="text-xs font-semibold px-2 py-1 bg-gray-100 text-gray-600 rounded-full">
+                                        {{ $event->date->format('d M, Y - H:i') }}
+                                    </span>
+                                </div>
+                                
+                                <p class="text-gray-600 text-sm mb-3">{{ $event->description }}</p>
+
+                                @if(isset($event->reason) && $event->reason)
+                                    <div class="bg-gray-50 p-2 rounded text-xs text-gray-500 italic mb-2">
+                                        "{{ $event->reason }}"
+                                    </div>
+                                @endif
+
+                                @if(isset($event->notes) && $event->notes)
+                                    <div class="bg-blue-50 p-2 rounded text-xs text-blue-600 italic mb-2">
+                                        <i class="fas fa-sticky-note mr-1"></i> {{ $event->notes }}
+                                    </div>
+                                @endif
+
+                                <div class="flex justify-between items-center text-[10px] uppercase tracking-wider font-bold">
+                                    <span class="text-gray-400">
+                                        <i class="fas fa-user-circle mr-1"></i> {{ $event->user }}
+                                    </span>
+                                    @if(isset($event->amount))
+                                        <span class="text-{{ $event->color }}-600">
+                                            ${{ number_format($event->amount, 2) }}
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
                     @endforeach
-                </tbody>
-            </table>
+                </div>
+            </div>
         @else
-            <p class="text-gray-500 italic">No se encontraron registros de mantenimiento.</p>
+            <div class="text-center py-12 bg-gray-50 rounded-xl border border-dashed border-gray-300">
+                <i class="fas fa-stream text-gray-300 text-4xl mb-4"></i>
+                <p class="text-gray-500">No hay eventos registrados en el historial de este activo.</p>
+            </div>
         @endif
     </div>
+    <!-- Modal de Traslado (Sprint 2) -->
+    <div id="transferModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 overflow-y-auto h-full w-full hidden z-50 flex items-center justify-center">
+        <div class="relative p-5 border w-full max-w-md shadow-lg rounded-md bg-white">
+            <div class="mt-3">
+                <div class="flex justify-between items-center mb-4 text-center">
+                    <h3 class="text-xl leading-6 font-bold text-gray-900">
+                        <i class="fas fa-exchange-alt text-indigo-600 mr-2"></i>Trasladar Activo
+                    </h3>
+                    <button onclick="document.getElementById('transferModal').classList.add('hidden')" class="text-gray-400 hover:text-gray-500">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <div class="mb-4 bg-indigo-50 p-3 rounded border border-indigo-100">
+                    <p class="text-sm text-indigo-800">
+                        <strong>Ubicación Actual:</strong> {{ $asset->location->name }}
+                    </p>
+                </div>
 
-    <div class="mt-8">
-        <h3 class="text-xl font-bold mb-4">Historial de Movimientos</h3>
-        @if($asset->movements->count() > 0)
-            <table class="min-w-full w-full table-auto">
-                <thead>
-                    <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                        <th class="py-3 px-6 text-left">De</th>
-                        <th class="py-3 px-6 text-center"><i class="fas fa-arrow-right"></i></th>
-                        <th class="py-3 px-6 text-left">A</th>
-                        <th class="py-3 px-6 text-left">Usuario</th>
-                        <th class="py-3 px-6 text-left">Fecha</th>
-                    </tr>
-                </thead>
-                <tbody class="text-gray-600 text-sm font-light">
-                    @foreach($asset->movements as $movement)
-                    <tr class="border-b border-gray-200 hover:bg-gray-100">
-                        <td class="py-3 px-6 text-left">
-                            <span class="px-2 py-1 bg-red-100 text-red-800 rounded text-xs">
-                                {{ $movement->fromLocation->name ?? 'N/A' }}
-                            </span>
-                        </td>
-                        <td class="py-3 px-6 text-center">
-                            <i class="fas fa-arrow-right text-gray-800"></i>
-                        </td>
-                        <td class="py-3 px-6 text-left">
-                            <span class="px-2 py-1 bg-green-100 text-green-800 rounded text-xs">
-                                {{ $movement->toLocation->name }}
-                            </span>
-                        </td>
-                        <td class="py-3 px-6 text-left">{{ $movement->user->name }}</td>
-                        <td class="py-3 px-6 text-left">{{ $movement->moved_at->format('d/m/Y H:i') }}</td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        @else
-            <p class="text-gray-500 italic">No se encontraron movimientos.</p>
-        @endif
+                <form action="{{ route('asset-movements.store') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="asset_id" value="{{ $asset->id }}">
+                    
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Nueva Ubicación</label>
+                        <select name="to_location_id" required class="w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                            <option value="">Seleccione destino...</option>
+                            @foreach($locations as $location)
+                                <option value="{{ $location->id }}">{{ $location->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Motivo del Traslado</label>
+                        <textarea name="reason" rows="3" required class="w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500" placeholder="Ej: Cambio de oficina, mantenimiento externo..."></textarea>
+                    </div>
+
+                    <div class="flex justify-end gap-3 mt-6">
+                        <button type="button" onclick="document.getElementById('transferModal').classList.add('hidden')" class="bg-white hover:bg-gray-50 text-gray-700 font-bold py-2 px-4 rounded border border-gray-300 transition duration-200">
+                            Cancelar
+                        </button>
+                        <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded border border-indigo-700 shadow-sm transition duration-200">
+                            Confirmar Traslado
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 @endsection

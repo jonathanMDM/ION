@@ -102,8 +102,98 @@ class AssetController extends Controller
      */
     public function show(Asset $asset)
     {
-        $asset->load(['costs.creator', 'costCenter.manager']);
-        return view('assets.show', compact('asset'));
+        $asset->load([
+            'costs.creator', 
+            'costCenter.manager', 
+            'movements.fromLocation', 
+            'movements.toLocation', 
+            'movements.user',
+            'maintenances',
+            'assignments.employee',
+            'assignments.user',
+            'location'
+        ]);
+        
+        // Unify all events for the timeline
+        $timeline = collect();
+
+        // Add Movements
+        foreach ($asset->movements as $movement) {
+            $timeline->push((object)[
+                'type' => 'movement',
+                'date' => $movement->moved_at,
+                'title' => 'Traslado de Ubicación',
+                'description' => "De " . ($movement->fromLocation->name ?? 'N/A') . " a " . $movement->toLocation->name,
+                'user' => $movement->user->name,
+                'icon' => 'fa-exchange-alt',
+                'color' => 'indigo',
+                'reason' => $movement->reason
+            ]);
+        }
+
+        // Add Maintenances
+        foreach ($asset->maintenances as $maintenance) {
+            $timeline->push((object)[
+                'type' => 'maintenance',
+                'date' => $maintenance->date,
+                'title' => 'Mantenimiento ' . ucfirst($maintenance->type ?? 'General'),
+                'description' => $maintenance->description,
+                'user' => 'Sistema',
+                'icon' => 'fa-wrench',
+                'color' => 'orange',
+                'amount' => $maintenance->cost
+            ]);
+        }
+
+        // Add Assignments
+        foreach ($asset->assignments as $assignment) {
+            $timeline->push((object)[
+                'type' => 'assignment',
+                'date' => $assignment->assigned_date,
+                'title' => 'Asignación de Activo',
+                'description' => "Asignado a: " . $assignment->employee->full_name,
+                'user' => $assignment->user->name ?? 'Admin',
+                'icon' => 'fa-user-check',
+                'color' => 'green',
+                'notes' => $assignment->notes
+            ]);
+
+            if ($assignment->return_date) {
+                $timeline->push((object)[
+                    'type' => 'return',
+                    'date' => $assignment->return_date,
+                    'title' => 'Devolución de Activo',
+                    'description' => "Devuelto por: " . $assignment->employee->full_name,
+                    'user' => 'Admin',
+                    'icon' => 'fa-undo',
+                    'color' => 'gray',
+                    'notes' => $assignment->notes
+                ]);
+            }
+        }
+
+        // Add Costs
+        foreach ($asset->costs as $cost) {
+            $timeline->push((object)[
+                'type' => 'cost',
+                'date' => $cost->date,
+                'title' => 'Registro de Costo',
+                'description' => $cost->concept,
+                'user' => $cost->creator->name ?? 'Sistema',
+                'icon' => 'fa-file-invoice-dollar',
+                'color' => 'emerald',
+                'amount' => $cost->amount
+            ]);
+        }
+
+        $timeline = $timeline->sortByDesc('date');
+
+        $locations = \App\Models\Location::where('company_id', auth()->user()->company_id)
+            ->where('id', '!=', $asset->location_id)
+            ->orderBy('name')
+            ->get();
+
+        return view('assets.show', compact('asset', 'locations', 'timeline'));
     }
 
     /**

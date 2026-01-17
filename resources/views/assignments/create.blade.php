@@ -40,10 +40,20 @@
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Fecha Esperada de Retorno</label>
-                    <input type="date" name="expected_return_date" value="{{ old('expected_return_date') }}" class="w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-700 text-gray-800 dark:text-white transition-colors">
-                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Opcional</p>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">¿Es un préstamo temporal?</label>
+                    <div class="flex items-center mt-3">
+                        <label class="inline-flex items-center cursor-pointer">
+                            <input type="checkbox" id="is_loan" class="sr-only peer" onchange="toggleReturnDate(this)">
+                            <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                            <span class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">Activar fecha de retorno</span>
+                        </label>
+                    </div>
                 </div>
+            </div>
+
+            <div id="return_date_container" class="mb-6 hidden">
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Fecha Esperada de Retorno *</label>
+                <input type="date" name="expected_return_date" id="expected_return_date" class="w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-700 text-gray-800 dark:text-white transition-colors">
             </div>
 
             <div class="mb-6">
@@ -62,4 +72,21 @@
         </form>
     </div>
 </div>
+
+@push('scripts')
+<script>
+    function toggleReturnDate(checkbox) {
+        const container = document.getElementById('return_date_container');
+        const input = document.getElementById('expected_return_date');
+        if (checkbox.checked) {
+            container.classList.remove('hidden');
+            input.setAttribute('required', 'required');
+        } else {
+            container.classList.add('hidden');
+            input.removeAttribute('required');
+            input.value = '';
+        }
+    }
+</script>
+@endpush
 @endsection
