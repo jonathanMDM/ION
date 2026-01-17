@@ -45,6 +45,33 @@
     </div>
 
     <!-- Statistics -->
+    <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+        <div class="flex justify-between items-start mb-4">
+            <h3 class="text-lg font-semibold text-gray-800">Suscripción y Facturación</h3>
+            <a href="{{ route('superadmin.companies.invoices.create', $company->id) }}" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded text-sm font-bold">
+                <i class="fas fa-file-invoice-dollar mr-2"></i>Registrar Pago y Enviar Factura
+            </a>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="p-3 bg-gray-50 rounded border border-gray-200">
+                <span class="text-xs text-gray-500 uppercase font-bold">Estado Suscripción</span>
+                <div class="flex items-center mt-1">
+                    @if($company->subscription_expires_at && $company->subscription_expires_at->isPast())
+                        <span class="text-red-600 font-bold"><i class="fas fa-exclamation-circle mr-1"></i> EXPIRADA</span>
+                    @else
+                        <span class="text-green-600 font-bold"><i class="fas fa-check-circle mr-1"></i> AL DÍA</span>
+                    @endif
+                </div>
+            </div>
+            <div class="p-3 bg-gray-50 rounded border border-gray-200">
+                <span class="text-xs text-gray-500 uppercase font-bold">Fecha de Expiración</span>
+                <div class="mt-1 font-bold">
+                    {{ $company->subscription_expires_at ? $company->subscription_expires_at->format('d/m/Y') : 'Sin fecha registrada' }}
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
         <div class="bg-white rounded-lg shadow-md p-6">
             <div class="flex items-center">

@@ -107,6 +107,7 @@ Route::middleware(['auth'])->group(function () {
     // Assets
     Route::delete('/assets/bulk-delete', [AssetController::class, 'bulkDelete'])->name('assets.bulk-delete');
     Route::resource('assets', AssetController::class);
+    Route::post('/assets/{asset}/withdraw', [AssetController::class, 'withdraw'])->name('assets.withdraw');
     Route::get('/assets/{asset}/qr', [AssetController::class, 'showQR'])->name('assets.qr');
     
     // Asset Movements
@@ -245,6 +246,10 @@ Route::middleware(['auth', 'superadmin'])->prefix('superadmin')->name('superadmi
     Route::get('api/token', [\App\Http\Controllers\ApiTokenController::class, 'index'])->name('api.token.index');
     Route::post('api/token/generate', [\App\Http\Controllers\ApiTokenController::class, 'generate'])->name('api.token.generate');
     Route::delete('api/token/revoke', [\App\Http\Controllers\ApiTokenController::class, 'revoke'])->name('api.token.revoke');
+
+    // Invoices
+    Route::get('companies/{company}/invoices/create', [\App\Http\Controllers\Superadmin\InvoiceController::class, 'create'])->name('companies.invoices.create');
+    Route::post('companies/{company}/invoices', [\App\Http\Controllers\Superadmin\InvoiceController::class, 'store'])->name('companies.invoices.store');
 });
 
 // Stop Impersonation

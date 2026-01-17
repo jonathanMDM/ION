@@ -203,4 +203,41 @@ class AssetController extends Controller
         
         return redirect()->route('assets.index')->with('success', "Se eliminaron exitosamente $count activo(s).");
     }
+
+    /**
+     * Handle stock withdrawal from an asset
+     */
+    public function withdraw(Request $request, Asset $asset)
+    {
+        $request->validate([
+            'quantity' => 'required|integer|min:1|max:' . $asset->quantity,
+            'reason' => 'required|string|max:255',
+        ]);
+
+        $withdrawalQuantity = $request->quantity;
+        $oldQuantity = $asset->quantity;
+        
+        // Update asset quantity
+        $asset->update([
+            'quantity' => $oldQuantity - $withdrawalQuantity
+        ]);
+
+        // Record movement
+        \App\Models\AssetMovement::create([
+            'asset_id' => $asset->id,
+            'from_location_id' => $asset->location_id,
+            'to_location_id' => $asset->location_id, // Same location for internal withdrawal
+            'user_id' => auth()->id(),
+            'reason' => 'Retiro de stock: ' . $request->reason . " (Cant: {$withdrawalQuantity})",
+            'moved_at' => now(),
+        ]);
+
+        $message = "Se han retirado $withdrawalQuantity unidades de {$asset->name}.";
+        
+        if ($asset->isLowStock()) {
+            $message .= " ATENCIÓN: El stock está por debajo del mínimo.";
+        }
+
+        return redirect()->back()->with('success', $message);
+    }
 }

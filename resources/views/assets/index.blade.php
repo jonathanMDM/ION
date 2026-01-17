@@ -152,6 +152,12 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                             </svg>
                         </a>
+                        <!-- Withdrawal Button -->
+                        <button type="button" onclick="openWithdrawModal({{ $asset->id }}, '{{ $asset->name }}', {{ $asset->quantity }})" class="w-4 mr-2 transform hover:text-orange-500 hover:scale-110" title="Retirar Stock">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </button>
                         @if(Auth::user()->isAdmin() || Auth::user()->hasPermission('edit_assets'))
                         <a href="{{ route('assets.edit', $asset->id) }}" class="w-4 mr-2 transform hover:text-gray-600 hover:scale-110" title="Editar">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -199,6 +205,178 @@
     @csrf
     @method('DELETE')
 </form>
+
+<script>
+function deleteAsset(id) {
+    if (typeof Swal === 'undefined') {
+        if (confirm('¿Estás seguro de que deseas eliminar este activo?')) {
+            const form = document.getElementById('singleDeleteForm');
+            const url = "{{ route('assets.destroy', ':id') }}";
+            form.action = url.replace(':id', id);
+            form.submit();
+        }
+        return;
+    }
+
+    Swal.fire({
+        title: '¿Estás seguro?',
+        text: "¡No podrás revertir esto!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#ef4444',
+        cancelButtonColor: '#3b82f6',
+        confirmButtonText: 'Sí, eliminar',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            const form = document.getElementById('singleDeleteForm');
+            const url = "{{ route('assets.destroy', ':id') }}";
+            form.action = url.replace(':id', id);
+            form.submit();
+        }
+    });
+}
+
+function toggleAll(source) {
+    const checkboxes = document.querySelectorAll('.row-checkbox');
+    checkboxes.forEach(checkbox => {
+        checkbox.checked = source.checked;
+    });
+    updateSelectedCount();
+}
+
+function updateSelectedCount() {
+    const checkboxes = document.querySelectorAll('.row-checkbox:checked');
+    const count = checkboxes.length;
+    document.getElementById('selectedCount').textContent = count;
+    
+    const bulkDeleteBtn = document.getElementById('bulkDeleteBtn');
+    if (count > 0) {
+        bulkDeleteBtn.classList.remove('hidden');
+    } else {
+        bulkDeleteBtn.classList.add('hidden');
+    }
+    
+    // Update select all checkbox
+    const selectAll = document.getElementById('selectAll');
+    const allCheckboxes = document.querySelectorAll('.row-checkbox');
+    selectAll.checked = allCheckboxes.length > 0 && count === allCheckboxes.length;
+}
+
+function confirmBulkDelete() {
+    const count = document.querySelectorAll('.row-checkbox:checked').length;
+    
+    if (typeof Swal === 'undefined') {
+        if (confirm(`¿Estás seguro de que deseas eliminar ${count} activo(s)? Esta acción no se puede deshacer.`)) {
+            document.getElementById('bulkDeleteForm').submit();
+        }
+        return;
+    }
+
+    Swal.fire({
+        title: '¿Estás seguro?',
+        text: `Se eliminarán ${count} activo(s). ¡Esta acción no se puede deshacer!`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#ef4444',
+        cancelButtonColor: '#3b82f6',
+        confirmButtonText: 'Sí, eliminar todo',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            document.getElementById('bulkDeleteForm').submit();
+        }
+    });
+}
+
+// Search functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('searchInput');
+    const tableRows = document.querySelectorAll('tbody tr');
+    const resultCount = document.getElementById('resultCount');
+    const totalRows = tableRows.length;
+
+    searchInput.addEventListener('input', function() {
+        const searchTerm = this.value.toLowerCase().trim();
+        let visibleCount = 0;
+
+        tableRows.forEach(row => {
+            const text = row.textContent.toLowerCase();
+            if (text.includes(searchTerm)) {
+                row.style.display = '';
+                visibleCount++;
+            } else {
+                row.style.display = 'none';
+            }
+        });
+
+        resultCount.textContent = visibleCount;
+    });
+});
+
+function clearSearch() {
+    const searchInput = document.getElementById('searchInput');
+    const tableRows = document.querySelectorAll('tbody tr');
+    const resultCount = document.getElementById('resultCount');
+    
+    searchInput.value = '';
+    tableRows.forEach(row => {
+        row.style.display = '';
+    });
+    resultCount.textContent = tableRows.length;
+}
+</script>
+
+<!-- Withdraw Modal -->
+<div id="withdrawModal" class="fixed inset-0 z-50 overflow-y-auto hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+    <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true" onclick="closeWithdrawModal()"></div>
+        <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+        <div class="inline-block align-bottom bg-white dark:bg-gray-800 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+            <form id="withdrawForm" action="" method="POST">
+                @csrf
+                <div class="bg-white dark:bg-gray-800 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                    <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-white" id="modal-title">
+                        Retirar Stock: <span id="withdrawAssetName"></span>
+                    </h3>
+                    <div class="mt-4">
+                        <label for="withdraw_quantity" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Cantidad a retirar (Max: <span id="maxQuantity"></span>)</label>
+                        <input type="number" name="quantity" id="withdraw_quantity" min="1" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm" required>
+                    </div>
+                    <div class="mt-4">
+                        <label for="withdraw_reason" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Motivo del retiro</label>
+                        <textarea name="reason" id="withdraw_reason" rows="3" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm" placeholder="Ej: Venda a cliente, Consumo interno..." required></textarea>
+                    </div>
+                </div>
+                <div class="bg-gray-50 dark:bg-gray-700 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                    <button type="submit" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-orange-600 text-base font-medium text-white hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 sm:ml-3 sm:w-auto sm:text-sm">
+                        Confirmar Retiro
+                    </button>
+                    <button type="button" onclick="closeWithdrawModal()" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 dark:border-gray-600 shadow-sm px-4 py-2 bg-white dark:bg-gray-800 text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                        Cancelar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+function openWithdrawModal(id, name, max) {
+    const form = document.getElementById('withdrawForm');
+    const url = "{{ route('assets.withdraw', ':id') }}";
+    form.action = url.replace(':id', id);
+    
+    document.getElementById('withdrawAssetName').textContent = name;
+    document.getElementById('maxQuantity').textContent = max;
+    document.getElementById('withdraw_quantity').max = max;
+    document.getElementById('withdrawModal').classList.remove('hidden');
+}
+
+function closeWithdrawModal() {
+    document.getElementById('withdrawModal').classList.add('hidden');
+}
+</script>
 
 <script>
 function deleteAsset(id) {
