@@ -91,6 +91,7 @@ class AssetController extends Controller
      */
     public function show(Asset $asset)
     {
+        $asset->load(['costs.creator', 'costCenter.manager']);
         return view('assets.show', compact('asset'));
     }
 

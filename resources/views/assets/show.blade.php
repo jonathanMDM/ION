@@ -99,6 +99,9 @@
     </div>
     @endif
 
+    {{-- Financial Information Section --}}
+    @include('assets.partials.financial-section')
+
     <!-- Sección de Asignación -->
     <div class="bg-white rounded-lg shadow p-6 mb-6 border-t-4 border-gray-500">
         <div class="flex justify-between items-center mb-4">
