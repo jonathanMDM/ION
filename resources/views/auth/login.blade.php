@@ -105,7 +105,7 @@
                         Correo Electrónico
                     </label>
                     <div class="relative">
-                        <span class="absolute inset-y-0 left-0 pl-4 flex items-center text-slate-500 group-focus-within:text-sky-400 transition-colors">
+                        <span class="absolute inset-y-0 left-0 pl-4 flex items-center text-slate-500 group-focus-within:text-cyan-300 transition-colors">
                             <i class="fas fa-at"></i>
                         </span>
                         <input 
@@ -127,7 +127,7 @@
                         Contraseña
                     </label>
                     <div class="relative">
-                        <span class="absolute inset-y-0 left-0 pl-4 flex items-center text-slate-500 group-focus-within:text-sky-400 transition-colors">
+                        <span class="absolute inset-y-0 left-0 pl-4 flex items-center text-slate-500 group-focus-within:text-cyan-300 transition-colors">
                             <i class="fas fa-key"></i>
                         </span>
                         <input 
@@ -153,12 +153,12 @@
                     <label class="flex items-center group cursor-pointer">
                         <div class="relative flex items-center">
                             <input type="checkbox" name="remember" class="peer sr-only">
-                            <div class="w-5 h-5 bg-slate-800 border border-white/10 rounded-md peer-checked:bg-sky-600 peer-checked:border-sky-500 transition-all"></div>
+                            <div class="w-5 h-5 bg-slate-800 border border-white/10 rounded-md peer-checked:bg-cyan-500 peer-checked:border-cyan-400 transition-all"></div>
                             <i class="fas fa-check absolute scale-0 peer-checked:scale-100 text-[10px] text-white w-5 text-center transition-transform"></i>
                         </div>
                         <span class="ml-2 text-xs text-slate-400 group-hover:text-slate-200 transition-colors">Recordarme</span>
                     </label>
-                    <a href="{{ route('password.request') }}" class="text-xs font-bold text-sky-400 hover:text-sky-300 transition-colors">
+                    <a href="{{ route('password.request') }}" class="text-xs font-bold text-cyan-300 hover:text-cyan-200 transition-colors">
                         ¿Olvidaste tu contraseña?
                     </a>
                 </div>
@@ -166,9 +166,9 @@
                 <!-- Submit Button -->
                 <button 
                     type="submit" 
-                    class="group relative w-full py-4 bg-white text-slate-950 font-black rounded-2xl hover:bg-sky-50 active:scale-[0.98] transition-all shadow-[0_20px_40px_rgba(255,255,255,0.1)] overflow-hidden"
+                    class="group relative w-full py-4 bg-white text-slate-950 font-black rounded-2xl hover:bg-cyan-50 active:scale-[0.98] transition-all shadow-[0_20px_40px_rgba(255,255,255,0.1)] overflow-hidden"
                 >
-                    <div class="absolute inset-0 bg-gradient-to-r from-sky-500 to-cyan-600 opacity-0 group-hover:opacity-10 transition-opacity"></div>
+                    <div class="absolute inset-0 bg-gradient-to-r from-cyan-500 to-cyan-600 opacity-0 group-hover:opacity-10 transition-opacity"></div>
                     <span class="relative flex items-center justify-center">
                         <i class="fas fa-sign-in-alt mr-2 text-sm"></i>
                         INICIAR SESIÓN
