@@ -108,6 +108,18 @@
             <input type="date" name="date_from" value="{{ request('date_from') }}" class="w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-700 text-gray-800 dark:text-white transition-colors text-sm">
         </div>
 
+        <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Fecha Hasta (Compra)</label>
+            <input type="date" name="date_to" value="{{ request('date_to') }}" class="w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-700 text-gray-800 dark:text-white transition-colors text-sm">
+        </div>
+
+        @if(\App\Helpers\FieldHelper::isVisible('municipality_plate'))
+        <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Placa Municipio</label>
+            <input type="text" name="municipality_plate" value="{{ request('municipality_plate') }}" class="w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-700 text-gray-800 dark:text-white transition-colors text-sm" placeholder="Buscar por placa...">
+        </div>
+        @endif
+
         @php
             $customFields = \App\Models\CustomField::where('company_id', auth()->user()->company_id)->get();
         @endphp
@@ -191,6 +203,9 @@
                     <th class="py-4 px-6 text-left">Activo / ID</th>
                     <th class="py-4 px-6 text-left">Categoría</th>
                     <th class="py-4 px-6 text-left">Ubicación</th>
+                    @if(\App\Helpers\FieldHelper::isVisible('municipality_plate'))
+                    <th class="py-4 px-6 text-left">Placa M.</th>
+                    @endif
                     @if(auth()->user()->company->hasModule('cost_centers'))
                     <th class="py-4 px-6 text-left">Centro Costo</th>
                     @endif
@@ -229,6 +244,11 @@
                             {{ $asset->location->name }}
                         </div>
                     </td>
+                    @if(\App\Helpers\FieldHelper::isVisible('municipality_plate'))
+                    <td class="py-4 px-6 text-left font-mono text-[10px]">
+                        {{ $asset->municipality_plate ?? '-' }}
+                    </td>
+                    @endif
                     @if(auth()->user()->company->hasModule('cost_centers'))
                     <td class="py-4 px-6 text-left">
                         {{ $asset->costCenter->name ?? 'N/A' }}

@@ -165,6 +165,9 @@
                 @if(auth()->user()->company->hasModule('cost_centers'))
                 <th>Centro Costo</th>
                 @endif
+                @if(\App\Helpers\FieldHelper::isVisible('municipality_plate'))
+                <th>Placa M.</th>
+                @endif
                 @foreach($customFields as $field)
                     @if(\App\Helpers\FieldHelper::isVisible($field->name))
                     <th>{{ $field->label }}</th>
@@ -186,6 +189,9 @@
                 <td>{{ $asset->location->name ?? 'N/A' }}</td>
                 @if(auth()->user()->company->hasModule('cost_centers'))
                 <td>{{ $asset->costCenter->name ?? 'N/A' }}</td>
+                @endif
+                @if(\App\Helpers\FieldHelper::isVisible('municipality_plate'))
+                <td>{{ $asset->municipality_plate ?? '-' }}</td>
                 @endif
                 @foreach($customFields as $field)
                     @if(\App\Helpers\FieldHelper::isVisible($field->name))
