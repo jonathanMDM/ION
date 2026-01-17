@@ -44,6 +44,14 @@ class Company extends Model
     }
 
     /**
+     * Get the invoices for the company.
+     */
+    public function invoices()
+    {
+        return $this->hasMany(Invoice::class);
+    }
+
+    /**
      * Check if subscription is expired
      */
     public function isExpired(): bool
