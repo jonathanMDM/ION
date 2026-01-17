@@ -91,7 +91,7 @@ Route::middleware(['auth'])->group(function () {
     
     // Change password
     Route::get('/change-password', [UserController::class, 'changePassword'])->name('password.change');
-    Route::post('/change-password', [UserController::class, 'updatePassword'])->name('password.update');
+    Route::post('/change-password', [UserController::class, 'updatePassword'])->name('password.change.update');
     
     // Notifications
     Route::get('/notifications', [\App\Http\Controllers\NotificationController::class, 'index'])->name('notifications.index');
