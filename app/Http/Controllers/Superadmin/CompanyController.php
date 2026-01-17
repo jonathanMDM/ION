@@ -80,6 +80,9 @@ class CompanyController extends Controller
 
     public function show(Company $company)
     {
+        $company->loadCount(['users', 'assets']);
+        $company->load('invoices');
+        
         return view('superadmin.companies.show', compact('company'));
     }
 
