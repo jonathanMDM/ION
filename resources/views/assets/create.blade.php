@@ -3,321 +3,374 @@
 @section('page-title', 'Agregar Nuevo Activo')
 
 @section('content')
-<div id="tour-asset-form" class="max-w-2xl mx-auto bg-white dark:bg-gray-800 p-4 md:p-6 rounded shadow transition-colors">
-    <h2 class="text-2xl font-bold mb-6 text-gray-800 dark:text-white">Agregar Nuevo Activo</h2>
+<div class="max-w-5xl mx-auto pb-12">
+    <!-- Header Section -->
+    <div class="flex items-center justify-between mb-8">
+        <div>
+            <h2 class="text-3xl font-extrabold text-gray-900 dark:text-white tracking-tight">Agregar Nuevo Activo</h2>
+            <p class="text-gray-500 dark:text-gray-400 mt-1">Registre un nuevo elemento en su inventario con detalles completos.</p>
+        </div>
+        <a href="{{ route('assets.index') }}" class="flex items-center text-sm font-semibold text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
+            <i class="fas fa-arrow-left mr-2"></i> Volver al listado
+        </a>
+    </div>
     
-    <form action="{{ route('assets.store') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('assets.store') }}" method="POST" enctype="multipart/form-data" class="space-y-8">
         @csrf
         
-        <div class="mb-4">
-            <label class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2" for="custom_id">ID Único (Opcional)</label>
-            <input type="text" name="custom_id" id="custom_id" class="shadow appearance-none border dark:border-gray-600 rounded w-full py-2 px-3 text-gray-700 dark:text-white bg-white dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline transition-colors" placeholder="Dejar en blanco para autogenerar">
-        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Left Column: Basic Information & Categorization -->
+            <div class="lg:col-span-2 space-y-8">
+                <!-- Section: General Information -->
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden">
+                    <div class="px-6 py-4 border-b border-gray-50 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-700/50">
+                        <h3 class="text-lg font-bold text-gray-800 dark:text-white flex items-center">
+                            <i class="fas fa-info-circle text-indigo-500 mr-2"></i> Información General
+                        </h3>
+                    </div>
+                    <div class="p-6 space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="md:col-span-2">
+                                <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2" for="name">
+                                    Nombre del Activo <span class="text-red-500">*</span>
+                                </label>
+                                <input type="text" name="name" id="name" value="{{ old('name') }}" 
+                                    class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all" 
+                                    placeholder="Ej: Laptop Dell Latitude 5420" required>
+                                @error('name') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
+                            </div>
 
-        <div class="mb-4">
-            <label class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2" for="name">Nombre del Activo</label>
-            <input type="text" name="name" id="name" class="shadow appearance-none border dark:border-gray-600 rounded w-full py-2 px-3 text-gray-700 dark:text-white bg-white dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline transition-colors" required>
-        </div>
+                            <div>
+                                <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2" for="custom_id">
+                                    ID Único / Placa Inventario
+                                </label>
+                                <input type="text" name="custom_id" id="custom_id" value="{{ old('custom_id') }}"
+                                    class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all" 
+                                    placeholder="Autogenerado si se deja vacío">
+                                @error('custom_id') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
+                            </div>
 
-        <div class="mb-4">
-            <label class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2" for="location_id">Ubicación</label>
-            <select name="location_id" id="location_id" class="shadow border dark:border-gray-600 rounded w-full py-2 px-3 text-gray-700 dark:text-white bg-white dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline transition-colors" required>
-                @foreach($locations as $location)
-                    <option value="{{ $location->id }}">{{ $location->name }}</option>
-                @endforeach
-            </select>
-        </div>
+                            <div>
+                                <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2" for="model">
+                                    Modelo / Referencia
+                                </label>
+                                <input type="text" name="model" id="model" value="{{ old('model') }}"
+                                    class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all" 
+                                    placeholder="Ej: E5420-X1">
+                            </div>
 
-        <div class="mb-4">
-            <label class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2" for="subcategory_id">Categoría / Subcategoría</label>
-            <select name="subcategory_id" id="subcategory_id" class="shadow border dark:border-gray-600 rounded w-full py-2 px-3 text-gray-700 dark:text-white bg-white dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline transition-colors" required>
-                @foreach($subcategories as $subcategory)
-                    <option value="{{ $subcategory->id }}">{{ $subcategory->category->name }} - {{ $subcategory->name }}</option>
-                @endforeach
-            </select>
-        </div>
+                            <div>
+                                <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2" for="quantity">
+                                    Cantidad Inicial <span class="text-red-500">*</span>
+                                </label>
+                                <input type="number" name="quantity" id="quantity" min="1" value="{{ old('quantity', 1) }}"
+                                    class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all" required>
+                            </div>
 
-        <div class="mb-4">
-            <label class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2" for="supplier_id">Proveedor</label>
-            <select name="supplier_id" id="supplier_id" class="shadow border dark:border-gray-600 rounded w-full py-2 px-3 text-gray-700 dark:text-white bg-white dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline transition-colors">
-                <option value="">Sin proveedor</option>
-                @foreach($suppliers as $supplier)
-                    <option value="{{ $supplier->id }}">{{ $supplier->name }}</option>
-                @endforeach
-            </select>
-        </div>
-
-        <div class="mb-4">
-            <label class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2" for="value">Valor</label>
-            <input type="number" step="0.01" name="value" id="value" class="shadow appearance-none border dark:border-gray-600 rounded w-full py-2 px-3 text-gray-700 dark:text-white bg-white dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline transition-colors" required>
-        </div>
-
-            <div class="mb-4">
-                <label for="model" class="block text-gray-700 dark:text-gray-300 font-bold mb-2">Modelo</label>
-                <input type="text" name="model" id="model" class="shadow appearance-none border dark:border-gray-600 rounded w-full py-2 px-3 text-gray-700 dark:text-white bg-white dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline transition-colors" value="{{ old('model') }}">
-            </div>
-
-            <div class="mb-4">
-                <label for="quantity" class="block text-gray-700 dark:text-gray-300 font-bold mb-2">Cantidad</label>
-                <input type="number" name="quantity" id="quantity" min="1" class="shadow appearance-none border dark:border-gray-600 rounded w-full py-2 px-3 text-gray-700 dark:text-white bg-white dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline transition-colors" value="{{ old('quantity', 1) }}" required>
-            </div>
-
-            @if(auth()->user()->company && auth()->user()->company->low_stock_alerts_enabled)
-            <div class="mb-4">
-                <label for="minimum_quantity" class="block text-gray-700 dark:text-gray-300 font-bold mb-2">
-                    Cantidad Mínima (Stock Bajo)
-                    <span class="text-gray-500 font-normal text-sm">- Opcional</span>
-                </label>
-                <input type="number" name="minimum_quantity" id="minimum_quantity" min="0" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" value="{{ old('minimum_quantity', 0) }}" placeholder="0 = Sin alerta">
-                <p class="text-gray-600 text-xs italic mt-1">Recibirás una alerta cuando la cantidad sea igual o menor a este valor</p>
-            </div>
-            @endif
-
-        <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="purchase_date">Fecha de Compra</label>
-            <input type="date" name="purchase_date" id="purchase_date" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-        </div>
-
-            <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="status">
-                    Estado
-                </label>
-                <select name="status" id="status" class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
-                    <option value="active" {{ old('status') == 'active' ? 'selected' : '' }}>Activo</option>
-                    <option value="maintenance" {{ old('status') == 'maintenance' ? 'selected' : '' }}>En Mantenimiento</option>
-                    <option value="decommissioned" {{ old('status') == 'decommissioned' ? 'selected' : '' }}>De Baja</option>
-                </select>
-                @error('status')
-                    <p class="text-red-500 text-xs italic">{{ $message }}</p>
-                @enderror
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                <div>
-                    <label class="block text-gray-700 text-sm font-bold mb-2" for="next_maintenance_date">
-                        Próximo Mantenimiento
-                    </label>
-                    <input type="date" name="next_maintenance_date" id="next_maintenance_date" value="{{ old('next_maintenance_date') }}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                    @error('next_maintenance_date')
-                        <p class="text-red-500 text-xs italic">{{ $message }}</p>
-                    @enderror
+                            @if(auth()->user()->company && auth()->user()->company->low_stock_alerts_enabled)
+                            <div>
+                                <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2" for="minimum_quantity">
+                                    Stock Mínimo (Alerta)
+                                </label>
+                                <input type="number" name="minimum_quantity" id="minimum_quantity" min="0" value="{{ old('minimum_quantity', 0) }}"
+                                    class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all">
+                                <p class="text-[10px] text-gray-400 mt-1 italic">0 para desactivar alertas</p>
+                            </div>
+                            @endif
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <label class="block text-gray-700 text-sm font-bold mb-2" for="maintenance_frequency_days">
-                        Frecuencia (Días)
-                    </label>
-                    <input type="number" name="maintenance_frequency_days" id="maintenance_frequency_days" value="{{ old('maintenance_frequency_days') }}" min="1" placeholder="Ej: 90" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                    @error('maintenance_frequency_days')
-                        <p class="text-red-500 text-xs italic">{{ $message }}</p>
-                    @enderror
+
+                <!-- Section: Localization & Suppliers -->
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden">
+                    <div class="px-6 py-4 border-b border-gray-50 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-700/50">
+                        <h3 class="text-lg font-bold text-gray-800 dark:text-white flex items-center">
+                            <i class="fas fa-map-marked-alt text-emerald-500 mr-2"></i> Ubicación y Clasificación
+                        </h3>
+                    </div>
+                    <div class="p-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2" for="location_id">
+                                    Ubicación Física <span class="text-red-500">*</span>
+                                </label>
+                                <select name="location_id" id="location_id" 
+                                    class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all" required>
+                                    @foreach($locations as $location)
+                                        <option value="{{ $location->id }}" {{ old('location_id') == $location->id ? 'selected' : '' }}>{{ $location->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2" for="subcategory_id">
+                                    Categoría / Subcategoría <span class="text-red-500">*</span>
+                                </label>
+                                <select name="subcategory_id" id="subcategory_id" 
+                                    class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all" required>
+                                    @foreach($subcategories as $subcategory)
+                                        <option value="{{ $subcategory->id }}" {{ old('subcategory_id') == $subcategory->id ? 'selected' : '' }}>
+                                            {{ $subcategory->category->name }} → {{ $subcategory->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2" for="supplier_id">
+                                    Proveedor
+                                </label>
+                                <select name="supplier_id" id="supplier_id" 
+                                    class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all">
+                                    <option value="">Sin proveedor asignado</option>
+                                    @foreach($suppliers as $supplier)
+                                        <option value="{{ $supplier->id }}" {{ old('supplier_id') == $supplier->id ? 'selected' : '' }}>{{ $supplier->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2" for="status">
+                                    Estado Inicial <span class="text-red-500">*</span>
+                                </label>
+                                <select name="status" id="status" 
+                                    class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all" required>
+                                    <option value="active" {{ old('status') == 'active' ? 'selected' : '' }}>Activo</option>
+                                    <option value="maintenance" {{ old('status') == 'maintenance' ? 'selected' : '' }}>En Taller / Mantenimiento</option>
+                                    <option value="decommissioned" {{ old('status') == 'decommissioned' ? 'selected' : '' }}>Dado de Baja</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
 
-        @if(\App\Helpers\FieldHelper::isVisible('municipality_plate'))
-        <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="municipality_plate">Placa Municipio</label>
-            <input type="text" name="municipality_plate" id="municipality_plate" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-        </div>
-        @endif
+                <!-- Section: Financial Information -->
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden">
+                    <div class="px-6 py-4 border-b border-gray-50 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-700/50 flex justify-between items-center">
+                        <h3 class="text-lg font-bold text-gray-800 dark:text-white flex items-center">
+                            <i class="fas fa-money-bill-wave text-blue-500 mr-2"></i> Control Financiero
+                        </h3>
+                        @if(!auth()->user()->company->hasModule('financial_control'))
+                            <span class="text-[10px] bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 px-2 py-0.5 rounded font-bold uppercase tracking-wider">Modo Básico</span>
+                        @endif
+                    </div>
+                    <div class="p-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- Purchase Price - Always visible -->
+                            <div>
+                                <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2" for="purchase_price">
+                                    Precio de Compra <span class="text-red-500">*</span>
+                                </label>
+                                <div class="relative group">
+                                    <span class="absolute left-4 top-3.5 text-gray-400 group-focus-within:text-indigo-500 transition-colors">$</span>
+                                    <input type="number" step="0.01" name="purchase_price" id="purchase_price" value="{{ old('purchase_price') }}"
+                                        class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 pl-8 pr-4 text-gray-700 dark:text-white font-bold focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all" 
+                                        placeholder="0.00" required>
+                                </div>
+                            </div>
 
-        <!-- Custom Fields -->
-        @php
-            $customFields = \App\Models\CustomField::where('company_id', Auth::user()->company_id)->get();
-        @endphp
-        @foreach($customFields as $field)
-            @if(\App\Helpers\FieldHelper::isVisible($field->name))
-            <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="custom_{{ $field->name }}">
-                    {{ $field->label }}
-                    @if($field->is_required) <span class="text-red-500">*</span> @endif
-                </label>
-                
-                @if($field->type === 'textarea')
-                    <textarea 
-                        name="custom_attributes[{{ $field->name }}]" 
-                        id="custom_{{ $field->name }}" 
-                        rows="3" 
-                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        {{ $field->is_required ? 'required' : '' }}
-                    ></textarea>
-                @elseif($field->type === 'select')
-                    <select 
-                        name="custom_attributes[{{ $field->name }}]" 
-                        id="custom_{{ $field->name }}" 
-                        class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        {{ $field->is_required ? 'required' : '' }}
-                    >
-                        <option value="">Seleccione...</option>
-                        @foreach($field->options as $option)
-                            <option value="{{ $option }}">{{ $option }}</option>
+                            <div>
+                                <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2" for="purchase_date">
+                                    Fecha de Adquisición
+                                </label>
+                                <input type="date" name="purchase_date" id="purchase_date" value="{{ old('purchase_date') }}"
+                                    class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all">
+                            </div>
+
+                            @if(auth()->user()->company->hasModule('financial_control'))
+                                <div class="md:col-span-2 space-y-6 mt-4">
+                                    <!-- Cost Center & Depreciation -->
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        <div>
+                                            <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2" for="cost_center_id">
+                                                Centro de Costo
+                                            </label>
+                                            <select name="cost_center_id" id="cost_center_id" 
+                                                class="w-full bg-gray-100 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-indigo-500 transition-all">
+                                                <option value="">Sin centro de costo</option>
+                                                @php
+                                                    $costCenters = \App\Models\CostCenter::where('company_id', Auth::user()->company_id)->where('is_active', true)->orderBy('code')->get();
+                                                @endphp
+                                                @foreach($costCenters as $center)
+                                                    <option value="{{ $center->id }}" {{ old('cost_center_id') == $center->id ? 'selected' : '' }}>
+                                                        {{ $center->code }} - {{ $center->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
+                                        <div>
+                                            <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2" for="depreciation_method">
+                                                Método de Depreciación
+                                            </label>
+                                            <select name="depreciation_method" id="depreciation_method" 
+                                                class="w-full bg-gray-100 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-indigo-500 transition-all"
+                                                onchange="toggleDepreciationFields()">
+                                                <option value="none" {{ old('depreciation_method', 'none') == 'none' ? 'selected' : '' }}>Sin depreciar</option>
+                                                <option value="straight_line" {{ old('depreciation_method') == 'straight_line' ? 'selected' : '' }}>Línea Recta</option>
+                                                <option value="declining_balance" {{ old('depreciation_method') == 'declining_balance' ? 'selected' : '' }}>Saldos Decrecientes</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div id="depreciation_fields" class="grid grid-cols-1 md:grid-cols-3 gap-6 p-4 bg-indigo-50/50 dark:bg-indigo-900/10 rounded-2xl border border-indigo-100 dark:border-indigo-900/30" 
+                                        style="display: {{ old('depreciation_method', 'none') != 'none' ? 'grid' : 'none' }}">
+                                        <div>
+                                            <label class="block text-xs font-bold text-indigo-700 dark:text-indigo-400 mb-2 uppercase" for="useful_life_years">Vida Útil (Años)</label>
+                                            <input type="number" name="useful_life_years" id="useful_life_years" min="1" value="{{ old('useful_life_years') }}"
+                                                class="w-full bg-white dark:bg-gray-900 border-indigo-100 dark:border-indigo-900/50 rounded-lg py-2 px-3 text-sm focus:ring-2 focus:ring-indigo-500 transition-all">
+                                        </div>
+                                        <div>
+                                            <label class="block text-xs font-bold text-indigo-700 dark:text-indigo-400 mb-2 uppercase" for="salvage_value">V. Salvamento</label>
+                                            <input type="number" step="0.01" name="salvage_value" id="salvage_value" value="{{ old('salvage_value', 0) }}"
+                                                class="w-full bg-white dark:bg-gray-900 border-indigo-100 dark:border-indigo-900/50 rounded-lg py-2 px-3 text-sm focus:ring-2 focus:ring-indigo-500 transition-all">
+                                        </div>
+                                        <div>
+                                            <label class="block text-xs font-bold text-indigo-700 dark:text-indigo-400 mb-2 uppercase" for="depreciation_start_date">Fecha Inicio</label>
+                                            <input type="date" name="depreciation_start_date" id="depreciation_start_date" value="{{ old('depreciation_start_date') }}"
+                                                class="w-full bg-white dark:bg-gray-900 border-indigo-100 dark:border-indigo-900/50 rounded-lg py-2 px-3 text-sm focus:ring-2 focus:ring-indigo-500 transition-all">
+                                        </div>
+                                    </div>
+                                </div>
+                            @else
+                                <input type="hidden" name="depreciation_method" value="none">
+                            @endif
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section: Custom Fields -->
+                @php
+                    $customFields = \App\Models\CustomField::where('company_id', Auth::user()->company_id)->get();
+                @endphp
+                @if($customFields->count() > 0)
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden">
+                    <div class="px-6 py-4 border-b border-gray-50 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-700/50">
+                        <h3 class="text-lg font-bold text-gray-800 dark:text-white flex items-center">
+                            <i class="fas fa-tags text-orange-500 mr-2"></i> Campos Personalizados
+                        </h3>
+                    </div>
+                    <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+                        @foreach($customFields as $field)
+                            @if(\App\Helpers\FieldHelper::isVisible($field->name))
+                            <div class="{{ $field->type === 'textarea' ? 'md:col-span-2' : '' }}">
+                                <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2" for="custom_{{ $field->name }}">
+                                    {{ $field->label }}
+                                    @if($field->is_required) <span class="text-red-500">*</span> @endif
+                                </label>
+                                
+                                @if($field->type === 'textarea')
+                                    <textarea name="custom_attributes[{{ $field->name }}]" id="custom_{{ $field->name }}" rows="3" 
+                                        class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-indigo-500 transition-all"
+                                        {{ $field->is_required ? 'required' : '' }}></textarea>
+                                @elseif($field->type === 'select')
+                                    <select name="custom_attributes[{{ $field->name }}]" id="custom_{{ $field->name }}" 
+                                        class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-indigo-500 transition-all"
+                                        {{ $field->is_required ? 'required' : '' }}>
+                                        <option value="">Seleccione...</option>
+                                        @foreach($field->options as $option)
+                                            <option value="{{ $option }}">{{ $option }}</option>
+                                        @endforeach
+                                    </select>
+                                @else
+                                    <input type="{{ $field->type }}" name="custom_attributes[{{ $field->name }}]" id="custom_{{ $field->name }}" 
+                                        class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-indigo-500 transition-all"
+                                        {{ $field->is_required ? 'required' : '' }}>
+                                @endif
+                            </div>
+                            @endif
                         @endforeach
-                    </select>
-                @else
-                    <input 
-                        type="{{ $field->type }}" 
-                        name="custom_attributes[{{ $field->name }}]" 
-                        id="custom_{{ $field->name }}" 
-                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        {{ $field->is_required ? 'required' : '' }}
-                    >
+                    </div>
+                </div>
                 @endif
             </div>
-            @endif
-        @endforeach
 
-        {{-- Financial & Depreciation Section --}}
-        <div class="border-t-2 border-gray-300 pt-6 mt-6 mb-6">
-            <h3 class="text-lg font-bold text-gray-800 mb-4">
-                <i class="fas fa-dollar-sign text-indigo-600 mr-2"></i>Información Financiera
-            </h3>
-            
-            {{-- Purchase Price - Always visible --}}
-            <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="purchase_price">
-                    Precio de Compra <span class="text-red-500">*</span>
-                </label>
-                <div class="relative">
-                    <span class="absolute left-3 top-2.5 text-gray-500">$</span>
-                    <input type="number" 
-                           step="0.01" 
-                           name="purchase_price" 
-                           id="purchase_price" 
-                           value="{{ old('purchase_price') }}"
-                           class="shadow appearance-none border rounded w-full py-2 pl-8 pr-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
-                           placeholder="0.00"
-                           required>
-                </div>
-                <p class="text-gray-600 text-xs italic mt-1">Valor original de compra del activo</p>
-            </div>
-
-            @if(auth()->user()->company->hasModule('financial_control'))
-            {{-- Advanced Financial Features - Only if module enabled --}}
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                <!-- Centro de Costo -->
-                <div>
-                    <label class="block text-gray-700 text-sm font-bold mb-2" for="cost_center_id">
-                        Centro de Costo
-                    </label>
-                    <select name="cost_center_id" 
-                            id="cost_center_id" 
-                            class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                        <option value="">Sin asignar</option>
-                        @php
-                            $costCenters = \App\Models\CostCenter::where('company_id', Auth::user()->company_id)
-                                ->where('is_active', true)
-                                ->orderBy('code')
-                                ->get();
-                        @endphp
-                        @foreach($costCenters as $center)
-                            <option value="{{ $center->id }}" {{ old('cost_center_id') == $center->id ? 'selected' : '' }}>
-                                {{ $center->code }} - {{ $center->name }}
-                            </option>
-                        @endforeach
-                    </select>
-                    <p class="text-gray-600 text-xs italic mt-1">Asignar a un centro de costo para control presupuestario</p>
-                </div>
-            </div>
-
-            <!-- Depreciation Settings -->
-            <div class="bg-indigo-50 p-4 rounded-lg border border-indigo-200 mb-4">
-                <h4 class="font-semibold text-indigo-900 mb-3">Configuración de Depreciación</h4>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <!-- Método de Depreciación -->
-                    <div class="md:col-span-2">
-                        <label class="block text-gray-700 text-sm font-bold mb-2" for="depreciation_method">
-                            Método de Depreciación
-                        </label>
-                        <select name="depreciation_method" 
-                                id="depreciation_method" 
-                                class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                onchange="toggleDepreciationFields()">
-                            <option value="none" {{ old('depreciation_method', 'none') == 'none' ? 'selected' : '' }}>
-                                Sin depreciación
-                            </option>
-                            <option value="straight_line" {{ old('depreciation_method') == 'straight_line' ? 'selected' : '' }}>
-                                Línea Recta (Depreciación constante)
-                            </option>
-                            <option value="declining_balance" {{ old('depreciation_method') == 'declining_balance' ? 'selected' : '' }}>
-                                Saldo Decreciente (Mayor depreciación inicial)
-                            </option>
-                            <option value="units_of_production" {{ old('depreciation_method') == 'units_of_production' ? 'selected' : '' }}>
-                                Unidades de Producción
-                            </option>
-                        </select>
+            <!-- Right Column: Media, Maintenance and Specs -->
+            <div class="space-y-8">
+                <!-- Section: Media / Image -->
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden">
+                    <div class="px-6 py-4 border-b border-gray-50 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-700/50">
+                        <h3 class="text-lg font-bold text-gray-800 dark:text-white flex items-center">
+                            <i class="fas fa-camera text-purple-500 mr-2"></i> Multimedia
+                        </h3>
                     </div>
-
-                    <div id="depreciation_fields" style="display: {{ old('depreciation_method', 'none') != 'none' ? 'contents' : 'none' }}">
-                        <!-- Vida Útil -->
-                        <div>
-                            <label class="block text-gray-700 text-sm font-bold mb-2" for="useful_life_years">
-                                Vida Útil (años)
-                            </label>
-                            <input type="number" 
-                                   name="useful_life_years" 
-                                   id="useful_life_years" 
-                                   value="{{ old('useful_life_years') }}"
-                                   min="1"
-                                   class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
-                                   placeholder="Ej: 5">
-                            <p class="text-gray-600 text-xs italic mt-1">Años de vida útil estimada</p>
-                        </div>
-
-                        <!-- Valor de Salvamento -->
-                        <div>
-                            <label class="block text-gray-700 text-sm font-bold mb-2" for="salvage_value">
-                                Valor de Salvamento
-                            </label>
-                            <div class="relative">
-                                <span class="absolute left-3 top-2.5 text-gray-500">$</span>
-                                <input type="number" 
-                                       step="0.01" 
-                                       name="salvage_value" 
-                                       id="salvage_value" 
-                                       value="{{ old('salvage_value', 0) }}"
-                                       min="0"
-                                       class="shadow appearance-none border rounded w-full py-2 pl-8 pr-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
-                                       placeholder="0.00">
+                    <div class="p-6">
+                        <div class="flex flex-col items-center">
+                            <div id="image-preview-container" class="w-full h-48 mb-4 rounded-xl border-2 border-dashed border-gray-200 dark:border-gray-700 flex flex-col items-center justify-center bg-gray-50 dark:bg-gray-900 overflow-hidden group">
+                                <i class="fas fa-image text-4xl text-gray-300 mb-2 group-hover:scale-110 transition-transform"></i>
+                                <span class="text-xs text-gray-400">Sin archivo seleccionado</span>
+                                <img id="image-preview" src="#" alt="Vista previa" class="hidden w-full h-full object-cover">
                             </div>
-                            <p class="text-gray-600 text-xs italic mt-1">Valor residual al final de la vida útil</p>
-                        </div>
-
-                        <!-- Fecha de Inicio de Depreciación -->
-                        <div class="md:col-span-2">
-                            <label class="block text-gray-700 text-sm font-bold mb-2" for="depreciation_start_date">
-                                Fecha de Inicio de Depreciación
+                            <label class="w-full flex justify-center items-center px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl cursor-pointer transition-colors shadow-lg shadow-indigo-500/20">
+                                <i class="fas fa-cloud-upload-alt mr-2"></i> Seleccionar Imagen
+                                <input type="file" name="image" id="image" accept="image/*" class="hidden" onchange="previewFile(this)">
                             </label>
-                            <input type="date" 
-                                   name="depreciation_start_date" 
-                                   id="depreciation_start_date" 
-                                   value="{{ old('depreciation_start_date') }}"
-                                   class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                            <p class="text-gray-600 text-xs italic mt-1">Fecha desde la cual comenzará a depreciarse</p>
+                            <p class="text-[10px] text-gray-400 mt-2 italic">Máx 2MB (JPG, PNG, WebP)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section: Technical Specs -->
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden">
+                    <div class="px-6 py-4 border-b border-gray-50 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-700/50">
+                        <h3 class="text-lg font-bold text-gray-800 dark:text-white flex items-center">
+                            <i class="fas fa-microchip text-teal-500 mr-2"></i> Especificaciones
+                        </h3>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        @if(\App\Helpers\FieldHelper::isVisible('municipality_plate'))
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2" for="municipality_plate">Placa Municipio</label>
+                            <input type="text" name="municipality_plate" id="municipality_plate" 
+                                class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-indigo-500 transition-all">
+                        </div>
+                        @endif
+
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2" for="specifications">Detalles Técnicos</label>
+                            <textarea name="specifications" id="specifications" rows="4" 
+                                class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-indigo-500 transition-all" 
+                                placeholder="Ej: Procesador i7, 16GB RAM, SSD 512GB"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section: Maintenance Planning -->
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden">
+                    <div class="px-6 py-4 border-b border-gray-50 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-700/50">
+                        <h3 class="text-lg font-bold text-gray-800 dark:text-white flex items-center">
+                            <i class="fas fa-calendar-check text-red-500 mr-2"></i> Mantenimiento
+                        </h3>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2" for="next_maintenance_date">Próxima Fecha</label>
+                            <input type="date" name="next_maintenance_date" id="next_maintenance_date" 
+                                class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-indigo-500 transition-all">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2" for="maintenance_frequency_days">Frecuencia (En días)</label>
+                            <input type="number" name="maintenance_frequency_days" id="maintenance_frequency_days" min="1" placeholder="Ej: 90" 
+                                class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-indigo-500 transition-all">
                         </div>
                     </div>
                 </div>
             </div>
-            @endif
         </div>
 
-        <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="specifications">Especificaciones</label>
-            <textarea name="specifications" id="specifications" rows="4" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="e.g., Processor: Intel i7, RAM: 16GB, Storage: 512GB SSD"></textarea>
-        </div>
-
-        <div class="mb-6">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="image">Imagen del Activo</label>
-            <input type="file" name="image" id="image" accept="image/*" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-            <p class="text-gray-600 text-xs italic mt-1">Tamaño máx: 2MB. Formatos: JPG, PNG, GIF, WebP</p>
-        </div>
-
-        <div class="flex items-center justify-between">
-            <button type="submit" class="bg-gray-800 hover:bg-black text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                Guardar Activo
-            </button>
-            <a href="{{ route('assets.index') }}" class="inline-block align-baseline font-bold text-sm text-gray-600 hover:text-gray-900">
-                Cancelar
-            </a>
+        <!-- Sticky Actions Footer -->
+        <div class="fixed bottom-0 left-0 right-0 md:left-64 bg-white/80 dark:bg-gray-800/80 backdrop-blur-md border-t border-gray-200 dark:border-gray-700 p-4 z-40 flex items-center justify-between shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]">
+            <div class="hidden md:block text-sm text-gray-500 dark:text-gray-400 italic">
+                Asegúrese de revisar todos los campos requeridos marcados con <span class="text-red-500">*</span>
+            </div>
+            <div class="flex items-center gap-4 w-full md:w-auto">
+                <a href="{{ route('assets.index') }}" class="flex-1 md:flex-none text-center px-8 py-3 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 font-bold rounded-xl transition-all">
+                    Cancelar
+                </a>
+                <button type="submit" class="flex-2 md:flex-none px-12 py-3 bg-gradient-to-r from-indigo-600 to-violet-700 hover:from-indigo-700 hover:to-violet-800 text-white font-extrabold rounded-xl transition-all shadow-xl shadow-indigo-500/20 transform hover:-translate-y-0.5 active:scale-95">
+                    <i class="fas fa-save mr-2"></i> REGISTRAR ACTIVO
+                </button>
+            </div>
         </div>
     </form>
 </div>
@@ -330,14 +383,37 @@ function toggleDepreciationFields() {
     
     if (method === 'none') {
         fields.style.display = 'none';
+        fields.classList.remove('grid');
     } else {
-        fields.style.display = 'contents';
+        fields.style.display = 'grid';
+        fields.classList.add('grid');
     }
 }
 
-// Initialize on page load
+function previewFile(input) {
+    const container = document.getElementById('image-preview-container');
+    const preview = document.getElementById('image-preview');
+    const icon = container.querySelector('i');
+    const span = container.querySelector('span');
+    
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            preview.src = e.target.result;
+            preview.classList.remove('hidden');
+            icon.classList.add('hidden');
+            span.classList.add('hidden');
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
 document.addEventListener('DOMContentLoaded', function() {
-    toggleDepreciationFields();
+    // Scroll padding for the sticky footer
+    document.body.style.paddingBottom = "80px";
+    if (document.getElementById('depreciation_method')) {
+        toggleDepreciationFields();
+    }
 });
 </script>
 @endpush
