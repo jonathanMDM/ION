@@ -77,11 +77,8 @@
             <!-- Header -->
             <!-- Header -->
             <div class="text-center mb-10">
-                <div class="inline-block relative mb-4">
-                    <div class="absolute -inset-2 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl blur opacity-30"></div>
-                    <div class="relative py-4 px-6">
-                        <img src="{{ asset('img/logo-horizontal.png') }}" alt="ION Inventory" class="h-16 w-auto mx-auto">
-                    </div>
+                <div class="mb-4">
+                    <img src="{{ asset('img/logo-horizontal.png') }}" alt="ION Inventory" class="h-16 w-auto mx-auto">
                 </div>
             </div>
 
