@@ -157,7 +157,7 @@
         @foreach(request()->all() as $key => $value)
             <input type="hidden" name="{{ $key }}" value="{{ $value }}">
         @endforeach
-        <button type="submit" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-6 rounded shadow transition duration-200 flex items-center">
+        <button type="submit" class="bg-red-700 hover:bg-red-800 text-white font-bold py-2 px-6 rounded shadow transition duration-200 flex items-center border border-red-800">
             <i class="fas fa-file-pdf mr-2"></i>Descargar PDF
         </button>
     </form>
@@ -167,7 +167,7 @@
         @foreach(request()->all() as $key => $value)
             <input type="hidden" name="{{ $key }}" value="{{ $value }}">
         @endforeach
-        <button type="submit" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-6 rounded shadow transition duration-200 flex items-center">
+        <button type="submit" class="bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-6 rounded shadow transition duration-200 flex items-center border border-green-800">
             <i class="fas fa-file-excel mr-2"></i>Exportar Excel (CSV)
         </button>
     </form>

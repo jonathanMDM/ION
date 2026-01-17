@@ -80,7 +80,7 @@ class ReportController extends Controller
             });
         }
 
-        $assets = $query->get();
+        $assets = $query->orderBy('purchase_date', 'desc')->get();
 
         // Calculate statistics
         $stats = [
@@ -97,7 +97,7 @@ class ReportController extends Controller
         $categories = Category::all();
         $subcategories = \App\Models\Subcategory::with('category')->get();
         $suppliers = \App\Models\Supplier::orderBy('name')->get();
-        $costCenters = \App\Models\CostCenter::where('company_id', \Auth::user()->company_id)->get();
+        $costCenters = \App\Models\CostCenter::where('company_id', \Auth::user()->company_id)->orderBy('name')->get();
 
         return view('reports.index', compact('assets', 'stats', 'locations', 'categories', 'subcategories', 'suppliers', 'costCenters'));
     }
@@ -153,11 +153,13 @@ class ReportController extends Controller
             $search = $request->search;
             $query->where(function($q) use ($search) {
                 $q->where('name', 'like', '%' . $search . '%')
-                  ->orWhere('custom_id', 'like', '%' . $search . '%');
+                  ->orWhere('custom_id', 'like', '%' . $search . '%')
+                  ->orWhere('municipality_plate', 'like', '%' . $search . '%')
+                  ->orWhere('specifications', 'like', '%' . $search . '%');
             });
         }
 
-        $assets = $query->get();
+        $assets = $query->orderBy('purchase_date', 'desc')->get();
 
         $stats = [
             'total_assets' => $assets->sum('quantity'),
@@ -183,11 +185,13 @@ class ReportController extends Controller
             $search = $request->search;
             $query->where(function($q) use ($search) {
                 $q->where('name', 'like', '%' . $search . '%')
-                  ->orWhere('custom_id', 'like', '%' . $search . '%');
+                  ->orWhere('custom_id', 'like', '%' . $search . '%')
+                  ->orWhere('municipality_plate', 'like', '%' . $search . '%')
+                  ->orWhere('specifications', 'like', '%' . $search . '%');
             });
         }
 
-        $assets = $query->get();
+        $assets = $query->orderBy('purchase_date', 'desc')->get();
 
         // Create CSV
         $filename = 'assets-report-' . date('Y-m-d') . '.csv';
