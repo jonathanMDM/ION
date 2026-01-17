@@ -366,8 +366,8 @@
                     Cancelar
                 </a>
                 <button type="submit" 
-                    class="w-full md:w-auto px-16 py-3.5 bg-gradient-to-r from-indigo-600 to-violet-700 hover:from-indigo-700 hover:to-violet-800 text-white font-extrabold rounded-2xl transition-all shadow-xl shadow-indigo-500/20 transform hover:-translate-y-0.5 active:scale-95 flex items-center justify-center">
-                    <i class="fas fa-save mr-2"></i> REGISTRAR ACTIVO
+                    class="w-full md:w-auto px-16 py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-black rounded-2xl transition-all shadow-xl shadow-indigo-500/25 transform hover:-translate-y-0.5 active:scale-95 flex items-center justify-center tracking-wide uppercase text-sm">
+                    <i class="fas fa-save mr-2 text-lg"></i> REGISTRAR ACTIVO
                 </button>
             </div>
         </div>

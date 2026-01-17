@@ -350,8 +350,8 @@
                     Cancelar
                 </a>
                 <button type="submit" 
-                    class="w-full md:w-auto px-16 py-3.5 bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white font-extrabold rounded-2xl transition-all shadow-xl shadow-blue-500/20 transform hover:-translate-y-0.5 flex items-center justify-center">
-                    <i class="fas fa-sync-alt mr-2"></i> ACTUALIZAR DATOS
+                    class="w-full md:w-auto px-16 py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-black rounded-2xl transition-all shadow-xl shadow-indigo-500/25 transform hover:-translate-y-0.5 flex items-center justify-center tracking-wide uppercase text-sm">
+                    <i class="fas fa-sync-alt mr-2 text-lg"></i> ACTUALIZAR DATOS
                 </button>
             </div>
         </div>
