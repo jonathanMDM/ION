@@ -88,16 +88,16 @@
         }
 
         .sidebar-item-active i {
-            color: var(--border-active) !important; /* Lime icon */
+            color: var(--border-active) !important; /* Blue icon */
         }
         
         .sidebar-text {
-            color: #8A9E9A; /* Muted text for inactive */
+            color: #94A3B8; /* Light blue-gray for dark blue background */
             font-weight: 500;
         }
         
         .sidebar-item-active .sidebar-text {
-            color: var(--text-main) !important;
+            color: #FFFFFF !important;
         }
         
         /* SweetAlert Forest Tech Styling */
@@ -270,7 +270,7 @@
             </a>
             
             <div class="mt-4">
-                <div class="px-4 py-2 text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] sidebar-text">Activos</div>
+                <div class="px-4 py-2 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] sidebar-text">Activos</div>
                 @if(Auth::user()->isAdmin() || Auth::user()->hasPermission('view_assets'))
                 <a href="{{ route('assets.index') }}" class="flex items-center px-4 py-3 rounded-xl transition-all hover:bg-white/5 hover:text-white mb-1 {{ request()->routeIs('assets.*') ? 'sidebar-item-active' : '' }}" title="Todos los Activos">
                     <i class="fas fa-box w-6"></i>
@@ -293,7 +293,7 @@
 
             @if(Auth::user()->isAdmin() || Auth::user()->hasPermission('manage_locations') || Auth::user()->hasPermission('manage_categories'))
             <div class="mt-4">
-                <div class="px-4 py-2 text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] sidebar-text">Organización</div>
+                <div class="px-4 py-2 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] sidebar-text">Organización</div>
                 @if(Auth::user()->isAdmin() || Auth::user()->hasPermission('manage_locations'))
                 <a href="{{ route('locations.index') }}" id="tour-locations" class="flex items-center px-4 py-3 rounded-xl transition-all hover:bg-white/5 hover:text-white mb-1 {{ request()->routeIs('locations.*') ? 'sidebar-item-active' : '' }}" title="Ubicaciones">
                     <i class="fas fa-map-marker-alt w-6"></i>
@@ -322,7 +322,7 @@
 
 @if(auth()->user()->company && auth()->user()->company->hasModule("cost_centers"))
 <div class="mt-4">
-    <div class="px-4 py-2 text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] sidebar-text">Finanzas</div>
+    <div class="px-4 py-2 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] sidebar-text">Finanzas</div>
     @if(Auth::user()->isAdmin() || Auth::user()->hasPermission("view_cost_centers"))
     <a href="{{ route("cost-centers.index") }}" class="flex items-center px-4 py-3 rounded-xl transition-all hover:bg-white/5 hover:text-white mb-1 {{ request()->routeIs("cost-centers.*") ? "sidebar-item-active" : "" }}" title="Centros de Costo">
         <i class="fas fa-building w-6"></i>
@@ -334,7 +334,7 @@
             @endif
 
             <div class="mt-4">
-                <div class="px-4 py-2 text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] sidebar-text">Operaciones</div>
+                <div class="px-4 py-2 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] sidebar-text">Operaciones</div>
                 @if(Auth::user()->isAdmin() || Auth::user()->hasPermission('view_maintenance'))
                 <a href="{{ route('maintenances.index') }}" id="tour-maintenance" class="flex items-center px-4 py-3 rounded-xl transition-all hover:bg-white/5 hover:text-white mb-1 {{ request()->routeIs('maintenances.*') ? 'sidebar-item-active' : '' }}" title="Mantenimiento">
                     <i class="fas fa-wrench w-6"></i>
@@ -356,7 +356,7 @@
             </div>
 
             <div class="mt-4 pb-20">
-                <div class="px-4 py-2 text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] sidebar-text">Configuración</div>
+                <div class="px-4 py-2 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] sidebar-text">Configuración</div>
 
                 @if(Auth::user()->isAdmin())
                 <a href="{{ route('users.index') }}" id="tour-users" class="flex items-center px-4 py-3 rounded-xl transition-all hover:bg-white/5 hover:text-white mb-1 {{ request()->routeIs('users.*') ? 'sidebar-item-active' : '' }}" title="Usuarios">
