@@ -17,35 +17,44 @@
         .sidebar-collapsed { width: 4rem; }
         .sidebar-expanded { width: 16rem; }
         .font-logo { font-family: 'Orbitron', sans-serif; }
-        /* Magma Teal Premium Palette */
+        /* Soft Pastel UI Palette (Light Theme) */
         :root {
-            /* Base Colors from Image */
-            --color-burnt-orange: #FE7E3C;
-            --color-lust: #E4201B;
-            --color-copper: #61413C;
-            --color-blue-lagoon: #0E6873;
-            --color-black-pearl: #1A2C30;
+            /* Main Backgrounds */
+            --bg-body: #F4F7FE;
+            --bg-card: #FFFFFF;
+            --bg-sidebar: #FFFFFF;
             
-            /* Derived & Interface Colors */
-            --bg-body: var(--color-black-pearl);
-            --bg-card: rgba(26, 44, 48, 0.7); /* Slightly lighter Black Pearl for cards */
-            --text-primary: #FFFFFF;
-            --text-secondary: #B0C4C9; /* Light teal-gray for secondary text */
+            /* Text Colors */
+            --text-main: #1B2559;      /* Dark Navy for headings */
+            --text-secondary: #A3AED0; /* Soft Blue-Gray for body text */
+            --text-light: #FFFFFF;
             
-            /* Semantic Mapping */
-            --page-bg: var(--bg-body);
-            --card-bg: var(--bg-card);
-            --primary: var(--color-burnt-orange);
-            --secondary: var(--color-blue-lagoon);
-            --danger: var(--color-lust);
-            --border-color: rgba(14, 104, 115, 0.3); /* Blue Lagoon low opacity */
+            /* Accents & Gradients */
+            --color-primary: #4318FF;
+            --color-secondary: #868CFF;
+            --color-accent-orange: #FFB588;
+            
+            /* UI Gradients */
+            --gradient-blue: linear-gradient(135deg, #868CFF 0%, #4318FF 100%);
+            --gradient-orange: linear-gradient(135deg, #F9AE89 0%, #EE5D50 100%);
+            --gradient-green: linear-gradient(135deg, #6AD299 0%, #3CCF7F 100%);
+            
+            /* Borders & Shadows */
+            --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); /* Soft shadow */
+            --border-light: #E0E5F2;
+            
+            /* Functional Mappings */
+            --color-black-pearl: #1B2559; /* Remapped for compatibility */
+            --color-burnt-orange: #EE5D50; /* Remapped to Soft Red/Orange */
+            --color-blue-lagoon: #4318FF; /* Remapped to Primary Blue */
+            --color-lust: #EE5D50;
         }
         
-        /* Modern Scrollbar - Teal & Orange */
+        /* Modern Scrollbar - Light Theme */
         ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: var(--color-black-pearl); }
-        ::-webkit-scrollbar-thumb { background: var(--color-blue-lagoon); border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--color-burnt-orange); }
+        ::-webkit-scrollbar-track { background: #F4F7FE; }
+        ::-webkit-scrollbar-thumb { background: #E0E5F2; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #A3AED0; }
 
         /* Glassmorphism for Top Bar */
         .glass-header {
@@ -60,41 +69,49 @@
         }
 
         /* Sidebar Item States */
-        /* Sidebar Item States - Orange Accent */
+        /* Sidebar Item States - Soft Pill Style */
         .sidebar-item-active {
-            background: linear-gradient(to right, rgba(254, 126, 60, 0.15), transparent);
-            border-left: 4px solid var(--color-burnt-orange);
-            color: var(--color-burnt-orange) !important;
+            background-color: var(--bg-body) !important;
+            color: var(--text-main) !important;
+            font-weight: 700 !important;
+            border-right: 4px solid var(--color-primary);
+            border-left: none !important;
+            border-radius: 10px 0 0 10px !important;
         }
-        .dark .sidebar-item-active {
-            background: linear-gradient(to right, rgba(254, 126, 60, 0.2), transparent);
-            border-left: 4px solid var(--color-burnt-orange);
-            color: var(--color-burnt-orange) !important;
+        
+        .sidebar-text {
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+        
+        .sidebar-item-active .sidebar-text {
+            color: var(--text-main) !important;
         }
         
         /* SweetAlert Forest Tech Styling */
-        /* SweetAlert Magma Styling */
-        .swal-neon-popup {
-            background: #1A2C30 !important; /* Black Pearl */
-            border: 1px solid var(--color-blue-lagoon) !important;
-            box-shadow: 0 0 30px rgba(14, 104, 115, 0.2) !important;
-        }
-        .swal-neon-popup .swal2-title {
-            color: #FFFFFF !important;
-        }
-        .swal-neon-popup .swal2-html-container {
-            color: #B0C4C9 !important;
-        }
-        .swal-neon-confirm {
-            background: var(--color-burnt-orange) !important;
-            color: #FFFFFF !important;
+        /* SweetAlert Soft UI Styling */
+        .swal-neon-popup, .swal2-popup {
+            background: #FFFFFF !important;
+            border-radius: 20px !important;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08) !important;
             border: none !important;
-            box-shadow: 0 4px 15px rgba(254, 126, 60, 0.4) !important;
-            font-weight: 700 !important;
         }
-        .swal-neon-confirm:hover {
-            background: #e06020 !important; /* Darker Orange */
-            box-shadow: 0 6px 20px rgba(254, 126, 60, 0.6) !important;
+        .swal-neon-popup .swal2-title, .swal2-title {
+            color: var(--text-main) !important;
+        }
+        .swal-neon-popup .swal2-html-container, .swal2-html-container {
+            color: var(--text-secondary) !important;
+        }
+        .swal-neon-confirm, .swal2-confirm {
+            background: var(--gradient-blue) !important;
+            color: #FFFFFF !important;
+            border-radius: 12px !important;
+            box-shadow: 0 4px 12px rgba(67, 24, 255, 0.4) !important;
+        }
+        .swal2-cancel {
+            background: #F4F7FE !important;
+            color: var(--text-secondary) !important;
+            border-radius: 12px !important;
         }
 
         /* SweetAlert Magma Custom Icons */
@@ -205,12 +222,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 </head>
-<body class="transition-colors duration-200" style="background-color: var(--bg-body); color: #FFFFFF;">
+<body class="transition-colors duration-200" style="background-color: var(--bg-body); color: var(--text-main);">
     <!-- Mobile Overlay -->
     <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden md:hidden" onclick="toggleMobileSidebar()"></div>
 
     <!-- Sidebar -->
-    <div id="sidebar" class="sidebar-expanded fixed left-0 top-0 h-full transition-all duration-300 z-50 md:z-10 -translate-x-full md:translate-x-0 text-slate-300" style="background: var(--color-black-pearl); border-right: 1px solid rgba(14, 104, 115, 0.2); color: #B0C4C9;">
+    <div id="sidebar" class="sidebar-expanded fixed left-0 top-0 h-full transition-all duration-300 z-50 md:z-10 -translate-x-full md:translate-x-0" style="background: var(--bg-sidebar); border-right: none; box-shadow: 4px 0 24px rgba(0,0,0,0.02);">
         <div class="p-6 border-b border-white/5">
             <div class="flex items-center justify-between">
                 <div class="flex items-center">
