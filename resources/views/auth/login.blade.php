@@ -64,16 +64,16 @@
         }
     </style>
 </head>
-<body style="background: #000000; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 1rem;" class="font-sans text-slate-200">
+<body style="background: var(--bg-rich-black); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 1rem;" class="font-sans text-slate-200">
     <div class="blob" style="top: -100px; left: -100px;"></div>
     <div class="blob" style="bottom: -100px; right: -100px; background: radial-gradient(circle, rgba(147, 51, 234, 0.2) 0%, rgba(147, 51, 234, 0) 70%); animation-delay: -5s;"></div>
 
     <div class="relative w-full max-w-md">
         <!-- Decoration -->
-        <div class="absolute -top-10 -left-10 w-20 h-20 rounded-full blur-3xl" style="background: rgba(0, 255, 78, 0.2);"></div>
-        <div class="absolute -bottom-10 -right-10 w-20 h-20 rounded-full blur-3xl" style="background: rgba(0, 245, 255, 0.2);"></div>
+        <div class="absolute -top-10 -left-10 w-20 h-20 rounded-full blur-3xl opacity-30" style="background: var(--green-caribbean);"></div>
+        <div class="absolute -bottom-10 -right-10 w-20 h-20 rounded-full blur-3xl opacity-30" style="background: var(--green-mountain);"></div>
 
-        <div class="glass-container relative overflow-hidden rounded-[2.5rem] p-8 sm:p-10" style="background: rgba(26, 26, 26, 0.8); backdrop-filter: blur(20px); border: 1px solid rgba(0, 245, 255, 0.2); box-shadow: 0 0 40px rgba(0, 245, 255, 0.1);">
+        <div class="glass-container relative overflow-hidden rounded-[2.5rem] p-8 sm:p-10 transition-all hover:shadow-[0_0_50px_-10px_rgba(0,223,129,0.1)]" style="background: rgba(3, 34, 33, 0.85); backdrop-filter: blur(20px); border: 1px solid var(--green-bangladesh); box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);">
             <!-- Header -->
             <!-- Header -->
             <div class="text-center mb-10">
@@ -153,12 +153,14 @@
                     <label class="flex items-center group cursor-pointer">
                         <div class="relative flex items-center">
                             <input type="checkbox" name="remember" class="peer sr-only">
-                            <div class="w-5 h-5 border rounded-md transition-all" style="background: #1a1a1a; border-color: rgba(255, 255, 255, 0.1);" data-checked-style="background: #00f5ff; border-color: #00f5ff;"></div>
+                            <div class="w-5 h-5 border rounded-md transition-all flex items-center justify-center" style="background: var(--bg-rich-black); border-color: var(--green-bangladesh);" data-checked-style="background: var(--green-caribbean); border-color: var(--green-caribbean);">
+                                <i class="fas fa-check text-[10px] text-[#000F08] opacity-0 transition-opacity peer-checked:opacity-100"></i>
+                            </div>
                             <i class="fas fa-check absolute scale-0 peer-checked:scale-100 text-[10px] text-white w-5 text-center transition-transform"></i>
                         </div>
                         <span class="ml-2 text-xs text-slate-400 group-hover:text-slate-200 transition-colors">Recordarme</span>
                     </label>
-                    <a href="{{ route('password.request') }}" class="text-xs font-bold transition-colors" style="color: #00f5ff;">
+                    <a href="{{ route('password.request') }}" class="text-xs font-bold transition-colors hover:underline" style="color: var(--green-caribbean);">
                         ¿Olvidaste tu contraseña?
                     </a>
                 </div>
@@ -167,9 +169,9 @@
                 <button 
                     type="submit" 
                     class="group relative w-full py-4 font-black rounded-2xl transition-all shadow-lg active:scale-[0.98] overflow-hidden"
-                    style="background: #00ff4e; color: #000000; box-shadow: 0 0 30px rgba(0, 255, 78, 0.5);"
+                    style="background: var(--green-caribbean); color: #000F08; box-shadow: 0 10px 30px -5px rgba(0, 223, 129, 0.4);"
                 >
-                    <div class="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity" style="background: linear-gradient(to right, #00ff4e, #00f5ff);"></div>
+                    <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity" style="background: linear-gradient(to right, var(--green-caribbean), var(--green-mountain));"></div>
                     <span class="relative flex items-center justify-center">
                         <i class="fas fa-sign-in-alt mr-2 text-sm"></i>
                         INICIAR SESIÓN

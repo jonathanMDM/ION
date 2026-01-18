@@ -27,22 +27,22 @@
     @if(!auth()->user()->company_id || isset($subscriptionWarning))
     <div class="grid grid-cols-1 gap-6">
         @if(!auth()->user()->company_id)
-        <div class="rounded-3xl p-8 text-white relative overflow-hidden shadow-2xl" style="background: linear-gradient(to right, #1a1a1a, #000000); border: 1px solid rgba(0, 255, 78, 0.3);">
+        <div class="rounded-3xl p-8 text-white relative overflow-hidden shadow-2xl" style="background: linear-gradient(135deg, var(--bg-dark-green), var(--bg-rich-black)); border: 1px solid var(--green-bangladesh);">
             <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6 font-medium">
                 <div class="flex items-center gap-5">
-                    <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl shadow-lg" style="background: rgba(0, 255, 78, 0.2); border: 1px solid rgba(0, 255, 78, 0.4); box-shadow: 0 10px 15px -3px rgba(0, 255, 78, 0.2);">
-                        <i class="fas fa-building" style="color: #00ff4e;"></i>
+                    <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl shadow-lg" style="background: rgba(3, 98, 76, 0.3); border: 1px solid var(--green-bangladesh); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);">
+                        <i class="fas fa-building" style="color: var(--green-caribbean);"></i>
                     </div>
                     <div>
-                        <h2 class="text-xl font-bold">Cuenta sin Organización</h2>
-                        <p class="text-gray-300">Vincule su cuenta a una empresa para empezar a gestionar inventarios.</p>
+                        <h2 class="text-xl font-bold" style="color: var(--text-white);">Cuenta sin Organización</h2>
+                        <p style="color: var(--text-pistachio);">Vincule su cuenta a una empresa para empezar a gestionar inventarios.</p>
                     </div>
                 </div>
-                <a href="https://wa.me/573145781261" target="_blank" class="px-6 py-3 text-black rounded-xl font-black shadow-lg transition-all hover:opacity-90" style="background: #00ff4e; box-shadow: 0 10px 15px -3px rgba(0, 255, 78, 0.5);">
+                <a href="https://wa.me/573145781261" target="_blank" class="px-6 py-3 rounded-xl font-black shadow-lg transition-all hover:opacity-90 hover:scale-105" style="background: var(--green-caribbean); color: var(--bg-rich-black); box-shadow: 0 4px 20px rgba(0, 223, 129, 0.4);">
                     Soporte Técnico
                 </a>
             </div>
-            <div class="absolute -right-10 -bottom-10 w-40 h-40 rounded-full blur-3xl" style="background: rgba(0, 255, 78, 0.1);"></div>
+            <div class="absolute -right-10 -bottom-10 w-40 h-40 rounded-full blur-3xl opacity-20" style="background: var(--green-caribbean);"></div>
         </div>
         @endif
         
@@ -70,64 +70,64 @@
     <!-- Metrics Grid -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         <!-- Total Assets -->
-        <div class="p-6 rounded-3xl shadow-lg transition-all hover:shadow-xl" style="background: #242424; border: 1px solid rgba(0, 245, 255, 0.3); box-shadow: 0 4px 6px -1px rgba(0, 245, 255, 0.1);">
+        <div class="p-6 rounded-3xl shadow-lg transition-all hover:shadow-xl hover:-translate-y-1" style="background: var(--bg-dark-green); border: 1px solid var(--green-bangladesh);">
             <div class="flex items-start justify-between">
                 <div>
-                    <p class="text-[10px] font-black uppercase tracking-widest text-gray-500 mb-1">Activos Totales</p>
-                    <h3 class="text-4xl font-extrabold text-white leading-tight">
+                    <p class="text-[10px] font-black uppercase tracking-widest mb-1" style="color: var(--text-pistachio);">Activos Totales</p>
+                    <h3 class="text-4xl font-extrabold leading-tight" style="color: var(--text-white);">
                         {{ $stats['total_assets'] ?? 0 }}
                     </h3>
-                    <p class="text-xs font-bold mt-1" style="color: #00f5ff;">Unidades en sistema</p>
+                    <p class="text-xs font-bold mt-1" style="color: var(--green-mountain);">Unidades en sistema</p>
                 </div>
-                <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-xl shadow-lg" style="background: rgba(0, 245, 255, 0.2); color: #00f5ff; border: 1px solid rgba(0, 245, 255, 0.4); box-shadow: 0 10px 15px -3px rgba(0, 245, 255, 0.2);">
+                <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-xl shadow-lg" style="background: rgba(3, 98, 76, 0.3); border: 1px solid var(--green-bangladesh); color: var(--green-caribbean);">
                     <i class="fas fa-boxes"></i>
                 </div>
             </div>
         </div>
 
         <!-- Operative -->
-        <div class="p-6 rounded-3xl shadow-lg transition-all hover:shadow-xl" style="background: #242424; border: 1px solid rgba(0, 255, 78, 0.3); box-shadow: 0 4px 6px -1px rgba(0, 255, 78, 0.1);">
+        <div class="p-6 rounded-3xl shadow-lg transition-all hover:shadow-xl hover:-translate-y-1" style="background: var(--bg-dark-green); border: 1px solid var(--green-bangladesh);">
             <div class="flex items-start justify-between">
                 <div>
-                    <p class="text-[10px] font-black uppercase tracking-widest text-gray-500 mb-1">Operativos</p>
-                    <h3 class="text-4xl font-extrabold leading-tight" style="color: #00ff4e;">
+                    <p class="text-[10px] font-black uppercase tracking-widest mb-1" style="color: var(--text-pistachio);">Operativos</p>
+                    <h3 class="text-4xl font-extrabold leading-tight" style="color: var(--green-caribbean);">
                         {{ $stats['active_assets'] ?? 0 }}
                     </h3>
-                    <p class="text-xs font-bold text-gray-400 mt-1">Estado: Activo</p>
+                    <p class="text-xs font-bold mt-1" style="color: var(--green-mountain);">Estado: Activo</p>
                 </div>
-                <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-xl shadow-lg" style="background: rgba(0, 255, 78, 0.2); color: #00ff4e; border: 1px solid rgba(0, 255, 78, 0.4); box-shadow: 0 10px 15px -3px rgba(0, 255, 78, 0.2);">
+                <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-xl shadow-lg" style="background: rgba(0, 223, 129, 0.1); border: 1px solid var(--green-caribbean); color: var(--green-caribbean);">
                     <i class="fas fa-check-circle"></i>
                 </div>
             </div>
         </div>
 
         <!-- Maintenance -->
-        <div class="p-6 rounded-3xl shadow-lg transition-all hover:shadow-xl" style="background: #242424; border: 1px solid rgba(255, 234, 0, 0.3); box-shadow: 0 4px 6px -1px rgba(255, 234, 0, 0.1);">
+        <div class="p-6 rounded-3xl shadow-lg transition-all hover:shadow-xl hover:-translate-y-1" style="background: var(--bg-dark-green); border: 1px solid var(--green-bangladesh);">
             <div class="flex items-start justify-between">
                 <div>
-                    <p class="text-[10px] font-black uppercase tracking-widest text-gray-500 mb-1">En Taller</p>
-                    <h3 class="text-4xl font-extrabold leading-tight" style="color: #ffea00;">
+                    <p class="text-[10px] font-black uppercase tracking-widest mb-1" style="color: var(--text-pistachio);">En Taller</p>
+                    <h3 class="text-4xl font-extrabold leading-tight" style="color: #F59E0B;">
                         {{ $stats['maintenance_assets'] ?? 0 }}
                     </h3>
-                    <p class="text-xs font-bold text-gray-400 mt-1">Requiere atención</p>
+                    <p class="text-xs font-bold mt-1" style="color: var(--text-pistachio); opacity: 0.7;">Requiere atención</p>
                 </div>
-                <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-xl shadow-lg" style="background: rgba(255, 234, 0, 0.2); color: #ffea00; border: 1px solid rgba(255, 234, 0, 0.4); box-shadow: 0 10px 15px -3px rgba(255, 234, 0, 0.2);">
+                <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-xl shadow-lg" style="background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); color: #F59E0B;">
                     <i class="fas fa-tools"></i>
                 </div>
             </div>
         </div>
 
         <!-- Decommissioned -->
-        <div class="p-6 rounded-3xl shadow-lg transition-all hover:shadow-xl" style="background: #242424; border: 1px solid rgba(255, 0, 85, 0.3); box-shadow: 0 4px 6px -1px rgba(255, 0, 85, 0.1);">
+        <div class="p-6 rounded-3xl shadow-lg transition-all hover:shadow-xl hover:-translate-y-1" style="background: var(--bg-dark-green); border: 1px solid var(--green-bangladesh);">
             <div class="flex items-start justify-between">
                 <div>
-                    <p class="text-[10px] font-black uppercase tracking-widest text-gray-500 mb-1">Bajas</p>
-                    <h3 class="text-4xl font-extrabold leading-tight" style="color: #ff0055;">
+                    <p class="text-[10px] font-black uppercase tracking-widest mb-1" style="color: var(--text-pistachio);">Bajas</p>
+                    <h3 class="text-4xl font-extrabold leading-tight" style="color: #EF4444;">
                         {{ $stats['decommissioned_assets'] ?? 0 }}
                     </h3>
-                    <p class="text-xs font-bold text-gray-400 mt-1">Fuera de servicio</p>
+                    <p class="text-xs font-bold mt-1" style="color: var(--text-pistachio); opacity: 0.7;">Fuera de servicio</p>
                 </div>
-                <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-xl shadow-lg" style="background: rgba(255, 0, 85, 0.2); color: #ff0055; border: 1px solid rgba(255, 0, 85, 0.4); box-shadow: 0 10px 15px -3px rgba(255, 0, 85, 0.2);">
+                <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-xl shadow-lg" style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); color: #EF4444;">
                     <i class="fas fa-ban"></i>
                 </div>
             </div>
@@ -139,74 +139,88 @@
         <!-- Main Column: Recent Activity and Alerts (2/3 width) -->
         <div class="lg:col-span-2 space-y-8">
             
-            <!-- Stock Alerter (Conditional) -->
-            @if($lowStockAssets->count() > 0)
-            <div class="bg-white dark:bg-gray-800 rounded-3xl border border-red-100 dark:border-red-900/30 shadow-sm p-6">
+            <!-- Assets per Location -->
+            <div class="rounded-3xl shadow-sm p-6" style="background: var(--bg-dark-green); border: 1px solid var(--green-bangladesh);">
                 <div class="flex items-center justify-between mb-6">
-                    <h4 class="text-lg font-bold text-gray-900 dark:text-white flex items-center gap-2">
-                        <i class="fas fa-exclamation-triangle text-red-500"></i>
-                        Alertas de Stock Bajo
-                    </h4>
-                    <span class="px-3 py-1 bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400 text-xs font-black rounded-lg uppercase tracking-wider">
-                        Acción Requerida
+                    <h4 class="text-lg font-bold" style="color: var(--text-white);">Activos por Sede</h4>
+                    <span class="text-xs px-2 py-1 rounded bg-opacity-20 flex items-center gap-1" style="background: rgba(3, 98, 76, 0.3); color: var(--green-mountain);">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span class="font-bold">{{ $stats['locations_count'] ?? 0 }}</span>
+                        Sedes
                     </span>
                 </div>
                 <div class="space-y-4">
-                    @foreach($lowStockAssets as $asset)
+                    @forelse($assets_per_location as $location)
                     <div class="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-900/50 rounded-2xl border border-gray-100 dark:border-gray-700">
                         <div class="flex items-center gap-4">
                             <div class="w-10 h-10 bg-white dark:bg-gray-800 rounded-lg flex items-center justify-center border border-gray-100 dark:border-gray-700">
-                                <i class="fas fa-microchip text-gray-400"></i>
+                                <i class="fas fa-building text-gray-400"></i>
                             </div>
                             <div>
-                                <p class="text-sm font-bold text-gray-900 dark:text-white">{{ $asset->name }}</p>
-                                <p class="text-[10px] text-gray-500 font-medium">{{ $asset->location->name }} • {{ $asset->subcategory->name }}</p>
+                                <p class="text-sm font-bold text-gray-900 dark:text-white">{{ $location->name }}</p>
+                                <p class="text-[10px] text-gray-500 font-medium">{{ $location->address }}</p>
                             </div>
                         </div>
                         <div class="text-right">
-                            <p class="text-sm font-black text-red-600">{{ $asset->quantity }} / {{ $asset->minimum_quantity }}</p>
-                            <p class="text-[9px] font-bold text-gray-400 uppercase tracking-widest">Disponible / Mín.</p>
+                            <p class="text-sm font-black text-green-600 dark:text-green-400">{{ $location->assets_count }}</p>
+                            <p class="text-[9px] font-bold text-gray-400 uppercase tracking-widest">Activos</p>
                         </div>
+                    </div>
+                    @empty
+                    <div class="p-4 text-center text-gray-400">
+                        <p class="text-sm font-medium">No hay sedes con activos registrados.</p>
+                    </div>
+                    @endforelse
+                </div>
+            </div>
+            
+            <!-- Stock Alerter (Conditional) -->
+            @if($lowStockAssets->count() > 0)
+            <div class="rounded-3xl shadow-sm p-6" style="background: var(--bg-dark-green); border: 1px solid rgba(239, 68, 68, 0.3);">
+                <div class="flex items-center justify-between mb-4">
+                    <h4 class="text-lg font-bold" style="color: var(--text-white);">Alertas de Stock</h4>
+                    <span class="text-xs px-2 py-1 rounded flex items-center gap-1 font-bold" style="background: rgba(239, 68, 68, 0.1); color: #EF4444;">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        Atención Requerida
+                    </span>
+                </div>
+                <div class="space-y-3">
+                    @foreach($lowStockAssets as $asset)
+                    <div class="flex items-center justify-between p-3 rounded-xl border" style="background: rgba(239, 68, 68, 0.05); border-color: rgba(239, 68, 68, 0.2);">
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background: rgba(239, 68, 68, 0.1); color: #EF4444;">
+                                <i class="fas fa-box-open"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm font-bold" style="color: var(--text-white);">{{ $asset->name }}</p>
+                                <p class="text-[10px] font-medium" style="color: #EF4444;">Stock Bajo: {{ $asset->stock }} unds</p>
+                            </div>
+                        </div>
+                        <a href="{{ route('assets.show', $asset->id) }}" class="text-xs font-bold hover:underline" style="color: #EF4444;">Ver</a>
                     </div>
                     @endforeach
                 </div>
             </div>
             @endif
 
-            <!-- Recent Assets Table -->
-            <div class="bg-white dark:bg-gray-800 rounded-3xl border border-gray-100 dark:border-gray-700 shadow-sm overflow-hidden">
-                <div class="p-6 border-b border-gray-50 dark:border-gray-700 flex justify-between items-center">
-                    <h4 class="text-lg font-bold text-gray-900 dark:text-white">Activos Recientes</h4>
-                    <a href="{{ route('assets.index') }}" class="text-sm font-bold text-sky-600 dark:text-sky-400 hover:underline">Ver Todo</a>
+            <!-- Recent Assets -->
+            <div class="rounded-3xl shadow-sm p-6" style="background: var(--bg-dark-green); border: 1px solid var(--green-bangladesh);">
+                <div class="flex items-center justify-between mb-6">
+                    <h4 class="text-lg font-bold" style="color: var(--text-white);">Activos Recientes</h4>
+                    <a href="{{ route('assets.index') }}" class="text-xs font-bold hover:opacity-80 transition-opacity" style="color: var(--green-caribbean);">Ver Todo</a>
                 </div>
-                <div class="divide-y divide-gray-50 dark:divide-gray-700">
-                    @forelse($recent_assets as $asset)
-                    <div class="p-5 flex items-center justify-between hover:bg-gray-50 dark:hover:bg-gray-900/20 transition-all">
+                <div class="space-y-4">
+                    @foreach($recentAssets as $asset)
+                    <div class="flex items-center justify-between group p-2 hover:bg-white/5 rounded-xl transition-colors">
                         <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 rounded-xl bg-gray-50 dark:bg-gray-700 flex items-center justify-center border border-gray-100 dark:border-gray-600 overflow-hidden">
-                                @if($asset->image)
-                                    <img src="{{ \Illuminate\Support\Str::startsWith($asset->image, 'http') ? $asset->image : asset('storage/' . $asset->image) }}" class="w-full h-full object-cover">
+                            <div class="relative">
+                                @if($asset->image_path)
+                                <img src="{{ asset('storage/' . $asset->image_path) }}" class="w-12 h-12 rounded-xl object-cover border shadow-sm" style="border-color: var(--green-bangladesh);" alt="{{ $asset->name }}">
                                 @else
-                                    <i class="fas fa-image text-gray-300"></i>
+                                <div class="w-12 h-12 rounded-xl flex items-center justify-center border shadow-sm" style="background: rgba(3, 98, 76, 0.3); border-color: var(--green-bangladesh); color: var(--green-mountain);">
+                                    <i class="fas fa-cube text-lg"></i>
+                                </div>
                                 @endif
-                            </div>
-                            <div>
-                                <a href="{{ route('assets.show', $asset->id) }}" class="text-sm font-bold text-gray-900 dark:text-white hover:text-sky-600 transition-colors">{{ $asset->name }}</a>
-                                <p class="text-xs text-gray-500 mt-0.5">{{ $asset->subcategory->category->name }} • {{ $asset->location->name }}</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-6">
-                            <div class="hidden sm:block text-right text-xs">
-                                <p class="text-gray-400 font-medium">Agregado</p>
-                                <p class="font-bold text-gray-600 dark:text-gray-400">{{ $asset->created_at->diffForHumans() }}</p>
-                            </div>
-                            <span class="px-2.5 py-1 text-[10px] font-black uppercase rounded-lg border
-                                {{ $asset->status == 'active' ? 'bg-emerald-50 text-emerald-600 border-emerald-100 dark:bg-emerald-900/20 dark:border-emerald-800/50' : '' }}
-                                {{ $asset->status == 'maintenance' ? 'bg-amber-50 text-amber-600 border-amber-100 dark:bg-amber-900/20 dark:border-amber-800/50' : '' }}
-                                {{ $asset->status == 'decommissioned' ? 'bg-red-50 text-red-600 border-red-100 dark:bg-red-900/20 dark:border-red-800/50' : '' }}">
-                                {{ ucfirst($asset->status) }}
-                            </span>
-                        </div>
                     </div>
                     @empty
                     <div class="p-12 text-center text-gray-400">
@@ -222,28 +236,28 @@
         <div class="space-y-8">
             
             <!-- Quick Actions -->
-            <div class="rounded-3xl shadow-sm p-6" style="background: #242424; border: 1px solid rgba(0, 245, 255, 0.2);">
-                <h4 class="text-lg font-bold text-white mb-6">Acciones Rápidas</h4>
+            <div class="rounded-3xl shadow-sm p-6" style="background: var(--bg-dark-green); border: 1px solid var(--green-bangladesh);">
+                <h4 class="text-lg font-bold mb-6" style="color: var(--text-white);">Acciones Rápidas</h4>
                 <div class="grid grid-cols-1 gap-3">
                     @if(Auth::user()->hasPermission('create_assets'))
-                    <a href="{{ route('assets.create') }}" class="group flex items-center p-4 rounded-2xl transition-all" style="background: rgba(0, 255, 78, 0.1); border: 1px solid rgba(0, 255, 78, 0.3);">
-                        <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform" style="background: rgba(0, 255, 78, 0.2); color: #00ff4e;">
+                    <a href="{{ route('assets.create') }}" class="group flex items-center p-4 rounded-2xl transition-all" style="background: rgba(0, 223, 129, 0.1); border: 1px solid var(--green-bangladesh);">
+                        <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform" style="background: rgba(0, 223, 129, 0.2); color: var(--green-caribbean);">
                             <i class="fas fa-plus"></i>
                         </div>
                         <div class="ml-4">
-                            <span class="text-sm font-bold group-hover:text-white transition-colors" style="color: #00ff4e;">Nuevo Activo</span>
-                            <span class="block text-[10px] text-gray-400 group-hover:text-gray-300 transition-colors uppercase tracking-widest font-black">Registro Central</span>
+                            <span class="text-sm font-bold group-hover:text-white transition-colors" style="color: var(--green-caribbean);">Nuevo Activo</span>
+                            <span class="block text-[10px] group-hover:text-white transition-colors uppercase tracking-widest font-black" style="color: var(--text-pistachio);">Registro Central</span>
                         </div>
                     </a>
                     @endif
 
                     @if(Auth::user()->hasPermission('import_assets'))
-                    <a href="{{ route('imports.create') }}" class="group flex items-center p-4 rounded-2xl transition-all" style="background: rgba(0, 245, 255, 0.1); border: 1px solid rgba(0, 245, 255, 0.3);">
-                        <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform" style="background: rgba(0, 245, 255, 0.2); color: #00f5ff;">
+                    <a href="{{ route('imports.create') }}" class="group flex items-center p-4 rounded-2xl transition-all" style="background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.2);">
+                        <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform" style="background: rgba(59, 130, 246, 0.2); color: #3B82F6;">
                             <i class="fas fa-file-excel"></i>
                         </div>
                         <div class="ml-4">
-                            <span class="text-sm font-bold group-hover:text-white transition-colors" style="color: #00f5ff;">Importar Excel</span>
+                            <span class="text-sm font-bold group-hover:text-white transition-colors" style="color: #60A5FA;">Importar Excel</span>
                         </div>
                     </a>
                     @endif

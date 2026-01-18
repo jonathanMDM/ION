@@ -17,25 +17,29 @@
         .sidebar-collapsed { width: 4rem; }
         .sidebar-expanded { width: 16rem; }
         .font-logo { font-family: 'Orbitron', sans-serif; }
-        [x-cloak] { display: none !important; }
-        
-        /* Neon Cyberpunk Color Palette */
+        /* Forest Tech Color Palette */
         :root {
-            --neon-green: #00ff4e;
-            --neon-cyan: #00f5ff;
-            --neon-purple: #b026ff;
-            --neon-yellow: #ffea00;
-            --neon-red: #ff0055;
-            --dark-bg: #242424;
-            --darker-bg: #1a1a1a;
-            --black-bg: #000000;
+            --bg-rich-black: #000F08;
+            --bg-dark-green: #032221;
+            --green-bangladesh: #03624C;
+            --green-mountain: #2CC295;
+            --green-caribbean: #00DF81;
+            --text-white: #F1F7F6;
+            --text-pistachio: #AACBC4;
+            
+            /* Semantic Mapping */
+            --page-bg: var(--bg-rich-black);
+            --card-bg: var(--bg-dark-green);
+            --primary: var(--green-caribbean);
+            --secondary: var(--green-mountain);
+            --border-color: var(--green-bangladesh);
         }
         
         /* Modern Scrollbar */
         ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: rgba(0, 245, 255, 0.3); border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: rgba(0, 245, 255, 0.5); }
+        ::-webkit-scrollbar-track { background: var(--bg-rich-black); }
+        ::-webkit-scrollbar-thumb { background: var(--green-bangladesh); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--green-mountain); }
 
         /* Glassmorphism for Top Bar */
         .glass-header {
@@ -51,38 +55,38 @@
 
         /* Sidebar Item States */
         .sidebar-item-active {
-            background: linear-gradient(to right, rgba(0, 245, 255, 0.15), transparent);
-            border-left: 4px solid #00f5ff;
-            color: #00f5ff !important;
+            background: linear-gradient(to right, rgba(0, 223, 129, 0.1), transparent);
+            border-left: 4px solid var(--green-caribbean);
+            color: var(--green-caribbean) !important;
         }
         .dark .sidebar-item-active {
-            background: linear-gradient(to right, rgba(0, 245, 255, 0.2), transparent);
-            border-left: 4px solid #00f5ff;
-            color: #00f5ff !important;
+            background: linear-gradient(to right, rgba(0, 223, 129, 0.15), transparent);
+            border-left: 4px solid var(--green-caribbean);
+            color: var(--green-caribbean) !important;
         }
         
-        /* SweetAlert Neon Styling */
+        /* SweetAlert Forest Tech Styling */
         .swal-neon-popup {
-            background: #1a1a1a !important;
-            border: 1px solid rgba(0, 245, 255, 0.3) !important;
-            box-shadow: 0 0 30px rgba(0, 245, 255, 0.2) !important;
+            background: var(--bg-dark-green) !important;
+            border: 1px solid var(--green-bangladesh) !important;
+            box-shadow: 0 0 30px rgba(0, 223, 129, 0.1) !important;
         }
         .swal-neon-popup .swal2-title {
-            color: #ffffff !important;
+            color: var(--text-white) !important;
         }
         .swal-neon-popup .swal2-html-container {
-            color: #e0e0e0 !important;
+            color: var(--text-pistachio) !important;
         }
         .swal-neon-confirm {
-            background: #00ff4e !important;
-            color: #000000 !important;
+            background: var(--green-caribbean) !important;
+            color: var(--bg-rich-black) !important;
             border: none !important;
-            box-shadow: 0 0 20px rgba(0, 255, 78, 0.5) !important;
-            font-weight: 800 !important;
+            box-shadow: 0 4px 15px rgba(0, 223, 129, 0.3) !important;
+            font-weight: 700 !important;
         }
         .swal-neon-confirm:hover {
-            background: #00ff4e !important;
-            box-shadow: 0 0 30px rgba(0, 255, 78, 0.7) !important;
+            background: var(--green-mountain) !important;
+            box-shadow: 0 6px 20px rgba(44, 194, 149, 0.4) !important;
         }
 
         /* Modern SweetAlert2 Premium Theme */
@@ -187,7 +191,7 @@
     <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden md:hidden" onclick="toggleMobileSidebar()"></div>
 
     <!-- Sidebar -->
-    <div id="sidebar" class="sidebar-expanded fixed left-0 top-0 h-full text-slate-400 transition-all duration-300 z-50 md:z-10 -translate-x-full md:translate-x-0" style="background: #000000; border-right: 1px solid rgba(0, 245, 255, 0.1);">
+    <div id="sidebar" class="sidebar-expanded fixed left-0 top-0 h-full text-slate-400 transition-all duration-300 z-50 md:z-10 -translate-x-full md:translate-x-0" style="background: var(--bg-rich-black); border-right: 1px solid rgba(255, 255, 255, 0.05);">
         <div class="p-6 border-b border-white/5">
             <div class="flex items-center justify-between">
                 <div class="flex items-center">
@@ -333,26 +337,26 @@
     <div id="main-content" class="ml-0 md:ml-64 transition-all duration-300 relative z-20 md:z-0 flex flex-col min-h-screen bg-slate-100 dark:bg-navy-900">
         <div class="flex flex-col">
         @if(session()->has('impersonator_id'))
-        <div class="backdrop-blur-xl text-white px-3 py-2 md:px-6 flex flex-row justify-between items-center shadow-2xl relative z-[60]" style="background: rgba(0, 0, 0, 0.95); border-bottom: 1px solid rgba(0, 245, 255, 0.2);">
+        <div class="backdrop-blur-xl text-white px-3 py-2 md:px-6 flex flex-row justify-between items-center shadow-2xl relative z-[60]" style="background: rgba(0, 15, 8, 0.95); border-bottom: 1px solid var(--green-bangladesh);">
             <div class="flex items-center gap-2 md:gap-4 overflow-hidden">
-                <div class="flex h-7 w-7 md:h-9 md:w-9 items-center justify-center rounded-xl shadow-inner flex-shrink-0" style="background: rgba(0, 245, 255, 0.2); border: 1px solid rgba(0, 245, 255, 0.4);">
-                    <i class="fas fa-user-secret animate-pulse text-xs md:text-lg" style="color: #00f5ff;"></i>
+                <div class="flex h-7 w-7 md:h-9 md:w-9 items-center justify-center rounded-xl shadow-inner flex-shrink-0" style="background: rgba(3, 98, 76, 0.3); border: 1px solid var(--green-bangladesh);">
+                    <i class="fas fa-user-secret animate-pulse text-xs md:text-lg" style="color: var(--green-caribbean);"></i>
                 </div>
                 <div class="min-w-0">
                     <div class="hidden md:flex items-center gap-2">
-                        <span class="text-[10px] uppercase tracking-[0.2em] font-black" style="color: #00f5ff;">Modo Admin</span>
-                        <span class="h-1 w-1 rounded-full" style="background: #00f5ff;"></span>
-                        <span class="text-[10px] uppercase tracking-[0.2em] font-black" style="color: #00ff4e;">Sesión Activa</span>
+                        <span class="text-[10px] uppercase tracking-[0.2em] font-black" style="color: var(--green-mountain);">Modo Admin</span>
+                        <span class="h-1 w-1 rounded-full" style="background: var(--green-caribbean);"></span>
+                        <span class="text-[10px] uppercase tracking-[0.2em] font-black" style="color: var(--green-caribbean);">Sesión Activa</span>
                     </div>
                     <p class="text-xs md:text-sm font-medium text-slate-200 truncate flex items-center">
-                        <span class="md:hidden font-bold mr-1" style="color: #00f5ff;">Admin:</span>
+                        <span class="md:hidden font-bold mr-1" style="color: var(--green-caribbean);">Admin:</span>
                         <span class="font-bold text-white tracking-tight truncate">{{ Str::limit(Auth::user()->name, 15) }}</span>
                     </p>
                 </div>
             </div>
             <form action="{{ route('impersonate.stop') }}" method="POST" class="flex-shrink-0 ml-2">
                 @csrf
-                <button type="submit" class="group relative flex items-center justify-center gap-2 px-3 py-1.5 md:px-5 md:py-2 rounded-lg md:rounded-xl text-[10px] md:text-xs font-bold transition-all duration-300 shadow-lg active:scale-95" style="background: rgba(255, 0, 85, 0.2); color: #ff0055; border: 1px solid rgba(255, 0, 85, 0.4);">
+                <button type="submit" class="group relative flex items-center justify-center gap-2 px-3 py-1.5 md:px-5 md:py-2 rounded-lg md:rounded-xl text-[10px] md:text-xs font-bold transition-all duration-300 shadow-lg active:scale-95" style="background: rgba(220, 38, 38, 0.1); color: #ef4444; border: 1px solid rgba(220, 38, 38, 0.3);">
                     <i class="fas fa-power-off opacity-70 group-hover:rotate-90 transition-transform duration-500"></i>
                     <span class="hidden md:inline">SALIR DEL MODO</span>
                     <span class="md:hidden">SALIR</span>
