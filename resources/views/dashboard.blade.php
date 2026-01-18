@@ -173,8 +173,8 @@
             </div>
             @endif
 
-            <!-- Recent Assets (Forest Gradient Theme) -->
-            <div class="rounded-[2rem] p-8 shadow-[0_8px_30px_rgb(0,0,0,0.1)] border border-[#10B981]/20" style="background: linear-gradient(135deg, #064E3B 0%, #047857 100%);">
+            <!-- Recent Assets (Deep Forest Theme) -->
+            <div class="rounded-[2rem] p-8 shadow-[0_8px_30px_rgb(0,0,0,0.1)] border border-[#10B981]/20" style="background: linear-gradient(135deg, #0A3D33 0%, #0C4A3E 100%);">
                 <div class="flex items-center justify-between mb-6">
                     <h4 class="text-xl font-bold text-white tracking-wide">Activos Recientes</h4>
                     <a href="{{ route('assets.index') }}" class="text-sm font-bold text-[#5EEAD4] hover:text-white transition-colors uppercase tracking-wider flex items-center gap-2">
@@ -214,8 +214,8 @@
         <!-- Sidebar Column: Quick Actions and System Health (1/3 width) -->
         <div class="space-y-8 mb-10">
             
-            <!-- Quick Actions (Forest Gradient Theme) -->
-            <div class="rounded-[2rem] p-8 shadow-[0_8px_30px_rgb(0,0,0,0.1)] border border-[#10B981]/20" style="background: linear-gradient(135deg, #065F46 0%, #059669 100%);">
+            <!-- Quick Actions (Deep Forest Theme) -->
+            <div class="rounded-[2rem] p-8 shadow-[0_8px_30px_rgb(0,0,0,0.1)] border border-[#10B981]/20" style="background: linear-gradient(135deg, #0A3D33 0%, #0C4A3E 100%);">
                 <h4 class="text-xl font-bold mb-6 text-white tracking-wide">Acciones Rápidas</h4>
                 <div class="grid grid-cols-1 gap-4">
                     @if(Auth::user()->hasPermission('create_assets'))
@@ -256,10 +256,10 @@
         </div>
     </div>
 
-    <!-- Assets by Location & Regional Occupation (Forest Gradient Theme) -->
+    <!-- Assets by Location & Regional Occupation (Deep Forest Theme) -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
         <!-- Assets by Location -->
-        <div class="rounded-[2rem] p-8 shadow-[0_8px_30px_rgb(0,0,0,0.1)] h-full border border-[#10B981]/20" style="background: linear-gradient(135deg, #064E3B 0%, #047857 100%);">
+        <div class="rounded-[2rem] p-8 shadow-[0_8px_30px_rgb(0,0,0,0.1)] h-full border border-[#10B981]/20" style="background: linear-gradient(135deg, #0A3D33 0%, #0C4A3E 100%);">
             <div class="flex items-center justify-between mb-8">
                 <h4 class="text-xl font-bold flex items-center gap-3 text-white tracking-wide">
                     Activos por Sede
@@ -298,7 +298,7 @@
         </div>
 
         <!-- Regional Occupation (Categories) -->
-        <div class="rounded-[2rem] p-8 shadow-[0_8px_30px_rgb(0,0,0,0.1)] h-full border border-[#10B981]/20" style="background: linear-gradient(135deg, #065F46 0%, #059669 100%);">
+        <div class="rounded-[2rem] p-8 shadow-[0_8px_30px_rgb(0,0,0,0.1)] h-full border border-[#10B981]/20" style="background: linear-gradient(135deg, #0A3D33 0%, #0C4A3E 100%);">
             <div class="flex items-center justify-between mb-8">
                 <h4 class="text-xl font-bold text-white tracking-wide">Ocupación Regional</h4>
                 <span class="text-xs font-bold text-[#CCFBF1] opacity-80 uppercase tracking-widest">{{ $stats['total_locations'] }} Sedes</span>
