@@ -17,29 +17,35 @@
         .sidebar-collapsed { width: 4rem; }
         .sidebar-expanded { width: 16rem; }
         .font-logo { font-family: 'Orbitron', sans-serif; }
-        /* Forest Tech Color Palette */
+        /* Magma Teal Premium Palette */
         :root {
-            --bg-rich-black: #000F08;
-            --bg-dark-green: #032221;
-            --green-bangladesh: #03624C;
-            --green-mountain: #2CC295;
-            --green-caribbean: #00DF81;
-            --text-white: #F1F7F6;
-            --text-pistachio: #AACBC4;
+            /* Base Colors from Image */
+            --color-burnt-orange: #FE7E3C;
+            --color-lust: #E4201B;
+            --color-copper: #61413C;
+            --color-blue-lagoon: #0E6873;
+            --color-black-pearl: #1A2C30;
+            
+            /* Derived & Interface Colors */
+            --bg-body: var(--color-black-pearl);
+            --bg-card: rgba(26, 44, 48, 0.7); /* Slightly lighter Black Pearl for cards */
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0C4C9; /* Light teal-gray for secondary text */
             
             /* Semantic Mapping */
-            --page-bg: var(--bg-rich-black);
-            --card-bg: var(--bg-dark-green);
-            --primary: var(--green-caribbean);
-            --secondary: var(--green-mountain);
-            --border-color: var(--green-bangladesh);
+            --page-bg: var(--bg-body);
+            --card-bg: var(--bg-card);
+            --primary: var(--color-burnt-orange);
+            --secondary: var(--color-blue-lagoon);
+            --danger: var(--color-lust);
+            --border-color: rgba(14, 104, 115, 0.3); /* Blue Lagoon low opacity */
         }
         
-        /* Modern Scrollbar */
+        /* Modern Scrollbar - Teal & Orange */
         ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: var(--bg-rich-black); }
-        ::-webkit-scrollbar-thumb { background: var(--green-bangladesh); border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--green-mountain); }
+        ::-webkit-scrollbar-track { background: var(--color-black-pearl); }
+        ::-webkit-scrollbar-thumb { background: var(--color-blue-lagoon); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--color-burnt-orange); }
 
         /* Glassmorphism for Top Bar */
         .glass-header {
@@ -54,39 +60,41 @@
         }
 
         /* Sidebar Item States */
+        /* Sidebar Item States - Orange Accent */
         .sidebar-item-active {
-            background: linear-gradient(to right, rgba(0, 223, 129, 0.1), transparent);
-            border-left: 4px solid var(--green-caribbean);
-            color: var(--green-caribbean) !important;
+            background: linear-gradient(to right, rgba(254, 126, 60, 0.15), transparent);
+            border-left: 4px solid var(--color-burnt-orange);
+            color: var(--color-burnt-orange) !important;
         }
         .dark .sidebar-item-active {
-            background: linear-gradient(to right, rgba(0, 223, 129, 0.15), transparent);
-            border-left: 4px solid var(--green-caribbean);
-            color: var(--green-caribbean) !important;
+            background: linear-gradient(to right, rgba(254, 126, 60, 0.2), transparent);
+            border-left: 4px solid var(--color-burnt-orange);
+            color: var(--color-burnt-orange) !important;
         }
         
         /* SweetAlert Forest Tech Styling */
+        /* SweetAlert Magma Styling */
         .swal-neon-popup {
-            background: var(--bg-dark-green) !important;
-            border: 1px solid var(--green-bangladesh) !important;
-            box-shadow: 0 0 30px rgba(0, 223, 129, 0.1) !important;
+            background: #1A2C30 !important; /* Black Pearl */
+            border: 1px solid var(--color-blue-lagoon) !important;
+            box-shadow: 0 0 30px rgba(14, 104, 115, 0.2) !important;
         }
         .swal-neon-popup .swal2-title {
-            color: var(--text-white) !important;
+            color: #FFFFFF !important;
         }
         .swal-neon-popup .swal2-html-container {
-            color: var(--text-pistachio) !important;
+            color: #B0C4C9 !important;
         }
         .swal-neon-confirm {
-            background: var(--green-caribbean) !important;
-            color: var(--bg-rich-black) !important;
+            background: var(--color-burnt-orange) !important;
+            color: #FFFFFF !important;
             border: none !important;
-            box-shadow: 0 4px 15px rgba(0, 223, 129, 0.3) !important;
+            box-shadow: 0 4px 15px rgba(254, 126, 60, 0.4) !important;
             font-weight: 700 !important;
         }
         .swal-neon-confirm:hover {
-            background: var(--green-mountain) !important;
-            box-shadow: 0 6px 20px rgba(44, 194, 149, 0.4) !important;
+            background: #e06020 !important; /* Darker Orange */
+            box-shadow: 0 6px 20px rgba(254, 126, 60, 0.6) !important;
         }
 
         /* Modern SweetAlert2 Premium Theme */
@@ -191,7 +199,7 @@
     <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden md:hidden" onclick="toggleMobileSidebar()"></div>
 
     <!-- Sidebar -->
-    <div id="sidebar" class="sidebar-expanded fixed left-0 top-0 h-full transition-all duration-300 z-50 md:z-10 -translate-x-full md:translate-x-0 text-slate-300" style="background: #032221; border-right: 1px solid rgba(0, 223, 129, 0.1); color: #F1F7F6;">
+    <div id="sidebar" class="sidebar-expanded fixed left-0 top-0 h-full transition-all duration-300 z-50 md:z-10 -translate-x-full md:translate-x-0 text-slate-300" style="background: var(--color-black-pearl); border-right: 1px solid rgba(14, 104, 115, 0.2); color: #B0C4C9;">
         <div class="p-6 border-b border-white/5">
             <div class="flex items-center justify-between">
                 <div class="flex items-center">

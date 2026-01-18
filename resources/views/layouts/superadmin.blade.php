@@ -140,7 +140,7 @@
     <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden md:hidden" onclick="toggleMobileSidebar()"></div>
 
     <!-- Sidebar -->
-    <div id="sidebar" class="sidebar-expanded fixed left-0 top-0 h-full transition-all duration-300 z-50 sidebar-mobile-hidden md:sidebar-mobile-visible text-slate-300" style="background: #032221; border-right: 1px solid rgba(0, 223, 129, 0.1); color: #F1F7F6;">
+    <div id="sidebar" class="sidebar-expanded fixed left-0 top-0 h-full transition-all duration-300 z-50 sidebar-mobile-hidden md:sidebar-mobile-visible text-slate-300" style="background: var(--color-black-pearl); border-right: 1px solid rgba(14, 104, 115, 0.2); color: #B0C4C9;">
         <div class="p-6 border-b border-white/5">
             <div class="flex items-center justify-between">
                 <div class="flex flex-col sidebar-text w-full">
