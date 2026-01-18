@@ -3,20 +3,22 @@
 @section('content')
 <div class="flex flex-col md:flex-row md:items-center mb-6 gap-4">
     <h1 class="text-3xl font-bold text-gray-800 md:flex-1">Historial de Mantenimiento</h1>
-    <a href="{{ route('maintenances.create') }}" class="bg-gray-800 hover:bg-black text-white font-bold py-2 px-4 rounded text-center whitespace-nowrap shrink-0">
-        <i class="fas fa-plus mr-2"></i>Agregar Registro de Mantenimiento
+    <a href="{{ route('maintenances.create') }}" 
+        class="text-white font-bold py-2.5 px-6 rounded-xl shadow-lg transform hover:-translate-y-0.5 transition-all flex items-center justify-center whitespace-nowrap shrink-0 border-none cursor-pointer"
+        style="background: linear-gradient(135deg, #5483B3 0%, #052659 100%); box-shadow: 0 4px 12px rgba(84, 131, 179, 0.3);">
+        <i class="fas fa-plus mr-2"></i>Agregar Registro
     </a>
 </div>
 
 <!-- Search Bar -->
-<div class="mb-4 bg-white p-4 rounded-lg shadow-md">
+<div class="mb-4 bg-white p-4 rounded-lg shadow-md border border-gray-100">
     <div class="flex items-center gap-3">
         <div class="flex-1 relative">
             <input 
                 type="text" 
                 id="searchInput" 
                 placeholder="Buscar por Activo, Fecha, Descripción o Costo..." 
-                class="w-full px-4 py-2 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-800 focus:border-transparent"
+                class="w-full px-4 py-2 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-medium focus:border-transparent"
             >
             <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
         </div>

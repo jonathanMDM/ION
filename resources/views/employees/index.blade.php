@@ -5,7 +5,9 @@
 @section('content')
 <div class="mb-6 flex flex-col md:flex-row md:items-center gap-4">
     <h2 class="text-2xl font-bold text-gray-800 md:flex-1">Empleados</h2>
-    <a href="{{ route('employees.create') }}" class="bg-gray-800 hover:bg-black text-white font-bold py-2 px-4 rounded text-center whitespace-nowrap shrink-0">
+    <a href="{{ route('employees.create') }}" 
+        class="text-white font-bold py-2.5 px-6 rounded-xl shadow-lg transform hover:-translate-y-0.5 transition-all flex items-center justify-center whitespace-nowrap shrink-0 border-none cursor-pointer"
+        style="background: linear-gradient(135deg, #5483B3 0%, #052659 100%); box-shadow: 0 4px 12px rgba(84, 131, 179, 0.3);">
         <i class="fas fa-user-plus mr-2"></i>Nuevo Empleado
     </a>
 </div>
@@ -36,7 +38,9 @@
         </div>
 
         <div class="flex items-end">
-            <button type="submit" class="bg-gray-800 hover:bg-gray-900 text-white font-bold py-2 px-6 rounded w-full">
+            <button type="submit" 
+                class="text-white font-bold py-2 px-6 rounded-lg w-full transition-all border-none cursor-pointer"
+                style="background: #1e293b; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
                 Filtrar
             </button>
         </div>

@@ -13,7 +13,9 @@
                 <i class="fas fa-trash mr-2"></i>Eliminar Seleccionadas (<span id="selectedCount">0</span>)
             </button>
             
-            <a href="{{ route('categories.create') }}" class="bg-gray-800 hover:bg-black text-white font-bold py-2 px-4 rounded text-center whitespace-nowrap">
+            <a href="{{ route('categories.create') }}" 
+                class="text-white font-bold py-2 px-6 rounded-xl shadow-lg transform hover:-translate-y-0.5 transition-all flex items-center justify-center whitespace-nowrap border-none cursor-pointer"
+                style="background: linear-gradient(135deg, #5483B3 0%, #052659 100%); box-shadow: 0 4px 12px rgba(84, 131, 179, 0.3);">
                 <i class="fas fa-plus mr-2"></i>Agregar Categoría
             </a>
         </div>

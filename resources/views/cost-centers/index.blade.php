@@ -9,7 +9,9 @@
             <h2 class="text-2xl font-bold text-gray-800">Centros de Costo</h2>
             <p class="text-gray-600 mt-1">Gestiona los centros de costo y su presupuesto</p>
         </div>
-        <a href="{{ route('cost-centers.create') }}" class="bg-blue-medium hover:bg-blue-dark text-white px-4 py-2 rounded font-bold">
+        <a href="{{ route('cost-centers.create') }}" 
+            class="text-white px-6 py-2.5 rounded-xl font-bold shadow-lg transform hover:-translate-y-0.5 transition-all flex items-center justify-center border-none cursor-pointer"
+            style="background: linear-gradient(135deg, #5483B3 0%, #052659 100%); box-shadow: 0 4px 12px rgba(84, 131, 179, 0.3);">
             <i class="fas fa-plus mr-2"></i>Nuevo Centro de Costo
         </a>
     </div>
@@ -20,7 +22,9 @@
         <i class="fas fa-building text-6xl text-gray-300 mb-4"></i>
         <h3 class="text-xl font-semibold text-gray-700 mb-2">No hay centros de costo registrados</h3>
         <p class="text-gray-500 mb-6">Comienza creando tu primer centro de costo para organizar tus activos</p>
-        <a href="{{ route('cost-centers.create') }}" class="inline-block bg-blue-medium hover:bg-blue-dark text-white px-6 py-3 rounded font-bold">
+        <a href="{{ route('cost-centers.create') }}" 
+            class="inline-block text-white px-8 py-3 rounded-xl font-bold shadow-lg transform hover:-translate-y-0.5 transition-all border-none cursor-pointer"
+            style="background: linear-gradient(135deg, #5483B3 0%, #052659 100%); box-shadow: 0 4px 15px rgba(84, 131, 179, 0.4);">
             <i class="fas fa-plus mr-2"></i>Crear Centro de Costo
         </a>
     </div>

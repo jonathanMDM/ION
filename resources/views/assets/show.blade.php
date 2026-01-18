@@ -282,10 +282,10 @@
                                             </div>
                                             <p class="text-sm text-gray-700 dark:text-gray-300 font-medium leading-relaxed">{{ $event->description }}</p>
                                             
-                                            @if($event->reason || $event->notes)
+                                            @if(isset($event->reason) || isset($event->notes))
                                                 <div class="mt-3 p-4 bg-white dark:bg-gray-800 rounded-2xl text-xs text-gray-600 dark:text-gray-400 italic border-l-4 border-{{ $event->color }}-500 shadow-sm">
                                                     <i class="fas fa-quote-left text-[10px] text-{{ $event->color }}-300 mb-1 block"></i>
-                                                    "{{ $event->reason ?? $event->notes }}"
+                                                    "{{ $event->reason ?? $event->notes ?? '' }}"
                                                 </div>
                                             @endif
                                         </div>
