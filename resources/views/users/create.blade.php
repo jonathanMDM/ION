@@ -48,7 +48,7 @@
                         <div>
                             <label class="block text-xs font-black text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2" for="name">Nombre Completo</label>
                             <input type="text" name="name" id="name" value="{{ old('name') }}" 
-                                class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-2xl py-3 px-4 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 transition-all font-bold" required placeholder="Ej: Diana Martínez">
+                                class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-2xl py-3 px-4 text-gray-900 dark:text-white focus:ring-2 focus:ring-[#5483B3] transition-all font-bold" required placeholder="Ej: Diana Martínez">
                         </div>
 
                         <div>
@@ -58,7 +58,7 @@
                                     <i class="fas fa-at text-gray-400 group-focus-within:text-indigo-500 transition-colors"></i>
                                 </div>
                                 <input type="email" name="email" id="email" value="{{ old('email') }}" 
-                                    class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-2xl py-3 pl-11 pr-4 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 transition-all" required placeholder="diana@empresa.com">
+                                    class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-2xl py-3 pl-11 pr-4 text-gray-900 dark:text-white focus:ring-2 focus:ring-[#5483B3] transition-all" required placeholder="diana@empresa.com">
                             </div>
                         </div>
 
@@ -66,13 +66,13 @@
                             <div>
                                 <label class="block text-xs font-black text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2" for="password">Contraseña Temporal</label>
                                 <input type="password" name="password" id="password" 
-                                    class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-2xl py-3 px-4 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 transition-all font-mono" required placeholder="••••••••">
+                                    class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-2xl py-3 px-4 text-gray-900 dark:text-white focus:ring-2 focus:ring-[#5483B3] transition-all font-mono" required placeholder="••••••••">
                                 <p class="text-[10px] text-gray-400 mt-2 italic font-medium">Mínimo 6 caracteres alfanuméricos.</p>
                             </div>
                             <div>
                                 <label class="block text-xs font-black text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2" for="password_confirmation">Confirmar Contraseña</label>
                                 <input type="password" name="password_confirmation" id="password_confirmation" 
-                                    class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-2xl py-3 px-4 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 transition-all font-mono" required placeholder="••••••••">
+                                    class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-2xl py-3 px-4 text-gray-900 dark:text-white focus:ring-2 focus:ring-[#5483B3] transition-all font-mono" required placeholder="••••••••">
                             </div>
                         </div>
                     </div>
@@ -99,7 +99,7 @@
                                 @foreach($permissions as $key => $label)
                                 <label class="group flex items-center justify-between p-3 rounded-2xl bg-gray-50 dark:bg-gray-900/40 border border-transparent hover:border-[#5483B3]/500/30 transition-all cursor-pointer">
                                     <span class="text-xs font-medium text-gray-600 dark:text-gray-400 group-hover:text-[#5483B3] transition-colors">{{ $label }}</span>
-                                    <input type="checkbox" name="permissions[]" value="{{ $key }}" class="w-5 h-5 rounded-lg border-gray-300 text-[#5483B3] focus:ring-indigo-500/20 transition-all">
+                                    <input type="checkbox" name="permissions[]" value="{{ $key }}" class="w-5 h-5 rounded-lg border-gray-300 text-[#5483B3] focus:ring-[#5483B3]/20 transition-all">
                                 </label>
                                 @endforeach
                             </div>

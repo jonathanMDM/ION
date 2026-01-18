@@ -56,7 +56,7 @@
                         <div>
                             <label class="block text-xs font-black text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2" for="name">Nombre Completo</label>
                             <input type="text" name="name" id="name" value="{{ old('name', $user->name) }}" 
-                                class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-2xl py-3 px-4 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 transition-all font-bold" required>
+                                class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-2xl py-3 px-4 text-gray-900 dark:text-white focus:ring-2 focus:ring-[#5483B3] transition-all font-bold" required>
                         </div>
 
                         <div>
@@ -66,7 +66,7 @@
                                     <i class="fas fa-at text-gray-400 group-focus-within:text-indigo-500 transition-colors"></i>
                                 </div>
                                 <input type="email" name="email" id="email" value="{{ old('email', $user->email) }}" 
-                                    class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-2xl py-3 pl-11 pr-4 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 transition-all" required>
+                                    class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-2xl py-3 pl-11 pr-4 text-gray-900 dark:text-white focus:ring-2 focus:ring-[#5483B3] transition-all" required>
                             </div>
                         </div>
                         
@@ -103,7 +103,7 @@
                                 @foreach($permissions as $key => $label)
                                 <label class="group flex items-center justify-between p-3 rounded-2xl bg-gray-50 dark:bg-gray-900/40 border border-transparent hover:border-[#5483B3]/500/30 transition-all cursor-pointer">
                                     <span class="text-xs font-medium text-gray-600 dark:text-gray-400 group-hover:text-[#5483B3] transition-colors">{{ $label }}</span>
-                                    <input type="checkbox" name="permissions[]" value="{{ $key }}" {{ in_array($key, $userPermissions) ? 'checked' : '' }} class="w-5 h-5 rounded-lg border-gray-300 text-[#5483B3] focus:ring-indigo-500/20 transition-all">
+                                    <input type="checkbox" name="permissions[]" value="{{ $key }}" {{ in_array($key, $userPermissions) ? 'checked' : '' }} class="w-5 h-5 rounded-lg border-gray-300 text-[#5483B3] focus:ring-[#5483B3]/20 transition-all">
                                 </label>
                                 @endforeach
                             </div>

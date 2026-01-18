@@ -57,20 +57,20 @@
                             <div>
                                 <label class="block text-xs font-black text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2" for="code">Código</label>
                                 <input type="text" name="code" id="code" value="{{ old('code', $costCenter->code) }}" 
-                                    class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-2xl py-3 px-4 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 transition-all font-mono text-sm" required>
+                                    class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-2xl py-3 px-4 text-gray-900 dark:text-white focus:ring-2 focus:ring-[#5483B3] transition-all font-mono text-sm" required>
                             </div>
 
                             <div>
                                 <label class="block text-xs font-black text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2" for="name">Nombre</label>
                                 <input type="text" name="name" id="name" value="{{ old('name', $costCenter->name) }}" 
-                                    class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-2xl py-3 px-4 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 transition-all font-bold" required>
+                                    class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-2xl py-3 px-4 text-gray-900 dark:text-white focus:ring-2 focus:ring-[#5483B3] transition-all font-bold" required>
                             </div>
                         </div>
 
                         <div>
                             <label class="block text-xs font-black text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2" for="description">Descripción</label>
                             <textarea name="description" id="description" rows="3" 
-                                class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-2xl py-3 px-4 text-gray-700 dark:text-gray-300 focus:ring-2 focus:ring-indigo-500 transition-all">{{ old('description', $costCenter->description) }}</textarea>
+                                class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-2xl py-3 px-4 text-gray-700 dark:text-gray-300 focus:ring-2 focus:ring-[#5483B3] transition-all">{{ old('description', $costCenter->description) }}</textarea>
                         </div>
                     </div>
                 </div>
@@ -98,7 +98,7 @@
                         <div>
                             <label class="block text-xs font-black text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2" for="manager_id">Responsable</label>
                             <select name="manager_id" id="manager_id" 
-                                class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-2 px-3 text-xs font-bold focus:ring-2 focus:ring-indigo-500 transition-all">
+                                class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-2 px-3 text-xs font-bold focus:ring-2 focus:ring-[#5483B3] transition-all">
                                 <option value="">Sin responsable</option>
                                 @foreach($managers as $manager)
                                     <option value="{{ $manager->id }}" {{ old('manager_id', $costCenter->manager_id) == $manager->id ? 'selected' : '' }}>

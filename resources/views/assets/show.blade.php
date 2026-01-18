@@ -385,7 +385,7 @@
 
                 <div>
                     <label class="block text-xs font-black text-gray-500 dark:text-gray-400 uppercase tracking-widest mb-2">Destino del Traslado</label>
-                    <select name="to_location_id" required class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-2xl py-3 px-4 font-black text-gray-800 dark:text-white focus:ring-2 focus:ring-indigo-500 transition-all">
+                    <select name="to_location_id" required class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-2xl py-3 px-4 font-black text-gray-800 dark:text-white focus:ring-2 focus:ring-[#5483B3] transition-all">
                         <option value="" disabled selected>Seleccione la nueva ubicación...</option>
                         @foreach($locations as $location)
                             <option value="{{ $location->id }}">{{ $location->name }}</option>
@@ -395,7 +395,7 @@
 
                 <div>
                     <label class="block text-xs font-black text-gray-500 dark:text-gray-400 uppercase tracking-widest mb-2">Justificación del Movimiento</label>
-                    <textarea name="reason" rows="4" required class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-2xl py-4 px-5 text-sm font-medium focus:ring-2 focus:ring-indigo-500 transition-all" placeholder="Describa por qué se realiza este cambio de ubicación..."></textarea>
+                    <textarea name="reason" rows="4" required class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-2xl py-4 px-5 text-sm font-medium focus:ring-2 focus:ring-[#5483B3] transition-all" placeholder="Describa por qué se realiza este cambio de ubicación..."></textarea>
                 </div>
 
                 <div class="flex gap-4 pt-4">

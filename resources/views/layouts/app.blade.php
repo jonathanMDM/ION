@@ -234,8 +234,8 @@
             <div class="flex items-center justify-between">
                 <div class="flex items-center">
                 <div class="flex flex-col sidebar-text">
-                    <a href="{{ route('dashboard') }}" class="flex items-center justify-center group">
-                        <img src="{{ asset('img/logo-horizontal.png') }}" alt="ION Inventory" class="h-12 w-auto transition-all group-hover:opacity-90">
+                    <a href="{{ route('dashboard') }}" class="flex items-center justify-center group bg-white/5 p-2 rounded-2xl border border-white/10 hover:bg-white/10 transition-all">
+                        <img src="{{ asset('img/logo-horizontal.png') }}" alt="ION Inventory" class="h-10 w-auto transition-all group-hover:scale-105 rounded-lg">
                     </a>
                 </div>
                 </div>

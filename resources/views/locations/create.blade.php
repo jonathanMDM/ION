@@ -30,7 +30,7 @@
                             <i class="fas fa-map-marker-alt text-gray-400 group-focus-within:text-indigo-500 transition-colors"></i>
                         </div>
                         <input type="text" name="name" id="name" value="{{ old('name') }}" 
-                            class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 pl-11 pr-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all" 
+                            class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 pl-11 pr-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-[#5483B3] focus:border-transparent transition-all" 
                             placeholder="Ej: Oficina Principal, Almacén IT..." required>
                     </div>
                     <p class="text-[10px] text-gray-400 mt-1 italic">💡 Ejemplos: Almacén General, Piso 2, Recepción.</p>
@@ -46,7 +46,7 @@
                             <i class="fas fa-search-location text-gray-400 group-focus-within:text-indigo-500 transition-colors"></i>
                         </div>
                         <input type="text" name="address" id="address" value="{{ old('address') }}" 
-                            class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 pl-11 pr-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all" 
+                            class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 pl-11 pr-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-[#5483B3] focus:border-transparent transition-all" 
                             placeholder="Ej: Calle 100 #15-30, Torre Central.">
                     </div>
                 </div>

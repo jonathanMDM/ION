@@ -51,7 +51,7 @@
                                     Código del Centro <span class="text-red-500">*</span>
                                 </label>
                                 <input type="text" name="code" id="code" value="{{ old('code') }}" 
-                                    class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-2xl py-3 px-4 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 transition-all font-mono text-sm" 
+                                    class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-2xl py-3 px-4 text-gray-900 dark:text-white focus:ring-2 focus:ring-[#5483B3] transition-all font-mono text-sm" 
                                     placeholder="Ej: CC-001" required>
                                 @error('code') <p class="text-red-500 text-[10px] mt-1 italic font-bold">{{ $message }}</p> @enderror
                             </div>
@@ -61,7 +61,7 @@
                                     Nombre Identificador <span class="text-red-500">*</span>
                                 </label>
                                 <input type="text" name="name" id="name" value="{{ old('name') }}" 
-                                    class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-2xl py-3 px-4 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 transition-all font-bold" 
+                                    class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-2xl py-3 px-4 text-gray-900 dark:text-white focus:ring-2 focus:ring-[#5483B3] transition-all font-bold" 
                                     placeholder="Ej: Departamento de Ventas" required>
                                 @error('name') <p class="text-red-500 text-[10px] mt-1 italic font-bold">{{ $message }}</p> @enderror
                             </div>
@@ -72,7 +72,7 @@
                                 Descripción / Propósito
                             </label>
                             <textarea name="description" id="description" rows="3" 
-                                class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-2xl py-3 px-4 text-gray-700 dark:text-gray-300 focus:ring-2 focus:ring-indigo-500 transition-all" 
+                                class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-2xl py-3 px-4 text-gray-700 dark:text-gray-300 focus:ring-2 focus:ring-[#5483B3] transition-all" 
                                 placeholder="Describa el alcance de este centro de costo...">{{ old('description') }}</textarea>
                         </div>
                     </div>
@@ -102,7 +102,7 @@
                         <div>
                             <label class="block text-xs font-black text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2" for="manager_id">Responsable Directo</label>
                             <select name="manager_id" id="manager_id" 
-                                class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-2 px-3 text-xs font-bold focus:ring-2 focus:ring-indigo-500 transition-all">
+                                class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-2 px-3 text-xs font-bold focus:ring-2 focus:ring-[#5483B3] transition-all">
                                 <option value="">Sin responsable asignado</option>
                                 @foreach($managers as $manager)
                                     <option value="{{ $manager->id }}" {{ old('manager_id') == $manager->id ? 'selected' : '' }}>

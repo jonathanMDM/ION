@@ -50,7 +50,7 @@
                             Razón Social / Nombre <span class="text-red-500">*</span>
                         </label>
                         <input type="text" name="name" id="name" value="{{ old('name', $supplier->name) }}" 
-                            class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-indigo-500 transition-all font-semibold" required>
+                            class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-[#5483B3] transition-all font-semibold" required>
                     </div>
 
                     <div>
@@ -58,7 +58,7 @@
                             NIT / Identificación Fiscal
                         </label>
                         <input type="text" name="nit" id="nit" value="{{ old('nit', $supplier->nit) }}" 
-                            class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-indigo-500 transition-all" 
+                            class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-[#5483B3] transition-all" 
                             placeholder="Ej: 900.123.456-7">
                     </div>
                 </div>
@@ -105,7 +105,7 @@
                         <i class="fas fa-map-marker-alt text-red-400 mr-2"></i> Dirección de Sede
                     </label>
                     <textarea name="address" id="address" rows="3" 
-                        class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-indigo-500 transition-all font-medium" 
+                        class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-[#5483B3] transition-all font-medium" 
                         placeholder="Dirección completa.">{{ old('address', $supplier->address) }}</textarea>
                 </div>
             </div>

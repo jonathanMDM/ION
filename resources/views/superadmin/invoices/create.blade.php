@@ -15,17 +15,17 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Monto Pagado ($)</label>
-                <input type="number" name="amount" step="0.01" class="w-full border-gray-300 rounded-md shadow-sm focus:border-[#5483B3]/500 focus:ring-indigo-500" required>
+                <input type="number" name="amount" step="0.01" class="w-full border-gray-300 rounded-md shadow-sm focus:border-[#5483B3]/500 focus:ring-[#5483B3]" required>
             </div>
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Fecha de Pago</label>
-                <input type="date" name="payment_date" value="{{ date('Y-m-d') }}" class="w-full border-gray-300 rounded-md shadow-sm focus:border-[#5483B3]/500 focus:ring-indigo-500" required>
+                <input type="date" name="payment_date" value="{{ date('Y-m-d') }}" class="w-full border-gray-300 rounded-md shadow-sm focus:border-[#5483B3]/500 focus:ring-[#5483B3]" required>
             </div>
         </div>
 
         <div class="mb-4">
             <label class="block text-sm font-medium text-gray-700 mb-1">Tipo de Periodo</label>
-            <select name="period_type" class="w-full border-gray-300 rounded-md shadow-sm focus:border-[#5483B3]/500 focus:ring-indigo-500" required>
+            <select name="period_type" class="w-full border-gray-300 rounded-md shadow-sm focus:border-[#5483B3]/500 focus:ring-[#5483B3]" required>
                 <option value="monthly">Mensualidad</option>
                 <option value="yearly">Anualidad</option>
                 <option value="other">Otro</option>
@@ -35,17 +35,17 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Inicio del Periodo</label>
-                <input type="date" name="period_start" class="w-full border-gray-300 rounded-md shadow-sm focus:border-[#5483B3]/500 focus:ring-indigo-500" required>
+                <input type="date" name="period_start" class="w-full border-gray-300 rounded-md shadow-sm focus:border-[#5483B3]/500 focus:ring-[#5483B3]" required>
             </div>
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Fin del Periodo (Expiración)</label>
-                <input type="date" name="period_end" class="w-full border-gray-300 rounded-md shadow-sm focus:border-[#5483B3]/500 focus:ring-indigo-500" required>
+                <input type="date" name="period_end" class="w-full border-gray-300 rounded-md shadow-sm focus:border-[#5483B3]/500 focus:ring-[#5483B3]" required>
             </div>
         </div>
 
         <div class="mb-6">
             <label class="block text-sm font-medium text-gray-700 mb-1">Notas (Opcional)</label>
-            <textarea name="notes" rows="3" class="w-full border-gray-300 rounded-md shadow-sm focus:border-[#5483B3]/500 focus:ring-indigo-500"></textarea>
+            <textarea name="notes" rows="3" class="w-full border-gray-300 rounded-md shadow-sm focus:border-[#5483B3]/500 focus:ring-[#5483B3]"></textarea>
         </div>
 
         <div class="bg-blue-50 p-4 rounded-md mb-6">

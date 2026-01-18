@@ -5,95 +5,106 @@
 @section('content')
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
     <!-- Total Companies -->
-    <div class="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900 p-6 border-l-4 border-[#5483B3]/500 transition-colors">
-        <div class="flex items-center">
-            <div class="p-3 rounded-full bg-indigo-100 text-indigo-500 mr-4">
-                <i class="fas fa-building text-2xl"></i>
-            </div>
+    <div class="p-6 rounded-3xl shadow-lg transition-all hover:scale-[1.02] hover:shadow-xl relative overflow-hidden group" style="background: linear-gradient(135deg, #052659 0%, #021024 100%);">
+        <div class="flex items-start justify-between relative z-10">
             <div>
-                <p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Empresas Registradas</p>
-                <p class="text-2xl font-bold text-slate-800 dark:text-white">{{ $stats['total_companies'] }}</p>
+                <p class="text-[11px] font-bold uppercase tracking-wider mb-1 opacity-80 text-white">Empresas Registradas</p>
+                <p class="text-3xl font-black tracking-tight text-white mb-1">{{ $stats['total_companies'] }}</p>
+                <p class="text-xs font-medium text-white/90">Gestión global</p>
+            </div>
+            <div class="w-12 h-12 rounded-xl flex items-center justify-center text-xl shadow-md backdrop-blur-md bg-white/10 text-white border border-white/10">
+                <i class="fas fa-building"></i>
             </div>
         </div>
+        <div class="absolute -right-6 -bottom-6 w-32 h-32 rounded-full bg-white/5 blur-2xl group-hover:bg-white/10 transition-all"></div>
     </div>
 
     <!-- Active Companies -->
-    <div class="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900 p-6 border-l-4 border-emerald-500 transition-colors">
-        <div class="flex items-center">
-            <div class="p-3 rounded-full bg-emerald-100 text-emerald-500 mr-4">
-                <i class="fas fa-check-circle text-2xl"></i>
-            </div>
+    <div class="p-6 rounded-3xl shadow-lg transition-all hover:scale-[1.02] hover:shadow-xl relative overflow-hidden group" style="background: linear-gradient(135deg, #5483B3 0%, #052659 100%);">
+        <div class="flex items-start justify-between relative z-10">
             <div>
-                <p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Empresas Activas</p>
-                <p class="text-2xl font-bold text-slate-800 dark:text-white">{{ $stats['active_companies'] }}</p>
+                <p class="text-[11px] font-bold uppercase tracking-wider mb-1 opacity-90 text-white">Empresas Activas</p>
+                <p class="text-3xl font-black tracking-tight text-white mb-1">{{ $stats['active_companies'] }}</p>
+                <p class="text-xs font-medium text-white/90">En operación</p>
+            </div>
+            <div class="w-12 h-12 rounded-xl flex items-center justify-center text-xl shadow-md backdrop-blur-md bg-white/10 text-white border border-white/10">
+                <i class="fas fa-check-circle"></i>
             </div>
         </div>
+        <div class="absolute -right-6 -bottom-6 w-32 h-32 rounded-full bg-white/5 blur-2xl group-hover:bg-white/10 transition-all"></div>
     </div>
 
     <!-- Total Users -->
-    <div class="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900 p-6 border-l-4 border-violet-500 transition-colors">
-        <div class="flex items-center">
-            <div class="p-3 rounded-full bg-violet-100 text-violet-500 mr-4">
-                <i class="fas fa-users text-2xl"></i>
-            </div>
+    <div class="p-6 rounded-3xl shadow-lg transition-all hover:scale-[1.02] hover:shadow-xl relative overflow-hidden group" style="background: linear-gradient(135deg, #7DA0CA 0%, #5483B3 100%);">
+        <div class="flex items-start justify-between relative z-10">
             <div>
-                <p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Usuarios Totales</p>
-                <p class="text-2xl font-bold text-slate-800 dark:text-white">{{ $stats['total_users'] }}</p>
+                <p class="text-[11px] font-bold uppercase tracking-wider mb-1 opacity-90 text-white">Usuarios Totales</p>
+                <p class="text-3xl font-black tracking-tight text-white mb-1">{{ $stats['total_users'] }}</p>
+                <p class="text-xs font-medium text-white/90">Plataforma ION</p>
+            </div>
+            <div class="w-12 h-12 rounded-xl flex items-center justify-center text-xl shadow-md backdrop-blur-md bg-white/10 text-white border border-white/10">
+                <i class="fas fa-users"></i>
             </div>
         </div>
+        <div class="absolute -right-6 -bottom-6 w-32 h-32 rounded-full bg-white/5 blur-2xl group-hover:bg-white/10 transition-all"></div>
     </div>
 
     <!-- Total Assets -->
-    <div class="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900 p-6 border-l-4 border-amber-500 transition-colors">
-        <div class="flex items-center">
-            <div class="p-3 rounded-full bg-amber-100 text-amber-500 mr-4">
-                <i class="fas fa-box text-2xl"></i>
-            </div>
+    <div class="p-6 rounded-3xl shadow-lg transition-all hover:scale-[1.02] hover:shadow-xl relative overflow-hidden group" style="background: linear-gradient(135deg, #475569 0%, #0F172A 100%);">
+        <div class="flex items-start justify-between relative z-10">
             <div>
-                <p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Activos Gestionados</p>
-                <p class="text-2xl font-bold text-slate-800 dark:text-white">{{ $stats['total_assets'] }}</p>
+                <p class="text-[11px] font-bold uppercase tracking-wider mb-1 opacity-80 text-white">Activos Gestionados</p>
+                <p class="text-3xl font-black tracking-tight text-white mb-1">{{ $stats['total_assets'] }}</p>
+                <p class="text-xs font-medium text-white/90">Total consolidado</p>
+            </div>
+            <div class="w-12 h-12 rounded-xl flex items-center justify-center text-xl shadow-md backdrop-blur-md bg-white/10 text-white border border-white/10">
+                <i class="fas fa-box"></i>
             </div>
         </div>
+        <div class="absolute -right-6 -bottom-6 w-32 h-32 rounded-full bg-white/5 blur-2xl group-hover:bg-white/10 transition-all"></div>
     </div>
 </div>
 
-<div class="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900 mb-8 transition-colors">
-    <div class="px-6 py-4 border-b border-slate-200 dark:border-slate-700 flex justify-between items-center">
-        <h3 class="text-lg font-semibold text-slate-800 dark:text-white">Empresas Recientes</h3>
-        <a href="{{ route('superadmin.companies.index') }}" class="text-[#5483B3] hover:text-indigo-800 text-sm font-medium">Ver todas</a>
+<div class="bg-white dark:bg-gray-800 rounded-[2.5rem] shadow-xl border border-slate-200 dark:border-slate-700 overflow-hidden mb-8">
+    <div class="px-8 py-6 border-b border-slate-200 dark:border-slate-700 flex justify-between items-center bg-slate-50/50">
+        <h3 class="text-lg font-bold text-slate-800 dark:text-white flex items-center gap-2">
+            <i class="fas fa-history text-[#5483B3]"></i>
+            Empresas Recientes
+        </h3>
+        <a href="{{ route('superadmin.companies.index') }}" class="text-[#5483B3] hover:text-[#052659] text-sm font-bold uppercase tracking-wider">Ver todas</a>
     </div>
     <div class="overflow-x-auto">
         <table class="min-w-full divide-y divide-slate-200 dark:divide-slate-700">
-            <thead class="bg-slate-50 dark:bg-slate-900/50">
+            <thead class="bg-slate-50/80">
                 <tr>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">Empresa</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">Email</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">Estado</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">Registro</th>
+                    <th class="px-8 py-4 text-left text-[10px] font-black text-slate-500 uppercase tracking-[0.2em]">Empresa</th>
+                    <th class="px-8 py-4 text-left text-[10px] font-black text-slate-500 uppercase tracking-[0.2em]">Email</th>
+                    <th class="px-8 py-4 text-left text-[10px] font-black text-slate-500 uppercase tracking-[0.2em]">Estado</th>
+                    <th class="px-8 py-4 text-left text-[10px] font-black text-slate-500 uppercase tracking-[0.2em]">Registro</th>
                 </tr>
             </thead>
-            <tbody class="bg-white divide-y divide-slate-200">
+            <tbody class="bg-white divide-y divide-slate-100 dark:divide-slate-800">
                 @forelse($recent_companies as $company)
-                <tr>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="text-sm font-medium text-gray-900 dark:text-white">{{ $company->name }}</div>
-                        <div class="text-sm text-gray-500 dark:text-gray-400">{{ $company->nit ?? 'N/A' }}</div>
+                <tr class="hover:bg-slate-50 transition-colors">
+                    <td class="px-8 py-5 whitespace-nowrap">
+                        <div class="text-sm font-bold text-slate-800 dark:text-white">{{ $company->name }}</div>
+                        <div class="text-[10px] text-slate-500 font-medium uppercase tracking-wider">{{ $company->nit ?? 'N/A' }}</div>
                     </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <td class="px-8 py-5 whitespace-nowrap text-sm text-slate-600">
                         {{ $company->email }}
                     </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ $company->status === 'active' ? 'bg-[#C1E8FF] text-[#052659]' : 'bg-red-100 text-red-800' }}">
-                            {{ ucfirst($company->status) }}
+                    <td class="px-8 py-5 whitespace-nowrap">
+                        <span class="px-3 py-1 text-[10px] font-black uppercase tracking-widest rounded-full {{ $company->status === 'active' ? 'bg-[#C1E8FF] text-[#052659]' : 'bg-red-100 text-red-800' }}">
+                            {{ $company->status === 'active' ? 'Activa' : 'Inactiva' }}
                         </span>
                     </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <td class="px-8 py-5 whitespace-nowrap text-sm text-slate-500">
                         {{ $company->created_at->format('d/m/Y') }}
                     </td>
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="4" class="px-6 py-4 text-center text-gray-500">No hay empresas registradas aún.</td>
+                    <td colspan="4" class="px-8 py-10 text-center text-slate-500 font-medium">No hay empresas registradas aún.</td>
                 </tr>
                 @endforelse
             </tbody>

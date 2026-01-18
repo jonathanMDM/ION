@@ -52,7 +52,7 @@
                                     <i class="fas fa-search text-gray-400 group-focus-within:text-indigo-500 transition-colors"></i>
                                 </div>
                                 <select name="employee_id" id="employee_id" required 
-                                    class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-2xl py-4 pl-11 pr-4 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 transition-all font-bold appearance-none">
+                                    class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-2xl py-4 pl-11 pr-4 text-gray-900 dark:text-white focus:ring-2 focus:ring-[#5483B3] transition-all font-bold appearance-none">
                                     <option value="" disabled selected>Busque o seleccione un empleado...</option>
                                     @foreach($employees as $employee)
                                         <option value="{{ $employee->id }}" {{ old('employee_id') == $employee->id ? 'selected' : '' }}>
@@ -67,7 +67,7 @@
                         <div>
                             <label class="block text-xs font-black text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-3">Notas de Entrega</label>
                             <textarea name="notes" rows="4" 
-                                class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-2xl py-4 px-5 text-sm font-medium focus:ring-2 focus:ring-indigo-500 transition-all" 
+                                class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-2xl py-4 px-5 text-sm font-medium focus:ring-2 focus:ring-[#5483B3] transition-all" 
                                 placeholder="Describa el estado físico del activo, accesorios incluidos o condiciones especiales de uso...">{{ old('notes') }}</textarea>
                         </div>
                     </div>
@@ -85,7 +85,7 @@
                         <div>
                             <label class="block text-xs font-black text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">Fecha de Entrega</label>
                             <input type="date" name="assigned_date" value="{{ date('Y-m-d') }}" required 
-                                class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-2 px-3 text-xs font-bold focus:ring-2 focus:ring-indigo-500 transition-all">
+                                class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-2 px-3 text-xs font-bold focus:ring-2 focus:ring-[#5483B3] transition-all">
                         </div>
 
                         @if(auth()->user()->company->hasModule('loans'))
@@ -99,7 +99,7 @@
                             <div id="return_date_container" class="mt-4 {{ old('is_loan') ? '' : 'hidden' }}">
                                 <label class="block text-[10px] font-black text-indigo-500 uppercase tracking-widest mb-2">Fecha de Devolución</label>
                                 <input type="date" name="expected_return_date" id="expected_return_date" value="{{ old('expected_return_date') }}" 
-                                    class="w-full bg-indigo-50 dark:bg-indigo-900/20 border-[#5483B3]/100 dark:border-[#5483B3]/900/30 rounded-xl py-2 px-3 text-xs font-black text-[#5483B3] focus:ring-2 focus:ring-indigo-500 transition-all">
+                                    class="w-full bg-indigo-50 dark:bg-indigo-900/20 border-[#5483B3]/100 dark:border-[#5483B3]/900/30 rounded-xl py-2 px-3 text-xs font-black text-[#5483B3] focus:ring-2 focus:ring-[#5483B3] transition-all">
                             </div>
                         </div>
                         @endif

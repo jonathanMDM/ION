@@ -51,7 +51,7 @@
                                     Nombres <span class="text-red-500">*</span>
                                 </label>
                                 <input type="text" name="first_name" id="first_name" value="{{ old('first_name') }}" 
-                                    class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-indigo-500 transition-all font-medium" 
+                                    class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-[#5483B3] transition-all font-medium" 
                                     placeholder="Ej: Juan Camilo" required>
                                 @error('first_name') <p class="text-red-500 text-xs mt-1 italic">{{ $message }}</p> @enderror
                             </div>
@@ -61,7 +61,7 @@
                                     Apellidos <span class="text-red-500">*</span>
                                 </label>
                                 <input type="text" name="last_name" id="last_name" value="{{ old('last_name') }}" 
-                                    class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-indigo-500 transition-all font-medium" 
+                                    class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-[#5483B3] transition-all font-medium" 
                                     placeholder="Ej: Pérez García" required>
                                 @error('last_name') <p class="text-red-500 text-xs mt-1 italic">{{ $message }}</p> @enderror
                             </div>
@@ -75,7 +75,7 @@
                                         <i class="fas fa-envelope text-gray-400 group-focus-within:text-indigo-500 transition-colors"></i>
                                     </div>
                                     <input type="email" name="email" id="email" value="{{ old('email') }}" 
-                                        class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 pl-11 pr-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-indigo-500 transition-all" 
+                                        class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 pl-11 pr-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-[#5483B3] transition-all" 
                                         placeholder="juan.perez@empresa.com" required>
                                 </div>
                                 @error('email') <p class="text-red-500 text-xs mt-1 italic">{{ $message }}</p> @enderror
@@ -96,20 +96,20 @@
                         <div>
                             <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2" for="department">Departamento</label>
                             <input type="text" name="department" value="{{ old('department') }}" 
-                                class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-2 px-3 text-sm focus:ring-2 focus:ring-indigo-500 transition-all" 
+                                class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-2 px-3 text-sm focus:ring-2 focus:ring-[#5483B3] transition-all" 
                                 placeholder="Ej: Operaciones">
                         </div>
 
                         <div>
                             <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2" for="position">Cargo</label>
                             <input type="text" name="position" value="{{ old('position') }}" 
-                                class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-2 px-3 text-sm focus:ring-2 focus:ring-indigo-500 transition-all" 
+                                class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-2 px-3 text-sm focus:ring-2 focus:ring-[#5483B3] transition-all" 
                                 placeholder="Ej: Analista Senior">
                         </div>
 
                         <div>
                             <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2" for="status">Estado Lab.</label>
-                            <select name="status" class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-2 px-3 text-sm focus:ring-2 focus:ring-indigo-500 transition-all font-bold">
+                            <select name="status" class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-2 px-3 text-sm focus:ring-2 focus:ring-[#5483B3] transition-all font-bold">
                                 <option value="active" {{ old('status') == 'active' ? 'selected' : '' }}>🟢 Activo</option>
                                 <option value="inactive" {{ old('status') == 'inactive' ? 'selected' : '' }}>🔴 Inactivo</option>
                             </select>

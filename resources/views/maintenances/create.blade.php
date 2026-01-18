@@ -32,7 +32,7 @@
                             <label class="block text-xs font-black text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-3" for="asset_id">Activo Intervenido <span class="text-red-500">*</span></label>
                             <div class="relative group">
                                 <select name="asset_id" id="asset_id" required 
-                                    class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-2xl py-4 px-4 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 transition-all font-bold">
+                                    class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-2xl py-4 px-4 text-gray-900 dark:text-white focus:ring-2 focus:ring-[#5483B3] transition-all font-bold">
                                     <option value=""></option>
                                     @foreach($assets as $asset)
                                         <option value="{{ $asset->id }}" 
@@ -49,7 +49,7 @@
                         <div>
                             <label class="block text-xs font-black text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2" for="description">Descripción del Trabajo Realizado <span class="text-red-500">*</span></label>
                             <textarea name="description" id="description" rows="5" required 
-                                class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-2xl py-4 px-5 text-sm font-medium focus:ring-2 focus:ring-indigo-500 transition-all" 
+                                class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-2xl py-4 px-5 text-sm font-medium focus:ring-2 focus:ring-[#5483B3] transition-all" 
                                 placeholder="Describa detalladamente el mantenimiento realizado, repuestos cambiados, fallas detectadas, etc...">{{ old('description') }}</textarea>
                         </div>
                     </div>
@@ -67,7 +67,7 @@
                         <div>
                             <label class="block text-xs font-black text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">Fecha del Servicio</label>
                             <input type="date" name="date" value="{{ date('Y-m-d') }}" required 
-                                class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-2 px-3 text-xs font-black text-gray-800 dark:text-white focus:ring-2 focus:ring-indigo-500 transition-all">
+                                class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-2 px-3 text-xs font-black text-gray-800 dark:text-white focus:ring-2 focus:ring-[#5483B3] transition-all">
                         </div>
 
                         <div>

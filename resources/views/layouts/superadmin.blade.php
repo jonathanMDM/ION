@@ -27,53 +27,57 @@
         .font-logo { font-family: 'Orbitron', sans-serif; }
         
         /* Modern Scrollbar */
-        /* Magma Teal Premium Palette */
         :root {
-            /* Base Colors */
-            --color-burnt-orange: #FE7E3C;
-            --color-lust: #E4201B;
-            --color-copper: #61413C;
-            --color-blue-lagoon: #0E6873;
-            --color-black-pearl: #1A2C30;
-            
-            /* Derived & Interface Colors */
-            --bg-body: var(--color-black-pearl);
-            --bg-card: rgba(26, 44, 48, 0.7);
-            --text-primary: #FFFFFF;
-            --text-secondary: #B0C4C9;
+            /* Professional Blue Palette (from reference image) */
+            --bg-body: #F8FAFB;
+            --bg-card: #FFFFFF;
+            --bg-sidebar: #021024;
+            --text-main: #1F2937;
+            --text-secondary: #6B7280;
+            --text-light: #FFFFFF;
+            --blue-darkest: #021024;
+            --blue-dark: #052659;
+            --blue-medium: #5483B3;
+            --blue-light: #7DA0CA;
+            --blue-lightest: #C1E8FF;
+            --color-primary: #5483B3;
+            --color-secondary: #052659;
+            --color-accent: #7DA0CA;
+            --gradient-blue-dark: linear-gradient(135deg, #052659 0%, #021024 100%);
+            --gradient-blue-medium: linear-gradient(135deg, #5483B3 0%, #052659 100%);
+            --gradient-blue-light: linear-gradient(135deg, #7DA0CA 0%, #5483B3 100%);
+            --gradient-blue-soft: linear-gradient(135deg, #C1E8FF 0%, #7DA0CA 100%);
+            --card-shadow: 0 8px 30px rgba(84, 131, 179, 0.12);
+            --border-light: #E5E7EB;
+            --color-active-text: #FFFFFF;
+            --bg-active-item: rgba(84, 131, 179, 0.15);
+            --border-active: #5483B3;
         }
 
-        /* Modern Scrollbar - Teal & Orange */
+        /* Modern Scrollbar - Blue Theme */
         ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: var(--color-black-pearl); }
-        ::-webkit-scrollbar-thumb { background: var(--color-blue-lagoon); border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--color-burnt-orange); }
+        ::-webkit-scrollbar-track { background: #F4F7FE; }
+        ::-webkit-scrollbar-thumb { background: #E0E5F2; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--blue-medium); }
 
-        /* Glassmorphism for Top Bar */
-        .glass-header {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-        }
-        .dark .glass-header {
-            background: rgba(15, 23, 42, 0.8);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        /* Sidebar Item States */
-        /* Sidebar Item States - Orange Accent */
+        /* Sidebar Item States - Blue Accent */
         .sidebar-item-active {
-            background: linear-gradient(to right, rgba(254, 126, 60, 0.15), transparent);
-            border-left: 4px solid var(--color-burnt-orange);
-            color: var(--color-burnt-orange) !important;
-        }
-        .dark .sidebar-item-active {
-            background: linear-gradient(to right, rgba(99, 102, 241, 0.2), transparent);
-            border-left: 4px solid #818cf8;
-            color: #a5b4fc !important;
+            background-color: var(--bg-active-item) !important;
+            color: var(--color-active-text) !important;
+            font-weight: 600 !important;
+            border-left: 4px solid var(--border-active) !important;
+            border-radius: 0 12px 12px 0 !important;
+            margin-right: 1rem;
         }
 
+        .sidebar-text {
+            color: #94A3B8;
+            font-weight: 500;
+        }
+        
+        .sidebar-item-active .sidebar-text {
+            color: #FFFFFF !important;
+        }
         /* Modern SweetAlert2 Premium Theme */
         .swal2-popup {
             background: rgba(15, 23, 42, 0.95) !important;

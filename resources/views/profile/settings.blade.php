@@ -61,7 +61,7 @@
                             <div class="bg-gray-50 p-4 rounded-lg">
                                 <p class="text-sm text-gray-600 mb-3 font-medium">Zona de Peligro</p>
                                 <div class="flex flex-col sm:flex-row gap-3 items-center">
-                                    <input type="password" name="password" required placeholder="Confirma tu contraseña" class="flex-1 w-full border-gray-300 rounded-lg shadow-sm focus:border-[#5483B3]/500 focus:ring-indigo-500">
+                                    <input type="password" name="password" required placeholder="Confirma tu contraseña" class="flex-1 w-full border-gray-300 rounded-lg shadow-sm focus:border-[#5483B3]/500 focus:ring-[#5483B3]">
                                     <button type="submit" class="bg-white border border-red-300 text-red-600 hover:bg-red-50 font-semibold py-2 px-4 rounded-lg transition-colors w-full sm:w-auto">
                                         Desactivar 2FA
                                     </button>
@@ -92,7 +92,7 @@
                                     
                                     <div class="mb-4">
                                         <label for="code" class="block text-sm font-medium text-gray-700 mb-1">Código de Verificación</label>
-                                        <input type="text" name="code" id="code" required placeholder="000 000" maxlength="6" class="w-full border-gray-300 rounded-lg shadow-sm focus:border-[#5483B3]/500 focus:ring-indigo-500 text-center text-xl tracking-widest font-mono">
+                                        <input type="text" name="code" id="code" required placeholder="000 000" maxlength="6" class="w-full border-gray-300 rounded-lg shadow-sm focus:border-[#5483B3]/500 focus:ring-[#5483B3] text-center text-xl tracking-widest font-mono">
                                     </div>
                                     <button type="submit" class="w-full bg-[#5483B3] hover:bg-[#052659] text-white font-bold py-2 px-4 rounded-lg shadow transition-colors">
                                         Activar Autenticación
@@ -129,7 +129,7 @@
                     <h4 class="font-semibold text-gray-700 mb-2">Visualización de Tablas</h4>
                     <div class="flex items-center justify-between">
                          <label for="items_per_page" class="text-gray-600 text-sm">Registros por página:</label>
-                         <select name="items_per_page" id="items_per_page" class="border-gray-300 rounded-lg text-sm shadow-sm focus:border-[#5483B3]/500 focus:ring-indigo-500">
+                         <select name="items_per_page" id="items_per_page" class="border-gray-300 rounded-lg text-sm shadow-sm focus:border-[#5483B3]/500 focus:ring-[#5483B3]">
                              <option value="10" {{ $perPage == 10 ? 'selected' : '' }}>10 por página</option>
                              <option value="25" {{ $perPage == 25 ? 'selected' : '' }}>25 por página</option>
                              <option value="50" {{ $perPage == 50 ? 'selected' : '' }}>50 por página</option>
