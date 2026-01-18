@@ -68,77 +68,74 @@
     @endif
 
     <!-- Metrics Grid (Pastel Gradients) -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
         <!-- Total Assets (Blue) -->
-        <div class="p-8 rounded-[2rem] shadow-xl transition-all hover:scale-[1.02] hover:shadow-2xl relative overflow-hidden group" style="background: var(--gradient-blue);">
+        <div class="p-5 rounded-3xl shadow-lg transition-all hover:scale-[1.02] hover:shadow-xl relative overflow-hidden group" style="background: var(--gradient-blue);">
             <div class="flex items-start justify-between relative z-10">
                 <div>
-                    <p class="text-xs font-bold uppercase tracking-wider mb-2 opacity-80 text-white">Activos Totales</p>
-                    <h3 class="text-5xl font-black tracking-tight text-white mb-2">
+                    <p class="text-[11px] font-bold uppercase tracking-wider mb-1 opacity-80 text-white">Activos Totales</p>
+                    <h3 class="text-4xl font-black tracking-tight text-white mb-1">
                         {{ $stats['total_assets'] ?? 0 }}
                     </h3>
-                    <p class="text-sm font-medium text-white/90">Unidades en sistema</p>
+                    <p class="text-xs font-medium text-white/90">Unidades en sistema</p>
                 </div>
-                <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl shadow-lg backdrop-blur-sm bg-white/20 text-white">
+                <div class="w-12 h-12 rounded-xl flex items-center justify-center text-xl shadow-md backdrop-blur-sm bg-white/20 text-white">
                     <i class="fas fa-boxes"></i>
                 </div>
             </div>
             <!-- Decorative Elements -->
-            <div class="absolute -right-10 -bottom-10 w-40 h-40 rounded-full bg-white/10 blur-2xl group-hover:bg-white/20 transition-all"></div>
-            <div class="absolute top-0 right-0 p-4 opacity-10">
-                <i class="fas fa-boxes text-9xl"></i>
-            </div>
+            <div class="absolute -right-6 -bottom-6 w-32 h-32 rounded-full bg-white/10 blur-2xl group-hover:bg-white/20 transition-all"></div>
         </div>
 
         <!-- Operative (Green) -->
-        <div class="p-8 rounded-[2rem] shadow-xl transition-all hover:scale-[1.02] hover:shadow-2xl relative overflow-hidden group" style="background: var(--gradient-green);">
+        <div class="p-5 rounded-3xl shadow-lg transition-all hover:scale-[1.02] hover:shadow-xl relative overflow-hidden group" style="background: var(--gradient-green);">
             <div class="flex items-start justify-between relative z-10">
                 <div>
-                    <p class="text-xs font-bold uppercase tracking-wider mb-2 opacity-80 text-white">Operativos</p>
-                    <h3 class="text-5xl font-black tracking-tight text-white mb-2">
+                    <p class="text-[11px] font-bold uppercase tracking-wider mb-1 opacity-80 text-white">Operativos</p>
+                    <h3 class="text-4xl font-black tracking-tight text-white mb-1">
                         {{ $stats['active_assets'] ?? 0 }}
                     </h3>
-                    <p class="text-sm font-medium text-white/90">Estado: Activo</p>
+                    <p class="text-xs font-medium text-white/90">Estado: Activo</p>
                 </div>
-                <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl shadow-lg backdrop-blur-sm bg-white/20 text-white">
+                <div class="w-12 h-12 rounded-xl flex items-center justify-center text-xl shadow-md backdrop-blur-sm bg-white/20 text-white">
                     <i class="fas fa-check-circle"></i>
                 </div>
             </div>
-             <div class="absolute -right-10 -bottom-10 w-40 h-40 rounded-full bg-white/10 blur-2xl group-hover:bg-white/20 transition-all"></div>
+             <div class="absolute -right-6 -bottom-6 w-32 h-32 rounded-full bg-white/10 blur-2xl group-hover:bg-white/20 transition-all"></div>
         </div>
 
         <!-- Maintenance (Orange) -->
-        <div class="p-8 rounded-[2rem] shadow-xl transition-all hover:scale-[1.02] hover:shadow-2xl relative overflow-hidden group" style="background: var(--gradient-orange);">
+        <div class="p-5 rounded-3xl shadow-lg transition-all hover:scale-[1.02] hover:shadow-xl relative overflow-hidden group" style="background: var(--gradient-orange);">
             <div class="flex items-start justify-between relative z-10">
                 <div>
-                    <p class="text-xs font-bold uppercase tracking-wider mb-2 opacity-80 text-white">En Taller</p>
-                    <h3 class="text-5xl font-black tracking-tight text-white mb-2">
+                    <p class="text-[11px] font-bold uppercase tracking-wider mb-1 opacity-80 text-white">En Taller</p>
+                    <h3 class="text-4xl font-black tracking-tight text-white mb-1">
                         {{ $stats['maintenance_assets'] ?? 0 }}
                     </h3>
-                    <p class="text-sm font-medium text-white/90">Requiere atención</p>
+                    <p class="text-xs font-medium text-white/90">Requiere atención</p>
                 </div>
-                <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl shadow-lg backdrop-blur-sm bg-white/20 text-white">
+                <div class="w-12 h-12 rounded-xl flex items-center justify-center text-xl shadow-md backdrop-blur-sm bg-white/20 text-white">
                     <i class="fas fa-tools"></i>
                 </div>
             </div>
-             <div class="absolute -right-10 -bottom-10 w-40 h-40 rounded-full bg-white/10 blur-2xl group-hover:bg-white/20 transition-all"></div>
+             <div class="absolute -right-6 -bottom-6 w-32 h-32 rounded-full bg-white/10 blur-2xl group-hover:bg-white/20 transition-all"></div>
         </div>
 
-        <!-- Decommissioned (Red Gradient - Consistent Style) -->
-        <div class="p-8 rounded-[2rem] shadow-xl transition-all hover:scale-[1.02] hover:shadow-2xl relative overflow-hidden group" style="background: linear-gradient(135deg, #FF9C9C 0%, #EE5D50 100%);">
+        <!-- Decommissioned (Red Gradient) -->
+        <div class="p-5 rounded-3xl shadow-lg transition-all hover:scale-[1.02] hover:shadow-xl relative overflow-hidden group" style="background: linear-gradient(135deg, #FF9C9C 0%, #EE5D50 100%);">
             <div class="flex items-start justify-between relative z-10">
                 <div>
-                    <p class="text-xs font-bold uppercase tracking-wider mb-2 opacity-80 text-white">Bajas</p>
-                    <h3 class="text-5xl font-black tracking-tight text-white mb-2">
+                    <p class="text-[11px] font-bold uppercase tracking-wider mb-1 opacity-80 text-white">Bajas</p>
+                    <h3 class="text-4xl font-black tracking-tight text-white mb-1">
                         {{ $stats['decommissioned_assets'] ?? 0 }}
                     </h3>
-                    <p class="text-sm font-medium text-white/90">Fuera de servicio</p>
+                    <p class="text-xs font-medium text-white/90">Fuera de servicio</p>
                 </div>
-                <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl shadow-lg backdrop-blur-sm bg-white/20 text-white">
+                <div class="w-12 h-12 rounded-xl flex items-center justify-center text-xl shadow-md backdrop-blur-sm bg-white/20 text-white">
                     <i class="fas fa-ban"></i>
                 </div>
             </div>
-             <div class="absolute -right-10 -bottom-10 w-40 h-40 rounded-full bg-white/10 blur-2xl group-hover:bg-white/20 transition-all"></div>
+             <div class="absolute -right-6 -bottom-6 w-32 h-32 rounded-full bg-white/10 blur-2xl group-hover:bg-white/20 transition-all"></div>
         </div>
     </div>
 
