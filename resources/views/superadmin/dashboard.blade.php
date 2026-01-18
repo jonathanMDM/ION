@@ -5,7 +5,7 @@
 @section('content')
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
     <!-- Total Companies -->
-    <div class="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900 p-6 border-l-4 border-indigo-500 transition-colors">
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900 p-6 border-l-4 border-[#5483B3]/500 transition-colors">
         <div class="flex items-center">
             <div class="p-3 rounded-full bg-indigo-100 text-indigo-500 mr-4">
                 <i class="fas fa-building text-2xl"></i>
@@ -60,7 +60,7 @@
 <div class="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900 mb-8 transition-colors">
     <div class="px-6 py-4 border-b border-slate-200 dark:border-slate-700 flex justify-between items-center">
         <h3 class="text-lg font-semibold text-slate-800 dark:text-white">Empresas Recientes</h3>
-        <a href="{{ route('superadmin.companies.index') }}" class="text-indigo-600 hover:text-indigo-800 text-sm font-medium">Ver todas</a>
+        <a href="{{ route('superadmin.companies.index') }}" class="text-[#5483B3] hover:text-indigo-800 text-sm font-medium">Ver todas</a>
     </div>
     <div class="overflow-x-auto">
         <table class="min-w-full divide-y divide-slate-200 dark:divide-slate-700">

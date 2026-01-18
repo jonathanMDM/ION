@@ -17,7 +17,7 @@
                     {{ \Carbon\Carbon::now()->isoFormat('D [de] MMMM, YYYY') }}
                 </span>
             </div>
-            <button onclick="window.location.reload()" class="p-3 rounded-2xl shadow-sm bg-white border border-gray-100 text-gray-400 hover:text-indigo-600 hover:shadow-md transition-all">
+            <button onclick="window.location.reload()" class="p-3 rounded-2xl shadow-sm bg-white border border-gray-100 text-gray-400 hover:text-[#5483B3] hover:shadow-md transition-all">
                 <i class="fas fa-sync-alt"></i>
             </button>
         </div>

@@ -10,13 +10,13 @@
             <h2 class="text-3xl font-extrabold text-gray-900 dark:text-white tracking-tight">Vincular Recurso</h2>
             <p class="text-gray-500 dark:text-gray-400 mt-1">Formalice la entrega de activos a un colaborador específico.</p>
         </div>
-        <a href="{{ route('assets.show', $asset->id) }}" class="flex items-center text-sm font-semibold text-gray-600 dark:text-gray-400 hover:text-indigo-600 transition-colors">
+        <a href="{{ route('assets.show', $asset->id) }}" class="flex items-center text-sm font-semibold text-gray-600 dark:text-gray-400 hover:text-[#5483B3] transition-colors">
             <i class="fas fa-arrow-left mr-2"></i> Volver al activo
         </a>
     </div>
 
     <!-- Asset Summary Card -->
-    <div class="bg-indigo-600 rounded-[2rem] p-8 mb-8 text-white shadow-xl shadow-indigo-500/20 flex flex-col md:flex-row items-center justify-between gap-6">
+    <div class="bg-[#5483B3] rounded-[2rem] p-8 mb-8 text-white shadow-xl shadow-[#5483B3]/20 flex flex-col md:flex-row items-center justify-between gap-6">
         <div class="flex items-center gap-6">
             <div class="w-16 h-16 bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center text-2xl">
                 <i class="fas fa-laptop-house"></i>
@@ -91,15 +91,15 @@
                         @if(auth()->user()->company->hasModule('loans'))
                         <div class="pt-4 border-t border-gray-50 dark:border-gray-700">
                             <label class="flex items-center justify-between cursor-pointer group">
-                                <span class="text-xs font-black text-gray-500 dark:text-gray-400 uppercase tracking-wider group-hover:text-indigo-600 transition-colors">¿Préstamo Temporal?</span>
+                                <span class="text-xs font-black text-gray-500 dark:text-gray-400 uppercase tracking-wider group-hover:text-[#5483B3] transition-colors">¿Préstamo Temporal?</span>
                                 <input type="checkbox" name="is_loan" value="1" id="is_loan" class="sr-only peer" onchange="toggleReturnDate(this)" {{ old('is_loan') ? 'checked' : '' }}>
-                                <div class="w-10 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-gray-600 peer-checked:bg-indigo-600 relative"></div>
+                                <div class="w-10 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-gray-600 peer-checked:bg-[#5483B3] relative"></div>
                             </label>
 
                             <div id="return_date_container" class="mt-4 {{ old('is_loan') ? '' : 'hidden' }}">
                                 <label class="block text-[10px] font-black text-indigo-500 uppercase tracking-widest mb-2">Fecha de Devolución</label>
                                 <input type="date" name="expected_return_date" id="expected_return_date" value="{{ old('expected_return_date') }}" 
-                                    class="w-full bg-indigo-50 dark:bg-indigo-900/20 border-indigo-100 dark:border-indigo-900/30 rounded-xl py-2 px-3 text-xs font-black text-indigo-600 focus:ring-2 focus:ring-indigo-500 transition-all">
+                                    class="w-full bg-indigo-50 dark:bg-indigo-900/20 border-[#5483B3]/100 dark:border-[#5483B3]/900/30 rounded-xl py-2 px-3 text-xs font-black text-[#5483B3] focus:ring-2 focus:ring-indigo-500 transition-all">
                             </div>
                         </div>
                         @endif
@@ -121,7 +121,7 @@
                 Cancelar
             </a>
             <button type="submit" 
-                class="w-full md:w-auto px-16 py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-black rounded-2xl transition-all shadow-xl shadow-indigo-500/25 transform hover:-translate-y-0.5 active:scale-95 flex items-center justify-center tracking-wide uppercase text-sm">
+                class="w-full md:w-auto px-16 py-4 bg-[#5483B3] hover:bg-[#052659] text-white font-black rounded-2xl transition-all shadow-xl shadow-[#5483B3]/25 transform hover:-translate-y-0.5 active:scale-95 flex items-center justify-center tracking-wide uppercase text-sm">
                 <i class="fas fa-check-circle mr-2 text-lg"></i> Confirmar Asignación
             </button>
         </div>

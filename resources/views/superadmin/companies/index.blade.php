@@ -80,7 +80,7 @@
                     <a href="{{ route('superadmin.companies.show', $company) }}" class="text-green-600 hover:text-green-900 mr-3" title="Ver Detalles y Facturación">
                         <i class="fas fa-eye"></i>
                     </a>
-                    <a href="{{ route('superadmin.companies.edit', $company) }}" class="text-indigo-600 hover:text-indigo-900 mr-3" title="Editar">
+                    <a href="{{ route('superadmin.companies.edit', $company) }}" class="text-[#5483B3] hover:text-indigo-900 mr-3" title="Editar">
                         <i class="fas fa-edit"></i>
                     </a>
                     <a href="{{ route('superadmin.companies.fields.index', $company) }}" class="text-blue-600 hover:text-blue-900 mr-3" title="Gestionar Campos">

@@ -150,7 +150,7 @@
             <a href="{{ route('assets.show', $asset) }}" class="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 font-medium">
                 Cancelar
             </a>
-            <button type="submit" class="px-6 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg font-medium">
+            <button type="submit" class="px-6 py-2 bg-[#5483B3] hover:bg-[#052659] text-white rounded-lg font-medium">
                 <i class="fas fa-save mr-2"></i>Registrar Costo
             </button>
         </div>

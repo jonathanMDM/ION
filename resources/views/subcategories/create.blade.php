@@ -10,7 +10,7 @@
             <h2 class="text-3xl font-extrabold text-gray-900 dark:text-white tracking-tight">Agregar Subcategoría</h2>
             <p class="text-gray-500 dark:text-gray-400 mt-1">Defina especificaciones detalladas para sus categorías principales.</p>
         </div>
-        <a href="{{ route('subcategories.index') }}" class="flex items-center text-sm font-semibold text-gray-600 dark:text-gray-400 hover:text-indigo-600 transition-colors">
+        <a href="{{ route('subcategories.index') }}" class="flex items-center text-sm font-semibold text-gray-600 dark:text-gray-400 hover:text-[#5483B3] transition-colors">
             <i class="fas fa-arrow-left mr-2"></i> Volver
         </a>
     </div>
@@ -65,7 +65,7 @@
                     Cancelar
                 </a>
                 <button type="submit" 
-                    class="w-full md:w-auto px-12 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-black rounded-xl transition-all shadow-xl shadow-indigo-500/20 transform hover:-translate-y-0.5 uppercase tracking-wide text-xs">
+                    class="w-full md:w-auto px-12 py-3 bg-[#5483B3] hover:bg-[#052659] text-white font-black rounded-xl transition-all shadow-xl shadow-[#5483B3]/20 transform hover:-translate-y-0.5 uppercase tracking-wide text-xs">
                     <i class="fas fa-plus mr-2 text-xs"></i> Guardar Subcategoría
                 </button>
             </div>

@@ -13,7 +13,7 @@
     <!-- Header Section -->
     <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8 group">
         <div class="flex items-center gap-5">
-            <a href="{{ route('assets.index') }}" class="w-12 h-12 flex items-center justify-center rounded-2xl bg-white dark:bg-gray-800 shadow-sm border border-gray-100 dark:border-gray-700 text-gray-400 hover:text-indigo-600 hover:shadow-md transition-all">
+            <a href="{{ route('assets.index') }}" class="w-12 h-12 flex items-center justify-center rounded-2xl bg-white dark:bg-gray-800 shadow-sm border border-gray-100 dark:border-gray-700 text-gray-400 hover:text-[#5483B3] hover:shadow-md transition-all">
                 <i class="fas fa-arrow-left"></i>
             </a>
             <div>
@@ -41,11 +41,11 @@
             @if(Auth::user()->hasPermission('edit_assets'))
                 <div class="flex items-center gap-3 bg-gray-100 dark:bg-gray-900/50 p-1.5 rounded-2xl border border-gray-200 dark:border-gray-800">
                     @if(auth()->user()->company->hasModule('transfers'))
-                        <button onclick="document.getElementById('transferModal').classList.remove('hidden')" class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-black rounded-xl transition-all shadow-lg shadow-indigo-500/20 flex items-center gap-2 text-sm uppercase tracking-wide">
+                        <button onclick="document.getElementById('transferModal').classList.remove('hidden')" class="px-5 py-2.5 bg-[#5483B3] hover:bg-[#052659] text-white font-black rounded-xl transition-all shadow-lg shadow-[#5483B3]/20 flex items-center gap-2 text-sm uppercase tracking-wide">
                             <i class="fas fa-exchange-alt"></i> Trasladar
                         </button>
                     @endif
-                    <a href="{{ route('assets.edit', $asset->id) }}" class="p-2.5 bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:text-indigo-600 rounded-xl transition-all hover:shadow-sm shadow-indigo-500/10">
+                    <a href="{{ route('assets.edit', $asset->id) }}" class="p-2.5 bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:text-[#5483B3] rounded-xl transition-all hover:shadow-sm shadow-[#5483B3]/10">
                         <i class="fas fa-edit"></i>
                     </a>
                 </div>
@@ -92,7 +92,7 @@
                                 <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Precio de Compra</p>
                                 <p class="text-xl font-black text-gray-900 dark:text-white">${{ number_format($asset->value, 2) }}</p>
                             </div>
-                            <div class="w-12 h-12 bg-indigo-50 dark:bg-indigo-900/30 rounded-2xl flex items-center justify-center text-indigo-600">
+                            <div class="w-12 h-12 bg-indigo-50 dark:bg-indigo-900/30 rounded-2xl flex items-center justify-center text-[#5483B3]">
                                 <i class="fas fa-tag"></i>
                             </div>
                         </div>
@@ -128,7 +128,7 @@
                     </div>
                     @endif
                     @if($asset->specifications)
-                    <div class="p-4 bg-indigo-50/30 dark:bg-indigo-900/10 rounded-2xl border border-indigo-100/50 dark:border-indigo-900/30">
+                    <div class="p-4 bg-indigo-50/30 dark:bg-indigo-900/10 rounded-2xl border border-[#5483B3]/100/50 dark:border-[#5483B3]/900/30">
                         <p class="text-[10px] font-black text-gray-400 uppercase mb-2">Comentarios Técnicos</p>
                         <p class="text-xs text-gray-600 dark:text-gray-400 leading-relaxed italic">"{{ $asset->specifications }}"</p>
                     </div>
@@ -208,7 +208,7 @@
                                 <i class="fas fa-undo"></i> Devolver
                             </button>
                         @elseif($asset->status == 'active')
-                            <a href="{{ route('assets.assign', $asset->id) }}" class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-black rounded-xl transition-all shadow-md shadow-indigo-500/20 flex items-center gap-2 text-[10px] uppercase tracking-widest">
+                            <a href="{{ route('assets.assign', $asset->id) }}" class="px-5 py-2.5 bg-[#5483B3] hover:bg-[#052659] text-white font-black rounded-xl transition-all shadow-md shadow-[#5483B3]/20 flex items-center gap-2 text-[10px] uppercase tracking-widest">
                                 <i class="fas fa-plus"></i> Asignar Recurso
                             </a>
                         @endif
@@ -229,7 +229,7 @@
                             </div>
                             <div class="flex-1 text-center md:text-left">
                                 <p class="text-[10px] font-black text-emerald-600/60 uppercase tracking-widest mb-1">Colaborador Actual</p>
-                                <a href="{{ route('employees.show', $assignment->employee->id) }}" class="text-xl font-black text-gray-900 dark:text-white hover:text-indigo-600 transition-colors">{{ $assignment->employee->full_name }}</a>
+                                <a href="{{ route('employees.show', $assignment->employee->id) }}" class="text-xl font-black text-gray-900 dark:text-white hover:text-[#5483B3] transition-colors">{{ $assignment->employee->full_name }}</a>
                                 <p class="text-sm font-medium text-gray-500 dark:text-gray-400 mt-1">{{ $assignment->employee->position ?? 'Sin cargo' }} • {{ $assignment->employee->department ?? 'General' }}</p>
                             </div>
                             <div class="grid grid-cols-2 gap-4 text-center">
@@ -373,12 +373,12 @@
                 @csrf
                 <input type="hidden" name="asset_id" value="{{ $asset->id }}">
                 
-                <div class="flex items-center gap-4 p-4 bg-indigo-50 dark:bg-indigo-900/20 rounded-2xl border border-indigo-100 dark:border-indigo-900/30">
+                <div class="flex items-center gap-4 p-4 bg-indigo-50 dark:bg-indigo-900/20 rounded-2xl border border-[#5483B3]/100 dark:border-[#5483B3]/900/30">
                     <div class="w-10 h-10 bg-white dark:bg-gray-800 rounded-xl flex items-center justify-center text-indigo-500 shadow-sm">
                         <i class="fas fa-map-pin"></i>
                     </div>
                     <div>
-                        <p class="text-[10px] font-black text-indigo-600 dark:text-indigo-400 uppercase tracking-widest">Ubicación Actual</p>
+                        <p class="text-[10px] font-black text-[#5483B3] dark:text-indigo-400 uppercase tracking-widest">Ubicación Actual</p>
                         <p class="text-sm font-black text-gray-900 dark:text-white leading-none mt-0.5">{{ $asset->location->name }}</p>
                     </div>
                 </div>
@@ -400,7 +400,7 @@
 
                 <div class="flex gap-4 pt-4">
                     <button type="button" onclick="document.getElementById('transferModal').classList.add('hidden')" class="flex-1 py-4 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 font-black rounded-2xl uppercase tracking-[0.2em] text-[10px] hover:bg-gray-200 transition-all">Cancelar</button>
-                    <button type="submit" class="flex-1 py-4 bg-indigo-600 text-white font-black rounded-2xl uppercase tracking-[0.2em] text-[10px] shadow-lg shadow-indigo-500/20 hover:bg-indigo-700 transition-all">Confirmar Traslado</button>
+                    <button type="submit" class="flex-1 py-4 bg-[#5483B3] text-white font-black rounded-2xl uppercase tracking-[0.2em] text-[10px] shadow-lg shadow-[#5483B3]/20 hover:bg-[#052659] transition-all">Confirmar Traslado</button>
                 </div>
             </form>
         </div>

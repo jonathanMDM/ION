@@ -13,7 +13,7 @@
             @if($notifications->total() > 0)
             <form action="{{ route('notifications.mark-all-as-read') }}" method="POST" class="inline">
                 @csrf
-                <button type="submit" class="text-sm text-indigo-600 hover:text-indigo-800 font-medium">
+                <button type="submit" class="text-sm text-[#5483B3] hover:text-indigo-800 font-medium">
                     <i class="fas fa-check-double mr-1"></i>
                     Marcar todas como leídas
                 </button>
@@ -59,7 +59,7 @@
                                 @if(!$notification->read_at)
                                 <form action="{{ route('notifications.mark-as-read', $notification->id) }}" method="POST" class="inline">
                                     @csrf
-                                    <button type="submit" class="text-xs text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300" title="Marcar como leída">
+                                    <button type="submit" class="text-xs text-[#5483B3] dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300" title="Marcar como leída">
                                         <i class="fas fa-check"></i>
                                     </button>
                                 </form>

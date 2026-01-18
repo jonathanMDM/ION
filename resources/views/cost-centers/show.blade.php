@@ -10,7 +10,7 @@
             <p class="text-gray-600 mt-1">Código: <span class="font-mono font-semibold">{{ $costCenter->code }}</span></p>
         </div>
         <div class="flex space-x-2">
-            <a href="{{ route('cost-centers.edit', $costCenter) }}" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded font-bold">
+            <a href="{{ route('cost-centers.edit', $costCenter) }}" class="bg-[#5483B3] hover:bg-[#052659] text-white px-4 py-2 rounded font-bold">
                 <i class="fas fa-edit mr-2"></i>Editar
             </a>
             <a href="{{ route('cost-centers.index') }}" class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded font-bold">
@@ -153,7 +153,7 @@
         @if($costCenter->manager)
             <div class="flex items-center mb-4">
                 <div class="h-12 w-12 rounded-full bg-indigo-100 flex items-center justify-center">
-                    <span class="text-indigo-600 font-semibold text-lg">{{ substr($costCenter->manager->name, 0, 2) }}</span>
+                    <span class="text-[#5483B3] font-semibold text-lg">{{ substr($costCenter->manager->name, 0, 2) }}</span>
                 </div>
                 <div class="ml-4">
                     <p class="text-sm font-semibold text-gray-900">{{ $costCenter->manager->name }}</p>
@@ -207,7 +207,7 @@
                             ${{ number_format($asset->book_value, 0) }}
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-center text-sm">
-                            <a href="{{ route('assets.show', $asset) }}" class="text-indigo-600 hover:text-indigo-900">
+                            <a href="{{ route('assets.show', $asset) }}" class="text-[#5483B3] hover:text-indigo-900">
                                 <i class="fas fa-eye"></i>
                             </a>
                         </td>

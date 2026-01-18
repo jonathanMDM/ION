@@ -10,7 +10,7 @@
             <h2 class="text-3xl font-extrabold text-gray-900 dark:text-white tracking-tight">Registro de Mantenimiento</h2>
             <p class="text-gray-500 dark:text-gray-400 mt-1">Documente intervenciones técnicas para prolongar la vida útil de sus activos.</p>
         </div>
-        <a href="{{ route('maintenances.index') }}" class="flex items-center text-sm font-semibold text-gray-600 dark:text-gray-400 hover:text-indigo-600 transition-colors">
+        <a href="{{ route('maintenances.index') }}" class="flex items-center text-sm font-semibold text-gray-600 dark:text-gray-400 hover:text-[#5483B3] transition-colors">
             <i class="fas fa-arrow-left mr-2"></i> Volver al listado
         </a>
     </div>
@@ -84,7 +84,7 @@
                     </div>
                 </div>
 
-                <div class="p-6 bg-indigo-50/50 dark:bg-indigo-900/10 rounded-3xl border border-indigo-100 dark:border-indigo-900/30">
+                <div class="p-6 bg-indigo-50/50 dark:bg-indigo-900/10 rounded-3xl border border-[#5483B3]/100 dark:border-[#5483B3]/900/30">
                     <p class="text-[10px] text-indigo-700 dark:text-indigo-400 font-medium leading-relaxed italic">
                         <i class="fas fa-lightbulb mr-1"></i> El costo registrado impactará el valor contable y el ROI del activo automáticamente.
                     </p>
@@ -99,7 +99,7 @@
                 Cancelar
             </a>
             <button type="submit" 
-                class="w-full md:w-auto px-16 py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-black rounded-2xl transition-all shadow-xl shadow-indigo-500/25 transform hover:-translate-y-0.5 active:scale-95 flex items-center justify-center tracking-wide uppercase text-sm">
+                class="w-full md:w-auto px-16 py-4 bg-[#5483B3] hover:bg-[#052659] text-white font-black rounded-2xl transition-all shadow-xl shadow-[#5483B3]/25 transform hover:-translate-y-0.5 active:scale-95 flex items-center justify-center tracking-wide uppercase text-sm">
                 <i class="fas fa-save mr-2 text-lg"></i> Registrar Mantenimiento
             </button>
         </div>

@@ -34,7 +34,7 @@
             <div class="absolute -inset-1 bg-gradient-to-r from-indigo-500 via-purple-600 to-pink-500 rounded-[2.5rem] blur-2xl opacity-30 animate-pulse"></div>
             <div class="relative bg-slate-900 border border-white/10 rounded-[2.2rem] shadow-2xl overflow-hidden p-8 sm:p-10 text-center">
                 <div class="mb-8 relative inline-block">
-                    <div class="w-20 h-20 bg-indigo-600 rounded-2xl flex items-center justify-center shadow-2xl mx-auto transform -rotate-12 border-4 border-white/5">
+                    <div class="w-20 h-20 bg-[#5483B3] rounded-2xl flex items-center justify-center shadow-2xl mx-auto transform -rotate-12 border-4 border-white/5">
                         <i class="fas fa-rocket text-white text-3xl animate-bounce"></i>
                     </div>
                 </div>
@@ -73,7 +73,7 @@
             <div class="p-3 sm:p-6">
                 <!-- Header -->
                 <div class="flex items-center space-x-2 sm:space-x-3 mb-1 sm:mb-4">
-                    <div class="w-6 h-6 sm:w-10 sm:h-10 bg-indigo-600 rounded-lg sm:rounded-xl flex items-center justify-center shadow-lg transform -rotate-3 shrink-0">
+                    <div class="w-6 h-6 sm:w-10 sm:h-10 bg-[#5483B3] rounded-lg sm:rounded-xl flex items-center justify-center shadow-lg transform -rotate-3 shrink-0">
                         <i class="fas fa-magic text-white text-[10px] sm:text-lg"></i>
                     </div>
                     <div class="min-w-0 flex-1">
@@ -108,7 +108,7 @@
                                 <span id="btn-text">Entendido</span>
                                 <i class="fas fa-chevron-right ml-1 sm:ml-2 text-[8px] sm:text-[10px]"></i>
                             </button>
-                            <button id="btn-wait" class="hidden px-3 sm:px-5 py-1 sm:py-2 bg-indigo-600 text-white rounded-lg sm:rounded-xl text-[9px] sm:text-[11px] font-black cursor-default opacity-80">
+                            <button id="btn-wait" class="hidden px-3 sm:px-5 py-1 sm:py-2 bg-[#5483B3] text-white rounded-lg sm:rounded-xl text-[9px] sm:text-[11px] font-black cursor-default opacity-80">
                                 Esperando...
                             </button>
                         </div>

@@ -9,7 +9,7 @@
             <h2 class="text-2xl font-bold text-gray-800">Centros de Costo</h2>
             <p class="text-gray-600 mt-1">Gestiona los centros de costo y su presupuesto</p>
         </div>
-        <a href="{{ route('cost-centers.create') }}" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded font-bold">
+        <a href="{{ route('cost-centers.create') }}" class="bg-[#5483B3] hover:bg-[#052659] text-white px-4 py-2 rounded font-bold">
             <i class="fas fa-plus mr-2"></i>Nuevo Centro de Costo
         </a>
     </div>
@@ -20,7 +20,7 @@
         <i class="fas fa-building text-6xl text-gray-300 mb-4"></i>
         <h3 class="text-xl font-semibold text-gray-700 mb-2">No hay centros de costo registrados</h3>
         <p class="text-gray-500 mb-6">Comienza creando tu primer centro de costo para organizar tus activos</p>
-        <a href="{{ route('cost-centers.create') }}" class="inline-block bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded font-bold">
+        <a href="{{ route('cost-centers.create') }}" class="inline-block bg-[#5483B3] hover:bg-[#052659] text-white px-6 py-3 rounded font-bold">
             <i class="fas fa-plus mr-2"></i>Crear Centro de Costo
         </a>
     </div>
@@ -54,7 +54,7 @@
                         @if($center->manager)
                             <div class="flex items-center">
                                 <div class="h-8 w-8 rounded-full bg-indigo-100 flex items-center justify-center">
-                                    <span class="text-indigo-600 font-semibold text-xs">{{ substr($center->manager->name, 0, 2) }}</span>
+                                    <span class="text-[#5483B3] font-semibold text-xs">{{ substr($center->manager->name, 0, 2) }}</span>
                                 </div>
                                 <div class="ml-3">
                                     <div class="text-sm font-medium text-gray-900">{{ $center->manager->name }}</div>
@@ -100,7 +100,7 @@
                         <a href="{{ route('cost-centers.show', $center) }}" class="text-blue-600 hover:text-blue-900 mr-3" title="Ver detalles">
                             <i class="fas fa-eye"></i>
                         </a>
-                        <a href="{{ route('cost-centers.edit', $center) }}" class="text-indigo-600 hover:text-indigo-900 mr-3" title="Editar">
+                        <a href="{{ route('cost-centers.edit', $center) }}" class="text-[#5483B3] hover:text-indigo-900 mr-3" title="Editar">
                             <i class="fas fa-edit"></i>
                         </a>
                         <form action="{{ route('cost-centers.toggle-status', $center) }}" method="POST" class="inline">

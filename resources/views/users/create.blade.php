@@ -10,7 +10,7 @@
             <h2 class="text-3xl font-extrabold text-gray-900 dark:text-white tracking-tight">Nuevo Usuario de Sistema</h2>
             <p class="text-gray-500 dark:text-gray-400 mt-1">Gestione el acceso y niveles de seguridad de sus colaboradores.</p>
         </div>
-        <a href="{{ route('users.index') }}" class="flex items-center text-sm font-semibold text-gray-600 dark:text-gray-400 hover:text-indigo-600 transition-colors">
+        <a href="{{ route('users.index') }}" class="flex items-center text-sm font-semibold text-gray-600 dark:text-gray-400 hover:text-[#5483B3] transition-colors">
             <i class="fas fa-arrow-left mr-2"></i> Volver al listado
         </a>
     </div>
@@ -87,19 +87,19 @@
                         @foreach(\App\Config\PermissionConfig::getPermissionsByCategory() as $category => $permissions)
                         <div>
                             <div class="flex items-center justify-between mb-4">
-                                <h4 class="text-xs font-black text-indigo-600 uppercase tracking-widest flex items-center">
+                                <h4 class="text-xs font-black text-[#5483B3] uppercase tracking-widest flex items-center">
                                     <span class="w-1.5 h-1.5 bg-indigo-500 rounded-full mr-2"></span> {{ $category }}
                                 </h4>
                                 <div class="flex items-center gap-2">
-                                    <button type="button" onclick="selectAll('{{ Str::slug($category) }}')" class="text-[9px] font-black text-gray-400 hover:text-indigo-600 transition-colors uppercase tracking-widest bg-gray-100 dark:bg-gray-900/40 px-2 py-1 rounded-lg">Todas</button>
+                                    <button type="button" onclick="selectAll('{{ Str::slug($category) }}')" class="text-[9px] font-black text-gray-400 hover:text-[#5483B3] transition-colors uppercase tracking-widest bg-gray-100 dark:bg-gray-900/40 px-2 py-1 rounded-lg">Todas</button>
                                     <button type="button" onclick="deselectAll('{{ Str::slug($category) }}')" class="text-[9px] font-black text-gray-400 hover:text-red-500 transition-colors uppercase tracking-widest bg-gray-100 dark:bg-gray-900/40 px-2 py-1 rounded-lg">Limpiar</button>
                                 </div>
                             </div>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-3 {{ Str::slug($category) }}-group">
                                 @foreach($permissions as $key => $label)
-                                <label class="group flex items-center justify-between p-3 rounded-2xl bg-gray-50 dark:bg-gray-900/40 border border-transparent hover:border-indigo-500/30 transition-all cursor-pointer">
-                                    <span class="text-xs font-medium text-gray-600 dark:text-gray-400 group-hover:text-indigo-600 transition-colors">{{ $label }}</span>
-                                    <input type="checkbox" name="permissions[]" value="{{ $key }}" class="w-5 h-5 rounded-lg border-gray-300 text-indigo-600 focus:ring-indigo-500/20 transition-all">
+                                <label class="group flex items-center justify-between p-3 rounded-2xl bg-gray-50 dark:bg-gray-900/40 border border-transparent hover:border-[#5483B3]/500/30 transition-all cursor-pointer">
+                                    <span class="text-xs font-medium text-gray-600 dark:text-gray-400 group-hover:text-[#5483B3] transition-colors">{{ $label }}</span>
+                                    <input type="checkbox" name="permissions[]" value="{{ $key }}" class="w-5 h-5 rounded-lg border-gray-300 text-[#5483B3] focus:ring-indigo-500/20 transition-all">
                                 </label>
                                 @endforeach
                             </div>
@@ -143,7 +143,7 @@
                 Cancelar
             </a>
             <button type="submit" 
-                class="w-full md:w-auto px-16 py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-black rounded-2xl transition-all shadow-xl shadow-indigo-500/25 transform hover:-translate-y-0.5 active:scale-95 flex items-center justify-center tracking-wide uppercase text-sm">
+                class="w-full md:w-auto px-16 py-4 bg-[#5483B3] hover:bg-[#052659] text-white font-black rounded-2xl transition-all shadow-xl shadow-[#5483B3]/25 transform hover:-translate-y-0.5 active:scale-95 flex items-center justify-center tracking-wide uppercase text-sm">
                 <i class="fas fa-save mr-2 text-lg"></i> Crear Usuario
             </button>
         </div>

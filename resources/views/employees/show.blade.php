@@ -7,7 +7,7 @@
     <!-- Header Section -->
     <div class="flex items-center justify-between mb-8">
         <div class="flex items-center gap-4">
-            <a href="{{ route('employees.index') }}" class="w-10 h-10 flex items-center justify-center rounded-full bg-white dark:bg-gray-800 shadow-sm border border-gray-100 dark:border-gray-700 text-gray-400 hover:text-indigo-600 transition-all">
+            <a href="{{ route('employees.index') }}" class="w-10 h-10 flex items-center justify-center rounded-full bg-white dark:bg-gray-800 shadow-sm border border-gray-100 dark:border-gray-700 text-gray-400 hover:text-[#5483B3] transition-all">
                 <i class="fas fa-arrow-left"></i>
             </a>
             <div>
@@ -16,7 +16,7 @@
             </div>
         </div>
         <div class="flex items-center gap-3">
-            <a href="{{ route('employees.edit', $employee->id) }}" class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl transition-all shadow-lg shadow-indigo-500/20 flex items-center">
+            <a href="{{ route('employees.edit', $employee->id) }}" class="px-5 py-2.5 bg-[#5483B3] hover:bg-[#052659] text-white font-bold rounded-xl transition-all shadow-lg shadow-[#5483B3]/20 flex items-center">
                 <i class="fas fa-user-edit mr-2"></i> Editar Perfil
             </a>
         </div>
@@ -29,7 +29,7 @@
                 <div class="h-24 bg-gradient-to-br from-indigo-500 to-purple-600"></div>
                 <div class="px-6 pb-6 pt-0 -mt-12 text-center">
                     <div class="relative inline-block">
-                        <div class="w-24 h-24 bg-white dark:bg-gray-900 rounded-2xl shadow-xl flex items-center justify-center text-3xl font-black text-indigo-600 border-4 border-white dark:border-gray-800 mx-auto">
+                        <div class="w-24 h-24 bg-white dark:bg-gray-900 rounded-2xl shadow-xl flex items-center justify-center text-3xl font-black text-[#5483B3] border-4 border-white dark:border-gray-800 mx-auto">
                             {{ substr($employee->first_name, 0, 1) }}{{ substr($employee->last_name, 0, 1) }}
                         </div>
                         <div class="absolute bottom-0 right-0 w-6 h-6 rounded-full border-2 border-white dark:border-gray-800 {{ $employee->status == 'active' ? 'bg-green-500' : 'bg-red-500' }}"></div>
@@ -39,7 +39,7 @@
                     <p class="text-sm font-medium text-gray-500 dark:text-gray-400">{{ $employee->position ?? 'Sin cargo' }}</p>
                     
                     <div class="mt-6 flex flex-wrap justify-center gap-2">
-                        <span class="px-3 py-1 bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 rounded-full text-[10px] font-black uppercase tracking-wider">
+                        <span class="px-3 py-1 bg-indigo-50 dark:bg-indigo-900/30 text-[#5483B3] dark:text-indigo-400 rounded-full text-[10px] font-black uppercase tracking-wider">
                             {{ $employee->department ?? 'General' }}
                         </span>
                         <span class="px-3 py-1 {{ $employee->status == 'active' ? 'bg-green-50 dark:bg-green-900/30 text-green-600 dark:text-green-400' : 'bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400' }} rounded-full text-[10px] font-black uppercase tracking-wider">
@@ -72,7 +72,7 @@
 
             <!-- Quick Stats -->
             <div class="grid grid-cols-2 gap-4">
-                <div class="bg-indigo-600 rounded-2xl p-4 text-white shadow-lg shadow-indigo-500/20">
+                <div class="bg-[#5483B3] rounded-2xl p-4 text-white shadow-lg shadow-[#5483B3]/20">
                     <p class="text-[10px] font-bold uppercase opacity-80">Activos</p>
                     <p class="text-2xl font-black">{{ $activeAssignments->count() }}</p>
                 </div>
@@ -137,7 +137,7 @@
                                         @endif
                                     </td>
                                     <td class="bg-gray-50/50 dark:bg-gray-900/40 rounded-r-2xl py-4 px-4 border-r border-t border-b border-gray-100 dark:border-gray-700 text-right">
-                                        <a href="{{ route('assets.show', $assignment->asset->id) }}" class="p-2 bg-white dark:bg-gray-800 rounded-lg shadow-sm text-gray-400 hover:text-indigo-600 transition-colors">
+                                        <a href="{{ route('assets.show', $assignment->asset->id) }}" class="p-2 bg-white dark:bg-gray-800 rounded-lg shadow-sm text-gray-400 hover:text-[#5483B3] transition-colors">
                                             <i class="fas fa-chevron-right text-xs"></i>
                                         </a>
                                     </td>
@@ -186,7 +186,7 @@
                                         @endif
                                     </div>
                                     <div class="text-right">
-                                        <a href="{{ route('assets.show', $assignment->asset->id) }}" class="text-[10px] font-black text-indigo-600 dark:text-indigo-400 uppercase tracking-widest hover:underline">Ver Activo</a>
+                                        <a href="{{ route('assets.show', $assignment->asset->id) }}" class="text-[10px] font-black text-[#5483B3] dark:text-indigo-400 uppercase tracking-widest hover:underline">Ver Activo</a>
                                     </div>
                                 </div>
                             </div>

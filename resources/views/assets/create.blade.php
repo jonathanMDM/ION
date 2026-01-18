@@ -10,7 +10,7 @@
             <h2 class="text-3xl font-extrabold text-gray-900 dark:text-white tracking-tight">Agregar Nuevo Activo</h2>
             <p class="text-gray-500 dark:text-gray-400 mt-1">Registre un nuevo elemento en su inventario con detalles completos.</p>
         </div>
-        <a href="{{ route('assets.index') }}" class="flex items-center text-sm font-semibold text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
+        <a href="{{ route('assets.index') }}" class="flex items-center text-sm font-semibold text-gray-600 dark:text-gray-400 hover:text-[#5483B3] dark:hover:text-indigo-400 transition-colors">
             <i class="fas fa-arrow-left mr-2"></i> Volver al listado
         </a>
     </div>
@@ -231,22 +231,22 @@
                                         </div>
                                     </div>
 
-                                    <div id="depreciation_fields" class="grid grid-cols-1 md:grid-cols-3 gap-6 p-4 bg-indigo-50/50 dark:bg-indigo-900/10 rounded-2xl border border-indigo-100 dark:border-indigo-900/30" 
+                                    <div id="depreciation_fields" class="grid grid-cols-1 md:grid-cols-3 gap-6 p-4 bg-indigo-50/50 dark:bg-indigo-900/10 rounded-2xl border border-[#5483B3]/100 dark:border-[#5483B3]/900/30" 
                                         style="display: {{ old('depreciation_method', 'none') != 'none' ? 'grid' : 'none' }}">
                                         <div>
                                             <label class="block text-xs font-bold text-indigo-700 dark:text-indigo-400 mb-2 uppercase" for="useful_life_years">Vida Útil (Años)</label>
                                             <input type="number" name="useful_life_years" id="useful_life_years" min="1" value="{{ old('useful_life_years') }}"
-                                                class="w-full bg-white dark:bg-gray-900 border-indigo-100 dark:border-indigo-900/50 rounded-lg py-2 px-3 text-sm focus:ring-2 focus:ring-indigo-500 transition-all">
+                                                class="w-full bg-white dark:bg-gray-900 border-[#5483B3]/100 dark:border-[#5483B3]/900/50 rounded-lg py-2 px-3 text-sm focus:ring-2 focus:ring-indigo-500 transition-all">
                                         </div>
                                         <div>
                                             <label class="block text-xs font-bold text-indigo-700 dark:text-indigo-400 mb-2 uppercase" for="salvage_value">V. Salvamento</label>
                                             <input type="number" step="0.01" name="salvage_value" id="salvage_value" value="{{ old('salvage_value', 0) }}"
-                                                class="w-full bg-white dark:bg-gray-900 border-indigo-100 dark:border-indigo-900/50 rounded-lg py-2 px-3 text-sm focus:ring-2 focus:ring-indigo-500 transition-all">
+                                                class="w-full bg-white dark:bg-gray-900 border-[#5483B3]/100 dark:border-[#5483B3]/900/50 rounded-lg py-2 px-3 text-sm focus:ring-2 focus:ring-indigo-500 transition-all">
                                         </div>
                                         <div>
                                             <label class="block text-xs font-bold text-indigo-700 dark:text-indigo-400 mb-2 uppercase" for="depreciation_start_date">Fecha Inicio</label>
                                             <input type="date" name="depreciation_start_date" id="depreciation_start_date" value="{{ old('depreciation_start_date') }}"
-                                                class="w-full bg-white dark:bg-gray-900 border-indigo-100 dark:border-indigo-900/50 rounded-lg py-2 px-3 text-sm focus:ring-2 focus:ring-indigo-500 transition-all">
+                                                class="w-full bg-white dark:bg-gray-900 border-[#5483B3]/100 dark:border-[#5483B3]/900/50 rounded-lg py-2 px-3 text-sm focus:ring-2 focus:ring-indigo-500 transition-all">
                                         </div>
                                     </div>
                                 </div>
@@ -319,7 +319,7 @@
                                 <span class="text-xs text-gray-400">Sin archivo seleccionado</span>
                                 <img id="image-preview" src="#" alt="Vista previa" class="hidden w-full h-full object-cover">
                             </div>
-                            <label class="w-full flex justify-center items-center px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl cursor-pointer transition-colors shadow-lg shadow-indigo-500/20">
+                            <label class="w-full flex justify-center items-center px-4 py-2 bg-[#5483B3] hover:bg-[#052659] text-white font-bold rounded-xl cursor-pointer transition-colors shadow-lg shadow-[#5483B3]/20">
                                 <i class="fas fa-cloud-upload-alt mr-2"></i> Seleccionar Imagen
                                 <input type="file" name="image" id="image" accept="image/*" class="hidden" onchange="previewFile(this)">
                             </label>
@@ -384,7 +384,7 @@
                     Cancelar
                 </a>
                 <button type="submit" 
-                    class="w-full md:w-auto px-16 py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-black rounded-2xl transition-all shadow-xl shadow-indigo-500/25 transform hover:-translate-y-0.5 active:scale-95 flex items-center justify-center tracking-wide uppercase text-sm">
+                    class="w-full md:w-auto px-16 py-4 bg-[#5483B3] hover:bg-[#052659] text-white font-black rounded-2xl transition-all shadow-xl shadow-[#5483B3]/25 transform hover:-translate-y-0.5 active:scale-95 flex items-center justify-center tracking-wide uppercase text-sm">
                     <i class="fas fa-save mr-2 text-lg"></i> REGISTRAR ACTIVO
                 </button>
             </div>

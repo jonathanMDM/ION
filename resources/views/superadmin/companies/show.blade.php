@@ -10,7 +10,7 @@
             <p class="text-gray-600 mt-1">Información detallada y gestión de la empresa</p>
         </div>
         <div class="flex gap-2">
-            <a href="{{ route('superadmin.companies.edit', $company) }}" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded font-bold">
+            <a href="{{ route('superadmin.companies.edit', $company) }}" class="bg-[#5483B3] hover:bg-[#052659] text-white px-4 py-2 rounded font-bold">
                 <i class="fas fa-edit mr-2"></i>Editar Empresa
             </a>
             <a href="{{ route('superadmin.companies.index') }}" class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded font-bold">
@@ -47,7 +47,7 @@
 <div class="bg-white rounded-lg shadow-md p-6 mb-6">
     <div class="flex justify-between items-start mb-4">
         <h3 class="text-lg font-semibold text-gray-800">Suscripción y Facturación</h3>
-        <a href="{{ route('superadmin.companies.invoices.create', $company->id) }}" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded text-sm font-bold">
+        <a href="{{ route('superadmin.companies.invoices.create', $company->id) }}" class="bg-[#5483B3] hover:bg-[#052659] text-white px-4 py-2 rounded text-sm font-bold">
             <i class="fas fa-file-invoice-dollar mr-2"></i>Registrar Pago y Enviar Factura
         </a>
     </div>
@@ -103,7 +103,7 @@
                         </td>
                         <td class="px-4 py-3 text-center">
                             <a href="{{ route('superadmin.invoices.download', $invoice) }}" 
-                               class="text-indigo-600 hover:text-indigo-900" 
+                               class="text-[#5483B3] hover:text-indigo-900" 
                                title="Ver/Descargar PDF"
                                target="_blank">
                                 <i class="fas fa-file-pdf text-lg"></i>

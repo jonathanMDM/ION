@@ -76,7 +76,7 @@
                         </form>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <a href="{{ route('superadmin.announcements.edit', $announcement) }}" class="text-indigo-600 hover:text-indigo-900 mr-3">Editar</a>
+                        <a href="{{ route('superadmin.announcements.edit', $announcement) }}" class="text-[#5483B3] hover:text-indigo-900 mr-3">Editar</a>
                         <form action="{{ route('superadmin.announcements.destroy', $announcement) }}" method="POST" class="inline-block" onsubmit="return confirm('¿Estás seguro de eliminar este anuncio?');">
                             @csrf
                             @method('DELETE')

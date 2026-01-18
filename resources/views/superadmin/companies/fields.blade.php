@@ -5,7 +5,7 @@
 @section('content')
 <div class="container mx-auto px-4 py-6">
     <div class="mb-6">
-        <a href="{{ route('superadmin.companies.index') }}" class="text-indigo-600 hover:text-indigo-900">
+        <a href="{{ route('superadmin.companies.index') }}" class="text-[#5483B3] hover:text-indigo-900">
             <i class="fas fa-arrow-left mr-2"></i>Volver a Empresas
         </a>
     </div>
