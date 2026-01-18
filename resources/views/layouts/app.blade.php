@@ -60,9 +60,18 @@
         .dark .glass-header {
             background: rgba(15, 23, 42, 0.8);
             backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
+        /* Essential Color Overrides (Bulletproof Theme) */
+        .bg-blue-medium { background-color: #5483B3 !important; }
+        .hover\:bg-blue-dark:hover { background-color: #052659 !important; }
+        .text-blue-medium { color: #5483B3 !important; }
+        .text-blue-dark { color: #052659 !important; }
+        .border-blue-medium { border-color: #5483B3 !important; }
+        .shadow-blue-medium\/25 { box-shadow: 0 10px 15px -3px rgba(84, 131, 179, 0.25) !important; }
+        .shadow-blue-medium\/20 { box-shadow: 0 10px 15px -3px rgba(84, 131, 179, 0.20) !important; }
+        
         /* Sidebar Item States */
         /* Sidebar Item States - Soft Pill Style */
         /* Sidebar Item States - Soft Pill Style (Updated to Red/Pink Theme) */
