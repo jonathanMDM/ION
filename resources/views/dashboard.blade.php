@@ -266,5 +266,53 @@
                 @forelse($assets_per_location as $location)
                 <div class="p-4 rounded-xl transition-all hover:translate-x-1" style="background: rgba(14, 104, 115, 0.15); border: 1px solid rgba(14, 104, 115, 0.3);">
                     <div class="flex items-center justify-between">
-</div>
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-lg" style="background: var(--color-black-pearl); color: #FFFFFF;">
+                                <i class="fas fa-building"></i>
+                            </div>
+                            <div>
+                                <h5 class="font-bold text-white">{{ $location->name }}</h5>
+                                <p class="text-[10px] text-gray-400 font-medium">{{ $location->address ?? 'Sin dirección' }}</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <span class="block text-xl font-black text-white">{{ $location->assets_count }}</span>
+                            <span class="text-[10px] font-black uppercase tracking-wider text-[#22D3EE]">ACTIVOS</span>
+                        </div>
+                    </div>
+                </div>
+                @empty
+                <div class="p-8 text-center text-gray-400 border border-dashed border-gray-700 rounded-xl">
+                    <i class="fas fa-map-marked-alt text-3xl mb-3 opacity-50"></i>
+                    <p class="text-sm font-medium">No hay sedes registradas</p>
+                </div>
+                @endforelse
+            </div>
+        </div>
+
+        <!-- Regional Occupation (Categories) -->
+        <div class="rounded-3xl shadow-lg p-6 relative overflow-hidden" style="background: var(--bg-card); border: 1px solid var(--color-blue-lagoon);">
+            <div class="flex items-center justify-between mb-6 relative z-10">
+                <h4 class="text-lg font-bold text-white tracking-widest uppercase text-xs">Ocupación Regional</h4>
+                <span class="text-xs font-bold text-gray-400">{{ $stats['total_locations'] }} Sedes</span>
+            </div>
+            
+            <div class="space-y-6 relative z-10">
+                <div class="flex items-center justify-between group">
+                    <div class="flex items-center gap-3">
+                        <span class="w-2 h-2 rounded-full shadow-[0_0_10px_rgba(254,126,60,0.8)]" style="background: var(--color-burnt-orange);"></span>
+                        <span class="text-sm font-bold text-gray-300 group-hover:text-white transition-colors">Categorías</span>
+                    </div>
+                    <span class="text-lg font-black text-white">{{ $stats['total_categories'] }}</span>
+                </div>
+                <div class="flex items-center justify-between group">
+                    <div class="flex items-center gap-3">
+                        <span class="w-2 h-2 rounded-full shadow-[0_0_10px_rgba(14,104,115,0.8)]" style="background: var(--color-blue-lagoon);"></span>
+                        <span class="text-sm font-bold text-gray-300 group-hover:text-white transition-colors">Mantenimientos</span>
+                    </div>
+                    <span class="text-lg font-black text-white">{{ $stats['total_maintenances'] }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
