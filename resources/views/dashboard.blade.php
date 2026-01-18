@@ -183,7 +183,7 @@
                 </div>
                 <div class="space-y-3">
                     @forelse($recentAssets as $asset)
-                    <div class="flex items-center justify-between group p-3 hover:bg-white/10 rounded-2xl transition-all border border-white/10 hover:border-[#E3EF26]/50">
+                    <div class="flex items-center justify-between group p-3 rounded-2xl transition-all border border-[#076653]/30 hover:border-[#E3EF26]/50 hover:translate-x-1" style="background: linear-gradient(90deg, rgba(7, 102, 83, 0.2) 0%, rgba(6, 35, 29, 0.4) 100%);">
                         <div class="flex items-center gap-4">
                             <div class="relative">
                                 @if($asset->image_path)
@@ -199,7 +199,7 @@
                                 <p class="text-xs font-bold text-[#E2FBCE]/80">{{ $asset->category->name ?? 'N/A' }}</p>
                             </div>
                         </div>
-                        <a href="{{ route('assets.show', $asset->id) }}" class="px-3 py-1.5 rounded-lg bg-[#E3EF26] text-[#06231D] text-xs font-bold hover:bg-[#E2FBCE] hover:shadow-[0_0_10px_rgba(227,239,38,0.5)] transition-all">Ver</a>
+                        <a href="{{ route('assets.show', $asset->id) }}" class="px-3 py-1.5 rounded-lg bg-[#076653] text-white text-xs font-bold hover:bg-[#E3EF26] hover:text-[#06231D] transition-all shadow-md">Ver</a>
                     </div>
                     @empty
                     <div class="p-12 text-center text-[#E2FBCE]/50 border-2 border-dashed border-[#076653] rounded-3xl">
@@ -219,7 +219,7 @@
                 <h4 class="text-xl font-bold mb-6 text-white tracking-wide">Acciones Rápidas</h4>
                 <div class="grid grid-cols-1 gap-4">
                     @if(Auth::user()->hasPermission('create_assets'))
-                    <a href="{{ route('assets.create') }}" class="group flex items-center p-3 rounded-2xl bg-[#076653]/30 hover:bg-[#E3EF26]/10 transition-all border border-[#E3EF26]/30 hover:border-[#E3EF26]">
+                    <a href="{{ route('assets.create') }}" class="group flex items-center p-3 rounded-2xl transition-all border border-[#076653]/30 hover:border-[#E3EF26]/50 hover:translate-x-1" style="background: linear-gradient(90deg, rgba(7, 102, 83, 0.2) 0%, rgba(6, 35, 29, 0.4) 100%);">
                         <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-[0_0_10px_rgba(227,239,38,0.3)] bg-[#E3EF26] text-[#06231D] group-hover:scale-110 group-hover:bg-[#E2FBCE] transition-all duration-300">
                             <i class="fas fa-plus text-sm font-bold"></i>
                         </div>
@@ -231,7 +231,7 @@
                     @endif
 
                     @if(Auth::user()->hasPermission('import_assets'))
-                    <a href="{{ route('imports.create') }}" class="group flex items-center p-3 rounded-2xl bg-[#076653]/30 hover:bg-[#E3EF26]/10 transition-all border border-[#E3EF26]/30 hover:border-[#E3EF26]">
+                    <a href="{{ route('imports.create') }}" class="group flex items-center p-3 rounded-2xl transition-all border border-[#076653]/30 hover:border-[#E3EF26]/50 hover:translate-x-1" style="background: linear-gradient(90deg, rgba(7, 102, 83, 0.2) 0%, rgba(6, 35, 29, 0.4) 100%);">
                         <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-[0_0_10px_rgba(227,239,38,0.3)] bg-[#E3EF26] text-[#06231D] group-hover:scale-110 group-hover:bg-[#E2FBCE] transition-all duration-300">
                             <i class="fas fa-file-excel text-sm font-bold"></i>
                         </div>
@@ -242,7 +242,7 @@
                     </a>
                     @endif
 
-                    <a href="{{ route('reports.index') }}" class="group flex items-center p-3 rounded-2xl bg-[#076653]/30 hover:bg-[#E3EF26]/10 transition-all border border-[#E3EF26]/30 hover:border-[#E3EF26]">
+                    <a href="{{ route('reports.index') }}" class="group flex items-center p-3 rounded-2xl transition-all border border-[#076653]/30 hover:border-[#E3EF26]/50 hover:translate-x-1" style="background: linear-gradient(90deg, rgba(7, 102, 83, 0.2) 0%, rgba(6, 35, 29, 0.4) 100%);">
                         <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-[0_0_10px_rgba(227,239,38,0.3)] bg-[#E3EF26] text-[#06231D] group-hover:scale-110 group-hover:bg-[#E2FBCE] transition-all duration-300">
                             <i class="fas fa-chart-bar text-sm font-bold"></i>
                         </div>
@@ -271,7 +271,7 @@
             
             <div class="space-y-4">
                 @forelse($assets_per_location as $location)
-                <div class="p-4 rounded-2xl transition-all hover:bg-white/10 border border-white/10 hover:border-[#E3EF26]/50 group">
+                <div class="p-4 rounded-2xl transition-all border border-[#076653]/30 hover:border-[#E3EF26]/50 hover:translate-x-1 group" style="background: linear-gradient(90deg, rgba(7, 102, 83, 0.2) 0%, rgba(6, 35, 29, 0.4) 100%);">
                     <div class="flex items-center justify-between">
                         <div class="flex items-center gap-4">
                             <div class="w-12 h-12 rounded-2xl flex items-center justify-center bg-[#E3EF26] text-[#06231D] group-hover:scale-110 group-hover:bg-[#E2FBCE] transition-all shadow-[0_0_10px_rgba(227,239,38,0.3)]">
@@ -305,7 +305,7 @@
             </div>
             
             <div class="space-y-6">
-                <div class="flex items-center justify-between p-4 rounded-2xl bg-[#076653]/30 hover:bg-[#076653]/50 transition-colors cursor-default group border border-[#E3EF26]/20">
+                <div class="flex items-center justify-between p-4 rounded-2xl transition-colors cursor-default group border border-[#076653]/30 hover:border-[#E3EF26]/50" style="background: linear-gradient(90deg, rgba(7, 102, 83, 0.2) 0%, rgba(6, 35, 29, 0.4) 100%);">
                     <div class="flex items-center gap-4">
                         <span class="w-3 h-3 rounded-full bg-[#E3EF26] ring-4 ring-[#E3EF26]/20 shadow-[0_0_10px_rgba(227,239,38,0.6)]"></span>
                         <div class="flex flex-col">
@@ -316,7 +316,7 @@
                     <span class="text-2xl font-black text-[#E3EF26] group-hover:scale-110 transition-transform drop-shadow-sm">{{ $stats['total_categories'] }}</span>
                 </div>
                 
-                <div class="flex items-center justify-between p-4 rounded-2xl bg-[#65A30D]/20 hover:bg-[#65A30D]/30 transition-colors cursor-default group border border-white/5">
+                <div class="flex items-center justify-between p-4 rounded-2xl transition-colors cursor-default group border border-[#076653]/30 hover:border-[#E3EF26]/50" style="background: linear-gradient(90deg, rgba(7, 102, 83, 0.2) 0%, rgba(6, 35, 29, 0.4) 100%);">
                     <div class="flex items-center gap-4">
                         <span class="w-3 h-3 rounded-full bg-[#65A30D] ring-4 ring-[#65A30D]/20"></span>
                         <div class="flex flex-col">
