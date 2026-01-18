@@ -450,7 +450,7 @@
                                     @if(Auth::user()->isAdmin())
                                         <span class="ml-2 bg-gray-200 text-gray-800 text-[10px] px-1.5 py-0.5 rounded border border-gray-300 font-medium">Admin</span>
                                     @elseif(Auth::user()->isEditor())
-                                        <span class="ml-2 bg-[#C1E8FF] text-[#052659] text-[10px] px-1.5 py-0.5 rounded border border-[#5483B3]/200 font-medium">Editor</span>
+                                        <span class="ml-2 bg-blue-lightest text-blue-dark text-[10px] px-1.5 py-0.5 rounded border border-blue-medium/200 font-medium">Editor</span>
                                     @else
                                         <span class="ml-2 bg-gray-100 text-gray-800 text-[10px] px-1.5 py-0.5 rounded border border-gray-200 font-medium">Visor</span>
                                     @endif
@@ -935,10 +935,10 @@
         <!-- WhatsApp Button -->
         <a href="https://wa.me/573145781261?text=Hola%20equipo%20de%20OutDeveloper,%20necesito%20soporte%20técnico%20con%20ION%20Inventory.%20Mi%20consulta%20es:%20" 
            target="_blank" 
-           class="bg-[#5483B3] hover:bg-[#5483B3] text-white rounded-full w-14 h-14 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group relative animate-pulse hover:animate-none"
+           class="bg-blue-medium hover:bg-blue-medium text-white rounded-full w-14 h-14 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group relative animate-pulse hover:animate-none"
            title="Soporte por WhatsApp">
             <i class="fab fa-whatsapp text-2xl"></i>
-            <span class="absolute right-full mr-3 bg-[#5483B3] text-white px-4 py-2 rounded-lg text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none shadow-lg">
+            <span class="absolute right-full mr-3 bg-blue-medium text-white px-4 py-2 rounded-lg text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none shadow-lg">
                 💬 Soporte ION Inventory
             </span>
         </a>

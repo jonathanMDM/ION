@@ -16,7 +16,7 @@
             </button>
             
             @if(Auth::user()->isAdmin() || Auth::user()->hasPermission('create_assets'))
-            <a href="{{ route('imports.create') }}" class="font-bold py-2 px-4 rounded-xl text-center whitespace-nowrap transition-transform hover:scale-105 border border-[#5483B3] text-[#5483B3] hover:bg-[#5483B3]/5">
+            <a href="{{ route('imports.create') }}" class="font-bold py-2 px-4 rounded-xl text-center whitespace-nowrap transition-transform hover:scale-105 border border-blue-medium text-blue-medium hover:bg-blue-medium/5">
                 <i class="fas fa-file-upload mr-2"></i>Importar Activos
             </a>
             <a href="{{ route('assets.create') }}" class="font-bold py-2 px-6 rounded-xl text-center whitespace-nowrap transition-transform hover:scale-105 shadow-lg text-white" style="background: linear-gradient(135deg, #5483B3 0%, #052659 100%); box-shadow: 0 4px 15px rgba(84, 131, 179, 0.4);">
@@ -34,9 +34,9 @@
                     type="text" 
                     id="searchInput" 
                     placeholder="Buscar por ID, Nombre, Ubicación, Categoría..." 
-                    class="w-full px-6 py-3 pl-12 rounded-xl focus:outline-none focus:ring-4 focus:ring-[#5483B3]/10 border border-slate-200 bg-slate-50 text-slate-800 placeholder-slate-400 transition-all focus:border-[#5483B3]"
+                    class="w-full px-6 py-3 pl-12 rounded-xl focus:outline-none focus:ring-4 focus:ring-blue-medium/10 border border-slate-200 bg-slate-50 text-slate-800 placeholder-slate-400 transition-all focus:border-blue-medium"
                 >
-                <i class="fas fa-search absolute left-4 top-4 text-[#5483B3]"></i>
+                <i class="fas fa-search absolute left-4 top-4 text-blue-medium"></i>
             </div>
             <button 
                 type="button" 
@@ -47,7 +47,7 @@
             </button>
         </div>
         <div class="mt-3 flex items-center gap-2">
-            <span class="w-2 h-2 rounded-full bg-[#5483B3] animate-pulse"></span>
+            <span class="w-2 h-2 rounded-full bg-blue-medium animate-pulse"></span>
             <p class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
                 <span id="resultCount" class="text-slate-700">{{ $assets->total() }}</span> activo(s) encontrado(s)
             </p>
@@ -88,7 +88,7 @@
         </thead>
         <tbody class="text-sm font-medium text-slate-700">
             @foreach($assets as $asset)
-            <tr class="border-b border-slate-50 hover:bg-[#5483B3]/5 transition-all">
+            <tr class="border-b border-slate-50 hover:bg-blue-medium/5 transition-all">
                 <td class="py-3 px-4 text-center">
                     <input type="checkbox" name="selected_assets[]" value="{{ $asset->id }}" class="form-checkbox h-5 w-5 text-gray-600 row-checkbox" onchange="updateSelectedCount()">
                 </td>
@@ -136,7 +136,7 @@
                 </td>
                 <td class="py-3 px-4 text-center w-32">
                     <span class="inline-block px-3 py-1 text-xs rounded-full whitespace-nowrap
-                        {{ $asset->status == 'active' ? 'bg-[#C1E8FF] text-[#052659]' : '' }}
+                        {{ $asset->status == 'active' ? 'bg-blue-lightest text-blue-dark' : '' }}
                         {{ $asset->status == 'maintenance' ? 'bg-yellow-100 text-yellow-800' : '' }}
                         {{ $asset->status == 'decommissioned' ? 'bg-red-100 text-red-800' : '' }}">
                         {{ $asset->status == 'active' ? 'Activo' : ($asset->status == 'maintenance' ? 'Mantenimiento' : 'Dado de Baja') }}

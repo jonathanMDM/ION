@@ -10,7 +10,7 @@
             <h2 class="text-3xl font-extrabold text-gray-900 dark:text-white tracking-tight">Registrar Empleado</h2>
             <p class="text-gray-500 dark:text-gray-400 mt-1">Añada un nuevo colaborador para asignarle activos y recursos.</p>
         </div>
-        <a href="{{ route('employees.index') }}" class="flex items-center text-sm font-semibold text-gray-600 dark:text-gray-400 hover:text-[#5483B3] transition-colors">
+        <a href="{{ route('employees.index') }}" class="flex items-center text-sm font-semibold text-gray-600 dark:text-gray-400 hover:text-blue-medium transition-colors">
             <i class="fas fa-arrow-left mr-2"></i> Volver al listado
         </a>
     </div>
@@ -51,7 +51,7 @@
                                     Nombres <span class="text-red-500">*</span>
                                 </label>
                                 <input type="text" name="first_name" id="first_name" value="{{ old('first_name') }}" 
-                                    class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-[#5483B3] transition-all font-medium" 
+                                    class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-blue-medium transition-all font-medium" 
                                     placeholder="Ej: Juan Camilo" required>
                                 @error('first_name') <p class="text-red-500 text-xs mt-1 italic">{{ $message }}</p> @enderror
                             </div>
@@ -61,7 +61,7 @@
                                     Apellidos <span class="text-red-500">*</span>
                                 </label>
                                 <input type="text" name="last_name" id="last_name" value="{{ old('last_name') }}" 
-                                    class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-[#5483B3] transition-all font-medium" 
+                                    class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-blue-medium transition-all font-medium" 
                                     placeholder="Ej: Pérez García" required>
                                 @error('last_name') <p class="text-red-500 text-xs mt-1 italic">{{ $message }}</p> @enderror
                             </div>
@@ -75,7 +75,7 @@
                                         <i class="fas fa-envelope text-gray-400 group-focus-within:text-indigo-500 transition-colors"></i>
                                     </div>
                                     <input type="email" name="email" id="email" value="{{ old('email') }}" 
-                                        class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 pl-11 pr-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-[#5483B3] transition-all" 
+                                        class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 pl-11 pr-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-blue-medium transition-all" 
                                         placeholder="juan.perez@empresa.com" required>
                                 </div>
                                 @error('email') <p class="text-red-500 text-xs mt-1 italic">{{ $message }}</p> @enderror
@@ -96,20 +96,20 @@
                         <div>
                             <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2" for="department">Departamento</label>
                             <input type="text" name="department" value="{{ old('department') }}" 
-                                class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-2 px-3 text-sm focus:ring-2 focus:ring-[#5483B3] transition-all" 
+                                class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-2 px-3 text-sm focus:ring-2 focus:ring-blue-medium transition-all" 
                                 placeholder="Ej: Operaciones">
                         </div>
 
                         <div>
                             <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2" for="position">Cargo</label>
                             <input type="text" name="position" value="{{ old('position') }}" 
-                                class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-2 px-3 text-sm focus:ring-2 focus:ring-[#5483B3] transition-all" 
+                                class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-2 px-3 text-sm focus:ring-2 focus:ring-blue-medium transition-all" 
                                 placeholder="Ej: Analista Senior">
                         </div>
 
                         <div>
                             <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2" for="status">Estado Lab.</label>
-                            <select name="status" class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-2 px-3 text-sm focus:ring-2 focus:ring-[#5483B3] transition-all font-bold">
+                            <select name="status" class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-2 px-3 text-sm focus:ring-2 focus:ring-blue-medium transition-all font-bold">
                                 <option value="active" {{ old('status') == 'active' ? 'selected' : '' }}>🟢 Activo</option>
                                 <option value="inactive" {{ old('status') == 'inactive' ? 'selected' : '' }}>🔴 Inactivo</option>
                             </select>
@@ -126,7 +126,7 @@
                 Cancelar
             </a>
             <button type="submit" 
-                class="w-full md:w-auto px-16 py-4 bg-[#5483B3] hover:bg-[#052659] text-white font-black rounded-2xl transition-all shadow-xl shadow-[#5483B3]/25 transform hover:-translate-y-0.5 active:scale-95 flex items-center justify-center tracking-wide uppercase text-sm">
+                class="w-full md:w-auto px-16 py-4 bg-blue-medium hover:bg-blue-dark text-white font-black rounded-2xl transition-all shadow-xl shadow-blue-medium/25 transform hover:-translate-y-0.5 active:scale-95 flex items-center justify-center tracking-wide uppercase text-sm">
                 <i class="fas fa-save mr-2 text-lg"></i> Registrar Empleado
             </button>
         </div>

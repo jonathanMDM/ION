@@ -27,7 +27,7 @@
                 </label>
                 <select name="cost_type" 
                         id="cost_type" 
-                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#5483B3] focus:border-transparent @error('cost_type') border-red-500 @enderror"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-medium focus:border-transparent @error('cost_type') border-red-500 @enderror"
                         required>
                     <option value="">Seleccionar tipo</option>
                     <option value="maintenance" {{ old('cost_type') == 'maintenance' ? 'selected' : '' }}>Mantenimiento</option>
@@ -55,7 +55,7 @@
                            value="{{ old('amount') }}"
                            step="0.01"
                            min="0"
-                           class="w-full pl-8 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#5483B3] focus:border-transparent @error('amount') border-red-500 @enderror"
+                           class="w-full pl-8 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-medium focus:border-transparent @error('amount') border-red-500 @enderror"
                            placeholder="0.00"
                            required>
                 </div>
@@ -73,7 +73,7 @@
                        name="date" 
                        id="date" 
                        value="{{ old('date', date('Y-m-d')) }}"
-                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#5483B3] focus:border-transparent @error('date') border-red-500 @enderror"
+                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-medium focus:border-transparent @error('date') border-red-500 @enderror"
                        required>
                 @error('date')
                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -89,7 +89,7 @@
                        name="invoice_number" 
                        id="invoice_number" 
                        value="{{ old('invoice_number') }}"
-                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#5483B3] focus:border-transparent @error('invoice_number') border-red-500 @enderror"
+                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-medium focus:border-transparent @error('invoice_number') border-red-500 @enderror"
                        placeholder="Ej: F-12345">
                 @error('invoice_number')
                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -105,7 +105,7 @@
                        name="vendor" 
                        id="vendor" 
                        value="{{ old('vendor') }}"
-                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#5483B3] focus:border-transparent @error('vendor') border-red-500 @enderror"
+                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-medium focus:border-transparent @error('vendor') border-red-500 @enderror"
                        placeholder="Nombre del proveedor">
                 @error('vendor')
                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -121,7 +121,7 @@
                        name="document" 
                        id="document" 
                        accept=".pdf,.jpg,.jpeg,.png"
-                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#5483B3] focus:border-transparent @error('document') border-red-500 @enderror">
+                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-medium focus:border-transparent @error('document') border-red-500 @enderror">
                 @error('document')
                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                 @enderror
@@ -137,7 +137,7 @@
             <textarea name="description" 
                       id="description" 
                       rows="4"
-                      class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#5483B3] focus:border-transparent @error('description') border-red-500 @enderror"
+                      class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-medium focus:border-transparent @error('description') border-red-500 @enderror"
                       placeholder="Describe el costo o servicio realizado..."
                       required>{{ old('description') }}</textarea>
             @error('description')
@@ -150,7 +150,7 @@
             <a href="{{ route('assets.show', $asset) }}" class="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 font-medium">
                 Cancelar
             </a>
-            <button type="submit" class="px-6 py-2 bg-[#5483B3] hover:bg-[#052659] text-white rounded-lg font-medium">
+            <button type="submit" class="px-6 py-2 bg-blue-medium hover:bg-blue-dark text-white rounded-lg font-medium">
                 <i class="fas fa-save mr-2"></i>Registrar Costo
             </button>
         </div>

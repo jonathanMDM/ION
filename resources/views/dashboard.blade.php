@@ -17,7 +17,7 @@
                     {{ \Carbon\Carbon::now()->isoFormat('D [de] MMMM, YYYY') }}
                 </span>
             </div>
-            <button onclick="window.location.reload()" class="p-3 rounded-2xl shadow-sm bg-white border border-gray-100 text-gray-400 hover:text-[#5483B3] hover:shadow-md transition-all">
+            <button onclick="window.location.reload()" class="p-3 rounded-2xl shadow-sm bg-white border border-gray-100 text-gray-400 hover:text-blue-medium hover:shadow-md transition-all">
                 <i class="fas fa-sync-alt"></i>
             </button>
         </div>
@@ -174,7 +174,7 @@
             @endif
 
             <!-- Recent Assets (Professional Blue) -->
-            <div class="rounded-[2rem] p-8 shadow-[0_8px_30px_rgb(0,0,0,0.1)] border border-[#5483B3]/20" style="background: linear-gradient(135deg, #052659 0%, #021024 100%);">
+            <div class="rounded-[2rem] p-8 shadow-[0_8px_30px_rgb(0,0,0,0.1)] border border-blue-medium/20" style="background: linear-gradient(135deg, #052659 0%, #021024 100%);">
                 <div class="flex items-center justify-between mb-6">
                     <h4 class="text-xl font-bold text-white tracking-wide">Activos Recientes</h4>
                     <a href="{{ route('assets.index') }}" class="text-sm font-bold text-[#7DA0CA] hover:text-white transition-colors uppercase tracking-wider flex items-center gap-2">
@@ -189,7 +189,7 @@
                                 @if($asset->image_path)
                                 <img src="{{ asset('storage/' . $asset->image_path) }}" class="w-12 h-12 rounded-xl object-cover shadow-sm border border-white/20" alt="{{ $asset->name }}">
                                 @else
-                                <div class="w-12 h-12 rounded-xl flex items-center justify-center bg-white text-[#052659] shadow-sm">
+                                <div class="w-12 h-12 rounded-xl flex items-center justify-center bg-white text-blue-dark shadow-sm">
                                     <i class="fas fa-cube text-lg"></i>
                                 </div>
                                 @endif
@@ -199,7 +199,7 @@
                                 <p class="text-xs font-bold text-white/70">{{ $asset->category->name ?? 'N/A' }}</p>
                             </div>
                         </div>
-                        <a href="{{ route('assets.show', $asset->id) }}" class="px-3 py-1.5 rounded-lg bg-white text-[#052659] text-xs font-bold hover:bg-white/90 transition-all shadow-sm">Ver</a>
+                        <a href="{{ route('assets.show', $asset->id) }}" class="px-3 py-1.5 rounded-lg bg-white text-blue-dark text-xs font-bold hover:bg-white/90 transition-all shadow-sm">Ver</a>
                     </div>
                     @empty
                     <div class="p-12 text-center text-[#CCFBF1]/50 border-2 border-dashed border-[#5EEAD4]/30 rounded-3xl">
@@ -215,12 +215,12 @@
         <div class="space-y-8 mb-10">
             
             <!-- Quick Actions (Professional Blue) -->
-            <div class="rounded-[2rem] p-8 shadow-[0_8px_30px_rgb(0,0,0,0.1)] border border-[#5483B3]/20" style="background: linear-gradient(135deg, #052659 0%, #021024 100%);">
+            <div class="rounded-[2rem] p-8 shadow-[0_8px_30px_rgb(0,0,0,0.1)] border border-blue-medium/20" style="background: linear-gradient(135deg, #052659 0%, #021024 100%);">
                 <h4 class="text-xl font-bold mb-6 text-white tracking-wide">Acciones Rápidas</h4>
                 <div class="grid grid-cols-1 gap-4">
                     @if(Auth::user()->hasPermission('create_assets'))
                     <a href="{{ route('assets.create') }}" class="group flex items-center p-3 rounded-2xl transition-all border border-white/10 hover:border-white/30 shadow-md bg-white/10 backdrop-blur-sm hover:bg-white/15">
-                        <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-sm bg-white text-[#052659] group-hover:scale-110 transition-transform">
+                        <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-sm bg-white text-blue-dark group-hover:scale-110 transition-transform">
                             <i class="fas fa-plus text-sm font-bold"></i>
                         </div>
                         <div class="ml-4">
@@ -232,7 +232,7 @@
 
                     @if(Auth::user()->hasPermission('import_assets'))
                     <a href="{{ route('imports.create') }}" class="group flex items-center p-3 rounded-2xl transition-all border border-white/10 hover:border-white/30 shadow-md bg-white/10 backdrop-blur-sm hover:bg-white/15">
-                        <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-sm bg-white text-[#052659] group-hover:scale-110 transition-transform">
+                        <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-sm bg-white text-blue-dark group-hover:scale-110 transition-transform">
                             <i class="fas fa-file-excel text-sm font-bold"></i>
                         </div>
                         <div class="ml-4">
@@ -243,7 +243,7 @@
                     @endif
 
                     <a href="{{ route('reports.index') }}" class="group flex items-center p-3 rounded-2xl transition-all border border-white/10 hover:border-white/30 shadow-md bg-white/10 backdrop-blur-sm hover:bg-white/15">
-                        <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-sm bg-white text-[#052659] group-hover:scale-110 transition-transform">
+                        <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-sm bg-white text-blue-dark group-hover:scale-110 transition-transform">
                             <i class="fas fa-chart-bar text-sm font-bold"></i>
                         </div>
                         <div class="ml-4">
@@ -259,7 +259,7 @@
     <!-- Assets by Location & Regional Occupation (Professional Blue) -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
         <!-- Assets by Location -->
-        <div class="rounded-[2rem] p-8 shadow-[0_8px_30px_rgb(0,0,0,0.1)] h-full border border-[#5483B3]/20" style="background: linear-gradient(135deg, #052659 0%, #021024 100%);">
+        <div class="rounded-[2rem] p-8 shadow-[0_8px_30px_rgb(0,0,0,0.1)] h-full border border-blue-medium/20" style="background: linear-gradient(135deg, #052659 0%, #021024 100%);">
             <div class="flex items-center justify-between mb-8">
                 <h4 class="text-xl font-bold flex items-center gap-3 text-white tracking-wide">
                     Activos por Sede
@@ -274,7 +274,7 @@
                 <div class="p-4 rounded-2xl transition-all border border-white/10 hover:border-white/30 shadow-md bg-white/10 backdrop-blur-sm hover:bg-white/15 group">
                     <div class="flex items-center justify-between">
                         <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 rounded-2xl flex items-center justify-center bg-white text-[#052659] group-hover:scale-110 transition-transform shadow-sm">
+                            <div class="w-12 h-12 rounded-2xl flex items-center justify-center bg-white text-blue-dark group-hover:scale-110 transition-transform shadow-sm">
                                 <i class="fas fa-building"></i>
                             </div>
                             <div>
@@ -298,7 +298,7 @@
         </div>
 
         <!-- Regional Occupation (Categories) -->
-        <div class="rounded-[2rem] p-8 shadow-[0_8px_30px_rgb(0,0,0,0.1)] h-full border border-[#5483B3]/20" style="background: linear-gradient(135deg, #052659 0%, #021024 100%);">
+        <div class="rounded-[2rem] p-8 shadow-[0_8px_30px_rgb(0,0,0,0.1)] h-full border border-blue-medium/20" style="background: linear-gradient(135deg, #052659 0%, #021024 100%);">
             <div class="flex items-center justify-between mb-8">
                 <h4 class="text-xl font-bold text-white tracking-wide">Ocupación Regional</h4>
                 <span class="text-xs font-bold text-[#CCFBF1] opacity-80 uppercase tracking-widest">{{ $stats['total_locations'] }} Sedes</span>

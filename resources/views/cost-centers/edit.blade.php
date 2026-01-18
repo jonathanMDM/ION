@@ -10,7 +10,7 @@
             <h2 class="text-3xl font-extrabold text-gray-900 dark:text-white tracking-tight">Editar Centro de Costo</h2>
             <p class="text-gray-500 dark:text-gray-400 mt-1">Actualice los valores para: <strong>{{ $costCenter->name }}</strong>.</p>
         </div>
-        <a href="{{ route('cost-centers.index') }}" class="flex items-center text-sm font-semibold text-gray-600 dark:text-gray-400 hover:text-[#5483B3] transition-colors">
+        <a href="{{ route('cost-centers.index') }}" class="flex items-center text-sm font-semibold text-gray-600 dark:text-gray-400 hover:text-blue-medium transition-colors">
             <i class="fas fa-arrow-left mr-2"></i> Volver al listado
         </a>
     </div>
@@ -48,7 +48,7 @@
                         </div>
                         <label class="relative inline-flex items-center cursor-pointer">
                             <input type="checkbox" name="is_active" value="1" class="sr-only peer" {{ old('is_active', $costCenter->is_active) ? 'checked' : '' }}>
-                            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-[#5483B3]"></div>
+                            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-medium"></div>
                             <span class="ml-3 text-[10px] font-black uppercase text-gray-500 tracking-wider">Activo</span>
                         </label>
                     </div>
@@ -57,20 +57,20 @@
                             <div>
                                 <label class="block text-xs font-black text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2" for="code">Código</label>
                                 <input type="text" name="code" id="code" value="{{ old('code', $costCenter->code) }}" 
-                                    class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-2xl py-3 px-4 text-gray-900 dark:text-white focus:ring-2 focus:ring-[#5483B3] transition-all font-mono text-sm" required>
+                                    class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-2xl py-3 px-4 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-medium transition-all font-mono text-sm" required>
                             </div>
 
                             <div>
                                 <label class="block text-xs font-black text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2" for="name">Nombre</label>
                                 <input type="text" name="name" id="name" value="{{ old('name', $costCenter->name) }}" 
-                                    class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-2xl py-3 px-4 text-gray-900 dark:text-white focus:ring-2 focus:ring-[#5483B3] transition-all font-bold" required>
+                                    class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-2xl py-3 px-4 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-medium transition-all font-bold" required>
                             </div>
                         </div>
 
                         <div>
                             <label class="block text-xs font-black text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2" for="description">Descripción</label>
                             <textarea name="description" id="description" rows="3" 
-                                class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-2xl py-3 px-4 text-gray-700 dark:text-gray-300 focus:ring-2 focus:ring-[#5483B3] transition-all">{{ old('description', $costCenter->description) }}</textarea>
+                                class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-2xl py-3 px-4 text-gray-700 dark:text-gray-300 focus:ring-2 focus:ring-blue-medium transition-all">{{ old('description', $costCenter->description) }}</textarea>
                         </div>
                     </div>
                 </div>
@@ -98,7 +98,7 @@
                         <div>
                             <label class="block text-xs font-black text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2" for="manager_id">Responsable</label>
                             <select name="manager_id" id="manager_id" 
-                                class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-2 px-3 text-xs font-bold focus:ring-2 focus:ring-[#5483B3] transition-all">
+                                class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-2 px-3 text-xs font-bold focus:ring-2 focus:ring-blue-medium transition-all">
                                 <option value="">Sin responsable</option>
                                 @foreach($managers as $manager)
                                     <option value="{{ $manager->id }}" {{ old('manager_id', $costCenter->manager_id) == $manager->id ? 'selected' : '' }}>
@@ -119,7 +119,7 @@
                 Cancelar
             </a>
             <button type="submit" 
-                class="w-full md:w-auto px-16 py-4 bg-[#5483B3] hover:bg-[#052659] text-white font-black rounded-2xl transition-all shadow-xl shadow-[#5483B3]/25 transform hover:-translate-y-0.5 active:scale-95 flex items-center justify-center tracking-wide uppercase text-sm">
+                class="w-full md:w-auto px-16 py-4 bg-blue-medium hover:bg-blue-dark text-white font-black rounded-2xl transition-all shadow-xl shadow-blue-medium/25 transform hover:-translate-y-0.5 active:scale-95 flex items-center justify-center tracking-wide uppercase text-sm">
                 <i class="fas fa-sync-alt mr-2 text-lg"></i> Actualizar Centro de Costo
             </button>
         </div>

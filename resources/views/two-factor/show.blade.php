@@ -24,12 +24,12 @@
         @endif
         
         @if($user->two_factor_enabled)
-            <div class="bg-green-50 dark:bg-green-900 border border-[#5483B3]/200 dark:border-[#5483B3]/700 rounded-lg p-4 mb-6">
+            <div class="bg-green-50 dark:bg-green-900 border border-blue-medium/200 dark:border-blue-medium/700 rounded-lg p-4 mb-6">
                 <div class="flex items-center">
                     <i class="fas fa-check-circle text-green-500 text-2xl mr-3"></i>
                     <div>
                         <p class="font-semibold text-green-800 dark:text-green-100">2FA Activado</p>
-                        <p class="text-sm text-[#052659] dark:text-green-200">Tu cuenta está protegida con autenticación de dos factores.</p>
+                        <p class="text-sm text-blue-dark dark:text-green-200">Tu cuenta está protegida con autenticación de dos factores.</p>
                     </div>
                 </div>
             </div>

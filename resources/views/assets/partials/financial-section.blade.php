@@ -2,7 +2,7 @@
 <div class="bg-white rounded-lg shadow-md p-6 mb-6">
     <div class="flex justify-between items-center mb-4">
         <h3 class="text-lg font-semibold text-gray-800">
-            <i class="fas fa-dollar-sign text-[#5483B3] mr-2"></i>Información Financiera
+            <i class="fas fa-dollar-sign text-blue-medium mr-2"></i>Información Financiera
         </h3>
     </div>
 
@@ -16,10 +16,10 @@
 
         <!-- Valor en Libros -->
         <div class="bg-indigo-50 rounded-lg p-4">
-            <p class="text-sm text-[#5483B3] mb-1">Valor en Libros</p>
+            <p class="text-sm text-blue-medium mb-1">Valor en Libros</p>
             <p class="text-2xl font-bold text-indigo-900">${{ number_format($asset->book_value ?? 0, 0) }}</p>
             @if($asset->depreciation_method !== 'none' && $asset->purchase_price > 0)
-                <p class="text-xs text-[#5483B3] mt-1">
+                <p class="text-xs text-blue-medium mt-1">
                     {{ number_format($asset->depreciation_percentage, 1) }}% depreciado
                 </p>
             @endif
@@ -100,7 +100,7 @@
                 <p class="text-sm font-semibold text-gray-900">{{ $asset->costCenter->name }}</p>
                 <p class="text-xs text-gray-500">Código: {{ $asset->costCenter->code }}</p>
             </div>
-            <a href="{{ route('cost-centers.show', $asset->costCenter) }}" class="text-[#5483B3] hover:text-indigo-900 text-sm font-medium">
+            <a href="{{ route('cost-centers.show', $asset->costCenter) }}" class="text-blue-medium hover:text-indigo-900 text-sm font-medium">
                 Ver detalles <i class="fas fa-arrow-right ml-1"></i>
             </a>
         </div>
@@ -112,9 +112,9 @@
 <div class="bg-white rounded-lg shadow-md p-6 mb-6">
     <div class="flex justify-between items-center mb-4">
         <h3 class="text-lg font-semibold text-gray-800">
-            <i class="fas fa-receipt text-[#5483B3] mr-2"></i>Costos Asociados
+            <i class="fas fa-receipt text-blue-medium mr-2"></i>Costos Asociados
         </h3>
-        <a href="{{ route('assets.costs.create', $asset) }}" class="bg-[#5483B3] hover:bg-[#052659] text-white px-4 py-2 rounded text-sm font-bold">
+        <a href="{{ route('assets.costs.create', $asset) }}" class="bg-blue-medium hover:bg-blue-dark text-white px-4 py-2 rounded text-sm font-bold">
             <i class="fas fa-plus mr-2"></i>Registrar Costo
         </a>
     </div>
@@ -123,7 +123,7 @@
         <div class="text-center py-8">
             <i class="fas fa-receipt text-4xl text-gray-300 mb-3"></i>
             <p class="text-gray-500">No hay costos registrados para este activo</p>
-            <a href="{{ route('assets.costs.create', $asset) }}" class="inline-block mt-4 text-[#5483B3] hover:text-indigo-900 font-medium">
+            <a href="{{ route('assets.costs.create', $asset) }}" class="inline-block mt-4 text-blue-medium hover:text-indigo-900 font-medium">
                 Registrar primer costo <i class="fas fa-arrow-right ml-1"></i>
             </a>
         </div>
@@ -150,7 +150,7 @@
                             <span class="px-2 py-1 text-xs font-semibold rounded-full 
                                 {{ $cost->cost_type === 'maintenance' ? 'bg-blue-100 text-blue-800' : '' }}
                                 {{ $cost->cost_type === 'repair' ? 'bg-red-100 text-red-800' : '' }}
-                                {{ $cost->cost_type === 'insurance' ? 'bg-[#C1E8FF] text-[#052659]' : '' }}
+                                {{ $cost->cost_type === 'insurance' ? 'bg-blue-lightest text-blue-dark' : '' }}
                                 {{ $cost->cost_type === 'spare_parts' ? 'bg-yellow-100 text-yellow-800' : '' }}
                                 {{ $cost->cost_type === 'upgrade' ? 'bg-purple-100 text-purple-800' : '' }}
                                 {{ $cost->cost_type === 'other' ? 'bg-gray-100 text-gray-800' : '' }}">

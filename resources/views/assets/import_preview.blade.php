@@ -21,7 +21,7 @@
             </div>
             <div class="bg-green-50 dark:bg-green-900/20 p-4 rounded transition-colors">
                 <p class="text-sm text-gray-600 dark:text-gray-400">Válidas</p>
-                <p class="text-2xl font-bold text-[#5483B3] dark:text-green-400">{{ $valid_count }}</p>
+                <p class="text-2xl font-bold text-blue-medium dark:text-green-400">{{ $valid_count }}</p>
             </div>
             <div class="bg-red-50 dark:bg-red-900/20 p-4 rounded transition-colors">
                 <p class="text-sm text-gray-600 dark:text-gray-400">Con Errores</p>
@@ -113,7 +113,7 @@
             @if($error_count == 0)
             <form action="{{ route('assets.import.execute') }}" method="POST">
                 @csrf
-                <button type="submit" class="bg-[#5483B3] hover:bg-[#052659] text-white font-bold py-2 px-6 rounded">
+                <button type="submit" class="bg-blue-medium hover:bg-blue-dark text-white font-bold py-2 px-6 rounded">
                     <i class="fas fa-check mr-2"></i>Confirmar e Importar {{ $valid_count }} Activos
                 </button>
             </form>

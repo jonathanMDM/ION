@@ -22,7 +22,7 @@
         </div>
         
         <!-- Result -->
-        <div id="result" class="hidden bg-green-50 dark:bg-green-900 border border-[#5483B3]/200 dark:border-[#5483B3]/700 rounded-lg p-4">
+        <div id="result" class="hidden bg-green-50 dark:bg-green-900 border border-blue-medium/200 dark:border-blue-medium/700 rounded-lg p-4">
             <p class="text-green-800 dark:text-green-100 font-semibold">Código detectado:</p>
             <p id="scannedCode" class="text-green-900 dark:text-green-50 font-mono text-lg"></p>
         </div>

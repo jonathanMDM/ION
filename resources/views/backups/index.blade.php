@@ -9,7 +9,7 @@
 </div>
 
 @if(session('success'))
-    <div class="bg-green-100 dark:bg-green-900/20 border border-[#5483B3]/400 dark:border-[#5483B3]/800 text-[#052659] dark:text-green-400 px-4 py-3 rounded mb-4 transition-colors">
+    <div class="bg-green-100 dark:bg-green-900/20 border border-blue-medium/400 dark:border-blue-medium/800 text-blue-dark dark:text-green-400 px-4 py-3 rounded mb-4 transition-colors">
         {{ session('success') }}
     </div>
 @endif
@@ -90,7 +90,7 @@
                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                         <form action="{{ route('backups.restore', $backup['name']) }}" method="POST" class="inline-block mr-3" onsubmit="return confirm('⚠️ ADVERTENCIA: Esto restaurará los datos del backup. ¿Estás seguro?')">
                             @csrf
-                            <button type="submit" class="text-[#5483B3] hover:text-green-900">
+                            <button type="submit" class="text-blue-medium hover:text-green-900">
                                 <i class="fas fa-undo"></i> Restaurar
                             </button>
                         </form>

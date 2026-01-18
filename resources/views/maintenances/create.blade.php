@@ -10,7 +10,7 @@
             <h2 class="text-3xl font-extrabold text-gray-900 dark:text-white tracking-tight">Registro de Mantenimiento</h2>
             <p class="text-gray-500 dark:text-gray-400 mt-1">Documente intervenciones técnicas para prolongar la vida útil de sus activos.</p>
         </div>
-        <a href="{{ route('maintenances.index') }}" class="flex items-center text-sm font-semibold text-gray-600 dark:text-gray-400 hover:text-[#5483B3] transition-colors">
+        <a href="{{ route('maintenances.index') }}" class="flex items-center text-sm font-semibold text-gray-600 dark:text-gray-400 hover:text-blue-medium transition-colors">
             <i class="fas fa-arrow-left mr-2"></i> Volver al listado
         </a>
     </div>
@@ -32,7 +32,7 @@
                             <label class="block text-xs font-black text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-3" for="asset_id">Activo Intervenido <span class="text-red-500">*</span></label>
                             <div class="relative group">
                                 <select name="asset_id" id="asset_id" required 
-                                    class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-2xl py-4 px-4 text-gray-900 dark:text-white focus:ring-2 focus:ring-[#5483B3] transition-all font-bold">
+                                    class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-2xl py-4 px-4 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-medium transition-all font-bold">
                                     <option value=""></option>
                                     @foreach($assets as $asset)
                                         <option value="{{ $asset->id }}" 
@@ -49,7 +49,7 @@
                         <div>
                             <label class="block text-xs font-black text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2" for="description">Descripción del Trabajo Realizado <span class="text-red-500">*</span></label>
                             <textarea name="description" id="description" rows="5" required 
-                                class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-2xl py-4 px-5 text-sm font-medium focus:ring-2 focus:ring-[#5483B3] transition-all" 
+                                class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-2xl py-4 px-5 text-sm font-medium focus:ring-2 focus:ring-blue-medium transition-all" 
                                 placeholder="Describa detalladamente el mantenimiento realizado, repuestos cambiados, fallas detectadas, etc...">{{ old('description') }}</textarea>
                         </div>
                     </div>
@@ -67,7 +67,7 @@
                         <div>
                             <label class="block text-xs font-black text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">Fecha del Servicio</label>
                             <input type="date" name="date" value="{{ date('Y-m-d') }}" required 
-                                class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-2 px-3 text-xs font-black text-gray-800 dark:text-white focus:ring-2 focus:ring-[#5483B3] transition-all">
+                                class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-2 px-3 text-xs font-black text-gray-800 dark:text-white focus:ring-2 focus:ring-blue-medium transition-all">
                         </div>
 
                         <div>
@@ -84,7 +84,7 @@
                     </div>
                 </div>
 
-                <div class="p-6 bg-indigo-50/50 dark:bg-indigo-900/10 rounded-3xl border border-[#5483B3]/100 dark:border-[#5483B3]/900/30">
+                <div class="p-6 bg-indigo-50/50 dark:bg-indigo-900/10 rounded-3xl border border-blue-medium/100 dark:border-blue-medium/900/30">
                     <p class="text-[10px] text-indigo-700 dark:text-indigo-400 font-medium leading-relaxed italic">
                         <i class="fas fa-lightbulb mr-1"></i> El costo registrado impactará el valor contable y el ROI del activo automáticamente.
                     </p>
@@ -99,7 +99,7 @@
                 Cancelar
             </a>
             <button type="submit" 
-                class="w-full md:w-auto px-16 py-4 bg-[#5483B3] hover:bg-[#052659] text-white font-black rounded-2xl transition-all shadow-xl shadow-[#5483B3]/25 transform hover:-translate-y-0.5 active:scale-95 flex items-center justify-center tracking-wide uppercase text-sm">
+                class="w-full md:w-auto px-16 py-4 bg-blue-medium hover:bg-blue-dark text-white font-black rounded-2xl transition-all shadow-xl shadow-blue-medium/25 transform hover:-translate-y-0.5 active:scale-95 flex items-center justify-center tracking-wide uppercase text-sm">
                 <i class="fas fa-save mr-2 text-lg"></i> Registrar Mantenimiento
             </button>
         </div>

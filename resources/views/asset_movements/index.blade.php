@@ -91,7 +91,7 @@
                     <i class="fas fa-arrow-right text-gray-800"></i>
                 </td>
                 <td class="py-3 px-6 text-left">
-                    <span class="px-2 py-1 bg-[#C1E8FF] text-[#052659] rounded text-xs">
+                    <span class="px-2 py-1 bg-blue-lightest text-blue-dark rounded text-xs">
                         {{ $movement->toLocation->name }}
                     </span>
                 </td>

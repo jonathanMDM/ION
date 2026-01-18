@@ -10,7 +10,7 @@
             <h2 class="text-3xl font-extrabold text-gray-900 dark:text-white tracking-tight">Editar Ubicación</h2>
             <p class="text-gray-500 dark:text-gray-400 mt-1">Modifique los detalles de la ubicación: <strong>{{ $location->name }}</strong></p>
         </div>
-        <a href="{{ route('locations.index') }}" class="flex items-center text-sm font-semibold text-gray-600 dark:text-gray-400 hover:text-[#5483B3] transition-colors">
+        <a href="{{ route('locations.index') }}" class="flex items-center text-sm font-semibold text-gray-600 dark:text-gray-400 hover:text-blue-medium transition-colors">
             <i class="fas fa-arrow-left mr-2"></i> Volver
         </a>
     </div>
@@ -31,7 +31,7 @@
                             <i class="fas fa-map-marker-alt text-gray-400 group-focus-within:text-indigo-500 transition-colors"></i>
                         </div>
                         <input type="text" name="name" id="name" value="{{ old('name', $location->name) }}" 
-                            class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 pl-11 pr-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-[#5483B3] focus:border-transparent transition-all font-semibold" required>
+                            class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 pl-11 pr-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-blue-medium focus:border-transparent transition-all font-semibold" required>
                     </div>
                 </div>
 
@@ -45,7 +45,7 @@
                             <i class="fas fa-search-location text-gray-400 group-focus-within:text-indigo-500 transition-colors"></i>
                         </div>
                         <input type="text" name="address" id="address" value="{{ old('address', $location->address) }}" 
-                            class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 pl-11 pr-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-[#5483B3] focus:border-transparent transition-all" 
+                            class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 pl-11 pr-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-blue-medium focus:border-transparent transition-all" 
                             placeholder="Ej: Piso 2, Oficina 204.">
                     </div>
                 </div>
@@ -58,7 +58,7 @@
                     Cancelar
                 </a>
                 <button type="submit" 
-                    class="w-full md:w-auto px-12 py-3 bg-[#5483B3] hover:bg-[#052659] text-white font-black rounded-xl transition-all shadow-xl shadow-[#5483B3]/20 transform hover:-translate-y-0.5 uppercase tracking-wide text-xs">
+                    class="w-full md:w-auto px-12 py-3 bg-blue-medium hover:bg-blue-dark text-white font-black rounded-xl transition-all shadow-xl shadow-blue-medium/20 transform hover:-translate-y-0.5 uppercase tracking-wide text-xs">
                     <i class="fas fa-sync-alt mr-2 text-xs"></i> Actualizar Ubicación
                 </button>
             </div>

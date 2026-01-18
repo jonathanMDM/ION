@@ -10,7 +10,7 @@
     </div>
 
     @if(session('success'))
-    <div class="bg-green-100 border-l-4 border-[#5483B3]/500 text-[#052659] p-4 mb-6" role="alert">
+    <div class="bg-green-100 border-l-4 border-blue-medium/500 text-blue-dark p-4 mb-6" role="alert">
         <p class="font-bold">¡Éxito!</p>
         <p>{{ session('success') }}</p>
     </div>

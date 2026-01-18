@@ -12,7 +12,7 @@
     </div>
 
     @if(session('success'))
-    <div class="bg-green-100 border-l-4 border-[#5483B3]/500 text-[#052659] p-4 mb-6" role="alert">
+    <div class="bg-green-100 border-l-4 border-blue-medium/500 text-blue-dark p-4 mb-6" role="alert">
         <p>{{ session('success') }}</p>
     </div>
     @endif
@@ -42,7 +42,7 @@
                             {{ $announcement->type == 'info' ? 'bg-blue-100 text-blue-800' : '' }}
                             {{ $announcement->type == 'warning' ? 'bg-yellow-100 text-yellow-800' : '' }}
                             {{ $announcement->type == 'error' ? 'bg-red-100 text-red-800' : '' }}
-                            {{ $announcement->type == 'success' ? 'bg-[#C1E8FF] text-[#052659]' : '' }}">
+                            {{ $announcement->type == 'success' ? 'bg-blue-lightest text-blue-dark' : '' }}">
                             {{ ucfirst($announcement->type) }}
                         </span>
                     </td>
@@ -70,13 +70,13 @@
                         <form action="{{ route('superadmin.announcements.toggle', $announcement) }}" method="POST">
                             @csrf
                             @method('PATCH')
-                            <button type="submit" class="text-sm font-medium {{ $announcement->is_active ? 'text-[#5483B3] hover:text-green-900' : 'text-red-600 hover:text-red-900' }}">
+                            <button type="submit" class="text-sm font-medium {{ $announcement->is_active ? 'text-blue-medium hover:text-green-900' : 'text-red-600 hover:text-red-900' }}">
                                 {{ $announcement->is_active ? 'Activo' : 'Inactivo' }}
                             </button>
                         </form>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <a href="{{ route('superadmin.announcements.edit', $announcement) }}" class="text-[#5483B3] hover:text-indigo-900 mr-3">Editar</a>
+                        <a href="{{ route('superadmin.announcements.edit', $announcement) }}" class="text-blue-medium hover:text-indigo-900 mr-3">Editar</a>
                         <form action="{{ route('superadmin.announcements.destroy', $announcement) }}" method="POST" class="inline-block" onsubmit="return confirm('¿Estás seguro de eliminar este anuncio?');">
                             @csrf
                             @method('DELETE')

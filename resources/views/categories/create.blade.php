@@ -10,7 +10,7 @@
             <h2 class="text-3xl font-extrabold text-gray-900 dark:text-white tracking-tight">Agregar Categoría</h2>
             <p class="text-gray-500 dark:text-gray-400 mt-1">Clasifique sus activos en grupos lógicos para un mejor control.</p>
         </div>
-        <a href="{{ route('categories.index') }}" class="flex items-center text-sm font-semibold text-gray-600 dark:text-gray-400 hover:text-[#5483B3] transition-colors">
+        <a href="{{ route('categories.index') }}" class="flex items-center text-sm font-semibold text-gray-600 dark:text-gray-400 hover:text-blue-medium transition-colors">
             <i class="fas fa-arrow-left mr-2"></i> Volver
         </a>
     </div>
@@ -46,7 +46,7 @@
                     Cancelar
                 </a>
                 <button type="submit" 
-                    class="w-full md:w-auto px-12 py-3 bg-[#5483B3] hover:bg-[#052659] text-white font-black rounded-xl transition-all shadow-xl shadow-[#5483B3]/20 transform hover:-translate-y-0.5 uppercase tracking-wide text-xs">
+                    class="w-full md:w-auto px-12 py-3 bg-blue-medium hover:bg-blue-dark text-white font-black rounded-xl transition-all shadow-xl shadow-blue-medium/20 transform hover:-translate-y-0.5 uppercase tracking-wide text-xs">
                     <i class="fas fa-save mr-2"></i> Guardar Categoría
                 </button>
             </div>

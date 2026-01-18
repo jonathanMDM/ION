@@ -7,13 +7,13 @@
 <div class="mb-6 border-b border-gray-200">
     <ul class="flex flex-wrap -mb-px text-sm font-medium text-center">
         <li class="me-2">
-            <a href="{{ route('reports.index') }}" class="inline-block p-4 border-b-2 {{ !request()->routeIs('reports.movements') ? 'text-[#5483B3] border-[#5483B3]/600 active' : 'border-transparent hover:text-gray-600 hover:border-gray-300' }} rounded-t-lg">
+            <a href="{{ route('reports.index') }}" class="inline-block p-4 border-b-2 {{ !request()->routeIs('reports.movements') ? 'text-blue-medium border-blue-medium/600 active' : 'border-transparent hover:text-gray-600 hover:border-gray-300' }} rounded-t-lg">
                 <i class="fas fa-box mr-2"></i>Inventario de Activos
             </a>
         </li>
         @if(auth()->user()->company->hasModule('transfers'))
         <li class="me-2">
-            <a href="{{ route('reports.movements') }}" class="inline-block p-4 border-b-2 {{ request()->routeIs('reports.movements') ? 'text-[#5483B3] border-[#5483B3]/600 active' : 'border-transparent hover:text-gray-600 hover:border-gray-300' }} rounded-t-lg">
+            <a href="{{ route('reports.movements') }}" class="inline-block p-4 border-b-2 {{ request()->routeIs('reports.movements') ? 'text-blue-medium border-blue-medium/600 active' : 'border-transparent hover:text-gray-600 hover:border-gray-300' }} rounded-t-lg">
                 <i class="fas fa-exchange-alt mr-2"></i>Historial de Movimientos
             </a>
         </li>
@@ -36,7 +36,7 @@
                 <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
             </div>
         </div>
-        <button type="submit" class="bg-[#5483B3] hover:bg-[#052659] text-white font-bold py-2 px-6 rounded shadow-sm">
+        <button type="submit" class="bg-blue-medium hover:bg-blue-dark text-white font-bold py-2 px-6 rounded shadow-sm">
             <i class="fas fa-search mr-2"></i>Buscar
         </button>
         @if(request()->hasAny(['search', 'status', 'location_id', 'category_id', 'subcategory_id', 'date_from', 'date_to', 'cost_center_id', 'supplier_id']))
@@ -142,14 +142,14 @@
 
 <!-- Statistics -->
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-6">
-    <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-4 border-l-4 border-[#5483B3]/500">
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-4 border-l-4 border-blue-medium/500">
         <p class="text-xs font-bold text-gray-500 uppercase tracking-wider">Total Activos</p>
         <p class="text-2xl font-bold text-gray-800 dark:text-white">{{ number_format($stats['total_assets']) }}</p>
     </div>
     
-    <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-4 border-l-4 border-[#5483B3]/500">
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-4 border-l-4 border-blue-medium/500">
         <p class="text-xs font-bold text-gray-500 uppercase tracking-wider">Valor Compra</p>
-        <p class="text-2xl font-bold text-[#5483B3]">${{ number_format($stats['total_purchase_price'], 2) }}</p>
+        <p class="text-2xl font-bold text-blue-medium">${{ number_format($stats['total_purchase_price'], 2) }}</p>
     </div>
 
     @if(auth()->user()->company->hasModule('depreciation'))
@@ -228,7 +228,7 @@
                 <tr class="border-b border-gray-100 dark:border-gray-700 hover:bg-indigo-50/30 dark:hover:bg-gray-700/50 transition-colors">
                     <td class="py-4 px-6 text-left">
                         <div class="flex flex-col">
-                            <a href="{{ route('assets.show', $asset->id) }}" class="text-[#5483B3] hover:text-indigo-800 font-bold">
+                            <a href="{{ route('assets.show', $asset->id) }}" class="text-blue-medium hover:text-indigo-800 font-bold">
                                 {{ $asset->name }}
                             </a>
                             <span class="text-[10px] text-gray-400 font-mono">{{ $asset->custom_id }}</span>
@@ -267,7 +267,7 @@
                     </td>
                     <td class="py-4 px-6 text-center">
                         <span class="px-3 py-1 text-[10px] font-bold uppercase rounded-full
-                            {{ $asset->status == 'active' ? 'bg-green-100 text-[#052659] border border-[#5483B3]/200' : '' }}
+                            {{ $asset->status == 'active' ? 'bg-green-100 text-blue-dark border border-blue-medium/200' : '' }}
                             {{ $asset->status == 'maintenance' ? 'bg-yellow-100 text-yellow-700 border border-yellow-200' : '' }}
                             {{ $asset->status == 'decommissioned' ? 'bg-red-100 text-red-700 border border-red-200' : '' }}">
                             {{ $asset->status == 'active' ? 'Activo' : ($asset->status == 'maintenance' ? 'Mantenimiento' : 'Baja') }}
@@ -277,7 +277,7 @@
                         ${{ number_format($asset->purchase_price, 2) }}
                     </td>
                     @if(auth()->user()->company->hasModule('depreciation'))
-                    <td class="py-4 px-6 text-right font-mono font-bold text-[#5483B3]">
+                    <td class="py-4 px-6 text-right font-mono font-bold text-blue-medium">
                         ${{ number_format($asset->value, 2) }}
                     </td>
                     @endif

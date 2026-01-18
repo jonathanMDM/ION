@@ -30,14 +30,14 @@
                     @if($user->isAdmin())
                         <span class="bg-gray-200 dark:bg-gray-600 text-gray-900 dark:text-gray-100 px-3 py-1 rounded-full text-xs font-semibold">Admin</span>
                     @elseif($user->isEditor())
-                        <span class="bg-[#C1E8FF] text-[#052659] px-3 py-1 rounded-full text-xs font-semibold">Editor</span>
+                        <span class="bg-blue-lightest text-blue-dark px-3 py-1 rounded-full text-xs font-semibold">Editor</span>
                     @else
                         <span class="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 px-3 py-1 rounded-full text-xs font-semibold">Visor</span>
                     @endif
                 </td>
                 <td class="py-3 px-6 text-center">
                     @if($user->is_active)
-                        <span class="bg-[#C1E8FF] text-[#052659] px-3 py-1 rounded-full text-xs font-semibold">Activo</span>
+                        <span class="bg-blue-lightest text-blue-dark px-3 py-1 rounded-full text-xs font-semibold">Activo</span>
                     @else
                         <span class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-xs font-semibold">Inactivo</span>
                     @endif

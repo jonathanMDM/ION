@@ -23,7 +23,7 @@
             <span class="px-3 py-1 text-sm rounded-full 
                 {{ $supportRequest->status == 'pending' ? 'bg-yellow-100 text-yellow-800' : '' }}
                 {{ $supportRequest->status == 'in_progress' ? 'bg-blue-100 text-blue-800' : '' }}
-                {{ $supportRequest->status == 'resolved' ? 'bg-[#C1E8FF] text-[#052659]' : '' }}
+                {{ $supportRequest->status == 'resolved' ? 'bg-blue-lightest text-blue-dark' : '' }}
                 {{ $supportRequest->status == 'closed' ? 'bg-gray-100 text-gray-800' : '' }}">
                 {{ $supportRequest->status_label }}
             </span>
@@ -60,7 +60,7 @@
                         <span class="text-gray-600">Categoría:</span>
                         <span class="px-2 py-1 text-xs rounded-full ml-2
                             {{ $supportRequest->category == 'technical' ? 'bg-blue-100 text-blue-800' : '' }}
-                            {{ $supportRequest->category == 'billing' ? 'bg-[#C1E8FF] text-[#052659]' : '' }}
+                            {{ $supportRequest->category == 'billing' ? 'bg-blue-lightest text-blue-dark' : '' }}
                             {{ $supportRequest->category == 'general' ? 'bg-gray-100 text-gray-800' : '' }}">
                             {{ ucfirst($supportRequest->category) }}
                         </span>

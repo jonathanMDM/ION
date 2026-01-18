@@ -68,10 +68,10 @@
 <div class="bg-white dark:bg-gray-800 rounded-[2.5rem] shadow-xl border border-slate-200 dark:border-slate-700 overflow-hidden mb-8">
     <div class="px-8 py-6 border-b border-slate-200 dark:border-slate-700 flex justify-between items-center bg-slate-50/50">
         <h3 class="text-lg font-bold text-slate-800 dark:text-white flex items-center gap-2">
-            <i class="fas fa-history text-[#5483B3]"></i>
+            <i class="fas fa-history text-blue-medium"></i>
             Empresas Recientes
         </h3>
-        <a href="{{ route('superadmin.companies.index') }}" class="text-[#5483B3] hover:text-[#052659] text-sm font-bold uppercase tracking-wider">Ver todas</a>
+        <a href="{{ route('superadmin.companies.index') }}" class="text-blue-medium hover:text-blue-dark text-sm font-bold uppercase tracking-wider">Ver todas</a>
     </div>
     <div class="overflow-x-auto">
         <table class="min-w-full divide-y divide-slate-200 dark:divide-slate-700">
@@ -94,7 +94,7 @@
                         {{ $company->email }}
                     </td>
                     <td class="px-8 py-5 whitespace-nowrap">
-                        <span class="px-3 py-1 text-[10px] font-black uppercase tracking-widest rounded-full {{ $company->status === 'active' ? 'bg-[#C1E8FF] text-[#052659]' : 'bg-red-100 text-red-800' }}">
+                        <span class="px-3 py-1 text-[10px] font-black uppercase tracking-widest rounded-full {{ $company->status === 'active' ? 'bg-blue-lightest text-blue-dark' : 'bg-red-100 text-red-800' }}">
                             {{ $company->status === 'active' ? 'Activa' : 'Inactiva' }}
                         </span>
                     </td>

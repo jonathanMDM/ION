@@ -7,13 +7,13 @@
 <div class="mb-6 border-b border-gray-200">
     <ul class="flex flex-wrap -mb-px text-sm font-medium text-center">
         <li class="me-2">
-            <a href="{{ route('reports.index') }}" class="inline-block p-4 border-b-2 {{ !request()->routeIs('reports.movements') ? 'text-[#5483B3] border-[#5483B3]/600 active' : 'border-transparent hover:text-gray-600 hover:border-gray-300' }} rounded-t-lg">
+            <a href="{{ route('reports.index') }}" class="inline-block p-4 border-b-2 {{ !request()->routeIs('reports.movements') ? 'text-blue-medium border-blue-medium/600 active' : 'border-transparent hover:text-gray-600 hover:border-gray-300' }} rounded-t-lg">
                 <i class="fas fa-box mr-2"></i>Inventario de Activos
             </a>
         </li>
         @if(auth()->user()->company->hasModule('transfers'))
         <li class="me-2">
-            <a href="{{ route('reports.movements') }}" class="inline-block p-4 border-b-2 {{ request()->routeIs('reports.movements') ? 'text-[#5483B3] border-[#5483B3]/600 active' : 'border-transparent hover:text-gray-600 hover:border-gray-300' }} rounded-t-lg">
+            <a href="{{ route('reports.movements') }}" class="inline-block p-4 border-b-2 {{ request()->routeIs('reports.movements') ? 'text-blue-medium border-blue-medium/600 active' : 'border-transparent hover:text-gray-600 hover:border-gray-300' }} rounded-t-lg">
                 <i class="fas fa-exchange-alt mr-2"></i>Historial de Movimientos
             </a>
         </li>
@@ -74,7 +74,7 @@
     <div class="overflow-x-auto">
         <table class="min-w-full w-full table-auto text-sm">
             <thead>
-                <tr class="bg-[#5483B3] text-white uppercase text-[10px] font-black tracking-widest leading-normal">
+                <tr class="bg-blue-medium text-white uppercase text-[10px] font-black tracking-widest leading-normal">
                     <th class="py-4 px-6 text-left">Fecha / Hora</th>
                     <th class="py-4 px-6 text-left">Activo</th>
                     <th class="py-4 px-6 text-center">De (Origen)</th>
@@ -105,7 +105,7 @@
                         <i class="fas fa-long-arrow-alt-right"></i>
                     </td>
                     <td class="py-4 px-6 text-center">
-                        <span class="px-2 py-1 bg-[#C1E8FF]/50 text-[#052659] rounded text-[10px] uppercase font-bold border border-[#5483B3]/100">
+                        <span class="px-2 py-1 bg-blue-lightest/50 text-blue-dark rounded text-[10px] uppercase font-bold border border-blue-medium/100">
                             {{ $movement->toLocation->name }}
                         </span>
                     </td>

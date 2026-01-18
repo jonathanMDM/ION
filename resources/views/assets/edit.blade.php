@@ -10,7 +10,7 @@
             <h2 class="text-3xl font-extrabold text-gray-900 dark:text-white tracking-tight">Editar Activo</h2>
             <p class="text-gray-500 dark:text-gray-400 mt-1">Actualice la información del activo <strong>{{ $asset->name }}</strong>.</p>
         </div>
-        <a href="{{ route('assets.show', $asset->id) }}" class="flex items-center text-sm font-semibold text-gray-600 dark:text-gray-400 hover:text-[#5483B3] dark:hover:text-indigo-400 transition-colors">
+        <a href="{{ route('assets.show', $asset->id) }}" class="flex items-center text-sm font-semibold text-gray-600 dark:text-gray-400 hover:text-blue-medium dark:hover:text-indigo-400 transition-colors">
             <i class="fas fa-eye mr-2"></i> Ver activo
         </a>
     </div>
@@ -54,7 +54,7 @@
                                     Nombre del Activo <span class="text-red-500">*</span>
                                 </label>
                                 <input type="text" name="name" id="name" value="{{ old('name', $asset->name) }}" 
-                                    class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-[#5483B3] transition-all font-semibold" required>
+                                    class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-blue-medium transition-all font-semibold" required>
                                 @error('name') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
                             </div>
 
@@ -72,7 +72,7 @@
                                     Modelo / Referencia
                                 </label>
                                 <input type="text" name="model" id="model" value="{{ old('model', $asset->model) }}"
-                                    class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-[#5483B3] transition-all">
+                                    class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-blue-medium transition-all">
                             </div>
 
                             <div>
@@ -80,7 +80,7 @@
                                     Cantidad en Stock <span class="text-red-500">*</span>
                                 </label>
                                 <input type="number" name="quantity" id="quantity" min="1" value="{{ old('quantity', $asset->quantity) }}"
-                                    class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-[#5483B3] transition-all font-bold" required>
+                                    class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-blue-medium transition-all font-bold" required>
                             </div>
 
                             @if(auth()->user()->company && auth()->user()->company->low_stock_alerts_enabled)
@@ -89,7 +89,7 @@
                                     Stock Mínimo (Alerta)
                                 </label>
                                 <input type="number" name="minimum_quantity" id="minimum_quantity" min="0" value="{{ old('minimum_quantity', $asset->minimum_quantity ?? 0) }}"
-                                    class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-[#5483B3] transition-all">
+                                    class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-blue-medium transition-all">
                             </div>
                             @endif
                         </div>
@@ -110,7 +110,7 @@
                                     Ubicación Física <span class="text-red-500">*</span>
                                 </label>
                                 <select name="location_id" id="location_id" 
-                                    class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-[#5483B3] transition-all" required>
+                                    class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-blue-medium transition-all" required>
                                     @foreach($locations as $location)
                                         <option value="{{ $location->id }}" {{ old('location_id', $asset->location_id) == $location->id ? 'selected' : '' }}>{{ $location->name }}</option>
                                     @endforeach
@@ -122,7 +122,7 @@
                                     Categoría / Subcategoría <span class="text-red-500">*</span>
                                 </label>
                                 <select name="subcategory_id" id="subcategory_id" 
-                                    class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-[#5483B3] transition-all" required>
+                                    class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-blue-medium transition-all" required>
                                     @foreach($subcategories as $subcategory)
                                         <option value="{{ $subcategory->id }}" {{ old('subcategory_id', $asset->subcategory_id) == $subcategory->id ? 'selected' : '' }}>
                                             {{ $subcategory->category->name }} → {{ $subcategory->name }}
@@ -136,7 +136,7 @@
                                     Proveedor
                                 </label>
                                 <select name="supplier_id" id="supplier_id" 
-                                    class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-[#5483B3] transition-all">
+                                    class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-blue-medium transition-all">
                                     <option value="">Sin proveedor asignado</option>
                                     @foreach($suppliers as $supplier)
                                         <option value="{{ $supplier->id }}" {{ old('supplier_id', $asset->supplier_id) == $supplier->id ? 'selected' : '' }}>{{ $supplier->name }}</option>
@@ -149,8 +149,8 @@
                                     Estado Actual <span class="text-red-500">*</span>
                                 </label>
                                 <select name="status" id="status" 
-                                    class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-[#5483B3] focus:border-transparent transition-all font-bold" required>
-                                    <option value="active" {{ old('status', $asset->status) == 'active' ? 'selected' : '' }} class="text-[#5483B3]">Activo</option>
+                                    class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-blue-medium focus:border-transparent transition-all font-bold" required>
+                                    <option value="active" {{ old('status', $asset->status) == 'active' ? 'selected' : '' }} class="text-blue-medium">Activo</option>
                                     <option value="maintenance" {{ old('status', $asset->status) == 'maintenance' ? 'selected' : '' }} class="text-yellow-600">En Taller / Mantenimiento</option>
                                     <option value="decommissioned" {{ old('status', $asset->status) == 'decommissioned' ? 'selected' : '' }} class="text-red-600">Dado de Baja</option>
                                 </select>
@@ -175,7 +175,7 @@
                                 <div class="relative group">
                                     <span class="absolute left-4 top-3.5 text-gray-400 group-focus-within:text-indigo-500 transition-colors">$</span>
                                     <input type="number" step="0.01" name="purchase_price" id="purchase_price" value="{{ old('purchase_price', $asset->purchase_price) }}"
-                                        class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 pl-8 pr-4 text-gray-700 dark:text-white font-bold focus:ring-2 focus:ring-[#5483B3] transition-all" required>
+                                        class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 pl-8 pr-4 text-gray-700 dark:text-white font-bold focus:ring-2 focus:ring-blue-medium transition-all" required>
                                 </div>
                             </div>
 
@@ -184,7 +184,7 @@
                                     Fecha de Adquisición
                                 </label>
                                 <input type="date" name="purchase_date" id="purchase_date" value="{{ old('purchase_date', $asset->purchase_date ? $asset->purchase_date->format('Y-m-d') : '') }}"
-                                    class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-[#5483B3] transition-all">
+                                    class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-blue-medium transition-all">
                             </div>
 
                             @if(auth()->user()->company->hasModule('financial_control'))
@@ -192,7 +192,7 @@
                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                         <div>
                                             <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2" for="cost_center_id">Centro de Costo</label>
-                                            <select name="cost_center_id" id="cost_center_id" class="w-full bg-gray-100 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-[#5483B3] transition-all">
+                                            <select name="cost_center_id" id="cost_center_id" class="w-full bg-gray-100 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-blue-medium transition-all">
                                                 <option value="">Sin centro asignado</option>
                                                 @php
                                                     $costCenters = \App\Models\CostCenter::where('company_id', Auth::user()->company_id)->where('is_active', true)->orderBy('code')->get();
@@ -207,7 +207,7 @@
 
                                         <div>
                                             <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2" for="depreciation_method">Método Depreciación</label>
-                                            <select name="depreciation_method" id="depreciation_method" class="w-full bg-gray-100 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-[#5483B3] transition-all" onchange="toggleDepreciationFields()">
+                                            <select name="depreciation_method" id="depreciation_method" class="w-full bg-gray-100 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-blue-medium transition-all" onchange="toggleDepreciationFields()">
                                                 <option value="none" {{ old('depreciation_method', $asset->depreciation_method) == 'none' ? 'selected' : '' }}>Sin depreciar</option>
                                                 <option value="straight_line" {{ old('depreciation_method', $asset->depreciation_method) == 'straight_line' ? 'selected' : '' }}>Línea Recta</option>
                                                 <option value="declining_balance" {{ old('depreciation_method', $asset->depreciation_method) == 'declining_balance' ? 'selected' : '' }}>Saldos Decrecientes</option>
@@ -215,22 +215,22 @@
                                         </div>
                                     </div>
 
-                                    <div id="depreciation_fields" class="grid grid-cols-1 md:grid-cols-3 gap-6 p-4 bg-indigo-50/50 dark:bg-indigo-900/10 rounded-2xl border border-[#5483B3]/100 dark:border-[#5483B3]/900/30" 
+                                    <div id="depreciation_fields" class="grid grid-cols-1 md:grid-cols-3 gap-6 p-4 bg-indigo-50/50 dark:bg-indigo-900/10 rounded-2xl border border-blue-medium/100 dark:border-blue-medium/900/30" 
                                         style="display: {{ old('depreciation_method', $asset->depreciation_method) != 'none' ? 'grid' : 'none' }}">
                                         <div>
                                             <label class="block text-xs font-bold text-indigo-700 dark:text-indigo-400 mb-2 uppercase">Vida Útil (Años)</label>
                                             <input type="number" name="useful_life_years" id="useful_life_years" min="1" value="{{ old('useful_life_years', $asset->useful_life_years) }}"
-                                                class="w-full bg-white dark:bg-gray-900 border-[#5483B3]/100 dark:border-[#5483B3]/900/50 rounded-lg py-2 px-3 text-sm focus:ring-2 focus:ring-[#5483B3] transition-all">
+                                                class="w-full bg-white dark:bg-gray-900 border-blue-medium/100 dark:border-blue-medium/900/50 rounded-lg py-2 px-3 text-sm focus:ring-2 focus:ring-blue-medium transition-all">
                                         </div>
                                         <div>
                                             <label class="block text-xs font-bold text-indigo-700 dark:text-indigo-400 mb-2 uppercase">V. Salvamento</label>
                                             <input type="number" step="0.01" name="salvage_value" id="salvage_value" value="{{ old('salvage_value', $asset->salvage_value) }}"
-                                                class="w-full bg-white dark:bg-gray-900 border-[#5483B3]/100 dark:border-[#5483B3]/900/50 rounded-lg py-2 px-3 text-sm focus:ring-2 focus:ring-[#5483B3] transition-all">
+                                                class="w-full bg-white dark:bg-gray-900 border-blue-medium/100 dark:border-blue-medium/900/50 rounded-lg py-2 px-3 text-sm focus:ring-2 focus:ring-blue-medium transition-all">
                                         </div>
                                         <div>
                                             <label class="block text-xs font-bold text-indigo-700 dark:text-indigo-400 mb-2 uppercase">Fecha Inicio</label>
                                             <input type="date" name="depreciation_start_date" id="depreciation_start_date" value="{{ old('depreciation_start_date', $asset->depreciation_start_date ? $asset->depreciation_start_date->format('Y-m-d') : '') }}"
-                                                class="w-full bg-white dark:bg-gray-900 border-[#5483B3]/100 dark:border-[#5483B3]/900/50 rounded-lg py-2 px-3 text-sm focus:ring-2 focus:ring-[#5483B3] transition-all">
+                                                class="w-full bg-white dark:bg-gray-900 border-blue-medium/100 dark:border-blue-medium/900/50 rounded-lg py-2 px-3 text-sm focus:ring-2 focus:ring-blue-medium transition-all">
                                         </div>
                                     </div>
                                 </div>
@@ -260,16 +260,16 @@
                                     {{ $field->label }} @if($field->is_required) <span class="text-red-500">*</span> @endif
                                 </label>
                                 @if($field->type === 'textarea')
-                                    <textarea name="custom_attributes[{{ $field->name }}]" id="custom_{{ $field->name }}" rows="3" class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-[#5483B3] transition-all">{{ $fieldVal }}</textarea>
+                                    <textarea name="custom_attributes[{{ $field->name }}]" id="custom_{{ $field->name }}" rows="3" class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-blue-medium transition-all">{{ $fieldVal }}</textarea>
                                 @elseif($field->type === 'select')
-                                    <select name="custom_attributes[{{ $field->name }}]" id="custom_{{ $field->name }}" class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-[#5483B3] transition-all">
+                                    <select name="custom_attributes[{{ $field->name }}]" id="custom_{{ $field->name }}" class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-blue-medium transition-all">
                                         <option value="">Seleccione...</option>
                                         @foreach($field->options as $option)
                                             <option value="{{ $option }}" {{ $fieldVal == $option ? 'selected' : '' }}>{{ $option }}</option>
                                         @endforeach
                                     </select>
                                 @else
-                                    <input type="{{ $field->type }}" name="custom_attributes[{{ $field->name }}]" id="custom_{{ $field->name }}" value="{{ $fieldVal }}" class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-[#5483B3] transition-all">
+                                    <input type="{{ $field->type }}" name="custom_attributes[{{ $field->name }}]" id="custom_{{ $field->name }}" value="{{ $fieldVal }}" class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-blue-medium transition-all">
                                 @endif
                             </div>
                             @endif
@@ -306,7 +306,7 @@
                                     </div>
                                 @endif
                             </div>
-                            <label class="w-full flex justify-center items-center px-4 py-2 bg-[#5483B3] hover:bg-[#052659] text-white font-bold rounded-xl cursor-pointer transition-colors shadow-lg shadow-[#5483B3]/20">
+                            <label class="w-full flex justify-center items-center px-4 py-2 bg-blue-medium hover:bg-blue-dark text-white font-bold rounded-xl cursor-pointer transition-colors shadow-lg shadow-blue-medium/20">
                                 <i class="fas fa-edit mr-2"></i> Subir Nueva Imagen
                                 <input type="file" name="image" id="image" accept="image/*" class="hidden" onchange="previewFile(this)">
                             </label>
@@ -327,12 +327,12 @@
                         <div>
                             <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2" for="municipality_plate">Placa Municipio</label>
                             <input type="text" name="municipality_plate" id="municipality_plate" value="{{ $asset->municipality_plate }}" 
-                                class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-[#5483B3] transition-all">
+                                class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-blue-medium transition-all">
                         </div>
                         @endif
                         <div>
                             <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2" for="specifications">Detalles Técnicos</label>
-                            <textarea name="specifications" id="specifications" rows="4" class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-[#5483B3] transition-all">{{ $asset->specifications }}</textarea>
+                            <textarea name="specifications" id="specifications" rows="4" class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-blue-medium transition-all">{{ $asset->specifications }}</textarea>
                         </div>
                     </div>
                 </div>
@@ -348,12 +348,12 @@
                         <div>
                             <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2" for="next_maintenance_date">Próxima Fecha</label>
                             <input type="date" name="next_maintenance_date" id="next_maintenance_date" value="{{ old('next_maintenance_date', $asset->next_maintenance_date ? $asset->next_maintenance_date->format('Y-m-d') : '') }}" 
-                                class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-[#5483B3] transition-all">
+                                class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-blue-medium transition-all">
                         </div>
                         <div>
                             <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2" for="maintenance_frequency_days">Frecuencia (En días)</label>
                             <input type="number" name="maintenance_frequency_days" id="maintenance_frequency_days" min="1" value="{{ old('maintenance_frequency_days', $asset->maintenance_frequency_days) }}"
-                                class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-[#5483B3] transition-all">
+                                class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-blue-medium transition-all">
                         </div>
                     </div>
                 </div>
@@ -368,7 +368,8 @@
                     Cancelar
                 </a>
                 <button type="submit" 
-                    class="w-full md:w-auto px-16 py-4 bg-[#5483B3] hover:bg-[#052659] text-white font-black rounded-2xl transition-all shadow-xl shadow-[#5483B3]/25 transform hover:-translate-y-0.5 flex items-center justify-center tracking-wide uppercase text-sm">
+                    class="w-full md:w-auto px-16 py-4 text-white font-black rounded-2xl transition-all shadow-xl transform hover:-translate-y-0.5 flex items-center justify-center tracking-wide uppercase text-sm border-none cursor-pointer"
+                    style="background: linear-gradient(135deg, #5483B3 0%, #052659 100%); box-shadow: 0 10px 20px rgba(84, 131, 179, 0.3);">
                     <i class="fas fa-sync-alt mr-2 text-lg"></i> ACTUALIZAR DATOS
                 </button>
             </div>

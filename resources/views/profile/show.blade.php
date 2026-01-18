@@ -20,7 +20,7 @@
                             @if($user->isAdmin())
                                 <span class="bg-gray-800 text-white px-3 py-1 rounded-full text-sm font-semibold">Administrador</span>
                             @elseif($user->isEditor())
-                                <span class="bg-[#5483B3] text-white px-3 py-1 rounded-full text-sm font-semibold">Editor</span>
+                                <span class="bg-blue-medium text-white px-3 py-1 rounded-full text-sm font-semibold">Editor</span>
                             @else
                                 <span class="bg-gray-500 text-white px-3 py-1 rounded-full text-sm font-semibold">Visor</span>
                             @endif

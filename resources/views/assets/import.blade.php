@@ -66,7 +66,7 @@
         <!-- Opciones de descarga de plantilla -->
         <div class="mb-6">
             <!-- Opción 1: Google Sheets (Recomendado) -->
-            <div class="bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/10 dark:to-emerald-900/10 border-2 border-[#5483B3]/500 rounded-lg p-6 mb-4 transition-colors">
+            <div class="bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/10 dark:to-emerald-900/10 border-2 border-blue-medium/500 rounded-lg p-6 mb-4 transition-colors">
                 <div class="flex items-start">
                     <div class="flex-shrink-0">
                         <i class="fas fa-star text-yellow-500 text-2xl"></i>
@@ -80,7 +80,7 @@
                         </p>
                         <div class="space-y-3">
                             @if(env('GOOGLE_SHEETS_TEMPLATE_URL'))
-                                <a href="{{ env('GOOGLE_SHEETS_TEMPLATE_URL') }}" target="_blank" class="inline-flex items-center bg-[#5483B3] hover:bg-[#052659] text-white font-bold py-3 px-8 rounded-lg shadow-lg transition duration-200">
+                                <a href="{{ env('GOOGLE_SHEETS_TEMPLATE_URL') }}" target="_blank" class="inline-flex items-center bg-blue-medium hover:bg-blue-dark text-white font-bold py-3 px-8 rounded-lg shadow-lg transition duration-200">
                                     <i class="fab fa-google mr-2"></i>
                                     📊 Abrir Plantilla en Google Sheets
                                 </a>
@@ -94,7 +94,7 @@
                                     <p class="text-xs">Luego configura la variable de entorno <code class="bg-yellow-200 px-1 rounded">GOOGLE_SHEETS_TEMPLATE_URL</code> con el enlace de tu plantilla.</p>
                                 </div>
                             @endif
-                            <div class="text-xs text-[#052659] mt-2">
+                            <div class="text-xs text-blue-dark mt-2">
                                 <p class="font-semibold mb-1">📝 Pasos:</p>
                                 <ol class="list-decimal list-inside space-y-1 ml-2">
                                     <li>Haz clic en el botón verde</li>

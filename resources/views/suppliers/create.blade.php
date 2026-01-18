@@ -10,7 +10,7 @@
             <h2 class="text-3xl font-extrabold text-gray-900 dark:text-white tracking-tight">Agregar Proveedor</h2>
             <p class="text-gray-500 dark:text-gray-400 mt-1">Registre un nuevo aliado comercial en su base de datos.</p>
         </div>
-        <a href="{{ route('suppliers.index') }}" class="flex items-center text-sm font-semibold text-gray-600 dark:text-gray-400 hover:text-[#5483B3] transition-colors">
+        <a href="{{ route('suppliers.index') }}" class="flex items-center text-sm font-semibold text-gray-600 dark:text-gray-400 hover:text-blue-medium transition-colors">
             <i class="fas fa-arrow-left mr-2"></i> Volver al listado
         </a>
     </div>
@@ -49,7 +49,7 @@
                             Razón Social / Nombre <span class="text-red-500">*</span>
                         </label>
                         <input type="text" name="name" id="name" value="{{ old('name') }}" 
-                            class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-[#5483B3] transition-all" 
+                            class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-blue-medium transition-all" 
                             placeholder="Ej: Suministros IT S.A.S" required>
                     </div>
 
@@ -58,7 +58,7 @@
                             NIT / Identificación Fiscal
                         </label>
                         <input type="text" name="nit" id="nit" value="{{ old('nit') }}" 
-                            class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-[#5483B3] transition-all" 
+                            class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-blue-medium transition-all" 
                             placeholder="Ej: 900.123.456-7">
                     </div>
                 </div>
@@ -108,7 +108,7 @@
                         <i class="fas fa-map-marker-alt text-red-400 mr-2"></i> Dirección de Sede
                     </label>
                     <textarea name="address" id="address" rows="3" 
-                        class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-[#5483B3] transition-all font-medium" 
+                        class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-blue-medium transition-all font-medium" 
                         placeholder="Dirección completa, ciudad y departamento.">{{ old('address') }}</textarea>
                 </div>
             </div>
@@ -121,7 +121,7 @@
                 Cancelar
             </a>
             <button type="submit" 
-                class="w-full md:w-auto px-16 py-4 bg-[#5483B3] hover:bg-[#052659] text-white font-black rounded-2xl transition-all shadow-xl shadow-[#5483B3]/25 transform hover:-translate-y-0.5 active:scale-95 flex items-center justify-center tracking-wide uppercase text-sm">
+                class="w-full md:w-auto px-16 py-4 bg-blue-medium hover:bg-blue-dark text-white font-black rounded-2xl transition-all shadow-xl shadow-blue-medium/25 transform hover:-translate-y-0.5 active:scale-95 flex items-center justify-center tracking-wide uppercase text-sm">
                 <i class="fas fa-save mr-2 text-lg"></i> Registrar Proveedor
             </button>
         </div>

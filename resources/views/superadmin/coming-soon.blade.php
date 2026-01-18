@@ -14,7 +14,7 @@
         <p class="text-gray-600 mb-6">
             {{ $message ?? 'Esta sección está actualmente en desarrollo y estará disponible próximamente.' }}
         </p>
-        <a href="{{ route('superadmin.index') }}" class="inline-flex items-center px-6 py-3 bg-[#5483B3] text-white rounded-lg hover:bg-[#052659] transition">
+        <a href="{{ route('superadmin.index') }}" class="inline-flex items-center px-6 py-3 bg-blue-medium text-white rounded-lg hover:bg-blue-dark transition">
             <i class="fas fa-arrow-left mr-2"></i>
             Volver al Dashboard
         </a>

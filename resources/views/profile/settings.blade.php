@@ -15,7 +15,7 @@
         <div class="bg-white rounded-lg shadow-md overflow-hidden mb-8">
             <div class="px-6 py-4 border-b border-gray-100 bg-gray-50">
                 <h3 class="font-bold text-gray-800 flex items-center">
-                    <i class="fas fa-shield-alt mr-2 text-[#5483B3]"></i> Seguridad
+                    <i class="fas fa-shield-alt mr-2 text-blue-medium"></i> Seguridad
                 </h3>
             </div>
             
@@ -44,11 +44,11 @@
                     @endif
 
                     @if($user->two_factor_enabled)
-                        <div class="bg-green-50 border border-[#5483B3]/200 rounded-lg p-4 mb-6 flex items-start">
+                        <div class="bg-green-50 border border-blue-medium/200 rounded-lg p-4 mb-6 flex items-start">
                             <i class="fas fa-check-circle text-green-500 text-2xl mr-3 mt-1"></i>
                             <div>
                                 <p class="font-bold text-green-800">2FA Activado</p>
-                                <p class="text-sm text-[#052659]">Tu cuenta está protegida.</p>
+                                <p class="text-sm text-blue-dark">Tu cuenta está protegida.</p>
                             </div>
                         </div>
                         
@@ -61,7 +61,7 @@
                             <div class="bg-gray-50 p-4 rounded-lg">
                                 <p class="text-sm text-gray-600 mb-3 font-medium">Zona de Peligro</p>
                                 <div class="flex flex-col sm:flex-row gap-3 items-center">
-                                    <input type="password" name="password" required placeholder="Confirma tu contraseña" class="flex-1 w-full border-gray-300 rounded-lg shadow-sm focus:border-[#5483B3]/500 focus:ring-[#5483B3]">
+                                    <input type="password" name="password" required placeholder="Confirma tu contraseña" class="flex-1 w-full border-gray-300 rounded-lg shadow-sm focus:border-blue-medium/500 focus:ring-blue-medium">
                                     <button type="submit" class="bg-white border border-red-300 text-red-600 hover:bg-red-50 font-semibold py-2 px-4 rounded-lg transition-colors w-full sm:w-auto">
                                         Desactivar 2FA
                                     </button>
@@ -92,9 +92,9 @@
                                     
                                     <div class="mb-4">
                                         <label for="code" class="block text-sm font-medium text-gray-700 mb-1">Código de Verificación</label>
-                                        <input type="text" name="code" id="code" required placeholder="000 000" maxlength="6" class="w-full border-gray-300 rounded-lg shadow-sm focus:border-[#5483B3]/500 focus:ring-[#5483B3] text-center text-xl tracking-widest font-mono">
+                                        <input type="text" name="code" id="code" required placeholder="000 000" maxlength="6" class="w-full border-gray-300 rounded-lg shadow-sm focus:border-blue-medium/500 focus:ring-blue-medium text-center text-xl tracking-widest font-mono">
                                     </div>
-                                    <button type="submit" class="w-full bg-[#5483B3] hover:bg-[#052659] text-white font-bold py-2 px-4 rounded-lg shadow transition-colors">
+                                    <button type="submit" class="w-full bg-blue-medium hover:bg-blue-dark text-white font-bold py-2 px-4 rounded-lg shadow transition-colors">
                                         Activar Autenticación
                                     </button>
                                 </form>
@@ -109,7 +109,7 @@
         <div class="bg-white rounded-lg shadow-md overflow-hidden">
             <div class="px-6 py-4 border-b border-gray-100 bg-gray-50">
                 <h3 class="font-bold text-gray-800 flex items-center">
-                    <i class="fas fa-sliders-h mr-2 text-[#5483B3]"></i> Preferencias Generales
+                    <i class="fas fa-sliders-h mr-2 text-blue-medium"></i> Preferencias Generales
                 </h3>
             </div>
             
@@ -129,7 +129,7 @@
                     <h4 class="font-semibold text-gray-700 mb-2">Visualización de Tablas</h4>
                     <div class="flex items-center justify-between">
                          <label for="items_per_page" class="text-gray-600 text-sm">Registros por página:</label>
-                         <select name="items_per_page" id="items_per_page" class="border-gray-300 rounded-lg text-sm shadow-sm focus:border-[#5483B3]/500 focus:ring-[#5483B3]">
+                         <select name="items_per_page" id="items_per_page" class="border-gray-300 rounded-lg text-sm shadow-sm focus:border-blue-medium/500 focus:ring-blue-medium">
                              <option value="10" {{ $perPage == 10 ? 'selected' : '' }}>10 por página</option>
                              <option value="25" {{ $perPage == 25 ? 'selected' : '' }}>25 por página</option>
                              <option value="50" {{ $perPage == 50 ? 'selected' : '' }}>50 por página</option>
@@ -151,7 +151,7 @@
                             </div>
                             <label class="relative inline-flex items-center cursor-pointer">
                                 <input type="checkbox" name="notifications[low_stock]" value="1" class="sr-only peer" {{ $notifyStock ? 'checked' : '' }}>
-                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-indigo-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#5483B3]"></div>
+                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-indigo-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-medium"></div>
                             </label>
                         </div>
                         @endif
@@ -163,7 +163,7 @@
                             </div>
                             <label class="relative inline-flex items-center cursor-pointer">
                                 <input type="checkbox" name="notifications[maintenance]" value="1" class="sr-only peer" {{ $notifyMaint ? 'checked' : '' }}>
-                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-indigo-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#5483B3]"></div>
+                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-indigo-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-medium"></div>
                             </label>
                         </div>
 
@@ -174,7 +174,7 @@
                             </div>
                             <label class="relative inline-flex items-center cursor-pointer">
                                 <input type="checkbox" name="notifications[weekly_digest]" value="1" class="sr-only peer" {{ $notifyWeekly ? 'checked' : '' }}>
-                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-indigo-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#5483B3]"></div>
+                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-indigo-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-medium"></div>
                             </label>
                         </div>
                     </div>

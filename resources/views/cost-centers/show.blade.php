@@ -10,7 +10,7 @@
             <p class="text-gray-600 mt-1">Código: <span class="font-mono font-semibold">{{ $costCenter->code }}</span></p>
         </div>
         <div class="flex space-x-2">
-            <a href="{{ route('cost-centers.edit', $costCenter) }}" class="bg-[#5483B3] hover:bg-[#052659] text-white px-4 py-2 rounded font-bold">
+            <a href="{{ route('cost-centers.edit', $costCenter) }}" class="bg-blue-medium hover:bg-blue-dark text-white px-4 py-2 rounded font-bold">
                 <i class="fas fa-edit mr-2"></i>Editar
             </a>
             <a href="{{ route('cost-centers.index') }}" class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded font-bold">
@@ -36,7 +36,7 @@
 
     <div class="bg-white rounded-lg shadow-md p-6">
         <div class="flex items-center">
-            <div class="p-3 rounded-full bg-green-100 text-[#5483B3]">
+            <div class="p-3 rounded-full bg-green-100 text-blue-medium">
                 <i class="fas fa-dollar-sign text-2xl"></i>
             </div>
             <div class="ml-4">
@@ -88,7 +88,7 @@
                 <dt class="text-sm text-gray-500">Estado</dt>
                 <dd>
                     @if($costCenter->is_active)
-                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-[#C1E8FF] text-[#052659]">
+                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-lightest text-blue-dark">
                             Activo
                         </span>
                     @else
@@ -121,12 +121,12 @@
                 </div>
                 <div class="flex justify-between mb-4">
                     <span class="text-sm text-gray-600">Disponible</span>
-                    <span class="text-sm font-semibold {{ $costCenter->budget - $stats['total_value'] < 0 ? 'text-red-600' : 'text-[#5483B3]' }}">
+                    <span class="text-sm font-semibold {{ $costCenter->budget - $stats['total_value'] < 0 ? 'text-red-600' : 'text-blue-medium' }}">
                         ${{ number_format($costCenter->budget - $stats['total_value'], 0) }}
                     </span>
                 </div>
                 <div class="w-full bg-gray-200 rounded-full h-4">
-                    <div class="h-4 rounded-full {{ $stats['budget_used_percentage'] > 90 ? 'bg-red-500' : ($stats['budget_used_percentage'] > 70 ? 'bg-yellow-500' : 'bg-[#5483B3]') }}" 
+                    <div class="h-4 rounded-full {{ $stats['budget_used_percentage'] > 90 ? 'bg-red-500' : ($stats['budget_used_percentage'] > 70 ? 'bg-yellow-500' : 'bg-blue-medium') }}" 
                          style="width: {{ min($stats['budget_used_percentage'], 100) }}%"></div>
                 </div>
                 <p class="text-xs text-gray-500 mt-2 text-center">{{ number_format($stats['budget_used_percentage'], 1) }}% del presupuesto</p>
@@ -153,7 +153,7 @@
         @if($costCenter->manager)
             <div class="flex items-center mb-4">
                 <div class="h-12 w-12 rounded-full bg-indigo-100 flex items-center justify-center">
-                    <span class="text-[#5483B3] font-semibold text-lg">{{ substr($costCenter->manager->name, 0, 2) }}</span>
+                    <span class="text-blue-medium font-semibold text-lg">{{ substr($costCenter->manager->name, 0, 2) }}</span>
                 </div>
                 <div class="ml-4">
                     <p class="text-sm font-semibold text-gray-900">{{ $costCenter->manager->name }}</p>
@@ -207,7 +207,7 @@
                             ${{ number_format($asset->book_value, 0) }}
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-center text-sm">
-                            <a href="{{ route('assets.show', $asset) }}" class="text-[#5483B3] hover:text-indigo-900">
+                            <a href="{{ route('assets.show', $asset) }}" class="text-blue-medium hover:text-indigo-900">
                                 <i class="fas fa-eye"></i>
                             </a>
                         </td>

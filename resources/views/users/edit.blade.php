@@ -10,7 +10,7 @@
             <h2 class="text-3xl font-extrabold text-gray-900 dark:text-white tracking-tight">Editar Acceso de Usuario</h2>
             <p class="text-gray-500 dark:text-gray-400 mt-1">Modificando perfil de seguridad para <strong>{{ $user->name }}</strong>.</p>
         </div>
-        <a href="{{ route('users.index') }}" class="flex items-center text-sm font-semibold text-gray-600 dark:text-gray-400 hover:text-[#5483B3] transition-colors">
+        <a href="{{ route('users.index') }}" class="flex items-center text-sm font-semibold text-gray-600 dark:text-gray-400 hover:text-blue-medium transition-colors">
             <i class="fas fa-arrow-left mr-2"></i> Volver
         </a>
     </div>
@@ -48,7 +48,7 @@
                         </div>
                         <label class="relative inline-flex items-center cursor-pointer">
                             <input type="checkbox" name="is_active" value="1" class="sr-only peer" {{ old('is_active', $user->is_active) ? 'checked' : '' }}>
-                            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-[#5483B3]"></div>
+                            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-medium"></div>
                             <span class="ml-3 text-[10px] font-black uppercase text-gray-500 tracking-wider">Estado Activo</span>
                         </label>
                     </div>
@@ -56,7 +56,7 @@
                         <div>
                             <label class="block text-xs font-black text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2" for="name">Nombre Completo</label>
                             <input type="text" name="name" id="name" value="{{ old('name', $user->name) }}" 
-                                class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-2xl py-3 px-4 text-gray-900 dark:text-white focus:ring-2 focus:ring-[#5483B3] transition-all font-bold" required>
+                                class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-2xl py-3 px-4 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-medium transition-all font-bold" required>
                         </div>
 
                         <div>
@@ -66,7 +66,7 @@
                                     <i class="fas fa-at text-gray-400 group-focus-within:text-indigo-500 transition-colors"></i>
                                 </div>
                                 <input type="email" name="email" id="email" value="{{ old('email', $user->email) }}" 
-                                    class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-2xl py-3 pl-11 pr-4 text-gray-900 dark:text-white focus:ring-2 focus:ring-[#5483B3] transition-all" required>
+                                    class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-2xl py-3 pl-11 pr-4 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-medium transition-all" required>
                             </div>
                         </div>
                         
@@ -91,19 +91,19 @@
                         @foreach(\App\Config\PermissionConfig::getPermissionsByCategory() as $category => $permissions)
                         <div>
                             <div class="flex items-center justify-between mb-4">
-                                <h4 class="text-xs font-black text-[#5483B3] uppercase tracking-widest flex items-center">
+                                <h4 class="text-xs font-black text-blue-medium uppercase tracking-widest flex items-center">
                                     <span class="w-1.5 h-1.5 bg-indigo-500 rounded-full mr-2"></span> {{ $category }}
                                 </h4>
                                 <div class="flex items-center gap-2">
-                                    <button type="button" onclick="selectAll('{{ Str::slug($category) }}')" class="text-[9px] font-black text-gray-400 hover:text-[#5483B3] transition-colors uppercase tracking-widest bg-gray-100 dark:bg-gray-900/40 px-2 py-1 rounded-lg">Todas</button>
+                                    <button type="button" onclick="selectAll('{{ Str::slug($category) }}')" class="text-[9px] font-black text-gray-400 hover:text-blue-medium transition-colors uppercase tracking-widest bg-gray-100 dark:bg-gray-900/40 px-2 py-1 rounded-lg">Todas</button>
                                     <button type="button" onclick="deselectAll('{{ Str::slug($category) }}')" class="text-[9px] font-black text-gray-400 hover:text-red-500 transition-colors uppercase tracking-widest bg-gray-100 dark:bg-gray-900/40 px-2 py-1 rounded-lg">Ninguna</button>
                                 </div>
                             </div>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-3 {{ Str::slug($category) }}-group">
                                 @foreach($permissions as $key => $label)
-                                <label class="group flex items-center justify-between p-3 rounded-2xl bg-gray-50 dark:bg-gray-900/40 border border-transparent hover:border-[#5483B3]/500/30 transition-all cursor-pointer">
-                                    <span class="text-xs font-medium text-gray-600 dark:text-gray-400 group-hover:text-[#5483B3] transition-colors">{{ $label }}</span>
-                                    <input type="checkbox" name="permissions[]" value="{{ $key }}" {{ in_array($key, $userPermissions) ? 'checked' : '' }} class="w-5 h-5 rounded-lg border-gray-300 text-[#5483B3] focus:ring-[#5483B3]/20 transition-all">
+                                <label class="group flex items-center justify-between p-3 rounded-2xl bg-gray-50 dark:bg-gray-900/40 border border-transparent hover:border-blue-medium/500/30 transition-all cursor-pointer">
+                                    <span class="text-xs font-medium text-gray-600 dark:text-gray-400 group-hover:text-blue-medium transition-colors">{{ $label }}</span>
+                                    <input type="checkbox" name="permissions[]" value="{{ $key }}" {{ in_array($key, $userPermissions) ? 'checked' : '' }} class="w-5 h-5 rounded-lg border-gray-300 text-blue-medium focus:ring-blue-medium/20 transition-all">
                                 </label>
                                 @endforeach
                             </div>
@@ -142,7 +142,7 @@
                 Cancelar
             </a>
             <button type="submit" 
-                class="w-full md:w-auto px-16 py-4 bg-[#5483B3] hover:bg-[#052659] text-white font-black rounded-2xl transition-all shadow-xl shadow-[#5483B3]/25 transform hover:-translate-y-0.5 active:scale-95 flex items-center justify-center tracking-wide uppercase text-sm">
+                class="w-full md:w-auto px-16 py-4 bg-blue-medium hover:bg-blue-dark text-white font-black rounded-2xl transition-all shadow-xl shadow-blue-medium/25 transform hover:-translate-y-0.5 active:scale-95 flex items-center justify-center tracking-wide uppercase text-sm">
                 <i class="fas fa-sync-alt mr-2 text-lg"></i> Actualizar Usuario
             </button>
         </div>

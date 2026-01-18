@@ -10,7 +10,7 @@
             <h2 class="text-3xl font-extrabold text-gray-900 dark:text-white tracking-tight">Nuevo Centro de Costo</h2>
             <p class="text-gray-500 dark:text-gray-400 mt-1">Defina una unidad contable para el seguimiento financiero de sus activos.</p>
         </div>
-        <a href="{{ route('cost-centers.index') }}" class="flex items-center text-sm font-semibold text-gray-600 dark:text-gray-400 hover:text-[#5483B3] transition-colors">
+        <a href="{{ route('cost-centers.index') }}" class="flex items-center text-sm font-semibold text-gray-600 dark:text-gray-400 hover:text-blue-medium transition-colors">
             <i class="fas fa-arrow-left mr-2"></i> Volver al listado
         </a>
     </div>
@@ -51,7 +51,7 @@
                                     Código del Centro <span class="text-red-500">*</span>
                                 </label>
                                 <input type="text" name="code" id="code" value="{{ old('code') }}" 
-                                    class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-2xl py-3 px-4 text-gray-900 dark:text-white focus:ring-2 focus:ring-[#5483B3] transition-all font-mono text-sm" 
+                                    class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-2xl py-3 px-4 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-medium transition-all font-mono text-sm" 
                                     placeholder="Ej: CC-001" required>
                                 @error('code') <p class="text-red-500 text-[10px] mt-1 italic font-bold">{{ $message }}</p> @enderror
                             </div>
@@ -61,7 +61,7 @@
                                     Nombre Identificador <span class="text-red-500">*</span>
                                 </label>
                                 <input type="text" name="name" id="name" value="{{ old('name') }}" 
-                                    class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-2xl py-3 px-4 text-gray-900 dark:text-white focus:ring-2 focus:ring-[#5483B3] transition-all font-bold" 
+                                    class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-2xl py-3 px-4 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-medium transition-all font-bold" 
                                     placeholder="Ej: Departamento de Ventas" required>
                                 @error('name') <p class="text-red-500 text-[10px] mt-1 italic font-bold">{{ $message }}</p> @enderror
                             </div>
@@ -72,7 +72,7 @@
                                 Descripción / Propósito
                             </label>
                             <textarea name="description" id="description" rows="3" 
-                                class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-2xl py-3 px-4 text-gray-700 dark:text-gray-300 focus:ring-2 focus:ring-[#5483B3] transition-all" 
+                                class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-2xl py-3 px-4 text-gray-700 dark:text-gray-300 focus:ring-2 focus:ring-blue-medium transition-all" 
                                 placeholder="Describa el alcance de este centro de costo...">{{ old('description') }}</textarea>
                         </div>
                     </div>
@@ -102,7 +102,7 @@
                         <div>
                             <label class="block text-xs font-black text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2" for="manager_id">Responsable Directo</label>
                             <select name="manager_id" id="manager_id" 
-                                class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-2 px-3 text-xs font-bold focus:ring-2 focus:ring-[#5483B3] transition-all">
+                                class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-2 px-3 text-xs font-bold focus:ring-2 focus:ring-blue-medium transition-all">
                                 <option value="">Sin responsable asignado</option>
                                 @foreach($managers as $manager)
                                     <option value="{{ $manager->id }}" {{ old('manager_id') == $manager->id ? 'selected' : '' }}>
@@ -123,7 +123,7 @@
                 Cancelar
             </a>
             <button type="submit" 
-                class="w-full md:w-auto px-16 py-4 bg-[#5483B3] hover:bg-[#052659] text-white font-black rounded-2xl transition-all shadow-xl shadow-[#5483B3]/25 transform hover:-translate-y-0.5 active:scale-95 flex items-center justify-center tracking-wide uppercase text-sm">
+                class="w-full md:w-auto px-16 py-4 bg-blue-medium hover:bg-blue-dark text-white font-black rounded-2xl transition-all shadow-xl shadow-blue-medium/25 transform hover:-translate-y-0.5 active:scale-95 flex items-center justify-center tracking-wide uppercase text-sm">
                 <i class="fas fa-save mr-2 text-lg"></i> Crear Centro de Costo
             </button>
         </div>

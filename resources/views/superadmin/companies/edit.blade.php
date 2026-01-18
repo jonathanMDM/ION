@@ -106,7 +106,7 @@
                                    id="module_{{ $key }}"
                                    value="1"
                                    {{ ($currentModules[$key] ?? false) ? 'checked' : '' }}
-                                   class="rounded border-gray-300 text-[#5483B3] shadow-sm focus:border-[#5483B3]/300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                   class="rounded border-gray-300 text-blue-medium shadow-sm focus:border-blue-medium/300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                         </div>
                         <div class="ml-3 text-sm">
                             <label for="module_{{ $key }}" class="font-medium text-gray-700 cursor-pointer">

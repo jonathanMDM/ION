@@ -24,7 +24,7 @@
     </div>
 
     <!-- Total Value -->
-    <div class="bg-white rounded-lg shadow p-6 border-l-4 border-[#5483B3]/500">
+    <div class="bg-white rounded-lg shadow p-6 border-l-4 border-blue-medium/500">
         <div class="flex items-center">
             <div class="p-3 rounded-full bg-green-100 text-green-500 mr-4">
                 <i class="fas fa-dollar-sign text-2xl"></i>
@@ -119,7 +119,7 @@
                             </div>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
-                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-[#C1E8FF] text-[#052659]">
+                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-lightest text-blue-dark">
                                 {{ $asset->created_at->diffForHumans() }}
                             </span>
                         </td>

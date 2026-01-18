@@ -12,7 +12,7 @@
     <form method="GET" action="{{ route('superadmin.activity-logs') }}" class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
         <div>
             <label class="block text-sm font-medium text-gray-700 mb-1">Usuario</label>
-            <select name="user_id" class="w-full rounded-md border-gray-300 shadow-sm focus:border-[#5483B3]/500 focus:ring focus:ring-indigo-200">
+            <select name="user_id" class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-medium/500 focus:ring focus:ring-indigo-200">
                 <option value="">Todos los usuarios</option>
                 @foreach($users as $user)
                     <option value="{{ $user->id }}" {{ request('user_id') == $user->id ? 'selected' : '' }}>
@@ -24,7 +24,7 @@
 
         <div>
             <label class="block text-sm font-medium text-gray-700 mb-1">Empresa</label>
-            <select name="company_id" class="w-full rounded-md border-gray-300 shadow-sm focus:border-[#5483B3]/500 focus:ring focus:ring-indigo-200">
+            <select name="company_id" class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-medium/500 focus:ring focus:ring-indigo-200">
                 <option value="">Todas las empresas</option>
                 @foreach($companies as $company)
                     <option value="{{ $company->id }}" {{ request('company_id') == $company->id ? 'selected' : '' }}>
@@ -36,27 +36,27 @@
 
         <div>
             <label class="block text-sm font-medium text-gray-700 mb-1">Acción</label>
-            <input type="text" name="action" value="{{ request('action') }}" placeholder="Buscar acción..." class="w-full rounded-md border-gray-300 shadow-sm focus:border-[#5483B3]/500 focus:ring focus:ring-indigo-200">
+            <input type="text" name="action" value="{{ request('action') }}" placeholder="Buscar acción..." class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-medium/500 focus:ring focus:ring-indigo-200">
         </div>
 
         <div>
             <label class="block text-sm font-medium text-gray-700 mb-1">Desde</label>
-            <input type="date" name="date_from" value="{{ request('date_from') }}" class="w-full rounded-md border-gray-300 shadow-sm focus:border-[#5483B3]/500 focus:ring focus:ring-indigo-200">
+            <input type="date" name="date_from" value="{{ request('date_from') }}" class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-medium/500 focus:ring focus:ring-indigo-200">
         </div>
 
         <div>
             <label class="block text-sm font-medium text-gray-700 mb-1">Hasta</label>
-            <input type="date" name="date_to" value="{{ request('date_to') }}" class="w-full rounded-md border-gray-300 shadow-sm focus:border-[#5483B3]/500 focus:ring focus:ring-indigo-200">
+            <input type="date" name="date_to" value="{{ request('date_to') }}" class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-medium/500 focus:ring focus:ring-indigo-200">
         </div>
 
         <div class="md:col-span-3 lg:col-span-5 flex gap-2">
-            <button type="submit" class="bg-[#5483B3] hover:bg-[#052659] text-white font-bold py-2 px-4 rounded shadow">
+            <button type="submit" class="bg-blue-medium hover:bg-blue-dark text-white font-bold py-2 px-4 rounded shadow">
                 <i class="fas fa-filter mr-2"></i>Filtrar
             </button>
             <a href="{{ route('superadmin.activity-logs') }}" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded shadow">
                 <i class="fas fa-times mr-2"></i>Limpiar
             </a>
-            <a href="{{ route('superadmin.activity-logs.export', request()->all()) }}" class="bg-[#5483B3] hover:bg-[#052659] text-white font-bold py-2 px-4 rounded shadow ml-auto">
+            <a href="{{ route('superadmin.activity-logs.export', request()->all()) }}" class="bg-blue-medium hover:bg-blue-dark text-white font-bold py-2 px-4 rounded shadow ml-auto">
                 <i class="fas fa-file-export mr-2"></i>Exportar CSV
             </a>
         </div>
@@ -85,7 +85,7 @@
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
                         <div class="flex items-center">
-                            <div class="flex-shrink-0 h-8 w-8 bg-indigo-100 rounded-full flex items-center justify-center text-[#5483B3]">
+                            <div class="flex-shrink-0 h-8 w-8 bg-indigo-100 rounded-full flex items-center justify-center text-blue-medium">
                                 <i class="fas fa-user text-xs"></i>
                             </div>
                             <div class="ml-3">
@@ -119,7 +119,7 @@
                                     @endif
                                     @if(isset($log->changes['after']) && count($log->changes['after']) > 0)
                                         <div>
-                                            <span class="font-semibold text-[#5483B3]">Después:</span>
+                                            <span class="font-semibold text-blue-medium">Después:</span>
                                             @foreach($log->changes['after'] as $key => $value)
                                                 <div>{{ $key }}: {{ is_array($value) ? json_encode($value) : $value }}</div>
                                             @endforeach

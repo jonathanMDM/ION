@@ -10,7 +10,7 @@
             <p class="text-gray-600 mt-1">Información detallada y gestión de la empresa</p>
         </div>
         <div class="flex gap-2">
-            <a href="{{ route('superadmin.companies.edit', $company) }}" class="bg-[#5483B3] hover:bg-[#052659] text-white px-4 py-2 rounded font-bold">
+            <a href="{{ route('superadmin.companies.edit', $company) }}" class="bg-blue-medium hover:bg-blue-dark text-white px-4 py-2 rounded font-bold">
                 <i class="fas fa-edit mr-2"></i>Editar Empresa
             </a>
             <a href="{{ route('superadmin.companies.index') }}" class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded font-bold">
@@ -47,7 +47,7 @@
 <div class="bg-white rounded-lg shadow-md p-6 mb-6">
     <div class="flex justify-between items-start mb-4">
         <h3 class="text-lg font-semibold text-gray-800">Suscripción y Facturación</h3>
-        <a href="{{ route('superadmin.companies.invoices.create', $company->id) }}" class="bg-[#5483B3] hover:bg-[#052659] text-white px-4 py-2 rounded text-sm font-bold">
+        <a href="{{ route('superadmin.companies.invoices.create', $company->id) }}" class="bg-blue-medium hover:bg-blue-dark text-white px-4 py-2 rounded text-sm font-bold">
             <i class="fas fa-file-invoice-dollar mr-2"></i>Registrar Pago y Enviar Factura
         </a>
     </div>
@@ -58,7 +58,7 @@
                 @if($company->subscription_expires_at && $company->subscription_expires_at->isPast())
                     <span class="text-red-600 font-bold"><i class="fas fa-exclamation-circle mr-1"></i> EXPIRADA</span>
                 @else
-                    <span class="text-[#5483B3] font-bold"><i class="fas fa-check-circle mr-1"></i> AL DÍA</span>
+                    <span class="text-blue-medium font-bold"><i class="fas fa-check-circle mr-1"></i> AL DÍA</span>
                 @endif
             </div>
         </div>
@@ -97,13 +97,13 @@
                         <td class="px-4 py-3 text-sm font-semibold text-gray-900">${{ number_format($invoice->amount, 2) }} {{ $invoice->currency }}</td>
                         <td class="px-4 py-3">
                             <span class="px-2 py-1 text-xs font-semibold rounded-full 
-                                {{ $invoice->status === 'paid' ? 'bg-[#C1E8FF] text-[#052659]' : 'bg-yellow-100 text-yellow-800' }}">
+                                {{ $invoice->status === 'paid' ? 'bg-blue-lightest text-blue-dark' : 'bg-yellow-100 text-yellow-800' }}">
                                 {{ ucfirst($invoice->status) }}
                             </span>
                         </td>
                         <td class="px-4 py-3 text-center">
                             <a href="{{ route('superadmin.invoices.download', $invoice) }}" 
-                               class="text-[#5483B3] hover:text-indigo-900" 
+                               class="text-blue-medium hover:text-indigo-900" 
                                title="Ver/Descargar PDF"
                                target="_blank">
                                 <i class="fas fa-file-pdf text-lg"></i>
@@ -134,7 +134,7 @@
 
     <div class="bg-white rounded-lg shadow-md p-6">
         <div class="flex items-center">
-            <div class="p-3 rounded-full bg-green-100 text-[#5483B3]">
+            <div class="p-3 rounded-full bg-green-100 text-blue-medium">
                 <i class="fas fa-box text-2xl"></i>
             </div>
             <div class="ml-4">
@@ -171,7 +171,7 @@
         </div>
         <div>
             <p class="text-sm text-gray-500">Estado</p>
-            <span class="px-2 py-1 text-xs font-semibold rounded-full {{ $company->status === 'active' ? 'bg-[#C1E8FF] text-[#052659]' : 'bg-red-100 text-red-800' }}">
+            <span class="px-2 py-1 text-xs font-semibold rounded-full {{ $company->status === 'active' ? 'bg-blue-lightest text-blue-dark' : 'bg-red-100 text-red-800' }}">
                 {{ ucfirst($company->status) }}
             </span>
         </div>
