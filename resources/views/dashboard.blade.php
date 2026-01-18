@@ -173,35 +173,37 @@
             </div>
             @endif
 
-            <!-- Recent Assets -->
-            <div class="rounded-[2rem] p-8 bg-white shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
+            <!-- Recent Assets (Deep Forest Theme) -->
+            <div class="rounded-[2rem] p-8 shadow-[0_8px_30px_rgb(0,0,0,0.1)] border border-[#076653]/30" style="background: linear-gradient(135deg, #06231D 0%, #020C0A 100%);">
                 <div class="flex items-center justify-between mb-6">
-                    <h4 class="text-xl font-bold text-gray-800">Activos Recientes</h4>
-                    <a href="{{ route('assets.index') }}" class="text-sm font-bold text-indigo-600 hover:opacity-80 transition-opacity">Ver Todo</a>
+                    <h4 class="text-xl font-bold text-white">Activos Recientes</h4>
+                    <a href="{{ route('assets.index') }}" class="text-sm font-bold text-[#E3EF26] hover:text-white transition-colors uppercase tracking-wider flex items-center gap-2">
+                        Ver Todo <i class="fas fa-arrow-right"></i>
+                    </a>
                 </div>
                 <div class="space-y-3">
                     @forelse($recentAssets as $asset)
-                    <div class="flex items-center justify-between group p-3 hover:bg-gray-50 rounded-2xl transition-all">
+                    <div class="flex items-center justify-between group p-3 hover:bg-white/5 rounded-2xl transition-all border border-white/5">
                         <div class="flex items-center gap-4">
                             <div class="relative">
                                 @if($asset->image_path)
-                                <img src="{{ asset('storage/' . $asset->image_path) }}" class="w-12 h-12 rounded-xl object-cover shadow-sm" alt="{{ $asset->name }}">
+                                <img src="{{ asset('storage/' . $asset->image_path) }}" class="w-12 h-12 rounded-xl object-cover shadow-sm border border-white/10" alt="{{ $asset->name }}">
                                 @else
-                                <div class="w-12 h-12 rounded-xl flex items-center justify-center bg-gray-50 text-indigo-400">
+                                <div class="w-12 h-12 rounded-xl flex items-center justify-center bg-[#076653]/40 text-[#E3EF26] shadow-inner">
                                     <i class="fas fa-cube text-lg"></i>
                                 </div>
                                 @endif
                             </div>
                             <div>
-                                <h5 class="text-sm font-bold text-gray-800">{{ $asset->name }}</h5>
-                                <p class="text-xs text-gray-500">{{ $asset->category->name ?? 'N/A' }}</p>
+                                <h5 class="text-sm font-bold text-white group-hover:text-[#E3EF26] transition-colors">{{ $asset->name }}</h5>
+                                <p class="text-xs text-gray-400">{{ $asset->category->name ?? 'N/A' }}</p>
                             </div>
                         </div>
-                        <a href="{{ route('assets.show', $asset->id) }}" class="px-3 py-1.5 rounded-lg bg-indigo-50 text-indigo-600 text-xs font-bold hover:bg-indigo-100 transition-colors">Ver</a>
+                        <a href="{{ route('assets.show', $asset->id) }}" class="px-3 py-1.5 rounded-lg bg-[#E3EF26] text-[#06231D] text-xs font-bold hover:bg-white transition-colors shadow-md">Ver</a>
                     </div>
                     @empty
-                    <div class="p-12 text-center text-gray-400">
-                        <i class="fas fa-folder-open text-3xl mb-3 block"></i>
+                    <div class="p-12 text-center text-gray-500 border-2 border-dashed border-gray-700/50 rounded-3xl">
+                        <i class="fas fa-folder-open text-3xl mb-3 block opacity-30"></i>
                         <p class="text-sm font-medium">No se encontraron registros recientes</p>
                     </div>
                     @endforelse
@@ -212,41 +214,41 @@
         <!-- Sidebar Column: Quick Actions and System Health (1/3 width) -->
         <div class="space-y-8 mb-10">
             
-            <!-- Quick Actions -->
-            <div class="rounded-[2rem] p-8 bg-white shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
-                <h4 class="text-xl font-bold mb-6 text-gray-800">Acciones Rápidas</h4>
+            <!-- Quick Actions (Dark Forest Theme) -->
+            <div class="rounded-[2rem] p-8 shadow-[0_8px_30px_rgb(0,0,0,0.1)] border border-[#076653]/30" style="background: linear-gradient(135deg, #0C342C 0%, #031814 100%);">
+                <h4 class="text-xl font-bold mb-6 text-white">Acciones Rápidas</h4>
                 <div class="grid grid-cols-1 gap-4">
                     @if(Auth::user()->hasPermission('create_assets'))
-                    <a href="{{ route('assets.create') }}" class="group flex items-center p-3 rounded-2xl bg-orange-50/50 hover:bg-orange-50 transition-all border border-transparent hover:border-orange-100">
-                        <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-sm bg-gradient-to-br from-orange-400 to-red-500 text-white group-hover:scale-110 transition-transform">
+                    <a href="{{ route('assets.create') }}" class="group flex items-center p-3 rounded-2xl bg-[#076653]/40 hover:bg-[#E3EF26] transition-all border border-[#E3EF26]/20 hover:border-[#E3EF26]">
+                        <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-sm bg-[#E3EF26] text-[#06231D] group-hover:scale-110 transition-transform">
                             <i class="fas fa-plus text-sm"></i>
                         </div>
                         <div class="ml-4">
-                            <span class="block text-sm font-bold text-gray-800 group-hover:text-orange-700 transition-colors">Nuevo Activo</span>
-                            <span class="block text-[10px] font-bold text-gray-400 uppercase tracking-wider">Registro Central</span>
+                            <span class="block text-sm font-bold text-gray-200 group-hover:text-[#06231D] transition-colors">Nuevo Activo</span>
+                            <span class="block text-[10px] font-bold text-gray-500 group-hover:text-[#06231D] uppercase tracking-wider">Registro Central</span>
                         </div>
                     </a>
                     @endif
 
                     @if(Auth::user()->hasPermission('import_assets'))
-                    <a href="{{ route('imports.create') }}" class="group flex items-center p-3 rounded-2xl bg-blue-50/50 hover:bg-blue-50 transition-all border border-transparent hover:border-blue-100">
-                        <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-sm bg-gradient-to-br from-blue-400 to-indigo-600 text-white group-hover:scale-110 transition-transform">
+                    <a href="{{ route('imports.create') }}" class="group flex items-center p-3 rounded-2xl bg-[#076653]/40 hover:bg-[#E3EF26] transition-all border border-[#E3EF26]/20 hover:border-[#E3EF26]">
+                        <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-sm bg-[#E3EF26] text-[#06231D] group-hover:scale-110 transition-transform">
                             <i class="fas fa-file-excel text-sm"></i>
                         </div>
                         <div class="ml-4">
-                            <span class="block text-sm font-bold text-gray-800 group-hover:text-blue-700 transition-colors">Importar Excel</span>
-                            <span class="block text-[10px] font-bold text-gray-400 uppercase tracking-wider">Carga Masiva</span>
+                            <span class="block text-sm font-bold text-gray-200 group-hover:text-[#06231D] transition-colors">Importar Excel</span>
+                            <span class="block text-[10px] font-bold text-gray-500 group-hover:text-[#06231D] uppercase tracking-wider">Carga Masiva</span>
                         </div>
                     </a>
                     @endif
 
-                    <a href="{{ route('reports.index') }}" class="group flex items-center p-3 rounded-2xl bg-gray-50/50 hover:bg-gray-100 transition-all border border-transparent hover:border-gray-200">
-                        <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-sm bg-white text-indigo-500 group-hover:scale-110 transition-transform border border-gray-100">
+                    <a href="{{ route('reports.index') }}" class="group flex items-center p-3 rounded-2xl bg-[#076653]/40 hover:bg-[#E3EF26] transition-all border border-[#E3EF26]/20 hover:border-[#E3EF26]">
+                        <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-sm bg-[#E3EF26] text-[#06231D] group-hover:scale-110 transition-transform">
                             <i class="fas fa-chart-bar text-sm"></i>
                         </div>
                         <div class="ml-4">
-                            <span class="block text-sm font-bold text-gray-800 group-hover:text-indigo-700 transition-colors">Mis Reportes</span>
-                            <span class="block text-[10px] font-bold text-gray-400 uppercase tracking-wider">Estadísticas</span>
+                            <span class="block text-sm font-bold text-gray-200 group-hover:text-[#06231D] transition-colors">Mis Reportes</span>
+                            <span class="block text-[10px] font-bold text-gray-500 group-hover:text-[#06231D] uppercase tracking-wider">Estadísticas</span>
                         </div>
                     </a>
                 </div>
@@ -254,40 +256,40 @@
         </div>
     </div>
 
-    <!-- Assets by Location & Regional Occupation -->
+    <!-- Assets by Location & Regional Occupation (Dark Forest Theme) -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
         <!-- Assets by Location -->
-        <div class="rounded-[2rem] p-8 bg-white shadow-[0_8px_30px_rgb(0,0,0,0.04)] h-full">
+        <div class="rounded-[2rem] p-8 shadow-[0_8px_30px_rgb(0,0,0,0.1)] h-full border border-[#076653]/30" style="background: linear-gradient(135deg, #020C0A 0%, #06231D 100%);">
             <div class="flex items-center justify-between mb-8">
-                <h4 class="text-xl font-bold flex items-center gap-3 text-gray-800">
+                <h4 class="text-xl font-bold flex items-center gap-3 text-white">
                     Activos por Sede
                 </h4>
-                <span class="px-3 py-1.5 rounded-full text-xs font-bold bg-indigo-50 text-indigo-600 border border-indigo-100 flex items-center gap-2">
+                <span class="px-3 py-1.5 rounded-full text-xs font-bold bg-[#E3EF26] text-[#06231D] flex items-center gap-2 shadow-sm">
                     <i class="fas fa-map-marker-alt"></i> {{ $stats['total_locations'] }} Sedes
                 </span>
             </div>
             
             <div class="space-y-4">
                 @forelse($assets_per_location as $location)
-                <div class="p-4 rounded-2xl transition-all hover:bg-gray-50 border border-transparent hover:border-gray-100 group">
+                <div class="p-4 rounded-2xl transition-all hover:bg-white/5 border border-white/5 group">
                     <div class="flex items-center justify-between">
                         <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 rounded-2xl flex items-center justify-center bg-indigo-50 text-indigo-500 group-hover:scale-110 transition-transform">
+                            <div class="w-12 h-12 rounded-2xl flex items-center justify-center bg-[#076653]/40 text-[#E3EF26] group-hover:scale-110 transition-transform shadow-inner">
                                 <i class="fas fa-building"></i>
                             </div>
                             <div>
-                                <h5 class="font-bold text-gray-800 text-sm">{{ $location->name }}</h5>
-                                <p class="text-xs text-gray-500 font-medium mt-0.5">{{ $location->address ?? 'Sin dirección' }}</p>
+                                <h5 class="font-bold text-white text-sm">{{ $location->name }}</h5>
+                                <p class="text-xs text-gray-400 font-medium mt-0.5">{{ $location->address ?? 'Sin dirección' }}</p>
                             </div>
                         </div>
                         <div class="text-right">
-                            <span class="block text-xl font-black text-indigo-600">{{ $location->assets_count }}</span>
-                            <span class="text-[10px] font-bold uppercase tracking-wider text-gray-400">ACTIVOS</span>
+                            <span class="block text-xl font-black text-[#E3EF26]">{{ $location->assets_count }}</span>
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-gray-500">ACTIVOS</span>
                         </div>
                     </div>
                 </div>
                 @empty
-                <div class="p-12 text-center text-gray-400 border-2 border-dashed border-gray-100 rounded-3xl">
+                <div class="p-12 text-center text-gray-500 border-2 border-dashed border-gray-700/50 rounded-3xl">
                     <i class="fas fa-map-marker-alt text-4xl mb-4 opacity-20"></i>
                     <p class="text-sm font-medium">No hay sedes registradas</p>
                 </div>
@@ -296,33 +298,33 @@
         </div>
 
         <!-- Regional Occupation (Categories) -->
-        <div class="rounded-[2rem] p-8 bg-white shadow-[0_8px_30px_rgb(0,0,0,0.04)] h-full">
+        <div class="rounded-[2rem] p-8 shadow-[0_8px_30px_rgb(0,0,0,0.1)] h-full border border-[#076653]/30" style="background: linear-gradient(135deg, #031814 0%, #0C342C 100%);">
             <div class="flex items-center justify-between mb-8">
-                <h4 class="text-xl font-bold text-gray-800">Ocupación Regional</h4>
+                <h4 class="text-xl font-bold text-white">Ocupación Regional</h4>
                 <span class="text-xs font-bold text-gray-400 uppercase tracking-widest">{{ $stats['total_locations'] }} Sedes</span>
             </div>
             
             <div class="space-y-6">
-                <div class="flex items-center justify-between p-4 rounded-2xl bg-indigo-50/30 hover:bg-indigo-50 transition-colors cursor-default group">
+                <div class="flex items-center justify-between p-4 rounded-2xl bg-[#076653]/20 hover:bg-[#076653]/30 transition-colors cursor-default group border border-white/5">
                     <div class="flex items-center gap-4">
-                        <span class="w-3 h-3 rounded-full bg-indigo-500 ring-4 ring-indigo-100"></span>
+                        <span class="w-3 h-3 rounded-full bg-[#E3EF26] ring-4 ring-[#E3EF26]/20"></span>
                         <div class="flex flex-col">
-                            <span class="text-sm font-bold text-gray-700">Categorías</span>
-                            <span class="text-xs text-gray-400">Total registradas</span>
+                            <span class="text-sm font-bold text-gray-200">Categorías</span>
+                            <span class="text-xs text-gray-500">Total registradas</span>
                         </div>
                     </div>
-                    <span class="text-2xl font-black text-indigo-600 group-hover:scale-110 transition-transform">{{ $stats['total_categories'] }}</span>
+                    <span class="text-2xl font-black text-[#E3EF26] group-hover:scale-110 transition-transform">{{ $stats['total_categories'] }}</span>
                 </div>
                 
-                <div class="flex items-center justify-between p-4 rounded-2xl bg-orange-50/30 hover:bg-orange-50 transition-colors cursor-default group">
+                <div class="flex items-center justify-between p-4 rounded-2xl bg-[#65A30D]/20 hover:bg-[#65A30D]/30 transition-colors cursor-default group border border-white/5">
                     <div class="flex items-center gap-4">
-                        <span class="w-3 h-3 rounded-full bg-orange-500 ring-4 ring-orange-100"></span>
+                        <span class="w-3 h-3 rounded-full bg-[#65A30D] ring-4 ring-[#65A30D]/20"></span>
                         <div class="flex flex-col">
-                            <span class="text-sm font-bold text-gray-700">Mantenimientos</span>
-                            <span class="text-xs text-gray-400">En proceso</span>
+                            <span class="text-sm font-bold text-gray-200">Mantenimientos</span>
+                            <span class="text-xs text-gray-500">En proceso</span>
                         </div>
                     </div>
-                    <span class="text-2xl font-black text-orange-500 group-hover:scale-110 transition-transform">{{ $stats['total_maintenances'] }}</span>
+                    <span class="text-2xl font-black text-[#65A30D] group-hover:scale-110 transition-transform">{{ $stats['total_maintenances'] }}</span>
                 </div>
             </div>
         </div>
