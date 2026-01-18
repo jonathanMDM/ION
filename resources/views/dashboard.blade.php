@@ -215,37 +215,37 @@
             <!-- Quick Actions -->
             <div class="rounded-[2rem] p-8 bg-white shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
                 <h4 class="text-xl font-bold mb-6 text-gray-800">Acciones Rápidas</h4>
-                <div class="grid grid-cols-1 gap-5">
+                <div class="grid grid-cols-1 gap-4">
                     @if(Auth::user()->hasPermission('create_assets'))
-                    <a href="{{ route('assets.create') }}" class="group flex items-center p-4 rounded-3xl bg-orange-50 hover:bg-orange-100 transition-all border border-orange-100/50">
-                        <div class="w-14 h-14 rounded-2xl flex items-center justify-center shadow-md bg-gradient-to-br from-orange-400 to-red-500 text-white group-hover:scale-110 transition-transform">
-                            <i class="fas fa-plus text-xl"></i>
+                    <a href="{{ route('assets.create') }}" class="group flex items-center p-3 rounded-2xl bg-orange-50/50 hover:bg-orange-50 transition-all border border-transparent hover:border-orange-100">
+                        <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-sm bg-gradient-to-br from-orange-400 to-red-500 text-white group-hover:scale-110 transition-transform">
+                            <i class="fas fa-plus text-sm"></i>
                         </div>
-                        <div class="ml-5">
-                            <span class="block text-base font-bold text-gray-800 group-hover:text-orange-600 transition-colors">Nuevo Activo</span>
+                        <div class="ml-4">
+                            <span class="block text-sm font-bold text-gray-800 group-hover:text-orange-700 transition-colors">Nuevo Activo</span>
                             <span class="block text-[10px] font-bold text-gray-400 uppercase tracking-wider">Registro Central</span>
                         </div>
                     </a>
                     @endif
 
                     @if(Auth::user()->hasPermission('import_assets'))
-                    <a href="{{ route('imports.create') }}" class="group flex items-center p-4 rounded-3xl bg-blue-50 hover:bg-blue-100 transition-all border border-blue-100/50">
-                        <div class="w-14 h-14 rounded-2xl flex items-center justify-center shadow-md bg-gradient-to-br from-blue-400 to-indigo-600 text-white group-hover:scale-110 transition-transform">
-                            <i class="fas fa-file-excel text-xl"></i>
+                    <a href="{{ route('imports.create') }}" class="group flex items-center p-3 rounded-2xl bg-blue-50/50 hover:bg-blue-50 transition-all border border-transparent hover:border-blue-100">
+                        <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-sm bg-gradient-to-br from-blue-400 to-indigo-600 text-white group-hover:scale-110 transition-transform">
+                            <i class="fas fa-file-excel text-sm"></i>
                         </div>
-                        <div class="ml-5">
-                            <span class="block text-base font-bold text-gray-800 group-hover:text-blue-600 transition-colors">Importar Excel</span>
+                        <div class="ml-4">
+                            <span class="block text-sm font-bold text-gray-800 group-hover:text-blue-700 transition-colors">Importar Excel</span>
                             <span class="block text-[10px] font-bold text-gray-400 uppercase tracking-wider">Carga Masiva</span>
                         </div>
                     </a>
                     @endif
 
-                    <a href="{{ route('reports.index') }}" class="group flex items-center p-4 rounded-3xl bg-gray-50 hover:bg-gray-100 transition-all border border-gray-100">
-                        <div class="w-14 h-14 rounded-2xl flex items-center justify-center shadow-md bg-white text-indigo-500 group-hover:scale-110 transition-transform">
-                            <i class="fas fa-chart-bar text-xl"></i>
+                    <a href="{{ route('reports.index') }}" class="group flex items-center p-3 rounded-2xl bg-gray-50/50 hover:bg-gray-100 transition-all border border-transparent hover:border-gray-200">
+                        <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-sm bg-white text-indigo-500 group-hover:scale-110 transition-transform border border-gray-100">
+                            <i class="fas fa-chart-bar text-sm"></i>
                         </div>
-                        <div class="ml-5">
-                            <span class="block text-base font-bold text-gray-800 group-hover:text-indigo-600 transition-colors">Mis Reportes</span>
+                        <div class="ml-4">
+                            <span class="block text-sm font-bold text-gray-800 group-hover:text-indigo-700 transition-colors">Mis Reportes</span>
                             <span class="block text-[10px] font-bold text-gray-400 uppercase tracking-wider">Estadísticas</span>
                         </div>
                     </a>
