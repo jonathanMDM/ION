@@ -72,7 +72,7 @@
                                 $percentage = $center->budget > 0 ? ($used / $center->budget) * 100 : 0;
                             @endphp
                             <div class="w-full bg-gray-200 rounded-full h-2 mt-1">
-                                <div class="h-2 rounded-full {{ $percentage > 90 ? 'bg-red-500' : ($percentage > 70 ? 'bg-yellow-500' : 'bg-green-500') }}" 
+                                <div class="h-2 rounded-full {{ $percentage > 90 ? 'bg-red-500' : ($percentage > 70 ? 'bg-yellow-500' : 'bg-[#5483B3]') }}" 
                                      style="width: {{ min($percentage, 100) }}%"></div>
                             </div>
                             <div class="text-xs text-gray-500 mt-1">{{ number_format($percentage, 1) }}% usado</div>
@@ -87,7 +87,7 @@
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
                         @if($center->is_active)
-                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-[#C1E8FF] text-[#052659]">
                                 Activo
                             </span>
                         @else

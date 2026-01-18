@@ -150,7 +150,7 @@
                             <span class="px-2 py-1 text-xs font-semibold rounded-full 
                                 {{ $cost->cost_type === 'maintenance' ? 'bg-blue-100 text-blue-800' : '' }}
                                 {{ $cost->cost_type === 'repair' ? 'bg-red-100 text-red-800' : '' }}
-                                {{ $cost->cost_type === 'insurance' ? 'bg-green-100 text-green-800' : '' }}
+                                {{ $cost->cost_type === 'insurance' ? 'bg-[#C1E8FF] text-[#052659]' : '' }}
                                 {{ $cost->cost_type === 'spare_parts' ? 'bg-yellow-100 text-yellow-800' : '' }}
                                 {{ $cost->cost_type === 'upgrade' ? 'bg-purple-100 text-purple-800' : '' }}
                                 {{ $cost->cost_type === 'other' ? 'bg-gray-100 text-gray-800' : '' }}">

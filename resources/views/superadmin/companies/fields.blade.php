@@ -13,7 +13,7 @@
     <h2 class="text-2xl font-bold text-gray-800 mb-6">Gestión de Campos - {{ $company->name }}</h2>
 
     @if(session('success'))
-        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
+        <div class="bg-green-100 border border-[#5483B3]/400 text-[#052659] px-4 py-3 rounded mb-4">
             {{ session('success') }}
         </div>
     @endif
@@ -199,7 +199,7 @@
                                                 @endif
                                                 <span class="text-xs mx-2">→</span>
                                                 @if($rule->is_visible)
-                                                    <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">Visible</span>
+                                                    <span class="text-xs bg-[#C1E8FF] text-[#052659] px-2 py-1 rounded">Visible</span>
                                                 @else
                                                     <span class="text-xs bg-red-100 text-red-800 px-2 py-1 rounded">Oculto</span>
                                                 @endif

@@ -79,7 +79,7 @@
     </div>
     <div class="bg-white rounded-lg shadow p-4">
         <p class="text-sm text-gray-600">Creaciones</p>
-        <p class="text-2xl font-bold text-green-600">{{ $logs->where('action', 'created')->count() }}</p>
+        <p class="text-2xl font-bold text-[#5483B3]">{{ $logs->where('action', 'created')->count() }}</p>
     </div>
     <div class="bg-white rounded-lg shadow p-4">
         <p class="text-sm text-gray-600">Actualizaciones</p>
@@ -113,7 +113,7 @@
                 </td>
                 <td class="py-3 px-6 text-left">
                     <span class="px-2 py-1 rounded text-xs
-                        {{ $log->action == 'created' ? 'bg-green-100 text-green-800' : '' }}
+                        {{ $log->action == 'created' ? 'bg-[#C1E8FF] text-[#052659]' : '' }}
                         {{ $log->action == 'updated' ? 'bg-gray-200 text-gray-900' : '' }}
                         {{ $log->action == 'deleted' ? 'bg-red-100 text-red-800' : '' }}">
                         {{ ucfirst($log->action) }}

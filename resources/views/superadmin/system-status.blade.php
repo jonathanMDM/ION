@@ -9,7 +9,7 @@
 
 <!-- System Health Overview -->
 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-    <div class="bg-white rounded-lg shadow p-6 border-l-4 border-green-500">
+    <div class="bg-white rounded-lg shadow p-6 border-l-4 border-[#5483B3]/500">
         <div class="flex items-center">
             <div class="p-3 rounded-full bg-green-100 text-green-500 mr-4">
                 <i class="fas fa-server text-2xl"></i>
@@ -94,7 +94,7 @@
                                 Expirado
                             </span>
                         @elseif($company->status === 'active')
-                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-[#C1E8FF] text-[#052659]">
                                 Activo
                             </span>
                         @else

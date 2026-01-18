@@ -32,7 +32,7 @@
                         <div class="w-24 h-24 bg-white dark:bg-gray-900 rounded-2xl shadow-xl flex items-center justify-center text-3xl font-black text-[#5483B3] border-4 border-white dark:border-gray-800 mx-auto">
                             {{ substr($employee->first_name, 0, 1) }}{{ substr($employee->last_name, 0, 1) }}
                         </div>
-                        <div class="absolute bottom-0 right-0 w-6 h-6 rounded-full border-2 border-white dark:border-gray-800 {{ $employee->status == 'active' ? 'bg-green-500' : 'bg-red-500' }}"></div>
+                        <div class="absolute bottom-0 right-0 w-6 h-6 rounded-full border-2 border-white dark:border-gray-800 {{ $employee->status == 'active' ? 'bg-[#5483B3]' : 'bg-red-500' }}"></div>
                     </div>
                     
                     <h2 class="mt-4 text-xl font-black text-gray-900 dark:text-white">{{ $employee->full_name }}</h2>
@@ -42,7 +42,7 @@
                         <span class="px-3 py-1 bg-indigo-50 dark:bg-indigo-900/30 text-[#5483B3] dark:text-indigo-400 rounded-full text-[10px] font-black uppercase tracking-wider">
                             {{ $employee->department ?? 'General' }}
                         </span>
-                        <span class="px-3 py-1 {{ $employee->status == 'active' ? 'bg-green-50 dark:bg-green-900/30 text-green-600 dark:text-green-400' : 'bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400' }} rounded-full text-[10px] font-black uppercase tracking-wider">
+                        <span class="px-3 py-1 {{ $employee->status == 'active' ? 'bg-green-50 dark:bg-green-900/30 text-[#5483B3] dark:text-green-400' : 'bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400' }} rounded-full text-[10px] font-black uppercase tracking-wider">
                             {{ $employee->status == 'active' ? 'Activo' : 'Inactivo' }}
                         </span>
                     </div>
@@ -129,7 +129,7 @@
                                     </td>
                                     <td class="bg-gray-50/50 dark:bg-gray-900/40 py-4 px-4 border-t border-b border-gray-100 dark:border-gray-700">
                                         @if($assignment->expected_return_date)
-                                            <span class="px-3 py-1 rounded-full text-[10px] font-black uppercase {{ $assignment->expected_return_date->isPast() ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700' }}">
+                                            <span class="px-3 py-1 rounded-full text-[10px] font-black uppercase {{ $assignment->expected_return_date->isPast() ? 'bg-red-100 text-red-700' : 'bg-green-100 text-[#052659]' }}">
                                                 Exp: {{ $assignment->expected_return_date->format('d/m/Y') }}
                                             </span>
                                         @else

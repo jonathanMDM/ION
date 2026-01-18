@@ -42,7 +42,7 @@
             <div>
                 <label class="font-bold text-gray-700">Ubicación Destino:</label>
                 <p class="mt-1">
-                    <span class="px-3 py-2 bg-green-100 text-green-800 rounded inline-block">
+                    <span class="px-3 py-2 bg-[#C1E8FF] text-[#052659] rounded inline-block">
                         {{ $movement->toLocation->name }}
                     </span>
                 </p>

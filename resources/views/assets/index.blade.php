@@ -134,7 +134,7 @@
                 </td>
                 <td class="py-3 px-4 text-center w-32">
                     <span class="inline-block px-3 py-1 text-xs rounded-full whitespace-nowrap
-                        {{ $asset->status == 'active' ? 'bg-green-100 text-green-800' : '' }}
+                        {{ $asset->status == 'active' ? 'bg-[#C1E8FF] text-[#052659]' : '' }}
                         {{ $asset->status == 'maintenance' ? 'bg-yellow-100 text-yellow-800' : '' }}
                         {{ $asset->status == 'decommissioned' ? 'bg-red-100 text-red-800' : '' }}">
                         {{ $asset->status == 'active' ? 'Activo' : ($asset->status == 'maintenance' ? 'Mantenimiento' : 'Dado de Baja') }}

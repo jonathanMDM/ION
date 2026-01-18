@@ -150,7 +150,7 @@
                                 </label>
                                 <select name="status" id="status" 
                                     class="w-full bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-gray-700 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all font-bold" required>
-                                    <option value="active" {{ old('status', $asset->status) == 'active' ? 'selected' : '' }} class="text-green-600">Activo</option>
+                                    <option value="active" {{ old('status', $asset->status) == 'active' ? 'selected' : '' }} class="text-[#5483B3]">Activo</option>
                                     <option value="maintenance" {{ old('status', $asset->status) == 'maintenance' ? 'selected' : '' }} class="text-yellow-600">En Taller / Mantenimiento</option>
                                     <option value="decommissioned" {{ old('status', $asset->status) == 'decommissioned' ? 'selected' : '' }} class="text-red-600">Dado de Baja</option>
                                 </select>

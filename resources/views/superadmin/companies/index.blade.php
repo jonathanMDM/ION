@@ -46,7 +46,7 @@
                     <div class="text-sm" style="color: #B0C4C9;"><i class="fas fa-box mr-1" style="color: var(--color-blue-lagoon);"></i> {{ $company->assets_count }} Activos</div>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
-                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ $company->status === 'active' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
+                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ $company->status === 'active' ? 'bg-[#C1E8FF] text-[#052659]' : 'bg-red-100 text-red-800' }}">
                         {{ ucfirst($company->status) }}
                     </span>
                 </td>
@@ -73,11 +73,11 @@
                     @endif
                     <form action="{{ route('superadmin.backups.create', $company) }}" method="POST" class="inline-block mr-3">
                         @csrf
-                        <button type="submit" class="text-green-600 hover:text-green-900" title="Crear Backup">
+                        <button type="submit" class="text-[#5483B3] hover:text-green-900" title="Crear Backup">
                             <i class="fas fa-database"></i>
                         </button>
                     </form>
-                    <a href="{{ route('superadmin.companies.show', $company) }}" class="text-green-600 hover:text-green-900 mr-3" title="Ver Detalles y Facturación">
+                    <a href="{{ route('superadmin.companies.show', $company) }}" class="text-[#5483B3] hover:text-green-900 mr-3" title="Ver Detalles y Facturación">
                         <i class="fas fa-eye"></i>
                     </a>
                     <a href="{{ route('superadmin.companies.edit', $company) }}" class="text-[#5483B3] hover:text-indigo-900 mr-3" title="Editar">

@@ -105,7 +105,7 @@
                         <i class="fas fa-long-arrow-alt-right"></i>
                     </td>
                     <td class="py-4 px-6 text-center">
-                        <span class="px-2 py-1 bg-green-50 text-green-700 rounded text-[10px] uppercase font-bold border border-green-100">
+                        <span class="px-2 py-1 bg-[#C1E8FF]/50 text-[#052659] rounded text-[10px] uppercase font-bold border border-[#5483B3]/100">
                             {{ $movement->toLocation->name }}
                         </span>
                     </td>

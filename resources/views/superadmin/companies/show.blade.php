@@ -58,7 +58,7 @@
                 @if($company->subscription_expires_at && $company->subscription_expires_at->isPast())
                     <span class="text-red-600 font-bold"><i class="fas fa-exclamation-circle mr-1"></i> EXPIRADA</span>
                 @else
-                    <span class="text-green-600 font-bold"><i class="fas fa-check-circle mr-1"></i> AL DÍA</span>
+                    <span class="text-[#5483B3] font-bold"><i class="fas fa-check-circle mr-1"></i> AL DÍA</span>
                 @endif
             </div>
         </div>
@@ -97,7 +97,7 @@
                         <td class="px-4 py-3 text-sm font-semibold text-gray-900">${{ number_format($invoice->amount, 2) }} {{ $invoice->currency }}</td>
                         <td class="px-4 py-3">
                             <span class="px-2 py-1 text-xs font-semibold rounded-full 
-                                {{ $invoice->status === 'paid' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800' }}">
+                                {{ $invoice->status === 'paid' ? 'bg-[#C1E8FF] text-[#052659]' : 'bg-yellow-100 text-yellow-800' }}">
                                 {{ ucfirst($invoice->status) }}
                             </span>
                         </td>
@@ -134,7 +134,7 @@
 
     <div class="bg-white rounded-lg shadow-md p-6">
         <div class="flex items-center">
-            <div class="p-3 rounded-full bg-green-100 text-green-600">
+            <div class="p-3 rounded-full bg-green-100 text-[#5483B3]">
                 <i class="fas fa-box text-2xl"></i>
             </div>
             <div class="ml-4">
@@ -171,7 +171,7 @@
         </div>
         <div>
             <p class="text-sm text-gray-500">Estado</p>
-            <span class="px-2 py-1 text-xs font-semibold rounded-full {{ $company->status === 'active' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
+            <span class="px-2 py-1 text-xs font-semibold rounded-full {{ $company->status === 'active' ? 'bg-[#C1E8FF] text-[#052659]' : 'bg-red-100 text-red-800' }}">
                 {{ ucfirst($company->status) }}
             </span>
         </div>

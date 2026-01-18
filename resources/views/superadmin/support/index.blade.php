@@ -105,7 +105,7 @@
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <span class="px-2 py-1 text-xs rounded-full 
                                     {{ $request->category == 'technical' ? 'bg-blue-100 text-blue-800' : '' }}
-                                    {{ $request->category == 'billing' ? 'bg-green-100 text-green-800' : '' }}
+                                    {{ $request->category == 'billing' ? 'bg-[#C1E8FF] text-[#052659]' : '' }}
                                     {{ $request->category == 'general' ? 'bg-gray-100 text-gray-800' : '' }}">
                                     {{ ucfirst($request->category) }}
                                 </span>
@@ -114,7 +114,7 @@
                                 <span class="px-2 py-1 text-xs rounded-full 
                                     {{ $request->status == 'pending' ? 'bg-yellow-100 text-yellow-800' : '' }}
                                     {{ $request->status == 'in_progress' ? 'bg-blue-100 text-blue-800' : '' }}
-                                    {{ $request->status == 'resolved' ? 'bg-green-100 text-green-800' : '' }}
+                                    {{ $request->status == 'resolved' ? 'bg-[#C1E8FF] text-[#052659]' : '' }}
                                     {{ $request->status == 'closed' ? 'bg-gray-100 text-gray-800' : '' }}">
                                     {{ $request->status_label }}
                                 </span>

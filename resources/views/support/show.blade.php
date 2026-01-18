@@ -17,14 +17,14 @@
                         @if($ticket->priority == 'urgent') bg-red-100 text-red-800
                         @elseif($ticket->priority == 'high') bg-orange-100 text-orange-800
                         @elseif($ticket->priority == 'medium') bg-yellow-100 text-yellow-800
-                        @else bg-green-100 text-green-800
+                        @else bg-[#C1E8FF] text-[#052659]
                         @endif">
                         {{ ucfirst($ticket->priority) }}
                     </span>
                     <span class="px-3 py-1 text-xs font-semibold rounded-full 
                         @if($ticket->status == 'open') bg-blue-100 text-blue-800
                         @elseif($ticket->status == 'in_progress') bg-yellow-100 text-yellow-800
-                        @elseif($ticket->status == 'resolved') bg-green-100 text-green-800
+                        @elseif($ticket->status == 'resolved') bg-[#C1E8FF] text-[#052659]
                         @else bg-gray-100 text-gray-800
                         @endif">
                         @if($ticket->status == 'open') Abierto
@@ -52,13 +52,13 @@
 
     @if($ticket->solution)
     <!-- Solution -->
-    <div class="bg-green-50 border-l-4 border-green-500 rounded-lg shadow-md p-6 mb-6">
+    <div class="bg-green-50 border-l-4 border-[#5483B3]/500 rounded-lg shadow-md p-6 mb-6">
         <h3 class="text-lg font-bold text-green-800 mb-4">
             <i class="fas fa-check-circle mr-2"></i>Solución
         </h3>
         <p class="text-gray-700 whitespace-pre-wrap">{{ $ticket->solution }}</p>
         @if($ticket->resolved_at)
-        <p class="text-sm text-green-600 mt-3">
+        <p class="text-sm text-[#5483B3] mt-3">
             <i class="fas fa-clock mr-1"></i>Resuelto el {{ $ticket->resolved_at->format('d/m/Y H:i') }}
         </p>
         @endif

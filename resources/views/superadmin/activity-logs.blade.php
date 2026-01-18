@@ -56,7 +56,7 @@
             <a href="{{ route('superadmin.activity-logs') }}" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded shadow">
                 <i class="fas fa-times mr-2"></i>Limpiar
             </a>
-            <a href="{{ route('superadmin.activity-logs.export', request()->all()) }}" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded shadow ml-auto">
+            <a href="{{ route('superadmin.activity-logs.export', request()->all()) }}" class="bg-[#5483B3] hover:bg-[#052659] text-white font-bold py-2 px-4 rounded shadow ml-auto">
                 <i class="fas fa-file-export mr-2"></i>Exportar CSV
             </a>
         </div>
@@ -119,7 +119,7 @@
                                     @endif
                                     @if(isset($log->changes['after']) && count($log->changes['after']) > 0)
                                         <div>
-                                            <span class="font-semibold text-green-600">Después:</span>
+                                            <span class="font-semibold text-[#5483B3]">Después:</span>
                                             @foreach($log->changes['after'] as $key => $value)
                                                 <div>{{ $key }}: {{ is_array($value) ? json_encode($value) : $value }}</div>
                                             @endforeach

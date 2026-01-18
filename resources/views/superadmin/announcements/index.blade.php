@@ -12,7 +12,7 @@
     </div>
 
     @if(session('success'))
-    <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-6" role="alert">
+    <div class="bg-green-100 border-l-4 border-[#5483B3]/500 text-[#052659] p-4 mb-6" role="alert">
         <p>{{ session('success') }}</p>
     </div>
     @endif
@@ -42,7 +42,7 @@
                             {{ $announcement->type == 'info' ? 'bg-blue-100 text-blue-800' : '' }}
                             {{ $announcement->type == 'warning' ? 'bg-yellow-100 text-yellow-800' : '' }}
                             {{ $announcement->type == 'error' ? 'bg-red-100 text-red-800' : '' }}
-                            {{ $announcement->type == 'success' ? 'bg-green-100 text-green-800' : '' }}">
+                            {{ $announcement->type == 'success' ? 'bg-[#C1E8FF] text-[#052659]' : '' }}">
                             {{ ucfirst($announcement->type) }}
                         </span>
                     </td>
@@ -70,7 +70,7 @@
                         <form action="{{ route('superadmin.announcements.toggle', $announcement) }}" method="POST">
                             @csrf
                             @method('PATCH')
-                            <button type="submit" class="text-sm font-medium {{ $announcement->is_active ? 'text-green-600 hover:text-green-900' : 'text-red-600 hover:text-red-900' }}">
+                            <button type="submit" class="text-sm font-medium {{ $announcement->is_active ? 'text-[#5483B3] hover:text-green-900' : 'text-red-600 hover:text-red-900' }}">
                                 {{ $announcement->is_active ? 'Activo' : 'Inactivo' }}
                             </button>
                         </form>

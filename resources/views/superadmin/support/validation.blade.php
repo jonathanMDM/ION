@@ -38,7 +38,7 @@
 
     <!-- Results Section -->
     @if(isset($company))
-    <div class="bg-green-50 border-l-4 border-green-500 rounded-lg shadow-md p-6 animate-fade-in-up">
+    <div class="bg-green-50 border-l-4 border-[#5483B3]/500 rounded-lg shadow-md p-6 animate-fade-in-up">
         <div class="flex items-center justify-between mb-6">
             <h3 class="text-2xl font-bold text-green-800">
                 <i class="fas fa-check-circle mr-2"></i>Cliente Validado
@@ -118,13 +118,13 @@
                     @php
                         $daysLeft = (int) now()->diffInDays($company->subscription_expires_at, false);
                     @endphp
-                    <p class="text-xs mt-2 {{ $daysLeft < 30 ? 'text-red-600' : 'text-green-600' }}">
+                    <p class="text-xs mt-2 {{ $daysLeft < 30 ? 'text-red-600' : 'text-[#5483B3]' }}">
                         {{ $daysLeft > 0 ? $daysLeft . ' días restantes' : 'Expirada' }}
                     </p>
                 @endif
             </div>
 
-            <div class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-green-500">
+            <div class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-[#5483B3]/500">
                 <div class="flex items-center justify-between">
                     <div>
                         <p class="text-sm text-gray-500">Usuarios</p>
@@ -157,7 +157,7 @@
                 <i class="fas fa-eye mr-2"></i>Ver Detalles Completos
             </a>
             @if($company->status == 'active')
-            <a href="{{ route('superadmin.tickets.create', ['company_id' => $company->id]) }}" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded transition duration-200">
+            <a href="{{ route('superadmin.tickets.create', ['company_id' => $company->id]) }}" class="bg-[#5483B3] hover:bg-[#052659] text-white font-bold py-2 px-4 rounded transition duration-200">
                 <i class="fas fa-ticket-alt mr-2"></i>Crear Ticket de Soporte
             </a>
             @else

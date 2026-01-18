@@ -175,7 +175,7 @@
                     
                     if (req.re.test(val)) {
                         iconEl.className = 'fas fa-check-circle text-green-500 mr-2';
-                        liEl.className = 'flex items-center text-green-700 font-medium';
+                        liEl.className = 'flex items-center text-[#052659] font-medium';
                     } else {
                         iconEl.className = 'fas fa-circle text-[10px] text-gray-300 mr-2';
                         liEl.className = 'flex items-center text-gray-500';
@@ -190,11 +190,11 @@
                     } else {
                         matchError.classList.add('hidden');
                         confirmInput.classList.remove('border-red-500');
-                        confirmInput.classList.add('border-green-500');
+                        confirmInput.classList.add('border-[#5483B3]/500');
                     }
                 } else {
                     matchError.classList.add('hidden');
-                    confirmInput.classList.remove('border-red-500', 'border-green-500');
+                    confirmInput.classList.remove('border-red-500', 'border-[#5483B3]/500');
                 }
             }
 

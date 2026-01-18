@@ -73,7 +73,7 @@
                 <td class="py-3 px-6 text-left">{{ $employee->department ?? '-' }}</td>
                 <td class="py-3 px-6 text-left">{{ $employee->position ?? '-' }}</td>
                 <td class="py-3 px-6 text-center">
-                    <span class="px-2 py-1 rounded text-xs {{ $employee->status == 'active' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
+                    <span class="px-2 py-1 rounded text-xs {{ $employee->status == 'active' ? 'bg-[#C1E8FF] text-[#052659]' : 'bg-red-100 text-red-800' }}">
                         {{ $employee->status == 'active' ? 'Activo' : 'Inactivo' }}
                     </span>
                 </td>

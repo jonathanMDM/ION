@@ -37,7 +37,7 @@
             <div class="flex items-center justify-between">
                 <div>
                     <p class="text-sm text-gray-600">Resueltos</p>
-                    <p class="text-2xl font-bold text-green-600">{{ $stats['resolved'] }}</p>
+                    <p class="text-2xl font-bold text-[#5483B3]">{{ $stats['resolved'] }}</p>
                 </div>
                 <i class="fas fa-check-circle text-3xl text-green-400"></i>
             </div>
@@ -120,7 +120,7 @@
                             @if($ticket->priority == 'urgent') bg-red-100 text-red-800
                             @elseif($ticket->priority == 'high') bg-orange-100 text-orange-800
                             @elseif($ticket->priority == 'medium') bg-yellow-100 text-yellow-800
-                            @else bg-green-100 text-green-800
+                            @else bg-[#C1E8FF] text-[#052659]
                             @endif">
                             {{ ucfirst($ticket->priority) }}
                         </span>
@@ -129,7 +129,7 @@
                         <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
                             @if($ticket->status == 'open') bg-blue-100 text-blue-800
                             @elseif($ticket->status == 'in_progress') bg-yellow-100 text-yellow-800
-                            @elseif($ticket->status == 'resolved') bg-green-100 text-green-800
+                            @elseif($ticket->status == 'resolved') bg-[#C1E8FF] text-[#052659]
                             @else bg-gray-100 text-gray-800
                             @endif">
                             {{ $ticket->status == 'in_progress' ? 'En Proceso' : ucfirst($ticket->status) }}

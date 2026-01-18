@@ -147,9 +147,9 @@
         <p class="text-2xl font-bold text-gray-800 dark:text-white">{{ number_format($stats['total_assets']) }}</p>
     </div>
     
-    <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-4 border-l-4 border-green-500">
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-4 border-l-4 border-[#5483B3]/500">
         <p class="text-xs font-bold text-gray-500 uppercase tracking-wider">Valor Compra</p>
-        <p class="text-2xl font-bold text-green-600">${{ number_format($stats['total_purchase_price'], 2) }}</p>
+        <p class="text-2xl font-bold text-[#5483B3]">${{ number_format($stats['total_purchase_price'], 2) }}</p>
     </div>
 
     @if(auth()->user()->company->hasModule('depreciation'))
@@ -267,7 +267,7 @@
                     </td>
                     <td class="py-4 px-6 text-center">
                         <span class="px-3 py-1 text-[10px] font-bold uppercase rounded-full
-                            {{ $asset->status == 'active' ? 'bg-green-100 text-green-700 border border-green-200' : '' }}
+                            {{ $asset->status == 'active' ? 'bg-green-100 text-[#052659] border border-[#5483B3]/200' : '' }}
                             {{ $asset->status == 'maintenance' ? 'bg-yellow-100 text-yellow-700 border border-yellow-200' : '' }}
                             {{ $asset->status == 'decommissioned' ? 'bg-red-100 text-red-700 border border-red-200' : '' }}">
                             {{ $asset->status == 'active' ? 'Activo' : ($asset->status == 'maintenance' ? 'Mantenimiento' : 'Baja') }}

@@ -44,11 +44,11 @@
                     @endif
 
                     @if($user->two_factor_enabled)
-                        <div class="bg-green-50 border border-green-200 rounded-lg p-4 mb-6 flex items-start">
+                        <div class="bg-green-50 border border-[#5483B3]/200 rounded-lg p-4 mb-6 flex items-start">
                             <i class="fas fa-check-circle text-green-500 text-2xl mr-3 mt-1"></i>
                             <div>
                                 <p class="font-bold text-green-800">2FA Activado</p>
-                                <p class="text-sm text-green-700">Tu cuenta está protegida.</p>
+                                <p class="text-sm text-[#052659]">Tu cuenta está protegida.</p>
                             </div>
                         </div>
                         

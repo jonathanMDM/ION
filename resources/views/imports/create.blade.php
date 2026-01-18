@@ -10,7 +10,7 @@
             
             <div class="mb-6">
                 <div class="mb-4">
-                    <a href="{{ route('assets.import.template') }}" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded inline-flex items-center">
+                    <a href="{{ route('assets.import.template') }}" class="bg-[#5483B3] hover:bg-[#052659] text-white font-bold py-2 px-4 rounded inline-flex items-center">
                         <i class="fas fa-file-excel mr-2"></i>Descargar Plantilla Excel
                     </a>
                     <p class="text-gray-600 dark:text-gray-400 text-sm mt-2">Descarga la plantilla con todos los encabezados correctos (incluyendo campos personalizados).</p>
@@ -84,7 +84,7 @@
     </div>
 
     <!-- Example Template -->
-    <div class="bg-green-50 dark:bg-green-900/10 border-l-4 border-green-500 dark:border-green-600 p-4 md:p-6 rounded shadow transition-colors">
+    <div class="bg-green-50 dark:bg-green-900/10 border-l-4 border-[#5483B3]/500 dark:border-[#5483B3]/600 p-4 md:p-6 rounded shadow transition-colors">
         <h3 class="text-lg font-bold text-green-900 dark:text-green-300 mb-4">
             <i class="fas fa-table mr-2"></i>Ejemplo de Formato
         </h3>
