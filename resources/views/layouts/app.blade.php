@@ -191,7 +191,7 @@
     <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden md:hidden" onclick="toggleMobileSidebar()"></div>
 
     <!-- Sidebar -->
-    <div id="sidebar" class="sidebar-expanded fixed left-0 top-0 h-full text-slate-400 transition-all duration-300 z-50 md:z-10 -translate-x-full md:translate-x-0" style="background: var(--bg-rich-black); border-right: 1px solid rgba(255, 255, 255, 0.05);">
+    <div id="sidebar" class="sidebar-expanded fixed left-0 top-0 h-full transition-all duration-300 z-50 md:z-10 -translate-x-full md:translate-x-0 text-slate-300" style="background: #032221; border-right: 1px solid rgba(0, 223, 129, 0.1); color: #F1F7F6;">
         <div class="p-6 border-b border-white/5">
             <div class="flex items-center justify-between">
                 <div class="flex items-center">
