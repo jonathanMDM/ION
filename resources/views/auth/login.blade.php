@@ -26,15 +26,15 @@
     </script>
     <style>
         body {
-            background: radial-gradient(circle at top right, #1e1b4b, #0f172a, #020617);
+            background: radial-gradient(circle at top right, #052659, #021024, #000000);
             overflow: hidden;
         }
 
         .glass-container {
-            background: rgba(15, 23, 42, 0.6);
+            background: rgba(2, 16, 36, 0.6);
             backdrop-filter: blur(20px);
             border: 1px border;
-            border-image-source: linear-gradient(to bottom right, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+            border-image-source: linear-gradient(to bottom right, rgba(84, 131, 179, 0.2), rgba(84, 131, 179, 0.05));
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
 
@@ -48,7 +48,7 @@
         .blob {
             position: absolute;
             width: 500px; height: 500px;
-            background: radial-gradient(circle, rgba(79, 70, 229, 0.3) 0%, rgba(79, 70, 229, 0) 70%);
+            background: radial-gradient(circle, rgba(84, 131, 179, 0.3) 0%, rgba(84, 131, 179, 0) 70%);
             filter: blur(40px);
             animation: move 20s infinite alternate;
         }
@@ -59,21 +59,21 @@
         }
 
         .input-glow:focus {
-            box-shadow: 0 0 15px rgba(79, 70, 229, 0.2);
-            border-color: rgba(99, 102, 241, 0.5);
+            box-shadow: 0 0 15px rgba(84, 131, 179, 0.3);
+            border-color: rgba(84, 131, 179, 0.5);
         }
     </style>
 </head>
-<body style="background: var(--color-black-pearl); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 1rem;" class="font-sans text-slate-200">
+<body style="background: #021024; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 1rem;" class="font-sans text-slate-200">
     <div class="blob" style="top: -100px; left: -100px;"></div>
-    <div class="blob" style="bottom: -100px; right: -100px; background: radial-gradient(circle, rgba(147, 51, 234, 0.2) 0%, rgba(147, 51, 234, 0) 70%); animation-delay: -5s;"></div>
+    <div class="blob" style="bottom: -100px; right: -100px; background: radial-gradient(circle, rgba(125, 160, 202, 0.2) 0%, rgba(125, 160, 202, 0) 70%); animation-delay: -5s;"></div>
 
     <div class="relative w-full max-w-md">
         <!-- Decoration -->
-        <div class="absolute -top-10 -left-10 w-20 h-20 rounded-full blur-3xl opacity-30" style="background: var(--color-burnt-orange);"></div>
-        <div class="absolute -bottom-10 -right-10 w-20 h-20 rounded-full blur-3xl opacity-30" style="background: var(--color-blue-lagoon);"></div>
+        <div class="absolute -top-10 -left-10 w-20 h-20 rounded-full blur-3xl opacity-30" style="background: #5483B3;"></div>
+        <div class="absolute -bottom-10 -right-10 w-20 h-20 rounded-full blur-3xl opacity-30" style="background: #7DA0CA;"></div>
 
-        <div class="glass-container relative overflow-hidden rounded-[2.5rem] p-8 sm:p-10 transition-all hover:shadow-[0_0_50px_-10px_rgba(254,126,60,0.1)]" style="background: rgba(26, 44, 48, 0.85); backdrop-filter: blur(20px); border: 1px solid rgba(14, 104, 115, 0.3); box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);">
+        <div class="glass-container relative overflow-hidden rounded-[2.5rem] p-8 sm:p-10 transition-all hover:shadow-[0_0_50px_-10px_rgba(84,131,179,0.2)]" style="background: rgba(5, 38, 89, 0.85); backdrop-filter: blur(20px); border: 1px solid rgba(84, 131, 179, 0.3); box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);">
             <!-- Header -->
             <!-- Header -->
             <div class="text-center mb-10">
@@ -160,7 +160,7 @@
                         </div>
                         <span class="ml-2 text-xs text-slate-400 group-hover:text-slate-200 transition-colors">Recordarme</span>
                     </label>
-                    <a href="{{ route('password.request') }}" class="text-xs font-bold transition-colors hover:underline" style="color: var(--color-burnt-orange);">
+                    <a href="{{ route('password.request') }}" class="text-xs font-bold transition-colors hover:underline" style="color: #7DA0CA;">
                         ¿Olvidaste tu contraseña?
                     </a>
                 </div>
@@ -169,9 +169,9 @@
                 <button 
                     type="submit" 
                     class="group relative w-full py-4 font-black rounded-2xl transition-all shadow-lg active:scale-[0.98] overflow-hidden"
-                    style="background: var(--color-burnt-orange); color: #FFFFFF; box-shadow: 0 10px 30px -5px rgba(254, 126, 60, 0.4);"
+                    style="background: linear-gradient(135deg, #5483B3 0%, #052659 100%); color: #FFFFFF; box-shadow: 0 10px 30px -5px rgba(84, 131, 179, 0.4);"
                 >
-                    <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity" style="background: linear-gradient(to right, var(--color-burnt-orange), #ff9f68);"></div>
+                    <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity" style="background: linear-gradient(to right, #7DA0CA, #5483B3);"></div>
                     <span class="relative flex items-center justify-center">
                         <i class="fas fa-sign-in-alt mr-2 text-sm"></i>
                         INICIAR SESIÓN

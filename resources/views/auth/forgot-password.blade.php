@@ -15,7 +15,7 @@
         .font-logo { font-family: 'Orbitron', sans-serif; }
     </style>
 </head>
-<body class="bg-gray-900 min-h-screen flex items-center justify-center p-4">
+<body class="min-h-screen flex items-center justify-center p-4" style="background: #021024;">
     <div class="bg-white rounded-lg shadow-2xl w-full max-w-md p-8">
         <div class="text-center mb-8">
             <div class="mb-4">
@@ -25,7 +25,7 @@
         </div>
 
         @if (session('success'))
-            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
+            <div class="border px-4 py-3 rounded mb-4" style="background: rgba(84, 131, 179, 0.1); border-color: #5483B3; color: #052659;">
                 <i class="fas fa-check-circle mr-2"></i>{{ session('success') }}
             </div>
         @endif
@@ -46,8 +46,8 @@
             </div>
         @endif
 
-        <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6">
-            <p class="text-sm text-blue-700">
+        <div class="border-l-4 p-4 mb-6" style="background: rgba(125, 160, 202, 0.1); border-color: #7DA0CA;">
+            <p class="text-sm" style="color: #052659;">
                 <i class="fas fa-info-circle mr-2"></i>
                 Ingresa tu correo electrónico y te enviaremos una contraseña temporal.
             </p>
@@ -65,7 +65,8 @@
                     name="email" 
                     id="email" 
                     value="{{ old('email') }}"
-                    class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                    class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2" 
+                    style="focus:ring-color: #5483B3;"
                     required 
                     autofocus
                     placeholder="tu@email.com"
@@ -74,7 +75,8 @@
 
             <button 
                 type="submit" 
-                class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline transition duration-200 mb-4"
+                class="w-full text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline transition duration-200 mb-4"
+                style="background: linear-gradient(135deg, #5483B3 0%, #052659 100%);"
             >
                 <i class="fas fa-paper-plane mr-2"></i>Enviar Contraseña Temporal
             </button>
