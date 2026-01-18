@@ -210,7 +210,7 @@
                     <a href="{{ route('assets.index') }}" class="text-xs font-bold hover:opacity-80 transition-opacity" style="color: var(--green-caribbean);">Ver Todo</a>
                 </div>
                 <div class="space-y-4">
-                    @foreach($recentAssets as $asset)
+                    @forelse($recentAssets as $asset)
                     <div class="flex items-center justify-between group p-2 hover:bg-white/5 rounded-xl transition-colors">
                         <div class="flex items-center gap-4">
                             <div class="relative">
