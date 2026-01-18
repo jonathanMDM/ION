@@ -183,23 +183,23 @@
                 </div>
                 <div class="space-y-3">
                     @forelse($recentAssets as $asset)
-                    <div class="flex items-center justify-between group p-3 rounded-2xl transition-all border border-[#5EEAD4]/20 hover:border-[#5EEAD4] hover:bg-[#134E4A]/80 shadow-md bg-[#0F3F3C]">
+                    <div class="flex items-center justify-between group p-3 rounded-2xl transition-all border border-white/10 hover:border-white/30 shadow-md bg-white/10 backdrop-blur-sm hover:bg-white/15">
                         <div class="flex items-center gap-4">
                             <div class="relative">
                                 @if($asset->image_path)
                                 <img src="{{ asset('storage/' . $asset->image_path) }}" class="w-12 h-12 rounded-xl object-cover shadow-sm border border-white/20" alt="{{ $asset->name }}">
                                 @else
-                                <div class="w-12 h-12 rounded-xl flex items-center justify-center bg-[#2DD4BF] text-[#042F2E] shadow-sm">
+                                <div class="w-12 h-12 rounded-xl flex items-center justify-center bg-white text-[#0A3D33] shadow-sm">
                                     <i class="fas fa-cube text-lg"></i>
                                 </div>
                                 @endif
                             </div>
                             <div>
-                                <h5 class="text-sm font-bold text-white group-hover:text-[#5EEAD4] transition-colors tracking-wide">{{ $asset->name }}</h5>
-                                <p class="text-xs font-bold text-[#CCFBF1] opacity-80">{{ $asset->category->name ?? 'N/A' }}</p>
+                                <h5 class="text-sm font-bold text-white group-hover:text-white transition-colors tracking-wide">{{ $asset->name }}</h5>
+                                <p class="text-xs font-bold text-white/70">{{ $asset->category->name ?? 'N/A' }}</p>
                             </div>
                         </div>
-                        <a href="{{ route('assets.show', $asset->id) }}" class="px-3 py-1.5 rounded-lg bg-[#5EEAD4] text-[#042F2E] text-xs font-bold hover:bg-white transition-all shadow-sm">Ver</a>
+                        <a href="{{ route('assets.show', $asset->id) }}" class="px-3 py-1.5 rounded-lg bg-white text-[#0A3D33] text-xs font-bold hover:bg-white/90 transition-all shadow-sm">Ver</a>
                     </div>
                     @empty
                     <div class="p-12 text-center text-[#CCFBF1]/50 border-2 border-dashed border-[#5EEAD4]/30 rounded-3xl">
@@ -219,36 +219,36 @@
                 <h4 class="text-xl font-bold mb-6 text-white tracking-wide">Acciones Rápidas</h4>
                 <div class="grid grid-cols-1 gap-4">
                     @if(Auth::user()->hasPermission('create_assets'))
-                    <a href="{{ route('assets.create') }}" class="group flex items-center p-3 rounded-2xl transition-all border border-[#5EEAD4]/20 hover:border-[#5EEAD4] hover:bg-[#134E4A]/80 shadow-md bg-[#0F3F3C]">
-                        <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-sm bg-[#5EEAD4] text-[#042F2E] group-hover:scale-110 transition-transform">
+                    <a href="{{ route('assets.create') }}" class="group flex items-center p-3 rounded-2xl transition-all border border-white/10 hover:border-white/30 shadow-md bg-white/10 backdrop-blur-sm hover:bg-white/15">
+                        <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-sm bg-white text-[#0A3D33] group-hover:scale-110 transition-transform">
                             <i class="fas fa-plus text-sm font-bold"></i>
                         </div>
                         <div class="ml-4">
-                            <span class="block text-sm font-bold text-white group-hover:text-[#5EEAD4] transition-colors">Nuevo Activo</span>
-                            <span class="block text-[10px] font-bold text-[#CCFBF1] opacity-70 group-hover:opacity-100 uppercase tracking-wider">Registro Central</span>
+                            <span class="block text-sm font-bold text-white group-hover:text-white transition-colors">Nuevo Activo</span>
+                            <span class="block text-[10px] font-bold text-white/70 group-hover:opacity-100 uppercase tracking-wider">Registro Central</span>
                         </div>
                     </a>
                     @endif
 
                     @if(Auth::user()->hasPermission('import_assets'))
-                    <a href="{{ route('imports.create') }}" class="group flex items-center p-3 rounded-2xl transition-all border border-[#5EEAD4]/20 hover:border-[#5EEAD4] hover:bg-[#134E4A]/80 shadow-md bg-[#0F3F3C]">
-                        <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-sm bg-[#5EEAD4] text-[#042F2E] group-hover:scale-110 transition-transform">
+                    <a href="{{ route('imports.create') }}" class="group flex items-center p-3 rounded-2xl transition-all border border-white/10 hover:border-white/30 shadow-md bg-white/10 backdrop-blur-sm hover:bg-white/15">
+                        <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-sm bg-white text-[#0A3D33] group-hover:scale-110 transition-transform">
                             <i class="fas fa-file-excel text-sm font-bold"></i>
                         </div>
                         <div class="ml-4">
-                            <span class="block text-sm font-bold text-white group-hover:text-[#5EEAD4] transition-colors">Importar Excel</span>
-                            <span class="block text-[10px] font-bold text-[#CCFBF1] opacity-70 group-hover:opacity-100 uppercase tracking-wider">Carga Masiva</span>
+                            <span class="block text-sm font-bold text-white group-hover:text-white transition-colors">Importar Excel</span>
+                            <span class="block text-[10px] font-bold text-white/70 group-hover:opacity-100 uppercase tracking-wider">Carga Masiva</span>
                         </div>
                     </a>
                     @endif
 
-                    <a href="{{ route('reports.index') }}" class="group flex items-center p-3 rounded-2xl transition-all border border-[#5EEAD4]/20 hover:border-[#5EEAD4] hover:bg-[#134E4A]/80 shadow-md bg-[#0F3F3C]">
-                        <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-sm bg-[#5EEAD4] text-[#042F2E] group-hover:scale-110 transition-transform">
+                    <a href="{{ route('reports.index') }}" class="group flex items-center p-3 rounded-2xl transition-all border border-white/10 hover:border-white/30 shadow-md bg-white/10 backdrop-blur-sm hover:bg-white/15">
+                        <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-sm bg-white text-[#0A3D33] group-hover:scale-110 transition-transform">
                             <i class="fas fa-chart-bar text-sm font-bold"></i>
                         </div>
                         <div class="ml-4">
-                            <span class="block text-sm font-bold text-white group-hover:text-[#5EEAD4] transition-colors">Mis Reportes</span>
-                            <span class="block text-[10px] font-bold text-[#CCFBF1] opacity-70 group-hover:opacity-100 uppercase tracking-wider">Estadísticas</span>
+                            <span class="block text-sm font-bold text-white group-hover:text-white transition-colors">Mis Reportes</span>
+                            <span class="block text-[10px] font-bold text-white/70 group-hover:opacity-100 uppercase tracking-wider">Estadísticas</span>
                         </div>
                     </a>
                 </div>
@@ -271,19 +271,19 @@
             
             <div class="space-y-4">
                 @forelse($assets_per_location as $location)
-                <div class="p-4 rounded-2xl transition-all border border-[#5EEAD4]/20 hover:border-[#5EEAD4] hover:bg-[#134E4A]/80 shadow-md bg-[#0F3F3C] group">
+                <div class="p-4 rounded-2xl transition-all border border-white/10 hover:border-white/30 shadow-md bg-white/10 backdrop-blur-sm hover:bg-white/15 group">
                     <div class="flex items-center justify-between">
                         <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 rounded-2xl flex items-center justify-center bg-[#5EEAD4] text-[#042F2E] group-hover:scale-110 transition-transform shadow-sm">
+                            <div class="w-12 h-12 rounded-2xl flex items-center justify-center bg-white text-[#0A3D33] group-hover:scale-110 transition-transform shadow-sm">
                                 <i class="fas fa-building"></i>
                             </div>
                             <div>
                                 <h5 class="font-bold text-white text-sm tracking-wide">{{ $location->name }}</h5>
-                                <p class="text-xs text-[#CCFBF1] opacity-80 font-bold mt-0.5">{{ $location->address ?? 'Sin dirección' }}</p>
+                                <p class="text-xs text-white/70 font-bold mt-0.5">{{ $location->address ?? 'Sin dirección' }}</p>
                             </div>
                         </div>
                         <div class="text-right">
-                            <span class="block text-xl font-black text-[#5EEAD4] drop-shadow-sm">{{ $location->assets_count }}</span>
+                            <span class="block text-xl font-black text-white drop-shadow-sm">{{ $location->assets_count }}</span>
                             <span class="text-[10px] font-bold uppercase tracking-wider text-white/50">ACTIVOS</span>
                         </div>
                     </div>
@@ -305,26 +305,26 @@
             </div>
             
             <div class="space-y-6">
-                <div class="flex items-center justify-between p-4 rounded-2xl transition-colors cursor-default group border border-[#5EEAD4]/20 bg-[#0F3F3C] hover:border-[#5EEAD4] hover:bg-[#134E4A]/80 shadow-md">
+                <div class="flex items-center justify-between p-4 rounded-2xl transition-colors cursor-default group border border-white/10 bg-white/10 backdrop-blur-sm hover:border-white/30 hover:bg-white/15 shadow-md">
                     <div class="flex items-center gap-4">
-                        <span class="w-3 h-3 rounded-full bg-[#5EEAD4] ring-4 ring-[#5EEAD4]/20 shadow-sm"></span>
+                        <span class="w-3 h-3 rounded-full bg-white ring-4 ring-white/20 shadow-sm"></span>
                         <div class="flex flex-col">
                             <span class="text-sm font-bold text-white">Categorías</span>
-                            <span class="text-xs text-[#CCFBF1] opacity-70">Total registradas</span>
+                            <span class="text-xs text-white/70">Total registradas</span>
                         </div>
                     </div>
-                    <span class="text-2xl font-black text-[#5EEAD4] group-hover:scale-110 transition-transform drop-shadow-sm">{{ $stats['total_categories'] }}</span>
+                    <span class="text-2xl font-black text-white group-hover:scale-110 transition-transform drop-shadow-sm">{{ $stats['total_categories'] }}</span>
                 </div>
                 
-                <div class="flex items-center justify-between p-4 rounded-2xl transition-colors cursor-default group border border-[#5EEAD4]/20 bg-[#0F3F3C] hover:border-[#5EEAD4] hover:bg-[#134E4A]/80 shadow-md">
+                <div class="flex items-center justify-between p-4 rounded-2xl transition-colors cursor-default group border border-white/10 bg-white/10 backdrop-blur-sm hover:border-white/30 hover:bg-white/15 shadow-md">
                     <div class="flex items-center gap-4">
-                        <span class="w-3 h-3 rounded-full bg-[#84CC16] ring-4 ring-[#84CC16]/20 shadow-sm"></span>
+                        <span class="w-3 h-3 rounded-full bg-white ring-4 ring-white/20 shadow-sm"></span>
                         <div class="flex flex-col">
                             <span class="text-sm font-bold text-white">Mantenimientos</span>
-                            <span class="text-xs text-[#CCFBF1] opacity-70">En proceso</span>
+                            <span class="text-xs text-white/70">En proceso</span>
                         </div>
                     </div>
-                    <span class="text-2xl font-black text-[#84CC16] group-hover:scale-110 transition-transform">{{ $stats['total_maintenances'] }}</span>
+                    <span class="text-2xl font-black text-white group-hover:scale-110 transition-transform">{{ $stats['total_maintenances'] }}</span>
                 </div>
             </div>
         </div>
