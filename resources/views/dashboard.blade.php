@@ -67,10 +67,10 @@
     </div>
     @endif
 
-    <!-- Metrics Grid (Forest Tech Gradients) -->
+    <!-- Metrics Grid (High Contrast Forest Theme) -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
-        <!-- Total Assets (Deep Green -> Black) -->
-        <div class="p-5 rounded-3xl shadow-lg transition-all hover:scale-[1.02] hover:shadow-xl relative overflow-hidden group" style="background: var(--gradient-deep);">
+        <!-- Total Assets (Deep Forest) -->
+        <div class="p-5 rounded-3xl shadow-lg transition-all hover:scale-[1.02] hover:shadow-xl relative overflow-hidden group" style="background: linear-gradient(135deg, #076653 0%, #06231D 100%);">
             <div class="flex items-start justify-between relative z-10">
                 <div>
                     <p class="text-[11px] font-bold uppercase tracking-wider mb-1 opacity-80 text-white">Activos Totales</p>
@@ -87,25 +87,25 @@
             <div class="absolute -right-6 -bottom-6 w-32 h-32 rounded-full bg-white/5 blur-2xl group-hover:bg-white/10 transition-all"></div>
         </div>
 
-        <!-- Operative (Pale Green -> Deep Green) -->
-        <div class="p-5 rounded-3xl shadow-lg transition-all hover:scale-[1.02] hover:shadow-xl relative overflow-hidden group" style="background: var(--gradient-forest);">
+        <!-- Operative (Emerald) -->
+        <div class="p-5 rounded-3xl shadow-lg transition-all hover:scale-[1.02] hover:shadow-xl relative overflow-hidden group" style="background: linear-gradient(135deg, #10B981 0%, #047857 100%);">
             <div class="flex items-start justify-between relative z-10">
                 <div>
-                    <p class="text-[11px] font-bold uppercase tracking-wider mb-1 opacity-90 text-[#06231D]">Operativos</p>
-                    <h3 class="text-4xl font-black tracking-tight text-[#06231D] mb-1">
+                    <p class="text-[11px] font-bold uppercase tracking-wider mb-1 opacity-90 text-white">Operativos</p>
+                    <h3 class="text-4xl font-black tracking-tight text-white mb-1">
                         {{ $stats['active_assets'] ?? 0 }}
                     </h3>
-                    <p class="text-xs font-medium text-[#06231D]/80">Estado: Activo</p>
+                    <p class="text-xs font-medium text-white/90">Estado: Activo</p>
                 </div>
-                <div class="w-12 h-12 rounded-xl flex items-center justify-center text-xl shadow-md backdrop-blur-md bg-[#06231D]/10 text-[#06231D] border border-[#06231D]/10">
+                <div class="w-12 h-12 rounded-xl flex items-center justify-center text-xl shadow-md backdrop-blur-md bg-white/10 text-white border border-white/10">
                     <i class="fas fa-check-circle"></i>
                 </div>
             </div>
-             <div class="absolute -right-6 -bottom-6 w-32 h-32 rounded-full bg-[#06231D]/5 blur-2xl group-hover:bg-[#06231D]/10 transition-all"></div>
+             <div class="absolute -right-6 -bottom-6 w-32 h-32 rounded-full bg-white/5 blur-2xl group-hover:bg-white/10 transition-all"></div>
         </div>
 
-        <!-- Maintenance (Acid Lime -> Dark Forest) -->
-        <div class="p-5 rounded-3xl shadow-lg transition-all hover:scale-[1.02] hover:shadow-xl relative overflow-hidden group" style="background: var(--gradient-dark);">
+        <!-- Maintenance (Dark Lime) -->
+        <div class="p-5 rounded-3xl shadow-lg transition-all hover:scale-[1.02] hover:shadow-xl relative overflow-hidden group" style="background: linear-gradient(135deg, #65A30D 0%, #365314 100%);">
             <div class="flex items-start justify-between relative z-10">
                 <div>
                     <p class="text-[11px] font-bold uppercase tracking-wider mb-1 opacity-90 text-white">En Taller</p>
@@ -121,8 +121,8 @@
              <div class="absolute -right-6 -bottom-6 w-32 h-32 rounded-full bg-white/5 blur-2xl group-hover:bg-white/10 transition-all"></div>
         </div>
 
-        <!-- Decommissioned (Custom Dark Red -> Black Green) -->
-        <div class="p-5 rounded-3xl shadow-lg transition-all hover:scale-[1.02] hover:shadow-xl relative overflow-hidden group" style="background: linear-gradient(180deg, #9F2C2C 0%, #06231D 100%);">
+        <!-- Decommissioned (Burnt Red) -->
+        <div class="p-5 rounded-3xl shadow-lg transition-all hover:scale-[1.02] hover:shadow-xl relative overflow-hidden group" style="background: linear-gradient(135deg, #991B1B 0%, #450A0A 100%);">
             <div class="flex items-start justify-between relative z-10">
                 <div>
                     <p class="text-[11px] font-bold uppercase tracking-wider mb-1 opacity-80 text-white">Bajas</p>
