@@ -41,8 +41,10 @@
             @if(Auth::user()->hasPermission('edit_assets'))
                 <div class="flex items-center gap-3 bg-gray-100 dark:bg-gray-900/50 p-1.5 rounded-2xl border border-gray-200 dark:border-gray-800">
                     @if(auth()->user()->company->hasModule('transfers'))
-                        <button onclick="document.getElementById('transferModal').classList.remove('hidden')" class="px-5 py-2.5 bg-blue-medium hover:bg-blue-dark text-white font-black rounded-xl transition-all shadow-lg shadow-blue-medium/20 flex items-center gap-2 text-sm uppercase tracking-wide">
-                            <i class="fas fa-exchange-alt"></i> Trasladar
+                        <button onclick="document.getElementById('transferModal').classList.remove('hidden')" 
+                            class="px-5 py-2.5 text-white font-black rounded-xl transition-all shadow-lg flex items-center gap-2 text-sm uppercase tracking-wide border-none cursor-pointer"
+                            style="background: linear-gradient(135deg, #5483B3 0%, #052659 100%); box-shadow: 0 4px 12px rgba(84, 131, 179, 0.3);">
+                            <i class="fas fa-exchange-alt"></i> Trasladar Activo
                         </button>
                     @endif
                     <a href="{{ route('assets.edit', $asset->id) }}" class="p-2.5 bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:text-blue-medium rounded-xl transition-all hover:shadow-sm shadow-blue-medium/10">
@@ -400,7 +402,11 @@
 
                 <div class="flex gap-4 pt-4">
                     <button type="button" onclick="document.getElementById('transferModal').classList.add('hidden')" class="flex-1 py-4 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 font-black rounded-2xl uppercase tracking-[0.2em] text-[10px] hover:bg-gray-200 transition-all">Cancelar</button>
-                    <button type="submit" class="flex-1 py-4 bg-blue-medium text-white font-black rounded-2xl uppercase tracking-[0.2em] text-[10px] shadow-lg shadow-blue-medium/20 hover:bg-blue-dark transition-all">Confirmar Traslado</button>
+                    <button type="submit" 
+                        class="flex-1 py-4 text-white font-black rounded-2xl uppercase tracking-[0.2em] text-[10px] shadow-lg transition-all border-none cursor-pointer"
+                        style="background: linear-gradient(135deg, #5483B3 0%, #052659 100%); box-shadow: 0 10px 20px rgba(84, 131, 179, 0.3);">
+                        Confirmar Traslado
+                    </button>
                 </div>
             </form>
         </div>

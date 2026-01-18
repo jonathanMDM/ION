@@ -61,7 +61,8 @@
                     Cancelar
                 </a>
                 <button type="submit" 
-                    class="w-full md:w-auto px-12 py-3 bg-blue-medium hover:bg-blue-dark text-white font-black rounded-xl transition-all shadow-xl shadow-blue-medium/20 transform hover:-translate-y-0.5 uppercase tracking-wide text-xs">
+                    class="w-full md:w-auto px-12 py-3 text-white font-black rounded-xl transition-all shadow-xl transform hover:-translate-y-0.5 uppercase tracking-wide text-xs border-none cursor-pointer"
+                    style="background: linear-gradient(135deg, #5483B3 0%, #052659 100%); box-shadow: 0 10px 20px rgba(84, 131, 179, 0.3);">
                     <i class="fas fa-sync-alt mr-2 text-xs"></i> Actualizar Subcategoría
                 </button>
             </div>

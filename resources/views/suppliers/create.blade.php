@@ -121,7 +121,7 @@
                 Cancelar
             </a>
             <button type="submit" 
-                class="w-full md:w-auto px-16 py-4 bg-blue-medium hover:bg-blue-dark text-white font-black rounded-2xl transition-all shadow-xl shadow-blue-medium/25 transform hover:-translate-y-0.5 active:scale-95 flex items-center justify-center tracking-wide uppercase text-sm">
+                class="w-full md:w-auto px-16 py-4 text-white font-black rounded-2xl transition-all shadow-xl shadow-blue-medium/25 transform hover:-translate-y-0.5 active:scale-95 flex items-center justify-center tracking-wide uppercase text-sm border-none cursor-pointer" style="background: linear-gradient(135deg, #5483B3 0%, #052659 100%); box-shadow: 0 10px 20px rgba(84, 131, 179, 0.3);">
                 <i class="fas fa-save mr-2 text-lg"></i> Registrar Proveedor
             </button>
         </div>

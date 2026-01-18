@@ -36,7 +36,9 @@
                 <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
             </div>
         </div>
-        <button type="submit" class="bg-blue-medium hover:bg-blue-dark text-white font-bold py-2 px-6 rounded shadow-sm">
+        <button type="submit" 
+            class="text-white font-bold py-2 px-6 rounded shadow-sm flex items-center border-none cursor-pointer"
+            style="background: linear-gradient(135deg, #5483B3 0%, #052659 100%); box-shadow: 0 4px 10px rgba(84, 131, 179, 0.3);">
             <i class="fas fa-search mr-2"></i>Buscar
         </button>
         @if(request()->hasAny(['search', 'status', 'location_id', 'category_id', 'subcategory_id', 'date_from', 'date_to', 'cost_center_id', 'supplier_id']))
@@ -133,7 +135,9 @@
         @endforeach
 
         <div class="flex items-end lg:col-span-2">
-            <button type="submit" class="w-full bg-gray-800 hover:bg-black text-white font-bold py-2 px-4 rounded shadow-sm transition-colors">
+            <button type="submit" 
+                class="w-full text-white font-bold py-2 px-4 rounded shadow-sm transition-colors border-none cursor-pointer"
+                style="background: #1e293b; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
                 <i class="fas fa-filter mr-2"></i>Aplicar Filtros Avanzados
             </button>
         </div>
