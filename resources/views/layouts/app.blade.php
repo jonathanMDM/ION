@@ -115,10 +115,10 @@
             color: var(--text-secondary) !important;
         }
         .swal-neon-confirm, .swal2-confirm {
-            background: var(--gradient-blue) !important;
+            background: linear-gradient(135deg, #5483B3 0%, #052659 100%) !important;
             color: #FFFFFF !important;
             border-radius: 12px !important;
-            box-shadow: 0 4px 12px rgba(67, 24, 255, 0.4) !important;
+            box-shadow: 0 4px 12px rgba(84, 131, 179, 0.4) !important;
         }
         .swal2-cancel {
             background: #F4F7FE !important;
@@ -126,10 +126,10 @@
             border-radius: 12px !important;
         }
 
-        /* SweetAlert Magma Custom Icons */
-        .swal2-icon.swal2-success { border-color: var(--color-blue-lagoon) !important; color: var(--color-blue-lagoon) !important; }
-        .swal2-icon.swal2-success .swal2-success-ring { border: 4px solid rgba(14, 104, 115, 0.2) !important; }
-        .swal2-icon.swal2-success [class^='swal2-success-line'] { background-color: var(--color-blue-lagoon) !important; }
+        /* SweetAlert Blue Theme Icons */
+        .swal2-icon.swal2-success { border-color: #5483B3 !important; color: #5483B3 !important; }
+        .swal2-icon.swal2-success .swal2-success-ring { border: 4px solid rgba(84, 131, 179, 0.2) !important; }
+        .swal2-icon.swal2-success [class^='swal2-success-line'] { background-color: #5483B3 !important; }
         
         .swal2-icon.swal2-error { border-color: var(--color-lust) !important; color: var(--color-lust) !important; }
         .swal2-icon.swal2-error .swal2-x-mark-line-left, 
