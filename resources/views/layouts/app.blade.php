@@ -17,35 +17,35 @@
         .sidebar-collapsed { width: 4rem; }
         .sidebar-expanded { width: 16rem; }
         .font-logo { font-family: 'Orbitron', sans-serif; }
-            /* Forest Tech Palette (Altitude) */
+            /* Modern Blue Palette */
             --bg-body: #F8FAFB; /* Ultra light gray for clean, fresh look */
             --bg-card: #FFFFFF;
-            --bg-sidebar: #032221; /* Dark Deep Teal from Image 1 / Gradient 4 Base */
+            --bg-sidebar: #1E3A8A; /* Deep Blue for sidebar */
             
             /* Text Colors */
-            --text-main: #06231D;      /* Black Green */
-            --text-secondary: #587974; /* Muted Teal */
+            --text-main: #1F2937;      /* Dark Gray */
+            --text-secondary: #6B7280; /* Medium Gray */
             --text-light: #FFFFFF;
             
             /* Accents */
-            --color-primary: #076653; /* Deep Green */
-            --color-secondary: #0C342C; /* Dark Forest */
-            --color-accent-lime: #E3EF26; /* Acid Lime */
+            --color-primary: #0D8BFF; /* Vibrant Blue */
+            --color-secondary: #1E40AF; /* Deep Blue */
+            --color-accent-blue: #3B82F6; /* Bright Blue */
             
-            /* Gradients (Altitude Palette) */
-            --gradient-lime: linear-gradient(180deg, #FFFDEE 0%, #E3EF26 100%);     /* Gradient 1 */
-            --gradient-forest: linear-gradient(180deg, #E2FBCE 0%, #076653 100%);   /* Gradient 2 */
-            --gradient-dark: linear-gradient(180deg, #E3EF26 0%, #0C342C 100%);     /* Gradient 3 */
-            --gradient-deep: linear-gradient(180deg, #076653 0%, #06231D 100%);     /* Gradient 4 */
+            /* Gradients (Modern Blue) */
+            --gradient-blue-light: linear-gradient(180deg, #DBEAFE 0%, #3B82F6 100%);
+            --gradient-blue: linear-gradient(180deg, #60A5FA 0%, #1E40AF 100%);
+            --gradient-blue-dark: linear-gradient(180deg, #3B82F6 0%, #1E3A8A 100%);
+            --gradient-deep: linear-gradient(180deg, #1E40AF 0%, #1E3A8A 100%);
             
             /* Functional Mappings */
-            --card-shadow: 0 8px 30px rgba(7, 102, 83, 0.06); /* Green-tinted shadow */
-            --border-light: #CFE5E1;
+            --card-shadow: 0 8px 30px rgba(59, 130, 246, 0.08); /* Blue-tinted shadow */
+            --border-light: #E5E7EB;
 
-            /* Sidebar Active State (Image 1 Style) */
+            /* Sidebar Active State (Modern Blue) */
             --color-active-text: #FFFFFF;
-            --bg-active-item: rgba(255, 255, 255, 0.1); /* Glassy effect on dark bg */
-            --border-active: #E3EF26; /* Lime border accent */
+            --bg-active-item: rgba(59, 130, 246, 0.15); /* Blue glassy effect */
+            --border-active: #0D8BFF; /* Bright blue border */
         }
         
         /* Modern Scrollbar - Light Theme */
