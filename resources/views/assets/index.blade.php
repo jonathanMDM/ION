@@ -27,36 +27,39 @@
     </div>
 
     <!-- Search Bar -->
-    <div class="mb-4 p-5 rounded-3xl shadow-md transition-colors bg-white border border-[#E0E5F2]">
-        <div class="flex items-center gap-4">
-            <div class="flex-1 relative">
+    <div class="mb-6 p-6 bg-white rounded-2xl border border-slate-200 shadow-sm transition-all focus-within:shadow-md">
+        <div class="flex flex-col md:flex-row items-center gap-4">
+            <div class="flex-1 w-full relative">
                 <input 
                     type="text" 
                     id="searchInput" 
                     placeholder="Buscar por ID, Nombre, Ubicación, Categoría..." 
-                    class="w-full px-6 py-3 pl-12 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#5483B3]/20 border border-[#E0E5F2] bg-slate-50 text-slate-800 placeholder-slate-400 transition-all focus:border-[#5483B3]"
+                    class="w-full px-6 py-3 pl-12 rounded-xl focus:outline-none focus:ring-4 focus:ring-[#5483B3]/10 border border-slate-200 bg-slate-50 text-slate-800 placeholder-slate-400 transition-all focus:border-[#5483B3]"
                 >
                 <i class="fas fa-search absolute left-4 top-4 text-[#5483B3]"></i>
             </div>
             <button 
                 type="button" 
                 onclick="clearSearch()" 
-                class="px-6 py-3 rounded-2xl bg-slate-100 text-slate-500 hover:bg-slate-200 transition-colors font-bold uppercase text-[10px] tracking-widest"
+                class="w-full md:w-auto px-6 py-3 rounded-xl bg-slate-100 text-slate-500 hover:bg-slate-200 transition-colors font-bold uppercase text-[10px] tracking-widest"
             >
                 <i class="fas fa-times mr-2"></i>Limpiar
             </button>
         </div>
-        <p class="text-xs mt-3 font-bold uppercase tracking-widest text-[#5483B3]">
-            <span id="resultCount" class="text-lg mr-1">{{ $assets->total() }}</span> activo(s) encontrado(s)
-        </p>
+        <div class="mt-3 flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-[#5483B3] animate-pulse"></span>
+            <p class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
+                <span id="resultCount" class="text-slate-700">{{ $assets->total() }}</span> activo(s) encontrado(s)
+            </p>
+        </div>
     </div>
 
-<div class="shadow-xl rounded-[2.5rem] my-6 overflow-hidden bg-white border border-[#E0E5F2]">
+<div class="bg-white rounded-2xl border border-slate-200 shadow-xl overflow-hidden my-6">
     <div class="overflow-x-auto">
     <table class="w-full table-auto" style="min-width: 1400px;">
         <thead>
-            <tr class="uppercase text-[10px] font-black tracking-[0.15em] bg-slate-50 text-slate-500 border-b border-slate-100">
-                <th class="py-5 px-6 text-center" style="width: 50px;">
+            <tr class="uppercase text-[10px] font-black tracking-[0.15em] bg-slate-50 text-slate-500 border-b border-slate-200">
+                <th class="py-4 px-6 text-center" style="width: 50px;">
                     <input type="checkbox" id="selectAll" class="form-checkbox h-5 w-5 text-gray-600" onchange="toggleAll(this)">
                 </th>
                 <th class="py-3 px-4 text-left whitespace-nowrap" style="min-width: 120px;">ID Único</th>
