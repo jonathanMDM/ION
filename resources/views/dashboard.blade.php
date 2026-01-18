@@ -67,45 +67,45 @@
     </div>
     @endif
 
-    <!-- Metrics Grid (Aurora Gradients) -->
+    <!-- Metrics Grid (Forest Tech Gradients) -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
-        <!-- Total Assets (Blue -> Lavender) -->
-        <div class="p-5 rounded-3xl shadow-lg transition-all hover:scale-[1.02] hover:shadow-xl relative overflow-hidden group" style="background: linear-gradient(180deg, #73A5F9 0%, #F4C7F9 100%);">
+        <!-- Total Assets (Deep Green -> Black) -->
+        <div class="p-5 rounded-3xl shadow-lg transition-all hover:scale-[1.02] hover:shadow-xl relative overflow-hidden group" style="background: var(--gradient-deep);">
             <div class="flex items-start justify-between relative z-10">
                 <div>
-                    <p class="text-[11px] font-bold uppercase tracking-wider mb-1 opacity-90 text-white">Activos Totales</p>
+                    <p class="text-[11px] font-bold uppercase tracking-wider mb-1 opacity-80 text-white">Activos Totales</p>
                     <h3 class="text-4xl font-black tracking-tight text-white mb-1">
                         {{ $stats['total_assets'] ?? 0 }}
                     </h3>
                     <p class="text-xs font-medium text-white/90">Unidades en sistema</p>
                 </div>
-                <div class="w-12 h-12 rounded-xl flex items-center justify-center text-xl shadow-md backdrop-blur-md bg-white/25 text-white">
+                <div class="w-12 h-12 rounded-xl flex items-center justify-center text-xl shadow-md backdrop-blur-md bg-white/10 text-white border border-white/10">
                     <i class="fas fa-boxes"></i>
                 </div>
             </div>
             <!-- Decorative Elements -->
-            <div class="absolute -right-6 -bottom-6 w-32 h-32 rounded-full bg-white/20 blur-2xl group-hover:bg-white/30 transition-all"></div>
+            <div class="absolute -right-6 -bottom-6 w-32 h-32 rounded-full bg-white/5 blur-2xl group-hover:bg-white/10 transition-all"></div>
         </div>
 
-        <!-- Operative (Mint -> Lime) -->
-        <div class="p-5 rounded-3xl shadow-lg transition-all hover:scale-[1.02] hover:shadow-xl relative overflow-hidden group" style="background: linear-gradient(180deg, #63DCA2 0%, #DDF488 100%);">
+        <!-- Operative (Pale Green -> Deep Green) -->
+        <div class="p-5 rounded-3xl shadow-lg transition-all hover:scale-[1.02] hover:shadow-xl relative overflow-hidden group" style="background: var(--gradient-forest);">
             <div class="flex items-start justify-between relative z-10">
                 <div>
-                    <p class="text-[11px] font-bold uppercase tracking-wider mb-1 opacity-90 text-white">Operativos</p>
-                    <h3 class="text-4xl font-black tracking-tight text-white mb-1">
+                    <p class="text-[11px] font-bold uppercase tracking-wider mb-1 opacity-90 text-[#06231D]">Operativos</p>
+                    <h3 class="text-4xl font-black tracking-tight text-[#06231D] mb-1">
                         {{ $stats['active_assets'] ?? 0 }}
                     </h3>
-                    <p class="text-xs font-medium text-white/90">Estado: Activo</p>
+                    <p class="text-xs font-medium text-[#06231D]/80">Estado: Activo</p>
                 </div>
-                <div class="w-12 h-12 rounded-xl flex items-center justify-center text-xl shadow-md backdrop-blur-md bg-white/25 text-white">
+                <div class="w-12 h-12 rounded-xl flex items-center justify-center text-xl shadow-md backdrop-blur-md bg-[#06231D]/10 text-[#06231D] border border-[#06231D]/10">
                     <i class="fas fa-check-circle"></i>
                 </div>
             </div>
-             <div class="absolute -right-6 -bottom-6 w-32 h-32 rounded-full bg-white/20 blur-2xl group-hover:bg-white/30 transition-all"></div>
+             <div class="absolute -right-6 -bottom-6 w-32 h-32 rounded-full bg-[#06231D]/5 blur-2xl group-hover:bg-[#06231D]/10 transition-all"></div>
         </div>
 
-        <!-- Maintenance (Coral -> Peach) -->
-        <div class="p-5 rounded-3xl shadow-lg transition-all hover:scale-[1.02] hover:shadow-xl relative overflow-hidden group" style="background: linear-gradient(180deg, #FF9C87 0%, #F9D69B 100%);">
+        <!-- Maintenance (Acid Lime -> Dark Forest) -->
+        <div class="p-5 rounded-3xl shadow-lg transition-all hover:scale-[1.02] hover:shadow-xl relative overflow-hidden group" style="background: var(--gradient-dark);">
             <div class="flex items-start justify-between relative z-10">
                 <div>
                     <p class="text-[11px] font-bold uppercase tracking-wider mb-1 opacity-90 text-white">En Taller</p>
@@ -114,28 +114,28 @@
                     </h3>
                     <p class="text-xs font-medium text-white/90">Requiere atención</p>
                 </div>
-                <div class="w-12 h-12 rounded-xl flex items-center justify-center text-xl shadow-md backdrop-blur-md bg-white/25 text-white">
+                <div class="w-12 h-12 rounded-xl flex items-center justify-center text-xl shadow-md backdrop-blur-md bg-white/10 text-white border border-white/10">
                     <i class="fas fa-tools"></i>
                 </div>
             </div>
-             <div class="absolute -right-6 -bottom-6 w-32 h-32 rounded-full bg-white/20 blur-2xl group-hover:bg-white/30 transition-all"></div>
+             <div class="absolute -right-6 -bottom-6 w-32 h-32 rounded-full bg-white/5 blur-2xl group-hover:bg-white/10 transition-all"></div>
         </div>
 
-        <!-- Decommissioned (Red -> Pink) -->
-        <div class="p-5 rounded-3xl shadow-lg transition-all hover:scale-[1.02] hover:shadow-xl relative overflow-hidden group" style="background: linear-gradient(180deg, #FF8E8E 0%, #FFC1C1 100%);">
+        <!-- Decommissioned (Custom Dark Red -> Black Green) -->
+        <div class="p-5 rounded-3xl shadow-lg transition-all hover:scale-[1.02] hover:shadow-xl relative overflow-hidden group" style="background: linear-gradient(180deg, #9F2C2C 0%, #06231D 100%);">
             <div class="flex items-start justify-between relative z-10">
                 <div>
-                    <p class="text-[11px] font-bold uppercase tracking-wider mb-1 opacity-90 text-white">Bajas</p>
+                    <p class="text-[11px] font-bold uppercase tracking-wider mb-1 opacity-80 text-white">Bajas</p>
                     <h3 class="text-4xl font-black tracking-tight text-white mb-1">
                         {{ $stats['decommissioned_assets'] ?? 0 }}
                     </h3>
                     <p class="text-xs font-medium text-white/90">Fuera de servicio</p>
                 </div>
-                <div class="w-12 h-12 rounded-xl flex items-center justify-center text-xl shadow-md backdrop-blur-md bg-white/25 text-white">
+                <div class="w-12 h-12 rounded-xl flex items-center justify-center text-xl shadow-md backdrop-blur-md bg-white/10 text-white border border-white/10">
                     <i class="fas fa-ban"></i>
                 </div>
             </div>
-             <div class="absolute -right-6 -bottom-6 w-32 h-32 rounded-full bg-white/20 blur-2xl group-hover:bg-white/30 transition-all"></div>
+             <div class="absolute -right-6 -bottom-6 w-32 h-32 rounded-full bg-white/5 blur-2xl group-hover:bg-white/10 transition-all"></div>
         </div>
     </div>
 

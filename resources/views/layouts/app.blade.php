@@ -17,41 +17,35 @@
         .sidebar-collapsed { width: 4rem; }
         .sidebar-expanded { width: 16rem; }
         .font-logo { font-family: 'Orbitron', sans-serif; }
-        /* Soft Pastel UI Palette (Light Theme) */
-        :root {
-            /* Main Backgrounds */
-            --bg-body: #F4F7FE;
+            /* Forest Tech Palette (Altitude) */
+            --bg-body: #F1F7F6; /* Very light mint/gray for body */
             --bg-card: #FFFFFF;
-            --bg-sidebar: #FFFFFF;
+            --bg-sidebar: #032221; /* Dark Deep Teal from Image 1 / Gradient 4 Base */
             
             /* Text Colors */
-            --text-main: #1B2559;      /* Dark Navy for headings */
-            --text-secondary: #A3AED0; /* Soft Blue-Gray for body text */
+            --text-main: #06231D;      /* Black Green */
+            --text-secondary: #587974; /* Muted Teal */
             --text-light: #FFFFFF;
             
-            /* Accents & Gradients */
-            --color-primary: #4318FF;
-            --color-secondary: #868CFF;
-            --color-accent-orange: #FFB588;
+            /* Accents */
+            --color-primary: #076653; /* Deep Green */
+            --color-secondary: #0C342C; /* Dark Forest */
+            --color-accent-lime: #E3EF26; /* Acid Lime */
             
-            /* UI Gradients */
-            --gradient-blue: linear-gradient(135deg, #868CFF 0%, #4318FF 100%);
-            --gradient-orange: linear-gradient(135deg, #F9AE89 0%, #EE5D50 100%);
-            --gradient-green: linear-gradient(135deg, #6AD299 0%, #3CCF7F 100%);
-            
-            /* Borders & Shadows */
-            --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); /* Soft shadow */
-            --border-light: #E0E5F2;
+            /* Gradients (Altitude Palette) */
+            --gradient-lime: linear-gradient(180deg, #FFFDEE 0%, #E3EF26 100%);     /* Gradient 1 */
+            --gradient-forest: linear-gradient(180deg, #E2FBCE 0%, #076653 100%);   /* Gradient 2 */
+            --gradient-dark: linear-gradient(180deg, #E3EF26 0%, #0C342C 100%);     /* Gradient 3 */
+            --gradient-deep: linear-gradient(180deg, #076653 0%, #06231D 100%);     /* Gradient 4 */
             
             /* Functional Mappings */
-            --color-black-pearl: #1B2559; /* Remapped for compatibility */
-            --color-burnt-orange: #EE5D50; /* Remapped to Soft Red/Orange */
-            --color-blue-lagoon: #4318FF; /* Remapped to Primary Blue */
-            --color-lust: #EE5D50;
+            --card-shadow: 0 8px 30px rgba(7, 102, 83, 0.06); /* Green-tinted shadow */
+            --border-light: #CFE5E1;
 
-            /* New Sidebar Active Colors (Xiaodianpu Style) */
-            --color-active-red: #FF5C8D; /* Vibrant Coral/Pink from reference */
-            --bg-active-red: rgba(255, 92, 141, 0.1); /* Soft Pink Background */
+            /* Sidebar Active State (Image 1 Style) */
+            --color-active-text: #FFFFFF;
+            --bg-active-item: rgba(255, 255, 255, 0.1); /* Glassy effect on dark bg */
+            --border-active: #E3EF26; /* Lime border accent */
         }
         
         /* Modern Scrollbar - Light Theme */
@@ -75,21 +69,23 @@
         /* Sidebar Item States */
         /* Sidebar Item States - Soft Pill Style */
         /* Sidebar Item States - Soft Pill Style (Updated to Red/Pink Theme) */
+        /* Sidebar Item States - Forest Tech Style */
         .sidebar-item-active {
-            background-color: var(--bg-active-red) !important;
-            color: var(--color-active-red) !important;
-            font-weight: 700 !important;
-            border-right: 4px solid var(--color-active-red);
-            border-left: none !important;
-            border-radius: 10px 0 0 10px !important;
+            background-color: var(--bg-active-item) !important;
+            color: var(--color-active-text) !important;
+            font-weight: 600 !important;
+            border-left: 4px solid var(--border-active) !important;
+            border-right: none !important;
+            border-radius: 0 12px 12px 0 !important; /* Rounded on right only */
+            margin-right: 1rem;
         }
 
         .sidebar-item-active i {
-            color: var(--color-active-red) !important;
+            color: var(--border-active) !important; /* Lime icon */
         }
         
         .sidebar-text {
-            color: var(--text-secondary);
+            color: #8A9E9A; /* Muted text for inactive */
             font-weight: 500;
         }
         
