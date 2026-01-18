@@ -135,7 +135,7 @@
         }
     </script>
 </head>
-<body class="bg-gray-100 dark:bg-gray-900 transition-colors duration-200">
+<body class="font-sans antialiased transition-colors duration-200" style="background-color: var(--color-black-pearl); color: #FFFFFF;">
     <!-- Mobile Overlay -->
     <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden md:hidden" onclick="toggleMobileSidebar()"></div>
 
@@ -269,8 +269,8 @@
         </div>
         </div>
 
-        <!-- Footer -->
-        <footer class="mt-auto py-6 px-4 md:px-6 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 transition-colors">
+        <!-- Header -->
+        <header class="sticky top-0 z-30 transition-all duration-300 backdrop-blur-md" style="background: rgba(26, 44, 48, 0.8); border-bottom: 1px solid rgba(14, 104, 115, 0.2);">
             <div class="max-w-7xl mx-auto w-full">
                 <div class="flex flex-col md:flex-row justify-between items-center gap-4">
                     <div class="text-center md:text-left">
@@ -282,9 +282,9 @@
                         <p class="text-sm text-gray-600">
                             Desarrollado por <a href="#" class="text-gray-700 hover:text-gray-900 font-semibold transition duration-200">OutDeveloper</a>
                         </p>
-                        <p class="text-xs text-gray-500 mt-1">
-                            Versión 1.1.0
-                        </p>
+                        <h2 class="font-logo font-bold text-2xl tracking-tight" style="color: #FFFFFF;">
+                        {{ $header ?? 'Panel Global' }}
+                    </h2>
                     </div>
                 </div>
             </div>
