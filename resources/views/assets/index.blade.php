@@ -16,10 +16,10 @@
             </button>
             
             @if(Auth::user()->isAdmin() || Auth::user()->hasPermission('create_assets'))
-            <a href="{{ route('imports.create') }}" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded text-center whitespace-nowrap">
+            <a href="{{ route('imports.create') }}" class="font-bold py-2 px-4 rounded-xl text-center whitespace-nowrap transition-transform hover:scale-105" style="border: 1px solid var(--color-blue-lagoon); color: var(--color-blue-lagoon);">
                 <i class="fas fa-file-upload mr-2"></i>Importar Activos
             </a>
-            <a href="{{ route('assets.create') }}" class="bg-gray-800 hover:bg-black text-white font-bold py-2 px-4 rounded text-center whitespace-nowrap">
+            <a href="{{ route('assets.create') }}" class="font-bold py-2 px-4 rounded-xl text-center whitespace-nowrap transition-transform hover:scale-105 shadow-lg" style="background: var(--color-burnt-orange); color: #FFFFFF; box-shadow: 0 4px 15px rgba(254, 126, 60, 0.4);">
                 <i class="fas fa-plus mr-2"></i>Nuevo Activo
             </a>
             @endif
@@ -27,34 +27,36 @@
     </div>
 
     <!-- Search Bar -->
-    <div class="mb-4 bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md transition-colors">
+    <div class="mb-4 p-4 rounded-2xl shadow-lg transition-colors" style="background: var(--bg-card); border: 1px solid var(--color-blue-lagoon);">
         <div class="flex items-center gap-3">
             <div class="flex-1 relative">
                 <input 
                     type="text" 
                     id="searchInput" 
                     placeholder="Buscar por ID, Nombre, Ubicación, Categoría..." 
-                    class="w-full px-4 py-2 pl-10 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-800 dark:focus:ring-gray-400 focus:border-transparent bg-white dark:bg-gray-700 text-gray-800 dark:text-white transition-colors"
+                    class="w-full px-4 py-2 pl-10 rounded-xl focus:outline-none focus:ring-2 transition-colors"
+                    style="background: rgba(14, 104, 115, 0.1); border: 1px solid rgba(14, 104, 115, 0.3); color: #FFFFFF; --tw-ring-color: var(--color-burnt-orange);"
                 >
-                <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                <i class="fas fa-search absolute left-3 top-3" style="color: var(--color-blue-lagoon);"></i>
             </div>
             <button 
                 type="button" 
                 onclick="clearSearch()" 
-                class="px-4 py-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 rounded-lg transition-colors"
+                class="px-4 py-2 rounded-xl transition-colors hover:brightness-110"
+                style="background: rgba(14, 104, 115, 0.2); color: #B0C4C9;"
             >
                 <i class="fas fa-times mr-2"></i>Limpiar
             </button>
         </div>
-        <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">
+        <p class="text-sm mt-2 font-medium" style="color: var(--color-blue-lagoon);">
             <span id="resultCount">{{ $assets->total() }}</span> activo(s) encontrado(s)
         </p>
     </div>
 
-<div class="bg-white dark:bg-gray-800 shadow-md rounded my-6 overflow-x-auto transition-colors">
+<div class="shadow-xl rounded-2xl my-6 overflow-x-auto transition-colors" style="background: var(--bg-card); border: 1px solid var(--color-blue-lagoon);">
     <table class="w-full table-auto" style="min-width: 1400px;">
         <thead>
-            <tr class="bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300 uppercase text-xs leading-normal">
+            <tr class="uppercase text-xs leading-normal" style="background: rgba(14, 104, 115, 0.2); color: #B0C4C9;">
                 <th class="py-3 px-4 text-center" style="width: 50px;">
                     <input type="checkbox" id="selectAll" class="form-checkbox h-5 w-5 text-gray-600" onchange="toggleAll(this)">
                 </th>
@@ -82,9 +84,9 @@
                 <th class="py-3 px-4 text-center whitespace-nowrap" style="min-width: 120px;">Acciones</th>
             </tr>
         </thead>
-        <tbody class="text-gray-600 dark:text-gray-300 text-sm font-light">
+        <tbody class="text-sm font-light" style="color: #FFFFFF;">
             @foreach($assets as $asset)
-            <tr class="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700/50 transition-colors">
+            <tr class="border-b hover:bg-white/5 transition-colors" style="border-color: rgba(14, 104, 115, 0.1);">
                 <td class="py-3 px-4 text-center">
                     <input type="checkbox" name="selected_assets[]" value="{{ $asset->id }}" class="form-checkbox h-5 w-5 text-gray-600 row-checkbox" onchange="updateSelectedCount()">
                 </td>

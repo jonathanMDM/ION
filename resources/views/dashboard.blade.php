@@ -3,23 +3,25 @@
 @section('page-title', 'Panel de Control')
 
 @section('content')
-<div class="space-y-8">
-    <!-- Header Section -->
-    <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 border-b border-gray-100 dark:border-gray-800">
-        <div>
-            <h1 class="text-3xl font-extrabold text-gray-900 dark:text-white tracking-tight">Panel Principal</h1>
-            <p class="text-gray-500 dark:text-gray-400 mt-1 font-medium">Gestión integral de activos y métricas operativas.</p>
-        </div>
-        <div class="flex items-center gap-4">
-            <div class="hidden sm:flex items-center px-4 py-2.5 bg-gray-50 dark:bg-gray-800/50 rounded-2xl border border-gray-100 dark:border-gray-700">
-                <i class="far fa-calendar-alt mr-2.5 text-indigo-500"></i>
-                <span class="text-sm font-bold text-gray-700 dark:text-gray-300">
-                    {{ \Carbon\Carbon::now()->isoFormat('D [de] MMMM, YYYY') }}
-                </span>
+    <div class="mb-8">
+        <h2 class="text-3xl font-black text-white tracking-tight">Panel Principal</h2>
+        <p class="text-gray-400 mt-1 font-medium">Gestión integral de activos y métricas operativas.</p>
+    </div>
+    
+    <!-- Top Stats Banner -->
+    <div class="relative overflow-hidden rounded-3xl shadow-2xl mb-10 group" style="background: linear-gradient(135deg, #05080a 0%, var(--color-black-pearl) 100%); border: 1px solid var(--color-blue-lagoon);">
+        <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6 p-6">
+            <div class="flex items-center gap-4">
+                <div class="hidden sm:flex items-center px-4 py-2.5 bg-gray-50 dark:bg-gray-800/50 rounded-2xl border border-gray-100 dark:border-gray-700">
+                    <i class="far fa-calendar-alt mr-2.5 text-indigo-500"></i>
+                    <span class="text-sm font-bold text-gray-700 dark:text-gray-300">
+                        {{ \Carbon\Carbon::now()->isoFormat('D [de] MMMM, YYYY') }}
+                    </span>
+                </div>
+                <button onclick="window.location.reload()" class="p-2.5 bg-white dark:bg-gray-800 text-gray-500 hover:text-indigo-600 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 transition-all hover:bg-indigo-50 dark:hover:bg-indigo-900/20">
+                    <i class="fas fa-sync-alt"></i>
+                </button>
             </div>
-            <button onclick="window.location.reload()" class="p-2.5 bg-white dark:bg-gray-800 text-gray-500 hover:text-indigo-600 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 transition-all hover:bg-indigo-50 dark:hover:bg-indigo-900/20">
-                <i class="fas fa-sync-alt"></i>
-            </button>
         </div>
     </div>
 
@@ -70,14 +72,14 @@
     <!-- Metrics Grid -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         <!-- Total Assets -->
-        <div class="p-6 rounded-3xl shadow-lg transition-all hover:shadow-xl hover:-translate-y-1" style="background: var(--bg-card); border: 1px solid var(--color-blue-lagoon);">
+        <div class="p-6 rounded-3xl shadow-lg transition-all hover:shadow-xl hover:-translate-y-1" style="background: rgba(20, 35, 40, 0.9); border: 1px solid var(--color-blue-lagoon);">
             <div class="flex items-start justify-between">
                 <div>
-                    <p class="text-[10px] font-black uppercase tracking-widest mb-1" style="color: #B0C4C9;">Activos Totales</p>
+                    <p class="text-[10px] font-black uppercase tracking-widest mb-1 opacity-80" style="color: #FFFFFF;">Activos Totales</p>
                     <h3 class="text-4xl font-extrabold leading-tight" style="color: #FFFFFF;">
                         {{ $stats['total_assets'] ?? 0 }}
                     </h3>
-                    <p class="text-xs font-bold mt-1" style="color: var(--color-blue-lagoon);">Unidades en sistema</p>
+                    <p class="text-xs font-bold mt-1" style="color: #22D3EE;">Unidades en sistema</p>
                 </div>
                 <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-xl shadow-lg" style="background: rgba(14, 104, 115, 0.2); border: 1px solid var(--color-blue-lagoon); color: var(--color-burnt-orange);">
                     <i class="fas fa-boxes"></i>
@@ -86,14 +88,14 @@
         </div>
 
         <!-- Operative -->
-        <div class="p-6 rounded-3xl shadow-lg transition-all hover:shadow-xl hover:-translate-y-1" style="background: var(--bg-card); border: 1px solid var(--color-blue-lagoon);">
+        <div class="p-6 rounded-3xl shadow-lg transition-all hover:shadow-xl hover:-translate-y-1" style="background: rgba(20, 35, 40, 0.9); border: 1px solid var(--color-blue-lagoon);">
             <div class="flex items-start justify-between">
                 <div>
-                    <p class="text-[10px] font-black uppercase tracking-widest mb-1" style="color: #B0C4C9;">Operativos</p>
+                    <p class="text-[10px] font-black uppercase tracking-widest mb-1 opacity-80" style="color: #FFFFFF;">Operativos</p>
                     <h3 class="text-4xl font-extrabold leading-tight" style="color: var(--color-burnt-orange);">
                         {{ $stats['active_assets'] ?? 0 }}
                     </h3>
-                    <p class="text-xs font-bold mt-1" style="color: var(--color-blue-lagoon);">Estado: Activo</p>
+                    <p class="text-xs font-bold mt-1" style="color: #22D3EE;">Estado: Activo</p>
                 </div>
                 <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-xl shadow-lg" style="background: rgba(254, 126, 60, 0.1); border: 1px solid var(--color-burnt-orange); color: var(--color-burnt-orange);">
                     <i class="fas fa-check-circle"></i>
@@ -102,14 +104,14 @@
         </div>
 
         <!-- Maintenance -->
-        <div class="p-6 rounded-3xl shadow-lg transition-all hover:shadow-xl hover:-translate-y-1" style="background: var(--bg-card); border: 1px solid var(--color-blue-lagoon);">
+        <div class="p-6 rounded-3xl shadow-lg transition-all hover:shadow-xl hover:-translate-y-1" style="background: rgba(20, 35, 40, 0.9); border: 1px solid var(--color-blue-lagoon);">
             <div class="flex items-start justify-between">
                 <div>
-                    <p class="text-[10px] font-black uppercase tracking-widest mb-1" style="color: #B0C4C9;">En Taller</p>
+                    <p class="text-[10px] font-black uppercase tracking-widest mb-1 opacity-80" style="color: #FFFFFF;">En Taller</p>
                     <h3 class="text-4xl font-extrabold leading-tight" style="color: #F59E0B;">
                         {{ $stats['maintenance_assets'] ?? 0 }}
                     </h3>
-                    <p class="text-xs font-bold mt-1" style="color: #B0C4C9; opacity: 0.7;">Requiere atención</p>
+                    <p class="text-xs font-bold mt-1 opacity-70" style="color: #FFFFFF;">Requiere atención</p>
                 </div>
                 <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-xl shadow-lg" style="background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); color: #F59E0B;">
                     <i class="fas fa-tools"></i>
@@ -118,14 +120,14 @@
         </div>
 
         <!-- Decommissioned -->
-        <div class="p-6 rounded-3xl shadow-lg transition-all hover:shadow-xl hover:-translate-y-1" style="background: var(--bg-card); border: 1px solid var(--color-blue-lagoon);">
+        <div class="p-6 rounded-3xl shadow-lg transition-all hover:shadow-xl hover:-translate-y-1" style="background: rgba(20, 35, 40, 0.9); border: 1px solid var(--color-blue-lagoon);">
             <div class="flex items-start justify-between">
                 <div>
-                    <p class="text-[10px] font-black uppercase tracking-widest mb-1" style="color: #B0C4C9;">Bajas</p>
+                    <p class="text-[10px] font-black uppercase tracking-widest mb-1 opacity-80" style="color: #FFFFFF;">Bajas</p>
                     <h3 class="text-4xl font-extrabold leading-tight" style="color: var(--color-lust);">
                         {{ $stats['decommissioned_assets'] ?? 0 }}
                     </h3>
-                    <p class="text-xs font-bold mt-1" style="color: #B0C4C9; opacity: 0.7;">Fuera de servicio</p>
+                    <p class="text-xs font-bold mt-1 opacity-70" style="color: #FFFFFF;">Fuera de servicio</p>
                 </div>
                 <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-xl shadow-lg" style="background: rgba(228, 32, 27, 0.1); border: 1px solid var(--color-lust); color: var(--color-lust);">
                     <i class="fas fa-ban"></i>
@@ -138,41 +140,6 @@
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <!-- Main Column: Recent Activity and Alerts (2/3 width) -->
         <div class="lg:col-span-2 space-y-8">
-            
-            <!-- Assets per Location -->
-            <div class="rounded-3xl shadow-sm p-6" style="background: var(--bg-dark-green); border: 1px solid var(--green-bangladesh);">
-                <div class="flex items-center justify-between mb-6">
-                    <h4 class="text-lg font-bold" style="color: var(--text-white);">Activos por Sede</h4>
-                    <span class="text-xs px-2 py-1 rounded bg-opacity-20 flex items-center gap-1" style="background: rgba(3, 98, 76, 0.3); color: var(--green-mountain);">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span class="font-bold">{{ $stats['locations_count'] ?? 0 }}</span>
-                        Sedes
-                    </span>
-                </div>
-                <div class="space-y-4">
-                    @forelse($assets_per_location as $location)
-                    <div class="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-900/50 rounded-2xl border border-gray-100 dark:border-gray-700">
-                        <div class="flex items-center gap-4">
-                            <div class="w-10 h-10 bg-white dark:bg-gray-800 rounded-lg flex items-center justify-center border border-gray-100 dark:border-gray-700">
-                                <i class="fas fa-building text-gray-400"></i>
-                            </div>
-                            <div>
-                                <p class="text-sm font-bold text-gray-900 dark:text-white">{{ $location->name }}</p>
-                                <p class="text-[10px] text-gray-500 font-medium">{{ $location->address }}</p>
-                            </div>
-                        </div>
-                        <div class="text-right">
-                            <p class="text-sm font-black text-green-600 dark:text-green-400">{{ $location->assets_count }}</p>
-                            <p class="text-[9px] font-bold text-gray-400 uppercase tracking-widest">Activos</p>
-                        </div>
-                    </div>
-                    @empty
-                    <div class="p-4 text-center text-gray-400">
-                        <p class="text-sm font-medium">No hay sedes con activos registrados.</p>
-                    </div>
-                    @endforelse
-                </div>
-            </div>
             
             <!-- Stock Alerter (Conditional) -->
             @if($lowStockAssets->count() > 0)
@@ -221,6 +188,13 @@
                                     <i class="fas fa-cube text-lg"></i>
                                 </div>
                                 @endif
+                            </div>
+                            <div>
+                                <p class="text-sm font-bold text-white">{{ $asset->name }}</p>
+                                <p class="text-[10px] text-gray-400 font-medium">{{ $asset->category->name ?? 'N/A' }}</p>
+                            </div>
+                        </div>
+                        <a href="{{ route('assets.show', $asset->id) }}" class="text-xs font-bold text-green-500 hover:underline">Ver</a>
                     </div>
                     @empty
                     <div class="p-12 text-center text-gray-400">
@@ -240,30 +214,30 @@
                 <h4 class="text-lg font-bold mb-6" style="color: #FFFFFF;">Acciones Rápidas</h4>
                 <div class="grid grid-cols-1 gap-3">
                     @if(Auth::user()->hasPermission('create_assets'))
-                    <a href="{{ route('assets.create') }}" class="group flex items-center p-4 rounded-2xl transition-all" style="background: rgba(254, 126, 60, 0.1); border: 1px solid var(--color-burnt-orange);">
-                        <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform" style="background: rgba(254, 126, 60, 0.2); color: var(--color-burnt-orange);">
+                    <a href="{{ route('assets.create') }}" class="group flex items-center p-4 rounded-2xl transition-all hover:brightness-125" style="background: rgba(254, 126, 60, 0.2); border: 1px solid var(--color-burnt-orange);">
+                        <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform" style="background: var(--color-burnt-orange); color: #FFFFFF;">
                             <i class="fas fa-plus"></i>
                         </div>
                         <div class="ml-4">
-                            <span class="text-sm font-bold group-hover:text-white transition-colors" style="color: var(--color-burnt-orange);">Nuevo Activo</span>
-                            <span class="block text-[10px] group-hover:text-white transition-colors uppercase tracking-widest font-black" style="color: #B0C4C9;">Registro Central</span>
+                            <span class="text-sm font-bold group-hover:text-white transition-colors" style="color: #FFFFFF;">Nuevo Activo</span>
+                            <span class="block text-[10px] group-hover:text-white transition-colors uppercase tracking-widest font-black" style="color: rgba(255,255,255,0.6);">Registro Central</span>
                         </div>
                     </a>
                     @endif
 
                     @if(Auth::user()->hasPermission('import_assets'))
-                    <a href="{{ route('imports.create') }}" class="group flex items-center p-4 rounded-2xl transition-all" style="background: rgba(14, 104, 115, 0.1); border: 1px solid var(--color-blue-lagoon);">
-                        <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform" style="background: rgba(14, 104, 115, 0.2); color: var(--color-blue-lagoon);">
+                    <a href="{{ route('imports.create') }}" class="group flex items-center p-4 rounded-2xl transition-all hover:brightness-125" style="background: rgba(14, 104, 115, 0.2); border: 1px solid var(--color-blue-lagoon);">
+                        <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform" style="background: var(--color-blue-lagoon); color: #FFFFFF;">
                             <i class="fas fa-file-excel"></i>
                         </div>
                         <div class="ml-4">
-                            <span class="text-sm font-bold group-hover:text-white transition-colors" style="color: var(--color-blue-lagoon);">Importar Excel</span>
+                            <span class="text-sm font-bold group-hover:text-white transition-colors" style="color: #FFFFFF;">Importar Excel</span>
                         </div>
                     </a>
                     @endif
 
-                    <a href="{{ route('reports.index') }}" class="group flex items-center p-4 bg-gray-50 dark:bg-gray-800/50 hover:bg-gray-900 rounded-2xl transition-all border border-gray-100 dark:border-gray-700">
-                        <div class="w-10 h-10 bg-white dark:bg-gray-700 text-gray-600 dark:text-gray-300 rounded-xl flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform">
+                    <a href="{{ route('reports.index') }}" class="group flex items-center p-4 rounded-2xl transition-all hover:bg-white/10" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);">
+                        <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform" style="background: #FFFFFF; color: var(--color-black-pearl);">
                             <i class="fas fa-chart-bar"></i>
                         </div>
                         <div class="ml-4 text-gray-900 dark:text-gray-100 group-hover:text-white transition-colors">
@@ -272,65 +246,25 @@
                     </a>
                 </div>
             </div>
-
-            <!-- Assets per Location -->
-            <div class="rounded-3xl shadow-sm p-6" style="background: var(--bg-card); border: 1px solid var(--color-blue-lagoon);">
-                <div class="flex items-center justify-between mb-6">
-                    <h4 class="text-lg font-bold" style="color: #FFFFFF;">Activos por Sede</h4>
-                    <span class="text-xs px-2 py-1 rounded bg-opacity-20 flex items-center gap-1" style="background: rgba(14, 104, 115, 0.3); color: var(--color-blue-lagoon);">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span class="font-bold">{{ $stats['locations_count'] ?? 0 }}</span>
-                        Sedes
-                    </span>
-                </div>
-                <div class="space-y-4">
-                    @forelse($assets_per_location as $location)
-                    <div class="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-900/50 rounded-2xl border border-gray-100 dark:border-gray-700">
-                        <div class="flex items-center gap-4">
-                            <div class="w-10 h-10 bg-white dark:bg-gray-800 rounded-lg flex items-center justify-center border border-gray-100 dark:border-gray-700">
-                                <i class="fas fa-building text-gray-400"></i>
-                            </div>
-                            <div>
-                                <p class="text-sm font-bold text-gray-900 dark:text-white">{{ $location->name }}</p>
-                                <p class="text-[10px] text-gray-500 font-medium">{{ $location->address }}</p>
-                            </div>
-                        </div>
-                        <div class="text-right">
-                            <p class="text-sm font-black text-green-600 dark:text-green-400">{{ $location->assets_count }}</p>
-                            <p class="text-[9px] font-bold text-gray-400 uppercase tracking-widest">Activos</p>
-                        </div>
-                    </div>
-                    @empty
-                    <div class="p-4 text-center text-gray-400">
-                        <p class="text-sm font-medium">No hay sedes con activos registrados.</p>
-                    </div>
-                    @endforelse
-                </div>
-            </div>
-
-            <!-- Mini Pulse and Status -->
-            <div class="bg-gray-50 dark:bg-gray-800/50 rounded-3xl p-6 border border-gray-100 dark:border-gray-700">
-                <div class="flex flex-col gap-6">
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs font-black uppercase text-gray-400 tracking-[0.2em]">Ocupación Regional</span>
-                        <span class="text-xs font-bold text-sky-600 dark:text-sky-400">{{ $stats['total_locations'] }} Sedes</span>
-                    </div>
-                    
-                    <div class="space-y-4">
-                        <div class="flex items-center justify-between">
-                            <span class="text-sm font-bold text-gray-600 dark:text-gray-400">Categorías</span>
-                            <span class="text-sm font-black text-gray-900 dark:text-white">{{ $stats['total_categories'] }}</span>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <span class="text-sm font-bold text-gray-600 dark:text-gray-400">Mantenimientos</span>
-                            <span class="text-sm font-black text-gray-900 dark:text-white">{{ $stats['total_maintenances'] }}</span>
-                        </div>
-                    </div>
-
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
+
+    <!-- Assets by Location & Regional Occupation -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
+        <!-- Assets by Location -->
+        <div class="rounded-3xl shadow-lg p-6 relative overflow-hidden group" style="background: var(--bg-card); border: 1px solid var(--color-blue-lagoon);">
+            <div class="flex items-center justify-between mb-6 relative z-10">
+                <h4 class="text-lg font-bold text-white flex items-center">
+                    Activos por Sede
+                </h4>
+                <span class="px-3 py-1 rounded-full text-xs font-bold bg-white/10 text-white backdrop-blur-md border border-white/20">
+                    <i class="fas fa-map-marker-alt mr-1"></i> {{ $stats['total_locations'] }} Sedes
+                </span>
+            </div>
+            
+            <div class="space-y-4 relative z-10">
+                @forelse($assets_per_location as $location)
+                <div class="p-4 rounded-xl transition-all hover:translate-x-1" style="background: rgba(14, 104, 115, 0.15); border: 1px solid rgba(14, 104, 115, 0.3);">
+                    <div class="flex items-center justify-between">
 </div>
 @endsection

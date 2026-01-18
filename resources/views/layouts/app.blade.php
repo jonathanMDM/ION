@@ -97,6 +97,17 @@
             box-shadow: 0 6px 20px rgba(254, 126, 60, 0.6) !important;
         }
 
+        /* SweetAlert Magma Custom Icons */
+        .swal2-icon.swal2-success { border-color: var(--color-blue-lagoon) !important; color: var(--color-blue-lagoon) !important; }
+        .swal2-icon.swal2-success .swal2-success-ring { border: 4px solid rgba(14, 104, 115, 0.2) !important; }
+        .swal2-icon.swal2-success [class^='swal2-success-line'] { background-color: var(--color-blue-lagoon) !important; }
+        
+        .swal2-icon.swal2-error { border-color: var(--color-lust) !important; color: var(--color-lust) !important; }
+        .swal2-icon.swal2-error .swal2-x-mark-line-left, 
+        .swal2-icon.swal2-error .swal2-x-mark-line-right { background-color: var(--color-lust) !important; }
+        
+        .swal2-icon.swal2-warning { border-color: var(--color-burnt-orange) !important; color: var(--color-burnt-orange) !important; }
+        
         /* Modern SweetAlert2 Premium Theme */
         .swal2-popup {
             background: rgba(15, 23, 42, 0.95) !important;
