@@ -28,8 +28,14 @@ class DashboardController extends Controller
             'total_maintenances' => Maintenance::count(),
         ];
 
+        // Specific Stats for Charts/Widgets
+        $assets_per_location = Location::withCount('assets')
+            ->orderBy('assets_count', 'desc')
+            ->take(5)
+            ->get();
+
         // Recent Activity
-        $recent_assets = Asset::with(['location', 'subcategory.category'])->latest()->take(5)->get();
+        $recentAssets = Asset::with(['location', 'subcategory.category'])->latest()->take(5)->get();
 
         // Low Stock Assets (only if company has alerts enabled)
         $lowStockAssets = collect();
@@ -67,6 +73,6 @@ class DashboardController extends Controller
             }
         }
 
-        return view('dashboard', compact('stats', 'recent_assets', 'announcements', 'lowStockAssets', 'subscriptionWarning'));
+        return view('dashboard', compact('stats', 'recentAssets', 'assets_per_location', 'announcements', 'lowStockAssets', 'subscriptionWarning'));
     }
 }
