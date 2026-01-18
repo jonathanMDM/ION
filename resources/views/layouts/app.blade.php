@@ -14,46 +14,36 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.10.1/sweetalert2.all.min.js"></script>
     <style>
-        .sidebar-collapsed { width: 4rem; }
-        .sidebar-expanded { width: 16rem; }
-        .font-logo { font-family: 'Orbitron', sans-serif; }
+        :root {
             /* Professional Blue Palette (from reference image) */
-            --bg-body: #F8FAFB; /* Ultra light gray for clean look */
+            --bg-body: #F8FAFB;
             --bg-card: #FFFFFF;
-            --bg-sidebar: #021024; /* Very Dark Blue - almost black */
-            
-            /* Text Colors */
-            --text-main: #1F2937;      /* Dark Gray */
-            --text-secondary: #6B7280; /* Medium Gray */
+            --bg-sidebar: #021024;
+            --text-main: #1F2937;
+            --text-secondary: #6B7280;
             --text-light: #FFFFFF;
-            
-            /* Blue Palette from Image */
-            --blue-darkest: #021024;  /* Very Dark Blue */
-            --blue-dark: #052659;     /* Dark Blue */
-            --blue-medium: #5483B3;   /* Medium Blue */
-            --blue-light: #7DA0CA;    /* Light Blue */
-            --blue-lightest: #C1E8FF; /* Very Light Blue */
-            
-            /* Accents */
-            --color-primary: #5483B3; /* Medium Blue */
-            --color-secondary: #052659; /* Dark Blue */
-            --color-accent: #7DA0CA; /* Light Blue */
-            
-            /* Gradients (Professional Blue) */
+            --blue-darkest: #021024;
+            --blue-dark: #052659;
+            --blue-medium: #5483B3;
+            --blue-light: #7DA0CA;
+            --blue-lightest: #C1E8FF;
+            --color-primary: #5483B3;
+            --color-secondary: #052659;
+            --color-accent: #7DA0CA;
             --gradient-blue-dark: linear-gradient(135deg, #052659 0%, #021024 100%);
             --gradient-blue-medium: linear-gradient(135deg, #5483B3 0%, #052659 100%);
             --gradient-blue-light: linear-gradient(135deg, #7DA0CA 0%, #5483B3 100%);
             --gradient-blue-soft: linear-gradient(135deg, #C1E8FF 0%, #7DA0CA 100%);
-            
-            /* Functional Mappings */
-            --card-shadow: 0 8px 30px rgba(84, 131, 179, 0.12); /* Blue-tinted shadow */
+            --card-shadow: 0 8px 30px rgba(84, 131, 179, 0.12);
             --border-light: #E5E7EB;
-
-            /* Sidebar Active State */
             --color-active-text: #FFFFFF;
-            --bg-active-item: rgba(84, 131, 179, 0.15); /* Medium blue glassy effect */
-            --border-active: #5483B3; /* Medium blue border */
+            --bg-active-item: rgba(84, 131, 179, 0.15);
+            --border-active: #5483B3;
         }
+        
+        .sidebar-collapsed { width: 4rem; }
+        .sidebar-expanded { width: 16rem; }
+        .font-logo { font-family: 'Orbitron', sans-serif; }
         
         /* Modern Scrollbar - Light Theme */
         ::-webkit-scrollbar { width: 6px; }
