@@ -48,6 +48,10 @@
             --color-burnt-orange: #EE5D50; /* Remapped to Soft Red/Orange */
             --color-blue-lagoon: #4318FF; /* Remapped to Primary Blue */
             --color-lust: #EE5D50;
+
+            /* New Sidebar Active Colors (Xiaodianpu Style) */
+            --color-active-red: #FF5C8D; /* Vibrant Coral/Pink from reference */
+            --bg-active-red: rgba(255, 92, 141, 0.1); /* Soft Pink Background */
         }
         
         /* Modern Scrollbar - Light Theme */
@@ -70,13 +74,18 @@
 
         /* Sidebar Item States */
         /* Sidebar Item States - Soft Pill Style */
+        /* Sidebar Item States - Soft Pill Style (Updated to Red/Pink Theme) */
         .sidebar-item-active {
-            background-color: var(--bg-body) !important;
-            color: var(--text-main) !important;
+            background-color: var(--bg-active-red) !important;
+            color: var(--color-active-red) !important;
             font-weight: 700 !important;
-            border-right: 4px solid var(--color-primary);
+            border-right: 4px solid var(--color-active-red);
             border-left: none !important;
             border-radius: 10px 0 0 10px !important;
+        }
+
+        .sidebar-item-active i {
+            color: var(--color-active-red) !important;
         }
         
         .sidebar-text {
