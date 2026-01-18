@@ -60,6 +60,15 @@
         ::-webkit-scrollbar-thumb { background: #E0E5F2; border-radius: 10px; }
         ::-webkit-scrollbar-thumb:hover { background: var(--blue-medium); }
 
+        /* Essential Color Overrides (Bulletproof Theme) */
+        .bg-blue-medium { background-color: #5483B3 !important; }
+        .hover\:bg-blue-dark:hover { background-color: #052659 !important; }
+        .text-blue-medium { color: #5483B3 !important; }
+        .text-blue-dark { color: #052659 !important; }
+        .border-blue-medium { border-color: #5483B3 !important; }
+        .shadow-blue-medium\/25 { box-shadow: 0 10px 15px -3px rgba(84, 131, 179, 0.25) !important; }
+        .shadow-blue-medium\/20 { box-shadow: 0 10px 15px -3px rgba(84, 131, 179, 0.20) !important; }
+
         /* Sidebar Item States - Blue Accent */
         .sidebar-item-active {
             background-color: var(--bg-active-item) !important;
@@ -146,6 +155,11 @@
                         'logo': ['Orbitron', 'sans-serif'],
                     },
                     colors: {
+                        'blue-darkest': '#021024',
+                        'blue-dark': '#052659',
+                        'blue-medium': '#5483B3',
+                        'blue-light': '#7DA0CA',
+                        'blue-lightest': '#C1E8FF',
                         navy: {
                             800: '#1e293b',
                             900: '#0f172a',
@@ -166,10 +180,10 @@
         <div class="p-6 border-b border-white/5">
             <div class="flex items-center justify-between">
                 <div class="flex flex-col sidebar-text w-full">
-                    <a href="{{ route('superadmin.index') }}" class="flex flex-col items-center justify-center w-full group">
-                        <div class="flex items-center gap-2">
-                            <img src="{{ asset('img/logo-horizontal.png') }}" alt="ION Inventory" class="h-10 w-auto transition-all group-hover:opacity-90">
-                            <span class="text-[10px] font-sans font-black uppercase tracking-wider transition-all" style="color: var(--green-caribbean); background: rgba(0, 223, 129, 0.1); padding: 0.375rem 0.5rem; border-radius: 0.375rem; border: 1px solid var(--green-bangladesh); box-shadow: 0 0 10px rgba(0, 223, 129, 0.1);">Admin</span>
+                    <a href="{{ route('superadmin.index') }}" class="flex flex-col items-center justify-center w-full group transition-all">
+                        <div class="flex items-center gap-3">
+                            <img src="{{ asset('img/logo-horizontal.png') }}" alt="ION Inventory" class="h-10 w-auto transition-all group-hover:scale-105">
+                            <span class="text-[9px] font-black uppercase tracking-widest text-white px-2 py-0.5 rounded bg-blue-medium/20 border border-blue-medium/30 shadow-sm shadow-blue-medium/10">Admin</span>
                         </div>
                     </a>
                 </div>
