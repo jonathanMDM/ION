@@ -121,8 +121,8 @@
              <div class="absolute -right-6 -bottom-6 w-32 h-32 rounded-full bg-white/5 blur-2xl group-hover:bg-white/10 transition-all"></div>
         </div>
 
-        <!-- Decommissioned (Burnt Red) -->
-        <div class="p-5 rounded-3xl shadow-lg transition-all hover:scale-[1.02] hover:shadow-xl relative overflow-hidden group" style="background: linear-gradient(135deg, #991B1B 0%, #450A0A 100%);">
+        <!-- Decommissioned (Dark Tech Gray) -->
+        <div class="p-5 rounded-3xl shadow-lg transition-all hover:scale-[1.02] hover:shadow-xl relative overflow-hidden group" style="background: linear-gradient(135deg, #475569 0%, #0F172A 100%);">
             <div class="flex items-start justify-between relative z-10">
                 <div>
                     <p class="text-[11px] font-bold uppercase tracking-wider mb-1 opacity-80 text-white">Bajas</p>
