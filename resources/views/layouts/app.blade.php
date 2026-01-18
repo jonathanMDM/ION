@@ -384,26 +384,26 @@
     <div id="main-content" class="ml-0 md:ml-64 transition-all duration-300 relative z-20 md:z-0 flex flex-col min-h-screen bg-slate-100 dark:bg-navy-900">
         <div class="flex flex-col">
         @if(session()->has('impersonator_id'))
-        <div class="backdrop-blur-xl text-white px-3 py-2 md:px-6 flex flex-row justify-between items-center shadow-2xl relative z-[60]" style="background: rgba(0, 15, 8, 0.95); border-bottom: 1px solid var(--green-bangladesh);">
+        <div class="backdrop-blur-xl text-white px-3 py-2 md:px-6 flex flex-row justify-between items-center shadow-2xl relative z-[60]" style="background: rgba(2, 16, 36, 0.95); border-bottom: 2px solid #5483B3;">
             <div class="flex items-center gap-2 md:gap-4 overflow-hidden">
-                <div class="flex h-7 w-7 md:h-9 md:w-9 items-center justify-center rounded-xl shadow-inner flex-shrink-0" style="background: rgba(3, 98, 76, 0.3); border: 1px solid var(--green-bangladesh);">
-                    <i class="fas fa-user-secret animate-pulse text-xs md:text-lg" style="color: var(--green-caribbean);"></i>
+                <div class="flex h-7 w-7 md:h-9 md:w-9 items-center justify-center rounded-xl shadow-inner flex-shrink-0" style="background: rgba(84, 131, 179, 0.2); border: 1px solid #5483B3;">
+                    <i class="fas fa-user-secret animate-pulse text-xs md:text-lg" style="color: #7DA0CA;"></i>
                 </div>
                 <div class="min-w-0">
                     <div class="hidden md:flex items-center gap-2">
-                        <span class="text-[10px] uppercase tracking-[0.2em] font-black" style="color: var(--green-mountain);">Modo Admin</span>
-                        <span class="h-1 w-1 rounded-full" style="background: var(--green-caribbean);"></span>
-                        <span class="text-[10px] uppercase tracking-[0.2em] font-black" style="color: var(--green-caribbean);">Sesión Activa</span>
+                        <span class="text-[10px] uppercase tracking-[0.2em] font-black text-blue-lightest" style="color: #C1E8FF;">Modo Admin</span>
+                        <span class="h-1 w-1 rounded-full" style="background: #5483B3;"></span>
+                        <span class="text-[10px] uppercase tracking-[0.2em] font-black" style="color: #7DA0CA;">Sesión Activa</span>
                     </div>
                     <p class="text-xs md:text-sm font-medium text-slate-200 truncate flex items-center">
-                        <span class="md:hidden font-bold mr-1" style="color: var(--green-caribbean);">Admin:</span>
+                        <span class="md:hidden font-bold mr-1" style="color: #7DA0CA;">Admin:</span>
                         <span class="font-bold text-white tracking-tight truncate">{{ Str::limit(Auth::user()->name, 15) }}</span>
                     </p>
                 </div>
             </div>
             <form action="{{ route('impersonate.stop') }}" method="POST" class="flex-shrink-0 ml-2">
                 @csrf
-                <button type="submit" class="group relative flex items-center justify-center gap-2 px-3 py-1.5 md:px-5 md:py-2 rounded-lg md:rounded-xl text-[10px] md:text-xs font-bold transition-all duration-300 shadow-lg active:scale-95" style="background: rgba(220, 38, 38, 0.1); color: #ef4444; border: 1px solid rgba(220, 38, 38, 0.3);">
+                <button type="submit" class="group relative flex items-center justify-center gap-2 px-3 py-1.5 md:px-5 md:py-2 rounded-lg md:rounded-xl text-[10px] md:text-xs font-bold transition-all duration-300 shadow-lg active:scale-95 text-white" style="background: linear-gradient(135deg, #5483B3 0%, #052659 100%); border: none;">
                     <i class="fas fa-power-off opacity-70 group-hover:rotate-90 transition-transform duration-500"></i>
                     <span class="hidden md:inline">SALIR DEL MODO</span>
                     <span class="md:hidden">SALIR</span>

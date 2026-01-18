@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" class="light">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -171,12 +171,12 @@
         }
     </script>
 </head>
-<body class="font-sans antialiased transition-colors duration-200" style="background-color: var(--color-black-pearl); color: #FFFFFF;">
+<body class="font-sans antialiased transition-colors duration-200" style="background-color: var(--bg-body); color: var(--text-main);">
     <!-- Mobile Overlay -->
     <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden md:hidden" onclick="toggleMobileSidebar()"></div>
 
     <!-- Sidebar -->
-    <div id="sidebar" class="sidebar-expanded fixed left-0 top-0 h-full transition-all duration-300 z-50 sidebar-mobile-hidden md:sidebar-mobile-visible text-slate-300" style="background: var(--color-black-pearl); border-right: 1px solid rgba(14, 104, 115, 0.2); color: #B0C4C9;">
+    <div id="sidebar" class="sidebar-expanded fixed left-0 top-0 h-full transition-all duration-300 z-50 sidebar-mobile-hidden md:sidebar-mobile-visible text-slate-300" style="background-color: #021024 !important; border-right: none; box-shadow: 4px 0 24px rgba(0,0,0,0.02);">
         <div class="p-6 border-b border-white/5">
             <div class="flex items-center justify-between">
                 <div class="flex flex-col sidebar-text w-full">
