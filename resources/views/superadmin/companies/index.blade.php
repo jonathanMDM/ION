@@ -5,17 +5,17 @@
 @section('content')
 <div class="mb-6 flex flex-col md:flex-row md:items-center gap-4">
     <p class="md:flex-1" style="color: #B0C4C9;">Administra las empresas registradas en la plataforma.</p>
-    <a href="{{ route('superadmin.companies.create') }}" class="font-bold py-2 px-4 rounded-xl shadow-lg whitespace-nowrap text-center shrink-0 transition-transform hover:scale-105" style="background: var(--color-burnt-orange); color: #FFFFFF; box-shadow: 0 4px 15px rgba(254, 126, 60, 0.4);">
+    <a href="{{ route('superadmin.companies.create') }}" class="font-bold py-2 px-4 rounded-xl shadow-lg whitespace-nowrap text-center shrink-0 transition-transform hover:scale-105" style="background: #5483B3; color: #FFFFFF; box-shadow: 0 4px 15px rgba(254, 126, 60, 0.4);">
         <i class="fas fa-plus mr-2"></i>Nueva Empresa
     </a>
 </div>
 
-<div class="shadow-xl rounded-2xl overflow-hidden" style="background: var(--bg-card); border: 1px solid var(--color-blue-lagoon);">
+<div class="shadow-xl rounded-2xl overflow-hidden" style="background: #FFFFFF; border: 1px solid #052659;">
     <div class="overflow-x-auto">
     <table class="min-w-full">
         <thead style="background: rgba(14, 104, 115, 0.2);">
             <tr>
-                <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider" style="color: var(--color-burnt-orange);">Empresa</th>
+                <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider" style="color: #5483B3;">Empresa</th>
                 <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider" style="color: #B0C4C9;">Contacto</th>
                 <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider" style="color: #B0C4C9;">Estadísticas</th>
                 <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider" style="color: #B0C4C9;">Estado</th>
@@ -28,12 +28,12 @@
             <tr class="hover:bg-white/5 transition-colors">
                 <td class="px-6 py-4 whitespace-nowrap">
                     <div class="flex items-center">
-                        <div class="flex-shrink-0 h-10 w-10 rounded-xl flex items-center justify-center shadow-lg" style="background: rgba(14, 104, 115, 0.2); color: var(--color-burnt-orange); border: 1px solid var(--color-blue-lagoon);">
+                        <div class="flex-shrink-0 h-10 w-10 rounded-xl flex items-center justify-center shadow-lg" style="background: rgba(14, 104, 115, 0.2); color: #5483B3; border: 1px solid #052659;">
                             <i class="fas fa-building"></i>
                         </div>
                         <div class="ml-4">
                             <div class="text-sm font-bold" style="color: #FFFFFF;">{{ $company->name }}</div>
-                            <div class="text-xs" style="color: var(--color-blue-lagoon);">NIT: {{ $company->nit ?? 'N/A' }}</div>
+                            <div class="text-xs" style="color: #052659;">NIT: {{ $company->nit ?? 'N/A' }}</div>
                         </div>
                     </div>
                 </td>
@@ -42,8 +42,8 @@
                     <div class="text-xs" style="color: #B0C4C9;">{{ $company->phone ?? 'Sin teléfono' }}</div>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
-                    <div class="text-sm" style="color: #FFFFFF;"><i class="fas fa-users mr-1" style="color: var(--color-blue-lagoon);"></i> {{ $company->users_count }} Usuarios</div>
-                    <div class="text-sm" style="color: #B0C4C9;"><i class="fas fa-box mr-1" style="color: var(--color-blue-lagoon);"></i> {{ $company->assets_count }} Activos</div>
+                    <div class="text-sm" style="color: #FFFFFF;"><i class="fas fa-users mr-1" style="color: #052659;"></i> {{ $company->users_count }} Usuarios</div>
+                    <div class="text-sm" style="color: #B0C4C9;"><i class="fas fa-box mr-1" style="color: #052659;"></i> {{ $company->assets_count }} Activos</div>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
                     <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ $company->status === 'active' ? 'bg-[#C1E8FF] text-[#052659]' : 'bg-red-100 text-red-800' }}">
@@ -53,7 +53,7 @@
                 <td class="px-6 py-4 whitespace-nowrap text-center">
                     <form action="{{ route('superadmin.companies.toggle-low-stock-alerts', $company) }}" method="POST" class="inline-block">
                         @csrf
-                        <button type="submit" class="relative inline-flex items-center h-6 rounded-full w-11 transition-all focus:outline-none" style="{{ $company->low_stock_alerts_enabled ? 'background-color: var(--color-burnt-orange);' : 'background-color: #4B5563;' }}" title="{{ $company->low_stock_alerts_enabled ? 'Desactivar alertas' : 'Activar alertas' }}">
+                        <button type="submit" class="relative inline-flex items-center h-6 rounded-full w-11 transition-all focus:outline-none" style="{{ $company->low_stock_alerts_enabled ? 'background-color: #5483B3;' : 'background-color: #4B5563;' }}" title="{{ $company->low_stock_alerts_enabled ? 'Desactivar alertas' : 'Activar alertas' }}">
                             <span class="sr-only">Toggle low stock alerts</span>
                             <span class="inline-block w-4 h-4 transform bg-white rounded-full transition-transform {{ $company->low_stock_alerts_enabled ? 'translate-x-6' : 'translate-x-1' }}"></span>
                         </button>
@@ -99,7 +99,7 @@
             <tr>
                 <td colspan="6" class="px-6 py-12 text-center" style="color: #B0C4C9;">
                     <div class="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center" style="background: rgba(14, 104, 115, 0.1);">
-                        <i class="fas fa-building text-3xl" style="color: var(--color-blue-lagoon);"></i>
+                        <i class="fas fa-building text-3xl" style="color: #052659;"></i>
                     </div>
                     <p class="text-lg font-medium">No hay empresas registradas.</p>
                 </td>

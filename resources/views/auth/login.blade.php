@@ -153,7 +153,7 @@
                     <label class="flex items-center group cursor-pointer">
                         <div class="relative flex items-center">
                             <input type="checkbox" name="remember" class="peer sr-only">
-                            <div class="w-5 h-5 border rounded-md transition-all flex items-center justify-center" style="background: var(--color-black-pearl); border-color: rgba(14, 104, 115, 0.5);" data-checked-style="background: var(--color-burnt-orange); border-color: var(--color-burnt-orange);">
+                            <div class="w-5 h-5 border rounded-md transition-all flex items-center justify-center" style="background: var(--color-black-pearl); border-color: rgba(14, 104, 115, 0.5);" data-checked-style="background: #5483B3; border-color: #5483B3;">
                                 <i class="fas fa-check text-[10px] text-[#000F08] opacity-0 transition-opacity peer-checked:opacity-100"></i>
                             </div>
                             <i class="fas fa-check absolute scale-0 peer-checked:scale-100 text-[10px] text-white w-5 text-center transition-transform"></i>

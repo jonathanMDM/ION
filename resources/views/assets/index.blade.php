@@ -16,10 +16,10 @@
             </button>
             
             @if(Auth::user()->isAdmin() || Auth::user()->hasPermission('create_assets'))
-            <a href="{{ route('imports.create') }}" class="font-bold py-2 px-4 rounded-xl text-center whitespace-nowrap transition-transform hover:scale-105" style="border: 1px solid var(--color-blue-lagoon); color: var(--color-blue-lagoon);">
+            <a href="{{ route('imports.create') }}" class="font-bold py-2 px-4 rounded-xl text-center whitespace-nowrap transition-transform hover:scale-105 border border-[#5483B3] text-[#5483B3] hover:bg-[#5483B3]/5">
                 <i class="fas fa-file-upload mr-2"></i>Importar Activos
             </a>
-            <a href="{{ route('assets.create') }}" class="font-bold py-2 px-4 rounded-xl text-center whitespace-nowrap transition-transform hover:scale-105 shadow-lg" style="background: var(--color-burnt-orange); color: #FFFFFF; box-shadow: 0 4px 15px rgba(254, 126, 60, 0.4);">
+            <a href="{{ route('assets.create') }}" class="font-bold py-2 px-6 rounded-xl text-center whitespace-nowrap transition-transform hover:scale-105 shadow-lg text-white" style="background: linear-gradient(135deg, #5483B3 0%, #052659 100%); box-shadow: 0 4px 15px rgba(84, 131, 179, 0.4);">
                 <i class="fas fa-plus mr-2"></i>Nuevo Activo
             </a>
             @endif
@@ -27,37 +27,36 @@
     </div>
 
     <!-- Search Bar -->
-    <div class="mb-4 p-4 rounded-2xl shadow-lg transition-colors" style="background: var(--bg-card); border: 1px solid var(--color-blue-lagoon);">
-        <div class="flex items-center gap-3">
+    <div class="mb-4 p-5 rounded-3xl shadow-md transition-colors bg-white border border-[#E0E5F2]">
+        <div class="flex items-center gap-4">
             <div class="flex-1 relative">
                 <input 
                     type="text" 
                     id="searchInput" 
                     placeholder="Buscar por ID, Nombre, Ubicación, Categoría..." 
-                    class="w-full px-4 py-2 pl-10 rounded-xl focus:outline-none focus:ring-2 transition-colors"
-                    style="background: rgba(14, 104, 115, 0.1); border: 1px solid rgba(14, 104, 115, 0.3); color: #FFFFFF; --tw-ring-color: var(--color-burnt-orange);"
+                    class="w-full px-6 py-3 pl-12 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#5483B3]/20 border border-[#E0E5F2] bg-slate-50 text-slate-800 placeholder-slate-400 transition-all focus:border-[#5483B3]"
                 >
-                <i class="fas fa-search absolute left-3 top-3" style="color: var(--color-blue-lagoon);"></i>
+                <i class="fas fa-search absolute left-4 top-4 text-[#5483B3]"></i>
             </div>
             <button 
                 type="button" 
                 onclick="clearSearch()" 
-                class="px-4 py-2 rounded-xl transition-colors hover:brightness-110"
-                style="background: rgba(14, 104, 115, 0.2); color: #B0C4C9;"
+                class="px-6 py-3 rounded-2xl bg-slate-100 text-slate-500 hover:bg-slate-200 transition-colors font-bold uppercase text-[10px] tracking-widest"
             >
                 <i class="fas fa-times mr-2"></i>Limpiar
             </button>
         </div>
-        <p class="text-sm mt-2 font-medium" style="color: var(--color-blue-lagoon);">
-            <span id="resultCount">{{ $assets->total() }}</span> activo(s) encontrado(s)
+        <p class="text-xs mt-3 font-bold uppercase tracking-widest text-[#5483B3]">
+            <span id="resultCount" class="text-lg mr-1">{{ $assets->total() }}</span> activo(s) encontrado(s)
         </p>
     </div>
 
-<div class="shadow-xl rounded-2xl my-6 overflow-x-auto transition-colors" style="background: var(--bg-card); border: 1px solid var(--color-blue-lagoon);">
+<div class="shadow-xl rounded-[2.5rem] my-6 overflow-hidden bg-white border border-[#E0E5F2]">
+    <div class="overflow-x-auto">
     <table class="w-full table-auto" style="min-width: 1400px;">
         <thead>
-            <tr class="uppercase text-xs leading-normal" style="background: rgba(14, 104, 115, 0.2); color: #B0C4C9;">
-                <th class="py-3 px-4 text-center" style="width: 50px;">
+            <tr class="uppercase text-[10px] font-black tracking-[0.15em] bg-slate-50 text-slate-500 border-b border-slate-100">
+                <th class="py-5 px-6 text-center" style="width: 50px;">
                     <input type="checkbox" id="selectAll" class="form-checkbox h-5 w-5 text-gray-600" onchange="toggleAll(this)">
                 </th>
                 <th class="py-3 px-4 text-left whitespace-nowrap" style="min-width: 120px;">ID Único</th>
@@ -84,9 +83,9 @@
                 <th class="py-3 px-4 text-center whitespace-nowrap" style="min-width: 120px;">Acciones</th>
             </tr>
         </thead>
-        <tbody class="text-sm font-light" style="color: #FFFFFF;">
+        <tbody class="text-sm font-medium text-slate-700">
             @foreach($assets as $asset)
-            <tr class="border-b hover:bg-white/5 transition-colors" style="border-color: rgba(14, 104, 115, 0.1);">
+            <tr class="border-b border-slate-50 hover:bg-[#5483B3]/5 transition-all">
                 <td class="py-3 px-4 text-center">
                     <input type="checkbox" name="selected_assets[]" value="{{ $asset->id }}" class="form-checkbox h-5 w-5 text-gray-600 row-checkbox" onchange="updateSelectedCount()">
                 </td>

@@ -125,7 +125,7 @@
         .swal2-icon.swal2-error .swal2-x-mark-line-left, 
         .swal2-icon.swal2-error .swal2-x-mark-line-right { background-color: var(--color-lust) !important; }
         
-        .swal2-icon.swal2-warning { border-color: var(--color-burnt-orange) !important; color: var(--color-burnt-orange) !important; }
+        .swal2-icon.swal2-warning { border-color: #5483B3 !important; color: #5483B3 !important; }
         
         /* Modern SweetAlert2 Premium Theme */
         .swal2-popup {

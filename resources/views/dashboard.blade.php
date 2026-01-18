@@ -27,22 +27,22 @@
     @if(!auth()->user()->company_id || isset($subscriptionWarning))
     <div class="grid grid-cols-1 gap-6">
         @if(!auth()->user()->company_id)
-        <div class="rounded-3xl p-8 text-white relative overflow-hidden shadow-2xl" style="background: linear-gradient(135deg, #152326, var(--color-black-pearl)); border: 1px solid var(--color-blue-lagoon);">
+        <div class="rounded-3xl p-8 text-white relative overflow-hidden shadow-2xl" style="background: linear-gradient(135deg, #152326, var(--color-black-pearl)); border: 1px solid #052659;">
             <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6 font-medium">
                 <div class="flex items-center gap-5">
-                    <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl shadow-lg" style="background: rgba(14, 104, 115, 0.3); border: 1px solid var(--color-blue-lagoon); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);">
-                        <i class="fas fa-building" style="color: var(--color-burnt-orange);"></i>
+                    <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl shadow-lg" style="background: rgba(14, 104, 115, 0.3); border: 1px solid #052659; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);">
+                        <i class="fas fa-building" style="color: #5483B3;"></i>
                     </div>
                     <div>
                         <h2 class="text-xl font-bold" style="color: #FFFFFF;">Cuenta sin Organización</h2>
                         <p style="color: #B0C4C9;">Vincule su cuenta a una empresa para empezar a gestionar inventarios.</p>
                     </div>
                 </div>
-                <a href="https://wa.me/573145781261" target="_blank" class="px-6 py-3 rounded-xl font-black shadow-lg transition-all hover:opacity-90 hover:scale-105" style="background: var(--color-burnt-orange); color: #FFFFFF; box-shadow: 0 4px 20px rgba(254, 126, 60, 0.4);">
+                <a href="https://wa.me/573145781261" target="_blank" class="px-6 py-3 rounded-xl font-black shadow-lg transition-all hover:opacity-90 hover:scale-105" style="background: #5483B3; color: #FFFFFF; box-shadow: 0 4px 20px rgba(254, 126, 60, 0.4);">
                     Soporte Técnico
                 </a>
             </div>
-            <div class="absolute -right-10 -bottom-10 w-40 h-40 rounded-full blur-3xl opacity-20" style="background: var(--color-burnt-orange);"></div>
+            <div class="absolute -right-10 -bottom-10 w-40 h-40 rounded-full blur-3xl opacity-20" style="background: #5483B3;"></div>
         </div>
         @endif
         
