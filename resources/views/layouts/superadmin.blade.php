@@ -27,10 +27,27 @@
         .font-logo { font-family: 'Orbitron', sans-serif; }
         
         /* Modern Scrollbar */
+        /* Magma Teal Premium Palette */
+        :root {
+            /* Base Colors */
+            --color-burnt-orange: #FE7E3C;
+            --color-lust: #E4201B;
+            --color-copper: #61413C;
+            --color-blue-lagoon: #0E6873;
+            --color-black-pearl: #1A2C30;
+            
+            /* Derived & Interface Colors */
+            --bg-body: var(--color-black-pearl);
+            --bg-card: rgba(26, 44, 48, 0.7);
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0C4C9;
+        }
+
+        /* Modern Scrollbar - Teal & Orange */
         ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: rgba(99, 102, 241, 0.2); border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: rgba(99, 102, 241, 0.4); }
+        ::-webkit-scrollbar-track { background: var(--color-black-pearl); }
+        ::-webkit-scrollbar-thumb { background: var(--color-blue-lagoon); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--color-burnt-orange); }
 
         /* Glassmorphism for Top Bar */
         .glass-header {
@@ -45,10 +62,11 @@
         }
 
         /* Sidebar Item States */
+        /* Sidebar Item States - Orange Accent */
         .sidebar-item-active {
-            background: linear-gradient(to right, rgba(99, 102, 241, 0.15), transparent);
-            border-left: 4px solid #6366f1;
-            color: #818cf8 !important;
+            background: linear-gradient(to right, rgba(254, 126, 60, 0.15), transparent);
+            border-left: 4px solid var(--color-burnt-orange);
+            color: var(--color-burnt-orange) !important;
         }
         .dark .sidebar-item-active {
             background: linear-gradient(to right, rgba(99, 102, 241, 0.2), transparent);
