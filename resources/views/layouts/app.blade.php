@@ -18,7 +18,7 @@
         .sidebar-expanded { width: 16rem; }
         .font-logo { font-family: 'Orbitron', sans-serif; }
             /* Forest Tech Palette (Altitude) */
-            --bg-body: #F1F7F6; /* Very light mint/gray for body */
+            --bg-body: #F8FAFB; /* Ultra light gray for clean, fresh look */
             --bg-card: #FFFFFF;
             --bg-sidebar: #032221; /* Dark Deep Teal from Image 1 / Gradient 4 Base */
             
